@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body{
+        font-family: Roboto;
+        font-size: 14px;
+        background-color: #EBEBEB;
+    }
+    .navigation__point {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    .navigation__link{
+        width: 30px;
+        height: 30px;
+    }
+}
