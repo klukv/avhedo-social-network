@@ -1,0 +1,21 @@
+<div
+  class="casting-page__inner mr-[18px] w-[872px] bg-[#fff] rounded-[10px] flex flex-col items-center"
+>
+  <div
+    class="casting-page__links flex items-center justify-center text-[22px] py-[20px] border-b-[1px] border-[#EBEBEB] w-full"
+  >
+    <a
+      routerLink="/casting/contacts"
+      class="casting-page__links-contacts hover:text-[#00A3FF] duration-[250ms] mr-[48px]"
+      >Знакомства</a
+    >
+    <a
+      routerLink="/casting/likes"
+      class="casting-page__links-like hover:text-[#00A3FF] duration-[250ms]"
+      >Вы нравитесь</a
+    >
+  </div>
+  <div class="casting-page__cards flex justify-center">
+    <router-outlet></router-outlet>
+  </div>
+</div>

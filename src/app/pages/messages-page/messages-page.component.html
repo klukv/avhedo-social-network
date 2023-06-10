@@ -1,0 +1,14 @@
+<div class="messages-page mr-[18px] w-[872px] bg-[#fff] rounded-[10px]">
+    <h1 class="messages-page__title text-[24px] py-[22px] border-b-[1px] border-[#EBEBEB] text-center">Сообщения</h1>
+    <ul class="messages-page__list-messages pt-[35px] px-[32px] pb-[64px]">
+        <li class="messages-page__list-messages__content flex items-center pt-[16px] pb-[32px] pl-[8px] border-b-[1px] border-solid border-[#EBEBEB] hover:bg-[#EBEBEB] duration-[250ms] cursor-pointer" *ngFor="let interlocutor of interlocutors; let i = index" (click)="goToChat(interlocutor.id)">
+            <div class="list-messages__content-avatar pr-[16px]">
+                <img src="../../../assets/img/avatar.svg" alt="user-avatar">
+            </div>
+            <div class="list-messages__content-info">
+                <h2 class="list-messages__content-info info__username text-[20px] mb-[6px]">{{interlocutor.username}}</h2>
+                <div class="list-messages__content-info info__text text-[#7A7A7A]">{{interlocutor.message}}</div>
+            </div>
+        </li>
+    </ul>
+</div>

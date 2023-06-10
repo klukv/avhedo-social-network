@@ -2,9 +2,12 @@
 <div class="wrapper">
   <main class="main">
     <div class="container">
-      <div class="main__inner flex mt-[68px]">
-        <router-outlet></router-outlet>
-        <app-my-page></app-my-page>
+      <div class="main__inner flex mt-[68px] justify-between">
+        <router-outlet class="hidden"></router-outlet>
+        <div class="main__additionally-info flex flex-col">
+          <app-my-page class="mb-[48px]"></app-my-page>
+          <app-friends-block class="friends bg-[#fff] rounded-[10px]"></app-friends-block>
+        </div>
       </div>
     </div>
   </main>
