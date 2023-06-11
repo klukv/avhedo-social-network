@@ -7,6 +7,7 @@ import { CastingPageComponent } from './pages/casting-page/casting-page.componen
 import { ContactsBlockComponent } from './components/casting/contacts-block/contacts-block.component';
 import { LikesBlockComponent } from './components/casting/likes-block/likes-block.component';
 import { FriendsPageComponent } from './pages/friends-page/friends-page.component';
+import { PersonPageComponent } from './pages/person-page/person-page.component';
 
 const castingRoutes: Routes = [
   { path: 'contacts', component: ContactsBlockComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'messages', component: MessagesPageComponent },
   { path: 'messages/chat', component: ChatPageComponent },
   { path: 'casting', component: CastingPageComponent, children: castingRoutes },
+  { path: 'person', component: PersonPageComponent},
 ];
 
 @NgModule({

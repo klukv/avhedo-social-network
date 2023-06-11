@@ -1,5 +1,6 @@
 export interface IFriends {
     id: number,
     username: string,
-    age: number
+    age: number,
+    about?: string
 }

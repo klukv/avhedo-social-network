@@ -17,6 +17,7 @@ import { FormBlockComponent } from './components/form-block/form-block.component
 import { LikesBlockComponent } from './components/casting/likes-block/likes-block.component';
 import { ContactsBlockComponent } from './components/casting/contacts-block/contacts-block.component';
 import { FriendsPageComponent } from './pages/friends-page/friends-page.component';
+import { PersonPageComponent } from './pages/person-page/person-page.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FriendsPageComponent } from './pages/friends-page/friends-page.componen
     FormBlockComponent,
     LikesBlockComponent,
     ContactsBlockComponent,
-    FriendsPageComponent
+    FriendsPageComponent,
+    PersonPageComponent
   ],
   imports: [
     BrowserModule,

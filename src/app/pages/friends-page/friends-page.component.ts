@@ -36,5 +36,12 @@ export class FriendsPageComponent {
       },
     });
   }
+  goToPageFriend(id: number) {
+    this.router.navigate(['person'], {
+      queryParams: {
+        id: id,
+      },
+    });
+  }
 
 }
