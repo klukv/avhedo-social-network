@@ -1,23 +1,34 @@
-<div class="person-page__inner flex justify-between">
-  <div class="person-page__info bg-[#fff] rounded-[10px] w-[670px] flex flex-col">
-    <div class="person-page__info-avatar flex-shrink-0 h-[350px] bg-[url('assets/img/person-page/avatar-image.jpg')] bg-no-repeat bg-cover bg-center">
-    </div>
+<div class="person-page__inner flex justify-between max-w-[1000px] mx-auto">
+  <div
+    class="person-page__info bg-[#fff] rounded-[10px] w-[670px] flex flex-col"
+  >
+    <div
+      class="person-page__info-avatar flex-shrink-0 h-[350px] bg-[url('assets/img/person-page/avatar-image.jpg')] bg-no-repeat bg-cover bg-center"
+    ></div>
     <div class="person-page__info-content px-[32px] py-[48px]">
-      <div class="person-page__info-content__title text-[32px] flex items-center mb-[16px]">
-        <div class="person-page__username mr-[12px]">Алексей</div>
-        <div class="person-page__surname">Пацанович</div>
-      </div>
+      <h2 class="person-page__username text-[32px] mb-[16px] mr-[12px]">
+        Алексей
+      </h2>
+
       <div class="person-page__info-content__age flex items-center mb-[16px]">
         <h2 class="person-page__age-title mr-[12px] text-[24px]">Возраст:</h2>
-        <div class="person-page__age-text text-[18px] text-[#7A7A7A]">26 лет</div>
+        <div class="person-page__age-text text-[18px] text-[#7A7A7A]">
+          26 лет
+        </div>
       </div>
       <div class="person-page__info-content__hobby flex items-center mb-[11px]">
         <h2 class="person-page__hobby-title mr-[12px] text-[24px]">Хобби:</h2>
-        <div class="person-page__hobby-text text-[18px] text-[#7A7A7A]">машины, гонки</div>
+        <div class="person-page__hobby-text text-[18px] text-[#7A7A7A]">
+          машины, гонки
+        </div>
       </div>
       <div class="person-page__info-content__about flex items-center">
-        <h2 class="person-page__about-title mr-[12px] text-[24px] self-start">О себе:</h2>
-        <div class="person-page__about-text text-[18px] text-[#7A7A7A] pt-[5px]">
+        <h2 class="person-page__about-title mr-[12px] text-[24px] self-start">
+          О себе:
+        </h2>
+        <div
+          class="person-page__about-text text-[18px] text-[#7A7A7A] pt-[5px]"
+        >
           Люби, мечтай, страдай, влюбляйся, но никогда не унижайся!
         </div>
       </div>
@@ -29,7 +40,9 @@
     >
       Друзья
     </h2>
-    <div class="person-page__friends-list grid gap-[16px] grid-cols-3 grid-rows-2 p-[24px]">
+    <div
+      class="person-page__friends-list grid gap-[16px] grid-cols-3 grid-rows-2 p-[24px]"
+    >
       <div
         class="person-page__friends-friend flex flex-col justify-center items-center"
         *ngFor="let friend of friendsList; let i = index"
@@ -37,7 +50,9 @@
         <div class="person-page__friend-avatar mb-[8px]">
           <img src="../../../assets/img/avatar.svg" alt="avatar-friend" />
         </div>
-        <div class="person-page__friend-username text-[#7A7A7A]">{{friend.username}}</div>
+        <div class="person-page__friend-username text-[#7A7A7A]">
+          {{ friend.username }}
+        </div>
       </div>
     </div>
   </div>

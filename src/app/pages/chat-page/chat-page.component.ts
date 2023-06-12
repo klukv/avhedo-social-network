@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 export class ChatPageComponent {
 
-  messages = [0, 1, 2]
+  messages = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 }
