@@ -18,6 +18,8 @@ import { LikesBlockComponent } from './components/casting/likes-block/likes-bloc
 import { ContactsBlockComponent } from './components/casting/contacts-block/contacts-block.component';
 import { FriendsPageComponent } from './pages/friends-page/friends-page.component';
 import { PersonPageComponent } from './pages/person-page/person-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { PersonPageComponent } from './pages/person-page/person-page.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    TextFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]
