@@ -20,6 +20,9 @@ import { FriendsPageComponent } from './pages/friends-page/friends-page.componen
 import { PersonPageComponent } from './pages/person-page/person-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TextFieldModule } from '@angular/cdk/text-field';
+import { ModalComponent } from './components/modal/modal.component';
+import { CreateProductComponent } from './components/create-product/create-product.component';
+import { StopPropaginationDirective } from './directives/stop-propagination.directive';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import { TextFieldModule } from '@angular/cdk/text-field';
     LikesBlockComponent,
     ContactsBlockComponent,
     FriendsPageComponent,
-    PersonPageComponent
+    PersonPageComponent,
+    ModalComponent,
+    CreateProductComponent,
+    StopPropaginationDirective
   ],
   imports: [
     BrowserModule,

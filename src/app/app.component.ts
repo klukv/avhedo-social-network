@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalService } from './services/modal.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ export class AppComponent {
   showBlockFriends: boolean;
   showBlockAdditionally: boolean;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public modalService: ModalService) {}
 
   hasRoute(route: string){
     return this.router.url.includes(route)
