@@ -1,16 +1,26 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FriendsService } from 'src/app/services/friends.service';
 
 @Component({
   selector: 'app-friends-block',
   templateUrl: './friends-block.component.html',
-  styleUrls: ['./friends-block.component.css']
+  styleUrls: ['./friends-block.component.css'],
 })
 export class FriendsBlockComponent {
-
-  constructor() {
-
+  constructor(private router: Router, public friendsService: FriendsService) {}
+  goToChat(id: number) {
+    this.router.navigate([`messages/chat`], {
+      queryParams: {
+        id: id,
+      },
+    });
   }
-
-  friends = [0, 1, 2, 3, 4]
-
+  goToPageFriend(id: number) {
+    this.router.navigate(['person'], {
+      queryParams: {
+        id: id,
+      },
+    });
+  }
 }

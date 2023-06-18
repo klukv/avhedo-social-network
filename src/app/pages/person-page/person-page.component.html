@@ -7,13 +7,13 @@
     ></div>
     <div class="person-page__info-content px-[32px] py-[48px]">
       <h2 class="person-page__username text-[32px] mb-[16px] mr-[12px]">
-        Алексей
+        {{this.friendInfo.username}}
       </h2>
 
       <div class="person-page__info-content__age flex items-center mb-[16px]">
         <h2 class="person-page__age-title mr-[12px] text-[24px]">Возраст:</h2>
         <div class="person-page__age-text text-[18px] text-[#7A7A7A]">
-          26 лет
+          {{this.friendInfo.age}} лет
         </div>
       </div>
       <div class="person-page__info-content__hobby flex items-center mb-[11px]">
@@ -36,7 +36,7 @@
   </div>
   <div class="person-page__friends bg-[#fff] rounded-[10px] self-start">
     <h2
-      class="person-page__friends-title text-center py-[16px] border-b-[1px] border-[#EBEBEB] text-[20px]"
+      class="person-page__friends-title text-center py-[16px] border-b-[1px] border-[#EBEBEB] text-[20px]" 
     >
       Друзья
     </h2>
@@ -45,12 +45,12 @@
     >
       <div
         class="person-page__friends-friend flex flex-col justify-center items-center"
-        *ngFor="let friend of friendsList; let i = index"
+        *ngFor="let friend of friendsService.friendsList; let i = index"
       >
         <div class="person-page__friend-avatar mb-[8px]">
           <img src="../../../assets/img/avatar.svg" alt="avatar-friend" />
         </div>
-        <div class="person-page__friend-username text-[#7A7A7A]">
+        <div class="person-page__friend-username text-[#7A7A7A] hover:text-[#00A3FF] duration-[250ms] cursor-pointer" (click)="goToPageFriend(friend.id)">
           {{ friend.username }}
         </div>
       </div>

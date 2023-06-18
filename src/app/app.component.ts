@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ModalService } from './services/modal.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class AppComponent {
 
   constructor(private router: Router, public modalService: ModalService) {}
 
-  hasRoute(route: string){
-    return this.router.url.includes(route)
+  hasRoute(route: string) {
+    return this.router.url.includes(route);
   }
 }

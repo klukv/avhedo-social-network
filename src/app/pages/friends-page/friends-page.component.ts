@@ -1,33 +1,15 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { IFriends } from 'src/app/models/friends';
+import { FriendsService } from 'src/app/services/friends.service';
 
 @Component({
   selector: 'app-friends-page',
   templateUrl: './friends-page.component.html',
-  styleUrls: ['./friends-page.component.css']
+  styleUrls: ['./friends-page.component.css'],
 })
 export class FriendsPageComponent {
-
-  constructor(private router: Router){}
-
-  friendsList: IFriends[] = [
-    {
-      id: 0,
-      username: 'Данил',
-      age: 21,
-    },
-    {
-      id: 1,
-      username: 'Максим',
-      age: 25,
-    },
-    {
-      id: 2,
-      username: 'Петя',
-      age: 18,
-    },
-  ];
+  constructor(private router: Router, public friendsService: FriendsService) {}
 
   goToChat(id: number) {
     this.router.navigate([`messages/chat`], {
@@ -43,5 +25,4 @@ export class FriendsPageComponent {
       },
     });
   }
-
 }

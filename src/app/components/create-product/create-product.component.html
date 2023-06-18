@@ -1,7 +1,18 @@
 <form class="form__edit">
   <div class="form__content flex flex-col items-center">
-    <input type="text" class="form__input w-[320px]  h-[50px] p-[16px] text-[18px] outline-none bg-[#EBEBEB] rounded-[10px]" placeholder="Новое значение"/>
-    <button class="form__button inline-flex mt-[8px] w-[40px] h-[40px] rounded-[50%] bg-[#00A3FF] justify-center items-center hover:bg-[#52C1FF] duration-[250ms]">
+    <div class="form__input-info w-[420px] p-[16px] bg-[#EBEBEB] rounded-[10px]">
+      <textarea
+        type="text"
+        class="form__input  w-full text-[18px] outline-none bg-transparent"
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1"
+        placeholder="Новое значение"
+      ></textarea>
+    </div>
+    <button
+      class="form__button inline-flex my-[8px] w-[40px] h-[40px] rounded-[50%] bg-[#00A3FF] justify-center items-center hover:bg-[#52C1FF] duration-[250ms]"
+    >
       <svg
         width="18"
         height="13"
