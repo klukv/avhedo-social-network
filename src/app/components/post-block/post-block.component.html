@@ -7,15 +7,15 @@
         alt="user-avatar"
       />
     </div>
-    <h2 class="post__block-user_username text-[24px]">{{post.username}}</h2>
+    <h2 class="post__block-user_username text-[24px]">{{ post.username }}</h2>
   </div>
   <div class="post__info bg-[#fff] rounded-[10px] px-[25px]">
     <div
       class="post__block-info pt-[23px] pb-[8px] border-b-[1px] border-solid border-[#EBEBEB]r"
     >
-      <h2 class="post__block-info_title text-[26px]">{{post.titlePost}}</h2>
-      <p class="post__block-info_text text-[18px] pt-[8px] pb-[16px]">
-        {{post.textPost}}
+      <h2 class="post__block-info_title text-[26px]">{{ post.titlePost }}</h2>
+      <p class="post__block-info_text text-[18px] pt-[22px] pb-[16px]">
+        {{ post.textPost }}
       </p>
       <div class="post__block-info_icons flex items-center mb-[8px]">
         <div class="post__block-like mr-[16px] cursor-pointer">
@@ -34,7 +34,7 @@
             />
           </svg>
         </div>
-        <div class="post__block-comment cursor-pointer">
+        <div class="post__block-comment cursor-pointer" (click)="clickIconComment()">
           <svg
             width="30"
             height="30"
@@ -74,8 +74,11 @@
           type="text"
           class="post__block-input bg-[#EBEBEB] w-full h-[40px] pl-[14px] rounded-[10px] outline-none"
           placeholder="Написать комментарий"
+          #inputComment
         />
-        <button class="send-svg absolute top-[6px] right-[10px] w-[28px] h-[28px]">
+        <button
+          class="send-svg absolute top-[6px] right-[10px] w-[28px] h-[28px]"
+        >
           <svg
             class="w-full h-full"
             viewBox="0 0 30 30"
@@ -89,8 +92,11 @@
           </svg>
         </button>
       </div>
-      <div class="post__block-comments_users">
-        <div class="post__block_one-comment flex items-center pb-[48px]" *ngFor="let comment of post.comments; let i = index">
+      <div class="post__block-comments_users pb-[36px]">
+        <div
+          class="post__block_one-comment flex items-center pb-[22px]"
+          *ngFor="let comment of post.comments; let i = index"
+        >
           <div class="post__block-username_avatar w-[50px] h-[50px]">
             <img
               src="../../../assets/img/avatar.svg"
@@ -102,10 +108,10 @@
             <h3
               class="post__block-comments_title text-[18px] hover:text-[#00A3FF] duration-[250ms] cursor-pointer"
             >
-              <a routerLink="#">{{comment.username}}</a>
+              <a routerLink="#" class="border-b-[#EBEBEB] border-solid border-b-[1px] pb-[2px]">{{ comment.username }}</a>
             </h3>
             <p class="post__block-comments_text text-[15px]">
-              {{comment.textComment}}
+              {{ comment.textComment }}
             </p>
           </div>
         </div>
