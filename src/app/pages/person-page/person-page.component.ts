@@ -22,7 +22,6 @@ export class PersonPageComponent {
     this.friendInfo = this.friendsService.listFriends.filter(
       (friend) => friend.id == userId
     )[0];
-    console.log(1);
   }
   goToPageFriend(id: number) {
     this.router.navigate(['person'], {
