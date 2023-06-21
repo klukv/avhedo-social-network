@@ -23,6 +23,7 @@ import { TextFieldModule } from '@angular/cdk/text-field';
 import { ModalComponent } from './components/modal/modal.component';
 import { CreateProductComponent } from './components/create-product/create-product.component';
 import { StopPropaginationDirective } from './directives/stop-propagination.directive';
+import { FriendsService } from './services/friends.service';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ import { StopPropaginationDirective } from './directives/stop-propagination.dire
     BrowserAnimationsModule,
     TextFieldModule
   ],
-  providers: [],
+  providers: [FriendsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

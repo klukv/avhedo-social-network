@@ -15,6 +15,7 @@ export class FriendsBlockComponent {
         id: id,
       },
     });
+    this.friendsService.changeInfoFriend(id);
   }
   goToPageFriend(id: number) {
     this.router.navigate(['person'], {

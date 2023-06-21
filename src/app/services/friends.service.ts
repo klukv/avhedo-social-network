@@ -3,9 +3,15 @@ import { IFriends } from '../models/friends';
 import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FriendsService {
+  private friendInfo = new BehaviorSubject<IFriends>({
+    id: 0,
+    username: 'Это кто',
+    age: 0,
+  });
+  friendInfo$ = this.friendInfo.asObservable();
 
   friendsList: IFriends[] = [
     {
@@ -40,7 +46,13 @@ export class FriendsService {
     },
   ];
 
-  constructor() { }
+  constructor() {}
 
-
+  setInfoFriend(infoFriend: IFriends){
+    this.friendInfo.next(infoFriend);
+  }
+  changeInfoFriend(id:number){
+    const selectFriend = this.friendsList.filter(friend => friend.id == id)[0];
+    this.setInfoFriend(selectFriend);
+  }
 }
