@@ -17,13 +17,15 @@ export class PersonPageComponent {
     public friendsService: FriendsService
   ) {}
 
-  ngOnInit(){
+  ngOnInit() {
     const userId = this.activeRoute.snapshot.queryParams['id'];
     this.friendsService.changeInfoFriend(userId);
   }
-  
+
   ngDoCheck() {
-    this.friendsService.friendInfo$.subscribe(friendInfo => this.friendInfo = friendInfo);
+    this.friendsService.friendInfo$.subscribe(
+      (friendInfo) => (this.friendInfo = friendInfo)
+    );
   }
   goToPageFriend(id: number) {
     this.friendsService.changeInfoFriend(id);

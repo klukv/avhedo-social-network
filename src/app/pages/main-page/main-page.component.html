@@ -7,13 +7,13 @@
         type="text"
         class="home__news-title placeholder:text-[22px] text-[22px] w-full py-[16px] outline-none border-b-[1px] border-solid border-[#EBEBEB]"
         [ngClass]="{
-          'hidden': !isPostsOpen,
-          'block': isPostsOpen
+          hidden: !isPostsOpen,
+          block: isPostsOpen
         }"
         placeholder="Укажите заголовок"
       />
       <textarea
-        class="home__news-input text-[22px] placeholder:text-[22px] outline-none  py-[16px] w-full min-h-[60px] resize-none overflow-hidden border-b-[1px] border-solid border-[#EBEBEB]"
+        class="home__news-input text-[22px] placeholder:text-[22px] outline-none py-[16px] w-full min-h-[60px] resize-none overflow-hidden border-b-[1px] border-solid border-[#EBEBEB]"
         [ngClass]="{
           'mt-0': !isPostsOpen,
           'mt-[40px]': isPostsOpen
@@ -28,13 +28,16 @@
       <button
         class="home__news-button text-[20px] text-[#fff] bg-[#00A3FF] px-[52px] py-[8px] rounded-[5px] self-end my-[32px] hover:bg-[#52C1FF] duration-[250ms]"
         [ngClass]="{
-          'hidden': !isPostsOpen,
-          'block': isPostsOpen
+          hidden: !isPostsOpen,
+          block: isPostsOpen
         }"
-        >
+      >
         Выложить
       </button>
     </div>
   </div>
-  <app-post-block></app-post-block>
+  <app-post-block
+    *ngFor="let post of postService.posts; let i = index"
+    [post]="post"
+  ></app-post-block>
 </div>

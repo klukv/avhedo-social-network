@@ -7,7 +7,7 @@
   <ul class="friends__list pt-[33px] pl-[34px] pb-[64px]">
     <li
       class="friends__list-point mb-[24px] last:mb-0"
-      *ngFor="let friend of friendsService.friendsList | slice : 0 : 5; let i = index"
+      *ngFor="let friend of friendsService.listFriends | slice : 0 : 5; let i = index"
     >
       <div class="friends__info flex items-center">
         <div class="friends__info-avatar mr-[18px]">

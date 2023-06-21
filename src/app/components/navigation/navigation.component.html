@@ -3,7 +3,10 @@
     <li
       class="navigation__point mr-[36px] hover:bg-[#EBEBEB] transition duration-300 ease-in-out"
     >
-      <a routerLink="/" class="navigation__link w-full h-full flex items-center justify-center">
+      <a
+        routerLink="/"
+        class="navigation__link w-full h-full flex items-center justify-center"
+      >
         <svg
           class="w-[30px] h-[30px]"
           viewBox="0 0 22 27"
@@ -21,9 +24,12 @@
       </a>
     </li>
     <li
-      class="navigation__point mr-[36px] hover:bg-[#EBEBEB] transition duration-300 ease-in-out"
+      class="navigation__point mr-[36px] hover:bg-[#EBEBEB] transition duration-300 ease-in-out relative"
+      (click)="handlePopupNitifications()"
     >
-      <div class="navigation__link after:content-['36'] relative after:absolute after:bottom-[-14px] after:right-[-10px]  after:text-[#00A3FF] after:text-[12px]">
+      <div
+        class="navigation__link after:content-['36'] relative after:absolute after:bottom-[-14px] after:right-[-10px] after:text-[#00A3FF] after:text-[12px]"
+      >
         <svg
           class="w-[30px] h-[30px]"
           viewBox="0 0 24 28"
@@ -39,11 +45,43 @@
           />
         </svg>
       </div>
+      <div
+        class="notifications absolute z-[500] min-w-[379px] left-0 top-[75px] bg-[#DEDEDE] rounded-b-lg"
+        [ngClass]="{ 'invisible opacity-0': !isOpenNotifications, 'visible opacity-100 transition-[opacity] duration-[100ms]': isOpenNotifications }"
+      >
+        <div class="notifications__inner pb-[48px]">
+          <h2
+            class="notifications__title text-[22px] text-center py-[24px] border-b-[1px] border-b-[#B6B6B6]"
+          >
+            Уведомления
+          </h2>
+          <ul class="notifications__list">
+            <li
+              class="notifications__point border-b-[1px] border-solid border-b-[#B6B6B6]"
+            >
+              <p class="px-[16px] py-[12px] text-[16px]">Текст1</p>
+            </li>
+            <li
+              class="notifications__point border-b-[1px] border-solid border-b-[#B6B6B6]"
+            >
+              <p class="px-[16px] py-[12px] text-[16px]">Текст2</p>
+            </li>
+            <li
+              class="notifications__point border-b-[1px] border-solid border-b-[#B6B6B6]"
+            >
+              <p class="px-[16px] py-[12px] text-[16px]">Текст3</p>
+            </li>
+          </ul>
+        </div>
+      </div>
     </li>
     <li
       class="navigation__point mr-[36px] hover:bg-[#EBEBEB] transition duration-300 ease-in-out"
     >
-      <a routerLink="/friends" class="navigation__link after:content-['20'] relative after:absolute after:bottom-[-14px] after:right-[-10px]  after:text-[#00A3FF] after:text-[12px]">
+      <a
+        routerLink="/friends"
+        class="navigation__link after:content-['20'] relative after:absolute after:bottom-[-14px] after:right-[-10px] after:text-[#00A3FF] after:text-[12px]"
+      >
         <svg
           class="w-[30px] h-[30px]"
           viewBox="0 0 34 34"
@@ -63,7 +101,10 @@
     <li
       class="navigation__point mr-[36px] hover:bg-[#EBEBEB] transition duration-300 ease-in-out"
     >
-      <a routerLink="/messages" class="navigation__link after:content-['5'] relative after:absolute after:bottom-[-14px] after:right-[-10px]  after:text-[#00A3FF] after:text-[12px]">
+      <a
+        routerLink="/messages"
+        class="navigation__link after:content-['5'] relative after:absolute after:bottom-[-14px] after:right-[-10px] after:text-[#00A3FF] after:text-[12px]"
+      >
         <svg
           class="w-[30px] h-[30px]"
           viewBox="0 0 28 28"
@@ -83,7 +124,10 @@
     <li
       class="navigation__point mr-[36px] hover:bg-[#EBEBEB] transition duration-300 ease-in-out"
     >
-      <a routerLink="/casting" class="navigation__link after:content-['12'] relative after:absolute after:bottom-[-14px] after:right-[-10px]  after:text-[#00A3FF] after:text-[12px]">
+      <a
+        routerLink="/casting"
+        class="navigation__link after:content-['12'] relative after:absolute after:bottom-[-14px] after:right-[-10px] after:text-[#00A3FF] after:text-[12px]"
+      >
         <svg
           class="w-[30px] h-[30px]"
           viewBox="0 0 42 42"
