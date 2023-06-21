@@ -7,15 +7,15 @@
         alt="user-avatar"
       />
     </div>
-    <h2 class="post__block-user_username text-[24px]">Никнейм</h2>
+    <h2 class="post__block-user_username text-[24px]">{{post.username}}</h2>
   </div>
   <div class="post__info bg-[#fff] rounded-[10px] px-[25px]">
     <div
       class="post__block-info pt-[23px] pb-[8px] border-b-[1px] border-solid border-[#EBEBEB]r"
     >
-      <h2 class="post__block-info_title text-[26px]">Заголовок поста</h2>
+      <h2 class="post__block-info_title text-[26px]">{{post.titlePost}}</h2>
       <p class="post__block-info_text text-[18px] pt-[8px] pb-[16px]">
-        Текст поста
+        {{post.textPost}}
       </p>
       <div class="post__block-info_icons flex items-center mb-[8px]">
         <div class="post__block-like mr-[16px] cursor-pointer">
@@ -90,7 +90,7 @@
         </button>
       </div>
       <div class="post__block-comments_users">
-        <div class="post__block_one-comment flex items-center pb-[48px]">
+        <div class="post__block_one-comment flex items-center pb-[48px]" *ngFor="let comment of post.comments; let i = index">
           <div class="post__block-username_avatar w-[50px] h-[50px]">
             <img
               src="../../../assets/img/avatar.svg"
@@ -102,10 +102,10 @@
             <h3
               class="post__block-comments_title text-[18px] hover:text-[#00A3FF] duration-[250ms] cursor-pointer"
             >
-              <a routerLink="#">Никнейм комментатора</a>
+              <a routerLink="#">{{comment.username}}</a>
             </h3>
             <p class="post__block-comments_text text-[15px]">
-              Текст комментария
+              {{comment.textComment}}
             </p>
           </div>
         </div>

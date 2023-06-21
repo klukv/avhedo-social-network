@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { PostsService } from 'src/app/services/posts.service';
 
 @Component({
   selector: 'app-main-page',
@@ -9,6 +10,8 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 export class MainPageComponent implements AfterViewInit {
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
   isPostsOpen: boolean;
+
+  constructor(public postService: PostsService){}
 
   ngAfterViewInit(): void {
     document.addEventListener('click', this.handleClickMenu.bind(this));

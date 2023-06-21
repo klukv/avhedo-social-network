@@ -9,6 +9,14 @@ export class FriendsService {
 
   constructor() { }
 
-  friendsList: IFriends[] = friendsData;
+  private _friendsList: IFriends[] = friendsData;
+
+  get listFriends() {
+    return this._friendsList;
+  }
+
+  set listFriends(newFriends: IFriends[]) {
+    this._friendsList = newFriends;
+  }
 
 }

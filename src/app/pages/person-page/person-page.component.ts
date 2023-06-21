@@ -19,7 +19,7 @@ export class PersonPageComponent {
   
   ngDoCheck() {
     const userId = this.activeRoute.snapshot.queryParams['id'];
-    this.friendInfo = this.friendsService.friendsList.filter(
+    this.friendInfo = this.friendsService.listFriends.filter(
       (friend) => friend.id == userId
     )[0];
     console.log(1);

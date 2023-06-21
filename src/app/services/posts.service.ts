@@ -8,5 +8,13 @@ import { postsData } from '../data/postsData';
 export class PostsService {
   constructor() {}
 
-  postsData: IPost[] = postsData;
+  private _postsData: IPost[] = postsData;
+
+  get posts() {
+    return this._postsData;
+  }
+
+  set posts(newPosts: IPost[]) {
+    this._postsData = newPosts;
+  }
 }
