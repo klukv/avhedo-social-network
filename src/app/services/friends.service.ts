@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IFriends } from '../models/friends';
 import { friendsData } from '../data/friendsData';
-import {BehaviorSubject} from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,7 @@ export class FriendsService {
   });
   friendInfo$ = this.friendInfo.asObservable();
 
-  constructor() { }
+  constructor() {}
 
   private _friendsList: IFriends[] = friendsData;
 
@@ -26,11 +26,13 @@ export class FriendsService {
     this._friendsList = newFriends;
   }
 
-  setInfoFriend(infoFriend: IFriends){
+  setInfoFriend(infoFriend: IFriends) {
     this.friendInfo.next(infoFriend);
   }
-  changeInfoFriend(id:number){
-    const selectFriend = this.listFriends.filter(friend => friend.id == id)[0];
+  changeInfoFriend(id: number) {
+    const selectFriend = this.listFriends.filter(
+      (friend) => friend.id == id
+    )[0];
     this.setInfoFriend(selectFriend);
   }
 }
