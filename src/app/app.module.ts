@@ -24,6 +24,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { CreateProductComponent } from './components/create-product/create-product.component';
 import { StopPropaginationDirective } from './directives/stop-propagination.directive';
 import { FriendsService } from './services/friends.service';
+import { PostsService } from './services/posts.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { FriendsService } from './services/friends.service';
     BrowserAnimationsModule,
     TextFieldModule
   ],
-  providers: [FriendsService],
+  providers: [FriendsService, PostsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
