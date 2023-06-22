@@ -3,6 +3,7 @@
 >
   <div
     class="casting-page__links flex items-center justify-center text-[22px] py-[20px] border-b-[1px] border-[#EBEBEB] w-full"
+    [ngClass]="{ hidden: !isClickCard, block: isClickCard }"
   >
     <a
       routerLink="/casting/contacts"
@@ -14,6 +15,38 @@
       class="casting-page__links-like hover:text-[#00A3FF] duration-[250ms]"
       >Вы нравитесь</a
     >
+  </div>
+  <div
+    class="casting-page__links flex justify-between items-center px-[64px] py-[206px]"
+    [ngClass]="{ hidden: isClickCard, block: !isClickCard }"
+  >
+    <div
+      class="casting-page__link mr-[26px] bg-[#EBEBEB] rounded-[10px] hover:brightness-[.80] duration-[200ms]"
+    >
+      <!-- <div class="casting-page__link-view absolute bg-black/50 inset-0 z-[-1] opacity-0"></div> -->
+      <div class="casting-page__link-title">
+        <a
+          routerLink="/casting/contacts"
+          class="casting-page__link-title__link text-[26px] px-[90px] h-[550px] flex items-center z-10"
+        >
+          Знакомства
+        </a>
+      </div>
+    </div>
+
+    <div
+      class="casting-page__link bg-[#EBEBEB] rounded-[10px] hover:brightness-[.80] duration-[200ms]"
+    >
+      <!-- <div class="casting-page__link-view absolute bg-black/50 inset-0"></div> -->
+      <div class="casting-page__link-title">
+        <a
+          routerLink="/casting/likes"
+          class="casting-page__link-title__link text-[26px] px-[90px] h-[550px] flex items-center"
+        >
+          Вы нравитесь
+        </a>
+      </div>
+    </div>
   </div>
   <div class="casting-page__cards flex justify-center">
     <router-outlet></router-outlet>
