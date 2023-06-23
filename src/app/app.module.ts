@@ -25,6 +25,7 @@ import { CreateProductComponent } from './components/create-product/create-produ
 import { StopPropaginationDirective } from './directives/stop-propagination.directive';
 import { FriendsService } from './services/friends.service';
 import { PostsService } from './services/posts.service';
+import { FilterFriendsPipe } from './pipes/filter-friends.pipe';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { PostsService } from './services/posts.service';
     PersonPageComponent,
     ModalComponent,
     CreateProductComponent,
-    StopPropaginationDirective
+    StopPropaginationDirective,
+    FilterFriendsPipe
   ],
   imports: [
     BrowserModule,

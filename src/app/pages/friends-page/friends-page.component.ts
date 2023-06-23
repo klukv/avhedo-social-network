@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { IFriends } from 'src/app/models/friends';
+import { debounce, debounceTime } from 'rxjs';
 import { FriendsService } from 'src/app/services/friends.service';
 
 @Component({
@@ -9,7 +9,16 @@ import { FriendsService } from 'src/app/services/friends.service';
   styleUrls: ['./friends-page.component.css'],
 })
 export class FriendsPageComponent {
-  constructor(private router: Router, public friendsService: FriendsService) {}
+  searchUsername = '';
+  constructor(private router: Router, public friendsService: FriendsService) {
+    this._setSearchSubscription();
+  }
+
+  private _setSearchSubscription() {
+    this.friendsService.searchUsernameFriend$
+      .pipe(debounceTime(500))
+      .subscribe((searchValue) => (this.searchUsername = searchValue));
+  }
 
   goToChat(id: number) {
     this.router.navigate([`messages/chat`], {
@@ -17,7 +26,7 @@ export class FriendsPageComponent {
         id: id,
       },
     });
-    this.friendsService.changeInfoFriend(id)
+    this.friendsService.changeInfoFriend(id);
   }
   goToPageFriend(id: number) {
     this.router.navigate(['person'], {

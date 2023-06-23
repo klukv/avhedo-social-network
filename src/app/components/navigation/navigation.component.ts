@@ -6,9 +6,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./navigation.component.css'],
 })
 export class NavigationComponent {
-  isOpenNotifications = false;
+  isOpenNotifications: boolean;
 
-  handlePopupNitifications() {
-    this.isOpenNotifications = !this.isOpenNotifications;
+  ngAfterViewInit(): void {
+    document.addEventListener('click', this.clickPopupNitifications.bind(this));
+  }
+
+  clickPopupNitifications(event: MouseEvent) {
+    const clickedElement = event.target as HTMLElement;
+
+    if (!clickedElement.closest('.notifications__link')) {
+      this.isOpenNotifications = false;
+    }
+  }
+  ngOnDestroy() {
+    document.removeEventListener('click', this.clickPopupNitifications.bind(this));
   }
 }

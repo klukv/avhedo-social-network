@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Subject, debounceTime } from 'rxjs';
+import { Subject, Subscription, debounceTime } from 'rxjs';
+import { FriendsService } from 'src/app/services/friends.service';
 
 @Component({
   selector: 'app-search',
@@ -9,23 +10,23 @@ import { Subject, debounceTime } from 'rxjs';
 export class SearchComponent {
   @Input() placeholder: string;
   @Output() setSearchValue = new EventEmitter();
-  private _searchValue = new Subject();
+  subs: Subscription;
 
-  constructor() {
+  constructor(private friendService: FriendsService) {
     this._setSearchSubscription();
   }
 
   updateSearch(newSearchText: any) {
-    this._searchValue.next(newSearchText.target.value);
+    this.friendService.setSearchUsername(newSearchText.target.value);
   }
 
   private _setSearchSubscription() {
-    this._searchValue.pipe(debounceTime(500)).subscribe((searchValue) => {
+    this.subs = this.friendService.searchUsernameFriend$.pipe(debounceTime(500)).subscribe((searchValue) => {
       this.setSearchValue.emit(searchValue);
     });
   }
 
   ngOnDestroy() {
-    this._searchValue.unsubscribe();
+    this.subs.unsubscribe();
   }
 }

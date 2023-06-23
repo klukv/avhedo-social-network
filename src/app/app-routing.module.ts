@@ -8,19 +8,21 @@ import { ContactsBlockComponent } from './components/casting/contacts-block/cont
 import { LikesBlockComponent } from './components/casting/likes-block/likes-block.component';
 import { FriendsPageComponent } from './pages/friends-page/friends-page.component';
 import { PersonPageComponent } from './pages/person-page/person-page.component';
+import { CASTING_PAGE, CASTING_PAGE_CONTACTS, CASTING_PAGE_LIKES, CHAT_PAGE, FRIENDS_PAGE, MAIN_PAGE, MESSAGES_PAGE, PERSON_PAGE } from './utils/const';
+
 
 const castingRoutes: Routes = [
-  { path: 'contacts', component: ContactsBlockComponent },
-  { path: 'likes', component: LikesBlockComponent },
+  { path: CASTING_PAGE_CONTACTS, component: ContactsBlockComponent },
+  { path: CASTING_PAGE_LIKES, component: LikesBlockComponent },
 ];
 
 const routes: Routes = [
-  { path: '', component: MainPageComponent },
-  { path: 'friends', component: FriendsPageComponent},
-  { path: 'messages', component: MessagesPageComponent },
-  { path: 'messages/chat', component: ChatPageComponent },
-  { path: 'casting', component: CastingPageComponent, children: castingRoutes },
-  { path: 'person', component: PersonPageComponent},
+  { path: MAIN_PAGE, component: MainPageComponent },
+  { path: FRIENDS_PAGE, component: FriendsPageComponent},
+  { path: MESSAGES_PAGE, component: MessagesPageComponent },
+  { path: CHAT_PAGE, component: ChatPageComponent },
+  { path: CASTING_PAGE, component: CastingPageComponent, children: castingRoutes },
+  { path: PERSON_PAGE, component: PersonPageComponent},
 ];
 
 @NgModule({
