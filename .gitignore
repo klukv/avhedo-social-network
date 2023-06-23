@@ -41,5 +41,9 @@ testem.log
 .DS_Store
 Thumbs.db
 
+<<<<<<< HEAD
 tasks.txt
 newTasks.txt
+=======
+tasks.txt
+>>>>>>> customize-casting-page
