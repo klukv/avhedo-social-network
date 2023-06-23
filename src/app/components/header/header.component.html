@@ -1,12 +1,58 @@
 <div class="header__inner px-[160px] bg-[#fff] h-[80px]">
-  <div
-    class="container flex items-center justify-between h-full"
-  >
-    <div class="header__block-one flex items-center">
+  <div class="container flex items-center justify-between h-full">
+    <div class="header__block-one flex items-center relative">
       <div class="header__logo pr-[70px]">
         <img src="../../../assets/img/logo.svg" alt="logo" />
       </div>
-      <app-search class="search" (setSearchValue)="filterSelectFriend($event)" [placeholder]="'Поиск друга'"></app-search>
+      <div class="header__search"> 
+        <app-search
+          class="header__search-block"
+          (setSearchValue)="filterSelectFriend($event)"
+          [placeholder]="'Поиск друга'"
+          (click)="isOpenSearchPopup = true"
+        ></app-search>
+        <div
+          class="header__search-popup absolute left-[228px] top-[61px] p-[8px] w-[318px] z-20 min-h-[50px] bg-[#DEDEDE] rounded-b-lg"
+          [ngClass]="{
+            'invisible opacity-0': !isOpenSearchPopup,
+            'visible opacity-100 transition-[opacity] duration-[100ms]': isOpenSearchPopup
+          }"
+        >
+          <ul
+            class="header__search-popup__list"
+            *ngIf="searchFriends.length !== 0; else empty"
+          >
+            <li
+              class="header__search-popup__list-point border-b-[1px] border-solid border-b-[#B6B6B6] p-[8px] hover:bg-[#B6B6B6] duration-[200ms] cursor-pointer"
+              *ngFor="let friendInfo of searchFriends"
+              (click)="goToPageFriend(friendInfo.id)"
+            >
+              <div class="header__search-popup__list-point__info flex">
+                <div class="search__avatar w-[48px] h-[48px] mr-[8px]">
+                  <img
+                    class="w-full h-full"
+                    src="../../../assets/img/avatar.svg"
+                    alt="avatar"
+                  />
+                </div>
+                <div class="search__text flex flex-col items-start">
+                  <h3 class="search__username text-[18px]">
+                    {{ friendInfo.username }}
+                  </h3>
+                  <div class="seacrh__age text-[#646464]">
+                    {{ friendInfo.age }} лет
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <ng-template #empty>
+            <div class="empty__block text-center text-[18px] p-[8px]">
+              Ничего не найдено
+            </div>
+          </ng-template>
+        </div>
+      </div>
     </div>
     <app-navigation></app-navigation>
   </div>
