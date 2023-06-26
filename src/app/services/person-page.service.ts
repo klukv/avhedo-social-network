@@ -18,6 +18,10 @@ export class PersonPageService {
 
   constructor() { }
 
+  get personInfo(){
+    return this._personInfo.getValue();
+  }
+
   setPersonInfo(newValue: IPersonInfo){
     this._personInfo.next(newValue);
     console.log(newValue);
@@ -25,7 +29,7 @@ export class PersonPageService {
 
 
   setNewPersonInfo(newInfo:IPersonItem<string>){
-    let oldState = this._personInfo.getValue();
+    let oldState = this.personInfo;
     oldState = {
       ...oldState,
       [newInfo.value]: newInfo.text

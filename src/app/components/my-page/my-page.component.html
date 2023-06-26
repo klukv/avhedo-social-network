@@ -11,7 +11,7 @@
       </div>
       <div class="page__user-links">
         <div class="page__user-links_header">
-          <h2 class="page__user-links_username text-[22px]">Никнейм</h2>
+          <h2 class="page__user-links_username text-[22px]">{{personService.personInfo.username}}</h2>
         </div>
         <div class="page__user-links_messages-block relative mb-[7px]">
           <a
@@ -96,7 +96,7 @@
             </svg>
           </button>
         </div>
-        <div class="page__info-age_text text-[#7A7A7A]">20</div>
+        <div class="page__info-age_text text-[#7A7A7A]">{{(personService.personInfo$ | async)?.age}}</div>
       </div>
       <div class="page__info-hobby mb-[16px]">
         <div class="page__info-hobby_header inline-block relative mb-[8px]">
@@ -130,7 +130,7 @@
           </button>
         </div>
         <div class="page__info-hobby_text text-[#7A7A7A]">
-          Настольные игры, спорт
+          {{personService.personInfo.hobby}}
         </div>
       </div>
       <div class="page__info-about">
@@ -166,8 +166,7 @@
         </div>
 
         <div class="page__info-about_text text-[#7A7A7A]">
-          Hi, i am jhon kates, i am 20 years old and worked as a web developer
-          in microsoft
+          {{personService.personInfo.about}}
         </div>
       </div>
     </div>

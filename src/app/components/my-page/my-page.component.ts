@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IPersonInfo } from 'src/app/models/personInfo';
 import { ModalService } from 'src/app/services/modal.service';
 import { PersonPageService } from 'src/app/services/person-page.service';
 import { TypeEditVariants } from 'src/app/utils/const';
