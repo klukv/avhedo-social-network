@@ -1,12 +1,12 @@
 <form class="form__edit">
-  <div class="form__content flex flex-col items-center">
-    <div class="form__input-info__age" *ngIf="modalService.typeEdit === 'age'">
+  <div class="form__content flex flex-col items-center" [ngSwitch]="modalService.typeEdit">
+    <div class="form__input-info__age" *ngSwitchCase="variantsEdit.TYPE_AGE">
       <mat-form-field>
         <mat-label>Input & change events</mat-label>
         <input
           matInput
           [matDatepicker]="picker"
-          (dateChange)="addEvent($event.value)"
+          (dateChange)="setUserAge($event.value)"
         />
         <mat-datepicker-toggle
           matIconSuffix
@@ -17,13 +17,13 @@
     </div>
     <div
       class="form__input-info__hobby"
-      *ngIf="modalService.typeEdit === 'hobby'"
+      *ngSwitchCase="variantsEdit.TYPE_HOBBY"
     >
       hobby
     </div>
     <div
       class="form__input-info__about w-[420px] p-[16px] bg-[#EBEBEB] rounded-[10px]"
-      *ngIf="modalService.typeEdit === 'about'"
+      *ngSwitchCase="variantsEdit.TYPE_ABOUT"
     >
       <textarea
         type="text"
@@ -36,6 +36,7 @@
     </div>
     <button
       class="form__button inline-flex my-[8px] w-[40px] h-[40px] rounded-[50%] bg-[#00A3FF] justify-center items-center hover:bg-[#52C1FF] duration-[250ms]"
+      (click)="setEditions(modalService.typeEdit)"
     >
       <svg
         width="18"
