@@ -10,35 +10,8 @@
         <img class="h-full" src="../../../assets/img/avatar.svg" alt="avatar" />
       </div>
       <div class="page__user-links">
-        <div class="page__user-links_header relative mb-[7px]">
+        <div class="page__user-links_header">
           <h2 class="page__user-links_username text-[22px]">Никнейм</h2>
-          <button
-            class="page__user-links_edit absolute inset-y-0 right-[-20px]"
-            (click)="modalService.open()"
-          >
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M15 12V15C15 15.3978 14.842 15.7794 14.5607 16.0607C14.2794 16.342 13.8978 16.5 13.5 16.5H3C2.60218 16.5 2.22064 16.342 1.93934 16.0607C1.65804 15.7794 1.5 15.3978 1.5 15V4.5C1.5 4.10218 1.65804 3.72064 1.93934 3.43934C2.22064 3.15804 2.60218 3 3 3H6"
-                stroke="#7A7A7A"
-                stroke-width="1.28"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M9.375 11.85L16.5 4.65L13.35 1.5L6.225 8.625L6 12L9.375 11.85Z"
-                stroke="#7A7A7A"
-                stroke-width="1.28"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
         </div>
         <div class="page__user-links_messages-block relative mb-[7px]">
           <a
@@ -97,7 +70,7 @@
           <h2 class="page__info-age_title text-[22px]">Возраст</h2>
           <button
             class="page__info-age_edit absolute inset-y-0 right-[-25px]"
-            (click)="modalService.open()"
+            (click)="modalService.open(variantsEdit.TYPE_AGE)"
           >
             <svg
               width="18"
@@ -130,7 +103,7 @@
           <h2 class="page__info-hobby_title text-[22px]">Хобби</h2>
           <button
             class="page__info-hobby_edit absolute inset-y-0 right-[-25px]"
-            (click)="modalService.open()"
+            (click)="modalService.open(variantsEdit.TYPE_HOBBY)"
           >
             <svg
               width="18"
@@ -165,7 +138,7 @@
           <h2 class="page__info-about_title text-[22px]">О себе</h2>
           <button
             class="page__info-about_edit absolute inset-y-0 right-[-25px]"
-            (click)="modalService.open()"
+            (click)="modalService.open(variantsEdit.TYPE_ABOUT)"
           >
             <svg
               width="18"

@@ -6,3 +6,9 @@ export const CASTING_PAGE_CONTACTS = 'contacts'
 export const PERSON_PAGE = 'person'
 export const MESSAGES_PAGE = 'messages'
 export const CHAT_PAGE = 'messages/chat'
+
+export enum TypeEditVariants{
+    TYPE_AGE = 'age',
+    TYPE_HOBBY = 'hobby',
+    TYPE_ABOUT = 'about'
+}

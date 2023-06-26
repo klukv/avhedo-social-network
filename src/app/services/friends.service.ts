@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { IFriends } from '../models/friends';
 import { friendsData } from '../data/friendsData';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FriendsService {
-  private _searchUsernameFriend = new Subject<string>();
+  private _searchUsernameFriend = new BehaviorSubject<string>('');
   private _friendInfo = new BehaviorSubject<IFriends>({
     id: 0,
     username: 'Это кто',
