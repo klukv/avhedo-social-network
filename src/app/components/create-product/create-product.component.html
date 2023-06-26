@@ -1,7 +1,26 @@
 <form class="form__edit">
   <div class="form__content flex flex-col items-center">
-    <div class="form__input-info__age" *ngIf="modalService.typeEdit === 'age'">age</div>
-    <div class="form__input-info__hobby" *ngIf="modalService.typeEdit === 'hobby'">hobby</div>
+    <div class="form__input-info__age" *ngIf="modalService.typeEdit === 'age'">
+      <mat-form-field>
+        <mat-label>Input & change events</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          (dateChange)="addEvent($event.value)"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div
+      class="form__input-info__hobby"
+      *ngIf="modalService.typeEdit === 'hobby'"
+    >
+      hobby
+    </div>
     <div
       class="form__input-info__about w-[420px] p-[16px] bg-[#EBEBEB] rounded-[10px]"
       *ngIf="modalService.typeEdit === 'about'"
