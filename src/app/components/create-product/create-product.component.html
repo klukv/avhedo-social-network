@@ -1,9 +1,14 @@
 <form class="form__edit">
   <div class="form__content flex flex-col items-center">
-    <div class="form__input-info w-[420px] p-[16px] bg-[#EBEBEB] rounded-[10px]">
+    <div class="form__input-info__age" *ngIf="modalService.typeEdit === 'age'">age</div>
+    <div class="form__input-info__hobby" *ngIf="modalService.typeEdit === 'hobby'">hobby</div>
+    <div
+      class="form__input-info__about w-[420px] p-[16px] bg-[#EBEBEB] rounded-[10px]"
+      *ngIf="modalService.typeEdit === 'about'"
+    >
       <textarea
         type="text"
-        class="form__input  w-full text-[18px] outline-none bg-transparent"
+        class="form__input w-full text-[18px] outline-none bg-transparent"
         cdkTextareaAutosize
         #autosize="cdkTextareaAutosize"
         cdkAutosizeMinRows="1"

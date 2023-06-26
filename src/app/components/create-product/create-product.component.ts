@@ -1,5 +1,6 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, ViewChild } from '@angular/core';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-create-product',
@@ -8,5 +9,7 @@ import { Component, ViewChild } from '@angular/core';
 })
 export class CreateProductComponent {
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
+
+  constructor(public modalService: ModalService){}
 
 }

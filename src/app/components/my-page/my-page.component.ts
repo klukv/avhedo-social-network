@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalService } from 'src/app/services/modal.service';
+import { TypeEditVariants } from 'src/app/utils/const';
 
 @Component({
   selector: 'app-my-page',
@@ -7,6 +8,8 @@ import { ModalService } from 'src/app/services/modal.service';
   styleUrls: ['./my-page.component.css']
 })
 export class MyPageComponent {
+
+  variantsEdit = TypeEditVariants;
 
   constructor(public modalService: ModalService){
 
