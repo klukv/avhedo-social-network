@@ -1,10 +1,21 @@
-<form  [formGroup]="form" class="form__edit" (ngSubmit)="setEditions(modalService.typeEdit)">
-  <div class="form__content flex flex-col items-center" [ngSwitch]="modalService.typeEdit">
-    <div class="form__input-info__age w-[280px]" *ngSwitchCase="variantsEdit.TYPE_AGE">
+<form
+  [formGroup]="form"
+  class="form__edit"
+  (ngSubmit)="setEditions(modalService.typeEdit)"
+>
+  <div
+    class="form__content flex flex-col items-center"
+    [ngSwitch]="modalService.typeEdit"
+  >
+    <div
+      class="form__input-info__age w-[280px]"
+      *ngSwitchCase="variantsEdit.TYPE_AGE"
+    >
       <mat-form-field class="w-full">
         <mat-label>Введите дату рождения</mat-label>
-        <input  
+        <input
           matInput
+          formControlName="ageValue"
           [matDatepicker]="picker"
           (dateChange)="setUserAge($event.value)"
         />
@@ -19,7 +30,21 @@
       class="form__input-info__hobby"
       *ngSwitchCase="variantsEdit.TYPE_HOBBY"
     >
-      hobby
+      <select
+        class="form__input-info__hobby-select"
+        formControlName="hobbyName"
+        (change)="addHobby()"
+        multiple
+      >
+        <option class="form__hobby-point" value="">Выберите хобби</option>
+        <option
+          class="form__hobby-point"
+          *ngFor="let hobby of hobbyList; let i = index"
+          [ngValue]="hobby"
+        >
+          {{ hobby }}
+        </option>
+      </select>
     </div>
     <div
       class="form__input-info__about w-[420px] p-[16px] bg-[#EBEBEB] rounded-[10px]"
@@ -29,9 +54,11 @@
         type="text"
         class="form__input w-full text-[18px] outline-none bg-transparent"
         cdkTextareaAutosize
+        formControlName="aboutInfo"
         #autosize="cdkTextareaAutosize"
         cdkAutosizeMinRows="1"
         placeholder="Новое значение"
+        (change)="addAboutInfo()"
       ></textarea>
     </div>
     <button

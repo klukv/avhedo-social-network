@@ -1,6 +1,11 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ModalService } from 'src/app/services/modal.service';
 import { PersonPageService } from 'src/app/services/person-page.service';
 import { TypeEditVariants } from 'src/app/utils/const';
@@ -18,20 +23,31 @@ export class CreateProductComponent {
   private _about: string;
 
   variantsEdit = TypeEditVariants;
-  form:FormGroup;
+  form: FormGroup;
+
+  hobbyList = [
+    ' Настольные игры',
+    ' Спорт',
+    ' Программирование',
+    ' Сериалы',
+    ' Фильмы',
+    ' Рисование',
+  ];
 
   constructor(
     public modalService: ModalService,
     public personService: PersonPageService,
-    private fb:FormBuilder
+    private fb: FormBuilder
   ) {
     this._createForm();
   }
 
-  private _createForm(){
+  private _createForm() {
     this.form = this.fb.group({
-      hobbyName:['', Validators.required],
-    })
+      ageValue: ['', Validators.required],
+      hobbyName: ['', Validators.required],
+      aboutInfo: ['', Validators.required],
+    });
   }
 
   setUserAge(selectedDate: Date) {
@@ -48,6 +64,14 @@ export class CreateProductComponent {
     }
   }
 
+  addHobby() {
+    this._hobby = this.form.value.hobbyName;
+  }
+
+  addAboutInfo(){
+    this._about = this.form.value.aboutInfo;
+    console.log(this.form.value);
+  }
   setEditions(edit: string | number) {
     switch (edit) {
       case this.variantsEdit.TYPE_AGE:

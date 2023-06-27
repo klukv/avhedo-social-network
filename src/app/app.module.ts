@@ -31,6 +31,7 @@ import { FriendsService } from './services/friends.service';
 import { PostsService } from './services/posts.service';
 import { FilterFriendsPipe } from './pipes/filter-friends.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MultiSelectComponent } from './components/multi-select/multi-select.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CreateProductComponent,
     StopPropaginationDirective,
     FilterFriendsPipe,
+    MultiSelectComponent,
   ],
   imports: [
     BrowserModule,
