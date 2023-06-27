@@ -32,6 +32,7 @@ import { PostsService } from './services/posts.service';
 import { FilterFriendsPipe } from './pipes/filter-friends.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MultiSelectComponent } from './components/multi-select/multi-select.component';
+import { ClickListenerDirective } from './directives/click-listener.directive';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { MultiSelectComponent } from './components/multi-select/multi-select.com
     StopPropaginationDirective,
     FilterFriendsPipe,
     MultiSelectComponent,
+    ClickListenerDirective,
   ],
   imports: [
     BrowserModule,

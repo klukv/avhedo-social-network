@@ -30,21 +30,7 @@
       class="form__input-info__hobby"
       *ngSwitchCase="variantsEdit.TYPE_HOBBY"
     >
-      <select
-        class="form__input-info__hobby-select"
-        formControlName="hobbyName"
-        (change)="addHobby()"
-        multiple
-      >
-        <option class="form__hobby-point" value="">Выберите хобби</option>
-        <option
-          class="form__hobby-point"
-          *ngFor="let hobby of hobbyList; let i = index"
-          [ngValue]="hobby"
-        >
-          {{ hobby }}
-        </option>
-      </select>
+    <app-multi-select [nameControl]="'hobbyName'"></app-multi-select>
     </div>
     <div
       class="form__input-info__about w-[420px] p-[16px] bg-[#EBEBEB] rounded-[10px]"

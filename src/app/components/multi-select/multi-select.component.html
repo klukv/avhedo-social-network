@@ -1,1 +1,23 @@
-<p>multi-select works!</p>
+<div class="select-hobby__inner relative">
+  <div class="select-hobby__input-block" (click)="modalService.openPopup()">
+    <input
+      type="text"
+      class="select-hobby__input w-[390px] h-[50px] rounded-[10px] px-[8px] bg-[#EBEBEB] py-[5px] text-[18px] focus:outline-none placeholder:text-[#7A7A7A]"
+      placeholder="Выберите хобби"
+    />
+  </div>
+  <ul
+    class="select-hobby__list bg-[#EBEBEB] w-2/4 absolute left-[10px] rounded-b-lg overflow-hidden z-[2000]"
+    [ngClass]="{
+      'opacity-0 invisible': !(modalService.$isOpenPopup | async),
+      'opacity-1 visible': modalService.$isOpenPopup | async
+    }"
+  >
+    <li
+      class="select-hobby__point text-[18px] px-[8px] py-[12px] hover:bg-[#00A3FF] hover:text-[#fff] duration-[150ms] cursor-pointer"
+      *ngFor="let hobby of hobbyList; let i = index"
+    >
+      {{ hobby }}
+    </li>
+  </ul>
+</div>

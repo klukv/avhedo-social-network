@@ -10,6 +10,7 @@ export class ModalService {
   constructor() {}
 
   $isVisible = new BehaviorSubject<boolean>(false);
+  $isOpenPopup = new BehaviorSubject<boolean>(false);
 
   open(typeEdition:string) {
     this._typeEdit = typeEdition;
@@ -18,6 +19,14 @@ export class ModalService {
 
   close() {
     this.$isVisible.next(false);
+  }
+
+  openPopup(){
+    this.$isOpenPopup.next(true);
+  }
+
+  closePopup(){
+    this.$isOpenPopup.next(false);
   }
 
   get typeEdit(){

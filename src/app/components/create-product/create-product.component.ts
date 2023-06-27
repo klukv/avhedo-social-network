@@ -25,15 +25,6 @@ export class CreateProductComponent {
   variantsEdit = TypeEditVariants;
   form: FormGroup;
 
-  hobbyList = [
-    ' Настольные игры',
-    ' Спорт',
-    ' Программирование',
-    ' Сериалы',
-    ' Фильмы',
-    ' Рисование',
-  ];
-
   constructor(
     public modalService: ModalService,
     public personService: PersonPageService,
