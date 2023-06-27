@@ -1,9 +1,9 @@
-<form class="form__edit">
+<form  [formGroup]="form" class="form__edit" (ngSubmit)="setEditions(modalService.typeEdit)">
   <div class="form__content flex flex-col items-center" [ngSwitch]="modalService.typeEdit">
-    <div class="form__input-info__age" *ngSwitchCase="variantsEdit.TYPE_AGE">
-      <mat-form-field>
-        <mat-label>Input & change events</mat-label>
-        <input
+    <div class="form__input-info__age w-[280px]" *ngSwitchCase="variantsEdit.TYPE_AGE">
+      <mat-form-field class="w-full">
+        <mat-label>Введите дату рождения</mat-label>
+        <input  
           matInput
           [matDatepicker]="picker"
           (dateChange)="setUserAge($event.value)"
@@ -36,7 +36,7 @@
     </div>
     <button
       class="form__button inline-flex my-[8px] w-[40px] h-[40px] rounded-[50%] bg-[#00A3FF] justify-center items-center hover:bg-[#52C1FF] duration-[250ms]"
-      (click)="setEditions(modalService.typeEdit)"
+      type="submit"
     >
       <svg
         width="18"

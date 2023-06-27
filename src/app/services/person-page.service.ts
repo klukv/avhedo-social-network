@@ -24,7 +24,6 @@ export class PersonPageService {
 
   setPersonInfo(newValue: IPersonInfo){
     this._personInfo.next(newValue);
-    console.log(newValue);
   }
 
 

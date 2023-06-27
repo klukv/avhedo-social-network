@@ -30,6 +30,7 @@ import { StopPropaginationDirective } from './directives/stop-propagination.dire
 import { FriendsService } from './services/friends.service';
 import { PostsService } from './services/posts.service';
 import { FilterFriendsPipe } from './pipes/filter-friends.pipe';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -64,6 +65,8 @@ import { FilterFriendsPipe } from './pipes/filter-friends.pipe';
     MatFormFieldModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
 
   providers: [FriendsService, PostsService],

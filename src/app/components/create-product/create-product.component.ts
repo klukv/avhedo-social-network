@@ -1,5 +1,6 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalService } from 'src/app/services/modal.service';
 import { PersonPageService } from 'src/app/services/person-page.service';
 import { TypeEditVariants } from 'src/app/utils/const';
@@ -17,11 +18,21 @@ export class CreateProductComponent {
   private _about: string;
 
   variantsEdit = TypeEditVariants;
+  form:FormGroup;
 
   constructor(
     public modalService: ModalService,
-    public personService: PersonPageService
-  ) {}
+    public personService: PersonPageService,
+    private fb:FormBuilder
+  ) {
+    this._createForm();
+  }
+
+  private _createForm(){
+    this.form = this.fb.group({
+      hobbyName:['', Validators.required],
+    })
+  }
 
   setUserAge(selectedDate: Date) {
     const today = new Date();
