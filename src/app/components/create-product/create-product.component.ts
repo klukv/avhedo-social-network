@@ -2,7 +2,6 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, ViewChild } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
@@ -19,7 +18,7 @@ export class CreateProductComponent {
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
   private _age: number;
-  private _hobby: string;
+  public hobby: string[] = [];
   private _about: string;
 
   variantsEdit = TypeEditVariants;
@@ -40,7 +39,7 @@ export class CreateProductComponent {
       aboutInfo: ['', Validators.required],
     });
   }
-
+  // =============================================================================== Age-block
   setUserAge(selectedDate: Date) {
     const today = new Date();
     const birthday = new Date(selectedDate);
@@ -54,15 +53,16 @@ export class CreateProductComponent {
       this._age--;
     }
   }
-
-  addHobby() {
-    this._hobby = this.form.value.hobbyName;
-  }
-
-  addAboutInfo(){
+  // =============================================================================== Hobby-block
+  // setHobby() {
+  //   this.personService.selectHobbyItems.map(hobby => this.hobby.push(hobby.information));
+  //   console.log(this.hobby);
+  // }
+  // =============================================================================== About-block
+  setAboutInfo() {
     this._about = this.form.value.aboutInfo;
-    console.log(this.form.value);
   }
+  // =============================================================================== Main-block
   setEditions(edit: string | number) {
     switch (edit) {
       case this.variantsEdit.TYPE_AGE:
@@ -74,7 +74,7 @@ export class CreateProductComponent {
       case this.variantsEdit.TYPE_HOBBY:
         this.personService.setNewPersonInfo({
           value: this.variantsEdit.TYPE_HOBBY,
-          text: this._hobby,
+          text: this.hobby,
         });
         break;
       case this.variantsEdit.TYPE_ABOUT:
@@ -89,10 +89,6 @@ export class CreateProductComponent {
 
   get currentAge() {
     return this._age;
-  }
-
-  get currentHobby() {
-    return this._hobby;
   }
 
   get currentAbout() {

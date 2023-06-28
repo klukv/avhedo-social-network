@@ -2,9 +2,9 @@
   <div class="select-hobby__input-block" (click)="modalService.openPopup()">
     <input
       type="text"
-      class="select-hobby__input w-[390px] h-[50px] rounded-[10px] px-[8px] bg-[#EBEBEB] py-[5px] text-[18px] focus:outline-none placeholder:text-[#7A7A7A]"
+      class="select-hobby__input w-full h-[50px] rounded-[10px] px-[8px] bg-[#EBEBEB] py-[5px] text-[18px] focus:outline-none placeholder:text-[#7A7A7A]"
       placeholder="Выберите хобби"
-      [(ngModel)] = 'searchHobby'
+      [(ngModel)]="searchHobby"
     />
   </div>
   <ul
@@ -17,6 +17,7 @@
     <li
       class="select-hobby__point text-[18px] px-[8px] py-[12px] hover:bg-[#00A3FF] hover:text-[#fff] duration-[150ms] cursor-pointer"
       *ngFor="let hobby of hobbyList | filterHobby : searchHobby; let i = index"
+      (click)="addSelectHobby(hobby)"
     >
       {{ hobby.information }}
     </li>

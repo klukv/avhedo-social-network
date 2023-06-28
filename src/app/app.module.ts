@@ -3,10 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TextFieldModule } from '@angular/cdk/text-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatNativeDateModule} from '@angular/material/core';
-import { MatDatepickerModule} from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -34,7 +34,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MultiSelectComponent } from './components/multi-select/multi-select.component';
 import { ClickListenerDirective } from './directives/click-listener.directive';
 import { FilterHobbyPipe } from './pipes/filter-hobby.pipe';
-
+import { ClickHobbyDirective } from './directives/click-hobby.directive';
 
 @NgModule({
   declarations: [
@@ -61,6 +61,7 @@ import { FilterHobbyPipe } from './pipes/filter-hobby.pipe';
     MultiSelectComponent,
     ClickListenerDirective,
     FilterHobbyPipe,
+    ClickHobbyDirective,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +78,6 @@ import { FilterHobbyPipe } from './pipes/filter-hobby.pipe';
 
   providers: [FriendsService, PostsService],
 
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -27,10 +27,51 @@
       </mat-form-field>
     </div>
     <div
-      class="form__input-info__hobby"
+      class="form__input-info__hobby w-full"
       *ngSwitchCase="variantsEdit.TYPE_HOBBY"
     >
-    <app-multi-select [nameControl]="'hobbyName'"></app-multi-select>
+      <div class="hobby__cells py-[8px]">
+        <div
+          class="hobby-cell inline-flex items-center px-[8px] py-[4px] rounded-[8px] bg-[#00A3FF] text-[#ffffff] my-[2px] mx-[2px] text-[16px]"
+          *ngFor="let selectHobby of personService.selectHobbyItems"
+        >
+          {{ selectHobby.information }}
+          <span
+            class="hobby-cell__close inline-flex justify-center items-center w-[20px] h-[20px] ml-[4px] border-solid border-[#ffffff] border-[2px] rounded-[50%] cursor-pointer"
+            (click)="personService.removeSelectHobby(selectHobby.id)"
+          >
+            <svg
+              class="w-full h-full"
+              viewBox="0 0 24.00 24.00"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              stroke="#ffffff"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke="#CCCCCC"
+                stroke-width="0.672"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <g id="Menu / Close_MD">
+                  <path
+                    id="Vector"
+                    d="M18 18L12 12M12 12L6 6M12 12L18 6M12 12L6 18"
+                    stroke="#ffffff"
+                    stroke-width="2.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </g>
+              </g>
+            </svg>
+          </span>
+        </div>
+      </div>
+      <app-multi-select appClickHobby [hobbyInfo]="hobby"></app-multi-select>
     </div>
     <div
       class="form__input-info__about w-[420px] p-[16px] bg-[#EBEBEB] rounded-[10px]"
@@ -44,7 +85,7 @@
         #autosize="cdkTextareaAutosize"
         cdkAutosizeMinRows="1"
         placeholder="Новое значение"
-        (change)="addAboutInfo()"
+        (change)="setAboutInfo()"
       ></textarea>
     </div>
     <button

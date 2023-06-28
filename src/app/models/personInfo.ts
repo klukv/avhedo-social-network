@@ -1,6 +1,6 @@
 export interface IPersonItem<T> {
     value: T,
-    text: string | number
+    text: string | string[] | number
 }
 
 export interface IPersonInfo {

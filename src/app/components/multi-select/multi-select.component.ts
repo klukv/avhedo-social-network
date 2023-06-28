@@ -1,6 +1,7 @@
 import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { IHobbyInfo } from 'src/app/models/personInfo';
 import { ModalService } from 'src/app/services/modal.service';
+import { PersonPageService } from 'src/app/services/person-page.service';
 
 @Component({
   selector: 'app-multi-select',
@@ -8,9 +9,7 @@ import { ModalService } from 'src/app/services/modal.service';
   styleUrls: ['./multi-select.component.css'],
 })
 export class MultiSelectComponent {
-  @Input() nameControl: string;
   searchHobby: string = '';
-  private _selectHobbyItems: IHobbyInfo[] = [];
   private _hobbyList:IHobbyInfo[]  = [
     {
       id: 0,
@@ -38,24 +37,17 @@ export class MultiSelectComponent {
     },
   ];
 
-  constructor(public modalService: ModalService) {}
-
-  addSelectHobby(hobby: IHobbyInfo) {
-    if (this._selectHobbyItems.indexOf(hobby) !== -1) {
-      return;
-    }
-    this._selectHobbyItems.push(hobby);
+  constructor(public modalService: ModalService, private personService: PersonPageService) {
   }
 
-  removeSelectHobby(id: number) {
-    this._selectHobbyItems.filter((hobby) => hobby.id !== id);
+  addSelectHobby(hobby: IHobbyInfo) {
+    if (this.personService.selectHobbyItems.indexOf(hobby) !== -1) {
+      return;
+    }
+    this.personService.selectHobbyItems.push(hobby);
   }
 
   get hobbyList() {
     return this._hobbyList;
-  }
-
-  get selectHobbyItems() {
-    return this._selectHobbyItems;
   }
 }
