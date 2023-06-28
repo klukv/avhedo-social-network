@@ -33,6 +33,7 @@ import { FilterFriendsPipe } from './pipes/filter-friends.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MultiSelectComponent } from './components/multi-select/multi-select.component';
 import { ClickListenerDirective } from './directives/click-listener.directive';
+import { FilterHobbyPipe } from './pipes/filter-hobby.pipe';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { ClickListenerDirective } from './directives/click-listener.directive';
     FilterFriendsPipe,
     MultiSelectComponent,
     ClickListenerDirective,
+    FilterHobbyPipe,
   ],
   imports: [
     BrowserModule,

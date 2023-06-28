@@ -10,3 +10,8 @@ export interface IPersonInfo {
     hobby: string,
     about: string
 }
+
+export interface IHobbyInfo {
+    id: number,
+    information: string
+}
