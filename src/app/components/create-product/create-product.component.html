@@ -35,7 +35,7 @@
           class="hobby-cell inline-flex items-center px-[8px] py-[4px] rounded-[8px] bg-[#00A3FF] text-[#ffffff] my-[2px] mx-[2px] text-[16px]"
           *ngFor="let selectHobby of personService.selectHobbyItems"
         >
-          {{ selectHobby.information }}
+          {{ selectHobby?.information }}
           <span
             class="hobby-cell__close inline-flex justify-center items-center w-[20px] h-[20px] ml-[4px] border-solid border-[#ffffff] border-[2px] rounded-[50%] cursor-pointer"
             (click)="personService.removeSelectHobby(selectHobby.id)"
@@ -71,7 +71,7 @@
           </span>
         </div>
       </div>
-      <app-multi-select appClickHobby [hobbyInfo]="hobby"></app-multi-select>
+      <app-multi-select></app-multi-select>
     </div>
     <div
       class="form__input-info__about w-[420px] p-[16px] bg-[#EBEBEB] rounded-[10px]"

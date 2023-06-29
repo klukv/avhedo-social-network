@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { IHobbyInfo } from 'src/app/models/personInfo';
 import { ModalService } from 'src/app/services/modal.service';
 import { PersonPageService } from 'src/app/services/person-page.service';
 import { TypeEditVariants } from 'src/app/utils/const';
@@ -18,7 +19,6 @@ export class CreateProductComponent {
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
   private _age: number;
-  public hobby: string[] = [];
   private _about: string;
 
   variantsEdit = TypeEditVariants;
@@ -53,11 +53,6 @@ export class CreateProductComponent {
       this._age--;
     }
   }
-  // =============================================================================== Hobby-block
-  // setHobby() {
-  //   this.personService.selectHobbyItems.map(hobby => this.hobby.push(hobby.information));
-  //   console.log(this.hobby);
-  // }
   // =============================================================================== About-block
   setAboutInfo() {
     this._about = this.form.value.aboutInfo;
@@ -74,7 +69,7 @@ export class CreateProductComponent {
       case this.variantsEdit.TYPE_HOBBY:
         this.personService.setNewPersonInfo({
           value: this.variantsEdit.TYPE_HOBBY,
-          text: this.hobby,
+          text: this.personService.selectHobbyItems.map(hobby => hobby.information).join(', '),
         });
         break;
       case this.variantsEdit.TYPE_ABOUT:

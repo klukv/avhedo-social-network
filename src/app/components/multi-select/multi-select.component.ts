@@ -10,41 +10,59 @@ import { PersonPageService } from 'src/app/services/person-page.service';
 })
 export class MultiSelectComponent {
   searchHobby: string = '';
-  private _hobbyList:IHobbyInfo[]  = [
+  private _hobbyList: IHobbyInfo[] = [
     {
       id: 0,
-      information: ' Настольные игры',
+      information: 'Настольные игры',
     },
     {
       id: 1,
-      information: ' Спорт',
+      information: 'Спорт',
     },
     {
       id: 2,
-      information: ' Программирование',
+      information: 'Программирование',
     },
     {
       id: 3,
-      information: ' Сериалы',
+      information: 'Сериалы',
     },
     {
       id: 4,
-      information: ' Фильмы',
+      information: 'Фильмы',
     },
     {
       id: 5,
-      information: ' Рисование',
+      information: 'Рисование',
     },
   ];
 
-  constructor(public modalService: ModalService, private personService: PersonPageService) {
+  constructor(
+    public modalService: ModalService,
+    private personService: PersonPageService
+  ) {}
+
+  ngOnInit() {
+    this.personService.personInfo$.subscribe((infoPerson) => {
+      const arrayCurrentHobby = infoPerson.hobby.split(', ');
+      if (arrayCurrentHobby.length === 0) return;
+
+      for (let i = 0; i < arrayCurrentHobby.length; i++) {
+        const findHobby = this.hobbyList.filter(
+          (hobbyValue) => hobbyValue.information === arrayCurrentHobby[i]
+        )[0];
+        this.personService.setCurrentHobbyItems(findHobby);
+      }
+    });
   }
 
   addSelectHobby(hobby: IHobbyInfo) {
-    if (this.personService.selectHobbyItems.indexOf(hobby) !== -1) {
-      return;
+    const isCheck = this.personService.selectHobbyItems.some(
+      (hobbyOfArray) => JSON.stringify(hobbyOfArray) === JSON.stringify(hobby)
+    );
+    if (!isCheck) {
+      this.personService.selectHobbyItems.push(hobby);
     }
-    this.personService.selectHobbyItems.push(hobby);
   }
 
   get hobbyList() {

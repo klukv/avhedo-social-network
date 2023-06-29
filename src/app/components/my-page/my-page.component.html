@@ -130,7 +130,7 @@
           </button>
         </div>
         <div class="page__info-hobby_text text-[#7A7A7A] break-words">
-          {{personService.personInfo.hobby}}
+          {{(personService.personInfo$ | async)?.hobby}}
         </div>
       </div>
       <div class="page__info-about">

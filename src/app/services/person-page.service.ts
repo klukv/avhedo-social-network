@@ -11,7 +11,7 @@ export class PersonPageService {
     id: 0,
     username: 'Артём',
     age: 21,
-    hobby: 'Настольные игры, спорт',
+    hobby: 'Настольные игры, Спорт, Рисование',
     about:
       'Hi, i am jhon kates, i am 20 years old and worked as a web developer in microsoft',
   });
@@ -22,10 +22,6 @@ export class PersonPageService {
 
   get personInfo() {
     return this._personInfo.getValue();
-  }
-
-  get selectHobbyItems() {
-    return this._selectHobbyItems;
   }
 
   setPersonInfo(newValue: IPersonInfo) {
@@ -41,7 +37,22 @@ export class PersonPageService {
     this.setPersonInfo(oldState);
   }
 
+  get selectHobbyItems() {
+    return this._selectHobbyItems;
+  }
+
+  setCurrentHobbyItems(currentHobby: IHobbyInfo) {
+    const isCheck = this._selectHobbyItems.some(
+      (hobby) => JSON.stringify(hobby) === JSON.stringify(currentHobby)
+    );
+    if (!isCheck) {
+      this._selectHobbyItems.push(currentHobby);
+    }
+  }
+
   removeSelectHobby(id: number) {
-    this._selectHobbyItems = this._selectHobbyItems.filter((hobby) => hobby.id !== id);
+    this._selectHobbyItems = this._selectHobbyItems.filter(
+      (hobby) => hobby.id !== id
+    );
   }
 }
