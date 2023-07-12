@@ -25,8 +25,29 @@ export const messagesData = [
   },
   {
     id: 4,
-    avatarLink: "",
-    username: "Юля",
-    textLastMessage: "..."
-}
+    avatarLink: '',
+    username: 'Юля',
+    textLastMessage: '...',
+  },
+];
+
+export const messageLinkInterlocutor: string[] = [
+  'Верни сотку',
+  'Пошли гулять',
+  'Но верни деньги',
+];
+
+export const messageLinkOwn = [
+  {
+    id: 0,
+    content: 'Нет',
+  },
+  {
+    id: 1,
+    content: 'Потом',
+  },
+  {
+    id: 2,
+    content: '---',
+  },
 ];

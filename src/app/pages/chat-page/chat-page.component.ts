@@ -10,7 +10,8 @@ import { WebsocketService } from 'src/app/services/websocket.service';
   styleUrls: ['./chat-page.component.css'],
 })
 export class ChatPageComponent {
-  private ws: WebSocket = new WebSocket('ws://localhost:5000');
+  private _user_id: string;
+  private _ws: WebSocket = new WebSocket('ws://localhost:5000');
   currentFriendChat: IFriends;
   messageContent: string = '';
 
@@ -19,33 +20,34 @@ export class ChatPageComponent {
     private activeRoute: ActivatedRoute,
     public websocketService: WebsocketService
   ) {
+    this._user_id = this.activeRoute.snapshot.queryParams['id'];
     this._connectWebsocket();
   }
 
   private _connectWebsocket(){
-    this.ws.onopen = () => {
+    this._ws.onopen = () => {
       const message = {
         event: 'connection',
-        id: Date.now(),
+        id: this._user_id,
       }
-      this.ws.send(JSON.stringify(message));
+      console.log(`connection`);
+      console.log(this._user_id);
+      this._ws.send(JSON.stringify(message));
       console.log(`Подключение с вебсокетом установлено`);
     }
 
-    this.ws.onmessage = (event) => {
+    this._ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
       this.websocketService.addNewMessage(data);
     }
 
-    this.ws.onclose = () => {
-      console.log(`Подключение остановлено. Попытка переподключения будет через 3 сек...`);
-      setTimeout(this._connectWebsocket, 3000);
+    this._ws.onclose = () => {
+      console.log(`Подключение остановлено`);
     }
   }
 
   ngOnInit() {
-    const userId = this.activeRoute.snapshot.queryParams['id'];
-    this.friendsService.changeInfoFriend(userId);
+    this.friendsService.changeInfoFriend(Number(this._user_id));
   }
 
   ngDoCheck() {
@@ -56,13 +58,19 @@ export class ChatPageComponent {
 
   sendMessageWs() {
     const message = {
-      id: Date.now(),
+      id: this._user_id,
       content: this.messageContent,
       event: 'message'
     }
-    this.ws.send(JSON.stringify(message));
+    console.log(`message`);
+    console.log(this._user_id);
+    this._ws.send(JSON.stringify(message));
     this.messageContent = ''
   }
 
   messages = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+  ngOnDestroy(){
+    this._ws.close();
+  }
 }
