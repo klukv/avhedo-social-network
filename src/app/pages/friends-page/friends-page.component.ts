@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { debounce, debounceTime } from 'rxjs';
 import { FriendsService } from 'src/app/services/friends.service';
+import { WebsocketService } from 'src/app/services/websocket.service';
 
 @Component({
   selector: 'app-friends-page',
@@ -10,7 +11,7 @@ import { FriendsService } from 'src/app/services/friends.service';
 })
 export class FriendsPageComponent {
   searchUsername = '';
-  constructor(private router: Router, public friendsService: FriendsService) {
+  constructor(private websocketService: WebsocketService, private router: Router, public friendsService: FriendsService) {
     this._setSearchSubscription();
   }
 
@@ -26,6 +27,7 @@ export class FriendsPageComponent {
         id: id,
       },
     });
+    this.websocketService.clearMessages();
     this.friendsService.changeInfoFriend(id);
   }
   goToPageFriend(id: number) {

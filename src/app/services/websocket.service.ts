@@ -14,20 +14,13 @@ export class WebsocketService {
 
   constructor() {}
 
-  addNewMessage(type: string , message: IChatMessage) {
-    console.log(type);
-    
-    switch (type) {
-      case TypeActionAddNewMessage.TYPE_ADD_MESSAGE: {
-        this._arrayMessages.push(message);
-        this._messages.next(this._arrayMessages);
-        break;
-      }
-      case TypeActionAddNewMessage.TYPE_CLEAR_STASH: {
-        this._arrayMessages = [];
-        this._messages.next(this._arrayMessages);
-        break;
-      }
-    }
+  addNewMessage(message: IChatMessage) {
+    this._arrayMessages.push(message);
+    this._messages.next(this._arrayMessages);
+  }
+
+  clearMessages(){
+    this._arrayMessages = [];
+    this._messages.next(this._arrayMessages);
   }
 }

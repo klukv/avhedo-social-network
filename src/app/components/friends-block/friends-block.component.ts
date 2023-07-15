@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FriendsService } from 'src/app/services/friends.service';
+import { WebsocketService } from 'src/app/services/websocket.service';
 
 @Component({
   selector: 'app-friends-block',
@@ -8,7 +9,7 @@ import { FriendsService } from 'src/app/services/friends.service';
   styleUrls: ['./friends-block.component.css'],
 })
 export class FriendsBlockComponent {
-  constructor(private router: Router, public friendsService: FriendsService) {}
+  constructor(private websocketService: WebsocketService, private router: Router, public friendsService: FriendsService) {}
   goToChat(id: number) {
     this.router.navigate([`messages/chat`], {
       queryParams: {

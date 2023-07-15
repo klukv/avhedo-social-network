@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IFriends } from 'src/app/models/friends';
 import { FriendsService } from 'src/app/services/friends.service';
 import { WebsocketService } from 'src/app/services/websocket.service';
-import { TypeActionAddNewMessage } from 'src/app/utils/const';
 
 @Component({
   selector: 'app-chat-page',
@@ -19,8 +18,8 @@ export class ChatPageComponent {
   messageContent: string = '';
 
   constructor(
-    private activeRoute: ActivatedRoute,
     private router: Router,
+    private activeRoute: ActivatedRoute,
     public friendsService: FriendsService,
     public websocketService: WebsocketService
   ) {
@@ -41,10 +40,7 @@ export class ChatPageComponent {
     this._ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
       if (data.content !== undefined) {
-        this.websocketService.addNewMessage(
-          TypeActionAddNewMessage.TYPE_ADD_MESSAGE,
-          data
-        );
+        this.websocketService.addNewMessage(data);
       }
     };
 
@@ -55,12 +51,16 @@ export class ChatPageComponent {
 
   ngOnInit() {
     this.friendsService.changeInfoFriend(Number(this._user_id));
-  }
-
-  ngDoCheck() {
     this.subscription = this.friendsService.friendInfo$.subscribe(
       (friendInfo) => (this.currentFriendChat = friendInfo)
     );
+    this.router.events.subscribe(event => {
+      let currentUrl = this.router.url
+
+      if(event instanceof NavigationEnd && currentUrl.includes('chat')){
+        window.location.reload();
+      }
+    })
   }
 
   sendMessageWs() {
@@ -76,10 +76,7 @@ export class ChatPageComponent {
   messages = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   ngOnDestroy() {
-    this.websocketService.addNewMessage(
-      TypeActionAddNewMessage.TYPE_CLEAR_STASH,
-      { id: null, content: '' }
-    );
+    this.websocketService.clearMessages();
     this._ws.close();
     this.subscription.unsubscribe();
   }
