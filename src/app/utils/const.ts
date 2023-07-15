@@ -12,3 +12,8 @@ export enum TypeEditVariants{
     TYPE_HOBBY = 'hobby',
     TYPE_ABOUT = 'about'
 }
+
+export enum TypeActionAddNewMessage{
+    TYPE_ADD_MESSAGE = 'ADD_MESSAGE',
+    TYPE_CLEAR_STASH = 'TYPE_CLEAR_STASH'
+}

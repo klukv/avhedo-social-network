@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { IFriends } from 'src/app/models/friends';
 import { FriendsService } from 'src/app/services/friends.service';
 import { WebsocketService } from 'src/app/services/websocket.service';
+import { TypeActionAddNewMessage } from 'src/app/utils/const';
 
 @Component({
   selector: 'app-chat-page',
@@ -10,40 +12,45 @@ import { WebsocketService } from 'src/app/services/websocket.service';
   styleUrls: ['./chat-page.component.css'],
 })
 export class ChatPageComponent {
+  private subscription: Subscription;
   private _user_id: string;
   private _ws: WebSocket = new WebSocket('ws://localhost:5000');
   currentFriendChat: IFriends;
   messageContent: string = '';
 
   constructor(
-    public friendsService: FriendsService,
     private activeRoute: ActivatedRoute,
+    private router: Router,
+    public friendsService: FriendsService,
     public websocketService: WebsocketService
   ) {
     this._user_id = this.activeRoute.snapshot.queryParams['id'];
     this._connectWebsocket();
   }
 
-  private _connectWebsocket(){
+  private _connectWebsocket() {
     this._ws.onopen = () => {
       const message = {
         event: 'connection',
         id: this._user_id,
-      }
-      console.log(`connection`);
-      console.log(this._user_id);
+      };
       this._ws.send(JSON.stringify(message));
       console.log(`Подключение с вебсокетом установлено`);
-    }
+    };
 
     this._ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      this.websocketService.addNewMessage(data);
-    }
+      if (data.content !== undefined) {
+        this.websocketService.addNewMessage(
+          TypeActionAddNewMessage.TYPE_ADD_MESSAGE,
+          data
+        );
+      }
+    };
 
     this._ws.onclose = () => {
       console.log(`Подключение остановлено`);
-    }
+    };
   }
 
   ngOnInit() {
@@ -51,7 +58,7 @@ export class ChatPageComponent {
   }
 
   ngDoCheck() {
-    this.friendsService.friendInfo$.subscribe(
+    this.subscription = this.friendsService.friendInfo$.subscribe(
       (friendInfo) => (this.currentFriendChat = friendInfo)
     );
   }
@@ -60,17 +67,20 @@ export class ChatPageComponent {
     const message = {
       id: this._user_id,
       content: this.messageContent,
-      event: 'message'
-    }
-    console.log(`message`);
-    console.log(this._user_id);
+      event: 'message',
+    };
     this._ws.send(JSON.stringify(message));
-    this.messageContent = ''
+    this.messageContent = '';
   }
 
   messages = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  ngOnDestroy(){
+  ngOnDestroy() {
+    this.websocketService.addNewMessage(
+      TypeActionAddNewMessage.TYPE_CLEAR_STASH,
+      { id: null, content: '' }
+    );
     this._ws.close();
+    this.subscription.unsubscribe();
   }
 }
