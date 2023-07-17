@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { debounce, debounceTime } from 'rxjs';
 import { FriendsService } from 'src/app/services/friends.service';
-import { WebsocketService } from 'src/app/services/websocket.service';
+
 
 @Component({
   selector: 'app-friends-page',
@@ -10,31 +8,6 @@ import { WebsocketService } from 'src/app/services/websocket.service';
   styleUrls: ['./friends-page.component.css'],
 })
 export class FriendsPageComponent {
-  searchUsername = '';
-  constructor(private websocketService: WebsocketService, private router: Router, public friendsService: FriendsService) {
-    this._setSearchSubscription();
-  }
-
-  private _setSearchSubscription() {
-    this.friendsService.searchUsernameFriend$
-      .pipe(debounceTime(500))
-      .subscribe((searchValue) => (this.searchUsername = searchValue));
-  }
-
-  goToChat(id: number) {
-    this.router.navigate([`messages/chat`], {
-      queryParams: {
-        id: id,
-      },
-    });
-    this.websocketService.clearMessages();
-    this.friendsService.changeInfoFriend(id);
-  }
-  goToPageFriend(id: number) {
-    this.router.navigate(['person'], {
-      queryParams: {
-        id: id,
-      },
-    });
+  constructor(public friendsService: FriendsService) {
   }
 }

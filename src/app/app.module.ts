@@ -34,6 +34,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MultiSelectComponent } from './components/multi-select/multi-select.component';
 import { ClickListenerDirective } from './directives/click-listener.directive';
 import { FilterHobbyPipe } from './pipes/filter-hobby.pipe';
+import { FriendsAddComponent } from './components/friends/friends-add/friends-add.component';
+import { FriendsSearchComponent } from './components/friends/friends-search/friends-search.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,8 @@ import { FilterHobbyPipe } from './pipes/filter-hobby.pipe';
     MultiSelectComponent,
     ClickListenerDirective,
     FilterHobbyPipe,
+    FriendsAddComponent,
+    FriendsSearchComponent,
   ],
   imports: [
     BrowserModule,
