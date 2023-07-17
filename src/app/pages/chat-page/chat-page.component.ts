@@ -39,7 +39,7 @@ export class ChatPageComponent {
       const message = {
         event: 'connection',
         id: Math.random(),
-        chatId: `${this._user_id}_${this.personInfo.id}`,
+        chatId: `${this.personInfo.id}_${this._user_id}`,
         senderId: this.personInfo.id,
         recipientId: this._user_id,
         content: this.messageContent,
@@ -72,12 +72,13 @@ export class ChatPageComponent {
         window.location.reload();
       }
     });
+    this.websocketService.getAllMessages(`${this.personInfo.id}_${this._user_id}`)
   }
 
   sendMessageWs() {
     const message = {
       id: Math.random(),
-      chatId: `${this._user_id}_${this.personInfo.id}`,
+      chatId: `${this.personInfo.id}_${this._user_id}`,
       senderId: this.personInfo.id,
       recipientId: this._user_id,
       content: this.messageContent,
@@ -86,8 +87,6 @@ export class ChatPageComponent {
     this._ws.send(JSON.stringify(message));
     this.messageContent = '';
   }
-
-  messages = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   ngOnDestroy() {
     this.websocketService.clearMessages();

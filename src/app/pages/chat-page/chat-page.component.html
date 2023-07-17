@@ -2,7 +2,7 @@
   class="chat-page mr-[18px] mb-[96px] w-[872px] h-[1150px] bg-[#fff] rounded-[10px] flex flex-col overflow-clip"
 >
   <div
-    class="chat-page__header sticky top-0 flex grow-0 items-center justify-center pt-[10px] pb-[5px] border-b-[1px] border-solid border-[#EBEBEB] bg-[#fff] "
+    class="chat-page__header sticky top-0 flex grow-0 items-center justify-center pt-[10px] pb-[5px] border-b-[1px] border-solid border-[#EBEBEB] bg-[#fff]"
   >
     <div class="chat-page__header-avatar mr-[18px] w-[64px] h-[64px]">
       <img
@@ -11,29 +11,41 @@
         alt="user-avatar"
       />
     </div>
-    <h1 class="chat-page__header-username text-[22px]">{{currentFriendChat.username}}</h1>
+    <h1 class="chat-page__header-username text-[22px]">
+      {{ currentFriendChat.username }}
+    </h1>
   </div>
   <div class="chat-page__list-messages__container flex-grow overflow-y-auto">
     <ul class="chat-page__list-messages flex flex-col justify-end h-full">
       <li class="chat-page__list-messages__group mt-[34px] mx-[64px]">
         <div
           class="chat-page__message interlocutor my-[10px] break-all"
-          *ngFor="let message of messages; let i = index"
+          *ngFor="
+            let message of this.websocketService.messagesInterlocutor$ | async;
+            let i = index
+          "
         >
           <p
             class="message-text p-[10px] border-[1px] border-[#000000] rounded-[10px] inline-block"
+            *ngIf="message.content"
           >
-            Верни сотку
+            {{ message.content }}
           </p>
         </div>
       </li>
       <li class="chat-page__list-messages__group mt-[34px] mx-[64px]">
         <div
           class="chat-page__message own__message_block my-[10px] flex flex-row-reverse items-center break-all"
-          *ngFor="let message of this.websocketService.messages$ | async; let i = index"
+          *ngFor="
+            let message of this.websocketService.messagesOwn$ | async;
+            let i = index
+          "
         >
-          <p class="message-text own rounded-[10px] p-[10px] inline-block" *ngIf="message.content">
-            {{message.content}}
+          <p
+            class="message-text own rounded-[10px] p-[10px] inline-block"
+            *ngIf="message.content"
+          >
+            {{ message.content }}
           </p>
         </div>
       </li>

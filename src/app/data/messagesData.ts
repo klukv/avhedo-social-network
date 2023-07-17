@@ -1,3 +1,5 @@
+import { IChatMessage } from "../models/chatMessage";
+
 export const messagesData = [
   {
     id: 0,
@@ -31,32 +33,23 @@ export const messagesData = [
   },
 ];
 
-export const messageLinkInterlocutor: string[] = [
-  'Верни сотку',
-  'Пошли гулять',
-  'Но верни деньги',
+export const messageLinkInterlocutor: IChatMessage[] = [
+  {
+    id: 3,
+    chatId: `0_3`,
+    senderId: "3",
+    recipientId: "0",
+    content: 'Hello world!',
+  },
 ];
 
 export const messageLinkOwn = [
   {
     id: 0,
-    chatId: `0_1`,
+    chatId: `0_3`,
     senderId: "0",
-    recipientId: "1",
-    content: 'Нет',
-  },
-  {
-    id: 1,
-    chatId: `3_4`,
-    senderId: "3",
-    recipientId: "4",
-    content: 'Потом',
-  },
-  {
-    id: 2,
-    chatId: `5_6`,
-    senderId: "5",
-    recipientId: "6",
-    content: '---',
+    recipientId: "3",
+    content: 'hello',
   },
 ];
+
