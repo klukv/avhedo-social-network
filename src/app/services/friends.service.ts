@@ -43,7 +43,7 @@ export class FriendsService {
     this._friendInfo.next(infoFriend);
   }
   changeInfoFriend(id: number) {
-    const selectFriend = this.listFriends.filter(
+    const selectFriend = this.listSearchFriends.filter(
       (friend) => friend.id == id
     )[0];
     this.setInfoFriend(selectFriend);

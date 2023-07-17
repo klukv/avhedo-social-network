@@ -2,21 +2,16 @@
   <div
     class="friends-page__title text-[24px] py-[22px] border-b-[1px] border-[#EBEBEB] flex justify-center items-center"
   >
-    <div
-      class="friends-page__title-two mr-[48px] hover:text-[#00A3FF] duration-[250ms] cursor-pointer"
+    <a
+      routerLink="/friends/search" class="friends-page__title-two mr-[48px] hover:text-[#00A3FF] duration-[250ms] cursor-pointer"
     >
       Поиск друзей
-    </div>
-    <div
-      class="friends-page__title-one hover:text-[#00A3FF] duration-[250ms] cursor-pointer"
+    </a>
+    <a
+      routerLink="/friends/added" class="friends-page__title-one hover:text-[#00A3FF] duration-[250ms] cursor-pointer"
     >
-      Друзья
-    </div>
+      Мои друзья
+    </a>
   </div>
-  <ng-template #friends_search>
-    
-  </ng-template>
-  <ng-template #friends_added>
-    
-  </ng-template>
+    <router-outlet></router-outlet>
 </div>

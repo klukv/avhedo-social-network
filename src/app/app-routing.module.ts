@@ -26,7 +26,7 @@ const friendsRoute = [
 
 const routes: Routes = [
   { path: MAIN_PAGE, component: MainPageComponent },
-  { path: FRIENDS_PAGE, component: FriendsPageComponent},
+  { path: FRIENDS_PAGE, component: FriendsPageComponent, children: friendsRoute},
   { path: MESSAGES_PAGE, component: MessagesPageComponent },
   { path: CHAT_PAGE, component: ChatPageComponent },
   { path: CASTING_PAGE, component: CastingPageComponent, children: castingRoutes },
