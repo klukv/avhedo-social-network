@@ -40,14 +40,23 @@ export const messageLinkInterlocutor: string[] = [
 export const messageLinkOwn = [
   {
     id: 0,
+    chatId: `0_1`,
+    senderId: "0",
+    recipientId: "1",
     content: 'Нет',
   },
   {
     id: 1,
+    chatId: `3_4`,
+    senderId: "3",
+    recipientId: "4",
     content: 'Потом',
   },
   {
     id: 2,
+    chatId: `5_6`,
+    senderId: "5",
+    recipientId: "6",
     content: '---',
   },
 ];

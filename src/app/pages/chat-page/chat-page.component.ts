@@ -1,8 +1,10 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IFriends } from 'src/app/models/friends';
+import { IPersonInfo } from 'src/app/models/personInfo';
 import { FriendsService } from 'src/app/services/friends.service';
+import { PersonPageService } from 'src/app/services/person-page.service';
 import { WebsocketService } from 'src/app/services/websocket.service';
 
 @Component({
@@ -15,14 +17,19 @@ export class ChatPageComponent {
   private _user_id: string;
   private _ws: WebSocket = new WebSocket('ws://localhost:5000');
   currentFriendChat: IFriends;
+  personInfo: IPersonInfo;
   messageContent: string = '';
 
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
+    private personService: PersonPageService,
     public friendsService: FriendsService,
     public websocketService: WebsocketService
   ) {
+    personService.personInfo$.subscribe(
+      (currentPersonInfo) => (this.personInfo = currentPersonInfo)
+    );
     this._user_id = this.activeRoute.snapshot.queryParams['id'];
     this._connectWebsocket();
   }
@@ -31,7 +38,11 @@ export class ChatPageComponent {
     this._ws.onopen = () => {
       const message = {
         event: 'connection',
-        id: this._user_id,
+        id: Math.random(),
+        chatId: `${this._user_id}_${this.personInfo.id}`,
+        senderId: this.personInfo.id,
+        recipientId: this._user_id,
+        content: this.messageContent,
       };
       this._ws.send(JSON.stringify(message));
       console.log(`Подключение с вебсокетом установлено`);
@@ -54,18 +65,21 @@ export class ChatPageComponent {
     this.subscription = this.friendsService.friendInfo$.subscribe(
       (friendInfo) => (this.currentFriendChat = friendInfo)
     );
-    this.router.events.subscribe(event => {
-      let currentUrl = this.router.url
+    this.router.events.subscribe((event) => {
+      let currentUrl = this.router.url;
 
-      if(event instanceof NavigationEnd && currentUrl.includes('chat')){
+      if (event instanceof NavigationEnd && currentUrl.includes('chat')) {
         window.location.reload();
       }
-    })
+    });
   }
 
   sendMessageWs() {
     const message = {
-      id: this._user_id,
+      id: Math.random(),
+      chatId: `${this._user_id}_${this.personInfo.id}`,
+      senderId: this.personInfo.id,
+      recipientId: this._user_id,
       content: this.messageContent,
       event: 'message',
     };
