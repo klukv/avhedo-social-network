@@ -8,7 +8,10 @@ import { ContactsBlockComponent } from './components/casting/contacts-block/cont
 import { LikesBlockComponent } from './components/casting/likes-block/likes-block.component';
 import { FriendsPageComponent } from './pages/friends-page/friends-page.component';
 import { PersonPageComponent } from './pages/person-page/person-page.component';
-import { CASTING_PAGE, CASTING_PAGE_CONTACTS, CASTING_PAGE_LIKES, CHAT_PAGE, FRIENDS_PAGE, MAIN_PAGE, MESSAGES_PAGE, PERSON_PAGE } from './utils/const';
+import { FriendsAddComponent } from './components/friends/friends-add/friends-add.component';
+import { FriendsSearchComponent } from './components/friends/friends-search/friends-search.component';
+import { CASTING_PAGE, CASTING_PAGE_CONTACTS, CASTING_PAGE_LIKES, CHAT_PAGE, FRIENDS_ADDED, FRIENDS_PAGE, FRIENDS_SEARCH, MAIN_PAGE, MESSAGES_PAGE, PERSON_PAGE } from './utils/const';
+
 
 
 const castingRoutes: Routes = [
@@ -16,9 +19,14 @@ const castingRoutes: Routes = [
   { path: CASTING_PAGE_LIKES, component: LikesBlockComponent },
 ];
 
+const friendsRoute = [
+  { path: FRIENDS_ADDED, component: FriendsAddComponent },
+  { path: FRIENDS_SEARCH, component: FriendsSearchComponent }
+]
+
 const routes: Routes = [
   { path: MAIN_PAGE, component: MainPageComponent },
-  { path: FRIENDS_PAGE, component: FriendsPageComponent},
+  { path: FRIENDS_PAGE, component: FriendsPageComponent, children: friendsRoute},
   { path: MESSAGES_PAGE, component: MessagesPageComponent },
   { path: CHAT_PAGE, component: ChatPageComponent },
   { path: CASTING_PAGE, component: CastingPageComponent, children: castingRoutes },
