@@ -1,31 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ILikesCard } from 'src/app/models/likeCards';
+import { CastingService } from 'src/app/services/casting.service';
 
 @Component({
   selector: 'app-form-block',
   templateUrl: './form-block.component.html',
-  styleUrls: ['./form-block.component.css']
+  styleUrls: ['./form-block.component.css'],
 })
 export class FormBlockComponent {
-  constructor(){}
+  @Input() infoCard: ILikesCard;
+  @Input() indexCard: number;
 
-  clickLikeButton(){
-    (<HTMLStyleElement>document.getElementById('card_swipe')).style.transition = '.3s';
-    (<HTMLStyleElement>document.getElementById('card_swipe')).style.transform = 'translateX(-400px) rotate(-30deg)';
-    (<HTMLStyleElement>document.getElementById('card_swipe')).style.opacity = '0';
-    // setTimeout(() => {
-    //   (<HTMLStyleElement>document.getElementById('card_swipe')).style.transform = 'translateX(0px) rotate(0deg)';
-    //   (<HTMLStyleElement>document.getElementById('card_swipe')).style.opacity = '1';
-    // }, 1000)
+  constructor(public castingService: CastingService) {}
+
+  clickLikeButton() {
+    (<HTMLStyleElement>document.getElementById('card_swipe')).style.transition = '.5s';
+    (<HTMLStyleElement>document.getElementById('card_swipe')).style.transform = 'translateX(-500px) rotate(-30deg)';
+   (<HTMLStyleElement>document.getElementById('card_swipe')).style.opacity = '0';
+    setTimeout(() => {
+      this.castingService.setNewListCards(this.indexCard);
+    }, 100)
   }
 
-  clickDislikeButton(){
-    (<HTMLStyleElement>document.getElementById('card_swipe')).style.transition = '.3s';
-    (<HTMLStyleElement>document.getElementById('card_swipe')).style.transform = 'translateX(400px) rotate(30deg)';
+  clickDislikeButton() {
+    (<HTMLStyleElement>document.getElementById('card_swipe')).style.transition = '.5s';
+    (<HTMLStyleElement>document.getElementById('card_swipe')).style.transform = 'translateX(500px) rotate(30deg)';
     (<HTMLStyleElement>document.getElementById('card_swipe')).style.opacity = '0';
     setTimeout(() => {
-      (<HTMLStyleElement>document.getElementById('card_swipe')).style.transform = 'translateX(0px) rotate(0deg)';
-      (<HTMLStyleElement>document.getElementById('card_swipe')).style.opacity = '1';
-    }, 1000)
+      this.castingService.setNewListCards(this.indexCard);
+    }, 100);
   }
-
 }

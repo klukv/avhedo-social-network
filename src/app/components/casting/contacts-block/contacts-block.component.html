@@ -1,3 +1,3 @@
-<div class="contacts__inner max-w-[393px] py-[48px]">
-    <app-form-block></app-form-block>
+<div class="contacts__inner w-[393px] h-[750px] py-[48px] relative">
+    <app-form-block *ngFor="let card of listLikeCards; let i = index;" [style.zIndex]="listLikeCards.length - i" [infoCard]="card" [indexCard]="i"></app-form-block>
 </div>

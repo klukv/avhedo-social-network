@@ -1,30 +1,45 @@
 <div
-  class="likes-page__card bg-[url('/assets/img/like-page/bg-card.jpg')] bg-no-repeat bg-cover bg-center rounded-[20px]"
+  [ngStyle]="{'background-image': 'linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(' + infoCard.imageUrl + ')'}"
+  class="likes-page__card bg-no-repeat bg-cover bg-center rounded-[20px] origin-[50%_100%]"
   id="card_swipe"
-  >
-  <div class="likes-page__card-info text-[#fff] px-[16px] pt-[16px] pb-[260px]">
-    <h2 class="likes-page__card-username text-[22px]">Анжелика</h2>
+>
+  <div class="likes-page__card-info text-[#fff] px-[16px] pt-[16px] pb-[260px] object-cover object-top">
+    <h2 class="likes-page__card-username text-[22px]">{{ infoCard.name }}</h2>
     <div class="likes-page__card-age flex items-center mb-[8px]">
-      <div class="likes-page__card-age__title text-[18px] pr-[5px]">Возраст:</div>
-      <div class="likes-page__card-age__content text-[14px]">18</div>
+      <div class="likes-page__card-age__title text-[18px] pr-[5px]">
+        Возраст:
+      </div>
+      <div class="likes-page__card-age__content text-[14px]">
+        {{infoCard.age}}
+      </div>
     </div>
     <div class="likes-page__card-hobby flex items-center mb-[8px]">
-      <div class="likes-page__card-hobby__title text-[18px] pr-[5px]">Хобби:</div>
-      <div class="likes-page__card-hobby__content text-[14px]">спорт, путешествия</div>
+      <div class="likes-page__card-hobby__title text-[18px] pr-[5px]">
+        Хобби:
+      </div>
+      <div class="likes-page__card-hobby__content text-[14px]">
+        {{ infoCard.hobby }}
+      </div>
     </div>
     <div class="likes-page__card-about flex">
-      <span class="likes-page__card-about__title text-[18px] pr-[5px] whitespace-nowrap">О себе:</span>
+      <span
+        class="likes-page__card-about__title text-[18px] pr-[5px] whitespace-nowrap"
+        >О себе:</span
+      >
       <div class="likes-page__card-about__content text-[14px] pt-[3px]">
-        люблю путешествовать, правильно питаюсь, ищу самодостаточного и
-        накаченного парня
+        {{ infoCard.about }}
       </div>
     </div>
   </div>
-  <div class="likes-page__card-buttons flex items-center justify-center py-[48px]">
-    <button class="likes-page__card-like mr-[48px] bg-[#00A3FF] rounded-[50%] flex items-center justify-center w-[49px] h-[49px] hover:bg-[#56C2FF] duration-[250ms]"
-    (click)="clickLikeButton()">
+  <div
+    class="likes-page__card-buttons flex items-center justify-center py-[48px]"
+  >
+    <button
+      class="likes-page__card-like mr-[48px] bg-[#00A3FF] rounded-[50%] flex items-center justify-center w-[49px] h-[49px] hover:bg-[#56C2FF] duration-[250ms]"
+      (click)="clickLikeButton()"
+    >
       <svg
-      class="button__like-svg"
+        class="button__like-svg"
         width="24"
         height="22"
         viewBox="0 0 24 22"
@@ -39,10 +54,12 @@
         />
       </svg>
     </button>
-    <button class="likes-page__card-unlike  bg-[#00A3FF] rounded-[50%] flex items-center justify-center w-[49px] h-[49px] hover:bg-[#56C2FF] duration-[250ms]"
-    (click)="clickDislikeButton()">
+    <button
+      class="likes-page__card-unlike bg-[#00A3FF] rounded-[50%] flex items-center justify-center w-[49px] h-[49px] hover:bg-[#56C2FF] duration-[250ms]"
+      (click)="clickDislikeButton()"
+    >
       <svg
-      class="button__unlike-svg"
+        class="button__unlike-svg"
         width="24"
         height="22"
         viewBox="0 0 24 22"
