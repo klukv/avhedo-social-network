@@ -1,7 +1,8 @@
 <div
-  class="likes-page__card bg-[url('/assets/img/like-page/bg-card.jpg')] bg-no-repeat bg-cover bg-center rounded-[10px]"
->
-  <div class="likes-page__card-info text-[#fff] px-[16px] pt-[16px] pb-[64px] border-b-[1px] border-[#7A7A7A] border-solid">
+  class="likes-page__card bg-[url('/assets/img/like-page/bg-card.jpg')] bg-no-repeat bg-cover bg-center rounded-[20px]"
+  id="card_swipe"
+  >
+  <div class="likes-page__card-info text-[#fff] px-[16px] pt-[16px] pb-[260px]">
     <h2 class="likes-page__card-username text-[22px]">Анжелика</h2>
     <div class="likes-page__card-age flex items-center mb-[8px]">
       <div class="likes-page__card-age__title text-[18px] pr-[5px]">Возраст:</div>
@@ -20,7 +21,8 @@
     </div>
   </div>
   <div class="likes-page__card-buttons flex items-center justify-center py-[48px]">
-    <button class="likes-page__card-like mr-[48px] bg-[#00A3FF] rounded-[50%] flex items-center justify-center w-[49px] h-[49px] hover:bg-[#56C2FF] duration-[250ms]">
+    <button class="likes-page__card-like mr-[48px] bg-[#00A3FF] rounded-[50%] flex items-center justify-center w-[49px] h-[49px] hover:bg-[#56C2FF] duration-[250ms]"
+    (click)="clickLikeButton()">
       <svg
       class="button__like-svg"
         width="24"
@@ -37,7 +39,8 @@
         />
       </svg>
     </button>
-    <button class="likes-page__card-unlike  bg-[#00A3FF] rounded-[50%] flex items-center justify-center w-[49px] h-[49px] hover:bg-[#56C2FF] duration-[250ms]">
+    <button class="likes-page__card-unlike  bg-[#00A3FF] rounded-[50%] flex items-center justify-center w-[49px] h-[49px] hover:bg-[#56C2FF] duration-[250ms]"
+    (click)="clickDislikeButton()">
       <svg
       class="button__unlike-svg"
         width="24"

@@ -4,7 +4,7 @@ export const messagesData = [
   {
     id: 0,
     avatarLink: '',
-    username: 'Данил',
+    username: 'Александр',
     textLastMessage: 'Ты мне не вернул сотку',
   },
   {
@@ -16,19 +16,19 @@ export const messagesData = [
   {
     id: 2,
     avatarLink: '',
-    username: 'Александр',
+    username: 'Надежда',
     textLastMessage: 'Пошли в доту',
   },
   {
     id: 3,
     avatarLink: '',
-    username: 'Матвей',
+    username: 'Евгений',
     textLastMessage: 'Я клутой!',
   },
   {
     id: 4,
     avatarLink: '',
-    username: 'Юля',
+    username: 'Лера',
     textLastMessage: '...',
   },
 ];

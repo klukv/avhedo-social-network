@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { IFriends } from 'src/app/models/friends';
 import { FriendsService } from 'src/app/services/friends.service';
-import { FRIENDS_PAGE } from 'src/app/utils/const';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +9,6 @@ import { FRIENDS_PAGE } from 'src/app/utils/const';
 })
 export class HeaderComponent {
 
-  friend_link = FRIENDS_PAGE;
   searchUsername = '';
   isOpenSearchPopup: boolean;
 

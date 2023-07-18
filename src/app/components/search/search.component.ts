@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Subject, Subscription, debounceTime } from 'rxjs';
+import { Subscription, debounceTime } from 'rxjs';
 import { FriendsService } from 'src/app/services/friends.service';
 
 @Component({
