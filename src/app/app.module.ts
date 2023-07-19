@@ -36,6 +36,7 @@ import { ClickListenerDirective } from './directives/click-listener.directive';
 import { FilterHobbyPipe } from './pipes/filter-hobby.pipe';
 import { FriendsAddComponent } from './components/friends/friends-add/friends-add.component';
 import { FriendsSearchComponent } from './components/friends/friends-search/friends-search.component';
+import { ActiveLinkDirective } from './directives/active-link.directive';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { FriendsSearchComponent } from './components/friends/friends-search/frie
     FilterHobbyPipe,
     FriendsAddComponent,
     FriendsSearchComponent,
+    ActiveLinkDirective,
   ],
   imports: [
     BrowserModule,
