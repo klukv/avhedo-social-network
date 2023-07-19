@@ -1,6 +1,6 @@
-import { ILikesCard } from '../models/likeCards';
+import { ICards } from '../models/likeCards';
 
-export const likeCards: ILikesCard[] = [
+export const likeCards: ICards[] = [
   {
     id: 0,
     name: 'Ангелина',

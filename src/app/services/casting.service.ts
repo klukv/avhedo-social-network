@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ILikesCard } from '../models/likeCards';
+import { ICards } from '../models/likeCards';
 import { BehaviorSubject } from 'rxjs';
 import { likeCards } from '../data/likesCards';
 
@@ -7,16 +7,16 @@ import { likeCards } from '../data/likesCards';
   providedIn: 'root'
 })
 export class CastingService {
-  private _listArrayCard:ILikesCard[] = likeCards
-  private _listLikePeople = new BehaviorSubject<ILikesCard[]>(this._listArrayCard);
-  listLikePeople$ = this._listLikePeople.asObservable();
+  private _listArrayCard:ICards[] = likeCards
+  private _listCastingPeople = new BehaviorSubject<ICards[]>(this._listArrayCard);
+  listCastingPeople$ = this._listCastingPeople.asObservable();
 
   constructor() {
    }
 
    setNewListCards(indexCard: number){
       this._listArrayCard.splice(indexCard, 1);
-      this._listLikePeople.next(this._listArrayCard);
+      this._listCastingPeople.next(this._listArrayCard);
    }
 
 }

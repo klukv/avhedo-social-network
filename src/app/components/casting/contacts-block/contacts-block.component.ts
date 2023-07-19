@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ILikesCard } from 'src/app/models/likeCards';
+import { ICards } from 'src/app/models/likeCards';
 import { CastingService } from 'src/app/services/casting.service';
 
 @Component({
@@ -8,10 +8,10 @@ import { CastingService } from 'src/app/services/casting.service';
   styleUrls: ['./contacts-block.component.css']
 })
 export class ContactsBlockComponent {
-  listLikeCards:ILikesCard[] = []
+  listCastingCards:ICards[] = []
 
   constructor(public castingService: CastingService){
-    this.castingService.listLikePeople$.subscribe(currentListCards => this.listLikeCards = currentListCards)
+    this.castingService.listCastingPeople$.subscribe(currentListCards => this.listCastingCards = currentListCards)
   }
 
 }

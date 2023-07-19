@@ -1,4 +1,4 @@
-export interface ILikesCard {
+export interface ICards {
     id: number,
     name: string,
     age: number,
