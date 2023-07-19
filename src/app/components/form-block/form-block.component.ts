@@ -18,7 +18,7 @@ export class FormBlockComponent {
     (<HTMLStyleElement>document.getElementById('card_swipe')).style.transform = 'translateX(-400px) rotate(-30deg)';
    (<HTMLStyleElement>document.getElementById('card_swipe')).style.opacity = '0';
     setTimeout(() => {
-      this.castingService.setNewListCards(this.indexCard);
+      this.castingService.setNewCastingCards(this.indexCard);
     }, 200)
   }
 
@@ -27,7 +27,7 @@ export class FormBlockComponent {
     (<HTMLStyleElement>document.getElementById('card_swipe')).style.transform = 'translateX(400px) rotate(30deg)';
     (<HTMLStyleElement>document.getElementById('card_swipe')).style.opacity = '0';
     setTimeout(() => {
-      this.castingService.setNewListCards(this.indexCard);
+      this.castingService.setNewCastingCards(this.indexCard);
     }, 200);
   }
 }

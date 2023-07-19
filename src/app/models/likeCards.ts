@@ -4,5 +4,5 @@ export interface ICards {
     age: number,
     hobby: string,
     about: string,
-    imageUrl: string
+    imageUrl?: string
 }
