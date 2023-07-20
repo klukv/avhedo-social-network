@@ -48,4 +48,9 @@ export class CastingService {
     return this._activeLinks;
    }
 
+   deleteUnlikeCard(indexCard: number){
+    this._listArrayLikesCard.splice(indexCard, 1);
+    this._listLikesPeople.next(this._listArrayLikesCard);
+   }
+
 }
