@@ -15,13 +15,22 @@ export class FriendsService {
     username: 'Это кто',
     age: 0,
   });
+
+  private _activeFriendsLinks = {
+    searchFriends: 'active',
+    addedFriends: 'not_active'
+  }
+  private _friendsList: IFriends[] = friendsData;
+  private _friendsListSearch: IFriends[] = allPeople;
+
   friendInfo$ = this._friendInfo.asObservable();
   searchUsernameFriend$ = this._searchUsernameFriend.asObservable();
 
   constructor(private router: Router, private websocketService: WebsocketService) {}
 
-  private _friendsList: IFriends[] = friendsData;
-  private _friendsListSearch: IFriends[] = allPeople;
+  get activeFriendsLinks(){
+    return this._activeFriendsLinks;
+  }
 
   get listFriends() {
     return this._friendsList;
@@ -33,6 +42,22 @@ export class FriendsService {
 
   set listFriends(newFriends: IFriends[]) {
     this._friendsList = newFriends;
+  }
+
+  setActiveFriendLink(selectLink: string){
+    Object.keys(this._activeFriendsLinks).map(key => {
+      if(key === selectLink){
+        this._activeFriendsLinks = {
+          ...this._activeFriendsLinks,
+          [key]: 'active',
+        }
+      }else{
+        this._activeFriendsLinks = {
+          ...this._activeFriendsLinks,
+          [key]: 'not_active'
+        }
+      }
+    })
   }
 
   setSearchUsername(value: string) {

@@ -38,6 +38,7 @@ import { FriendsAddComponent } from './components/friends/friends-add/friends-ad
 import { FriendsSearchComponent } from './components/friends/friends-search/friends-search.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
+import { ActiveLinkDirective } from './directives/active-link.directive';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
     FriendsSearchComponent,
     LoginPageComponent,
     SignupPageComponent,
+    ActiveLinkDirective,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,79 @@
+import { ICards } from '../models/likeCards';
+
+export const castingCards: ICards[] = [
+  {
+    id: 0,
+    name: 'Ангелина',
+    age: 20,
+    hobby: 'Спорт, настольные игры',
+    about: 'Люблю бегать',
+    imageUrl:
+      'https://lh3.googleusercontent.com/pw/AIL4fc-tX8xZ7gi1JWIDYSrNJ2rpIQJ9U1hEA4MolpMb5aq4oEeuMzqG96YJMw9-j7DDC7ZKwsrcK8ZVCaElvHimmXYNM9m2Dp3ex_8NTNk4a3K_GiFJ8W-KgbN3mwDphz6oOW4a5BtXfN3Wq1OuFT_5rw-xUDXonIz6yWZjBU9i7sKUMcYvy8Dn9Osv8BpuY2r2bWcG_gBI47jilsOtHMuPnBWlGxKFE1ikkO8qeaqPN6X-8_hYW3Kr1hl7x42gOzWzyJ71H8xH0E8zFuj-MMn9_wLXdIPi-uWpZa8x8_ve61Sqh1szB6P5e5Mx_-HStSOSBJUARzL8zt2mQLthOLIJsClt0ydADYlrWusNf0u7H554u2tiLUH5won5kVg9F6N7RxhQJSw011mZLCUCl--JE11qes7cmvdPbnL4gRDrLBRDX386ABwW-81XeZFH_atgm8TM2VbZgvlBcHn8ggsRWtxEdBRH3k6WB-X12_ev_5hsVabjvIrV0-oxcf7tnXfVwOHh96HpxxmyAe4qZbzH0unyN0QJo878N5xNdxHqFZXGiCQcoqb1d_i8ZWsLa-gxbGZ91FD4IKC3tZjb961aYwy0oy-ZEHzwQy0cT2FPly3WBKOXIY6fnnRfUAG99VkSEKJNHiZTahalD-0w9CufNdBNgSk_GTEGfhNu55CnRVQv36Am77LtMPESpr-xfPCVZX_r_6foX4a_GVmYeUHFi_v7guMM6W_CyYpkmITsq8yD7Q7nfjasmDvnkDJ2xUeBYoaWF2XfuP2XRH-tK4KBBJxJLMV5htt40T1p5vsSSPo5ff2myp8Z8rjIFfwiO1oM6UIyTqAVtRD7cwKqxzkMwZdD7un1phyK7TYpHbOHTtnR4xjQ1_RJF7X02demBQKMMuCS6Rx-Nnuz0JRkwJfLEhXSsw=w1366-h768-s-no?authuser=0',
+  },
+  {
+    id: 1,
+    name: 'Елена',
+    age: 26,
+    hobby: 'Сериалы, Фильмы',
+    about: 'Люблю есть',
+    imageUrl:
+      'https://lh3.googleusercontent.com/pw/AIL4fc9M6DvWwUcBx66v5pajfDSg_26JoZGF43R25CV-_-g4bAJfQ9D6KOTEopuaFIJzok0Pgkii_xIolx5z_M7QpQt5-m3rtIsRhIJ846vmM9_kRmNus9VyELUgAACgL7WRCJKFt3KQpZAIhbWkuTM1YStZYkN9ZjnmA37HsiMfu8vmIo_9bXPl7XNJUgG9XKD4N_AuKzGQNhn95QutvIQ1__yXenHs9HISH2MKzbZQb1PgZVuV5taeDssojFH8K51qV-aNMciQYPBk9hKKCMPxMeqw4W-TTHez5_9Jcl2mWbP61NWY4om5iKLd_kbVxAkSlQIulCVzGcKFGsKzUsEl4myzLrh-Stzn_1eTN-l4n972fd8p3xIxM0Ctgwr4tSV2bUQsclFw3EMvPdA4LoxBogw0zOy0mgRJ-hrsgiQjs_G77ALTk70pk8VHwRE0_41z2C6qGbY5nvIsE1vWuSvbHQaTq0NuQhpdlQHl49fHjshj_NuIWI-Ty3oSOkRkPKUrSL4x-8q7N-lB6ilQ-ZIISG9HJE6h7virVy0jm6pFmtVR-klOq7KTWkpUMlrSSLgIMuVjWYygZAMZJWbJQGTUyiOZ6yfWmgJcyXncjuplbqeWhsMQQSQLzVj02okIAf4JzkQfTbJBqhAiLXo7vQLeM1K3bHM2d1waMPJoU2Pi84e6igPO5Jui_vsWgfLLQrGKQZMZTGl7tP7YQOz6J4OTkTbDVgrNk069oKjfTMKvfN2DfIkvtJzvM2t-NdE-nYlT31UkCFeKlt21ZHgKn1Li2KQRlhS03siHdNd9U6pjRJinafJAboI0PyUjuvvPtX_anTARaYUtiAQbmrvgpPXdMuNXBEHvdjFQ_EmI51DpsuUy1pyvEvcdlICw28GMQGocg5ABVoQ0J7ZpNbkj93PmqZNBzw=w1366-h768-s-no?authuser=0',
+  },
+  {
+    id: 2,
+    name: 'Екатерина',
+    age: 21,
+    hobby: 'Спорт, рисование',
+    about: 'Увлекаюсь путешествиями',
+    imageUrl:
+      'https://lh3.googleusercontent.com/pw/AIL4fc8CUFUvS7pzefTnSaTCpj_vCx12wgIc7rM1BbvaDY_5478Y4QrIzZfWOTmxzt5HT4sUZo4aUTP7pra0al48uD4bGaS4JMDvp8y7wXsk4csxcO5mNflTHE4CbJJwJnrTpNJxdhbdT7KXvOZ3cSS1pWuhrbG3uUbS6c_0HVLttlBXV41FQslvBanaB_1VPFsYw5QIHgcsTI04bTQRuiEsw3qeTdNVaQgCa5BoK6Wzlku6VYkQw1ne47ev83wTXBgZDaTLoTTbFaJgTMsxT5FjbDvl3bGECZvgmvHthh1-BAfTEkixTeNI3LW0eBtEgXBw51XzmyCcGcnXCH_ARhadiG4Zc1AZ-AhqUJcSgYtv1wFqdkUiV-EBBhSMJfaqMUh9i1IE8ia-fD3AC5Z5fLw-96EPuRyiiI4g9Qhuby0U-9DFALADNuzAfiBf9X6qcN90FPNERL7Q_2OOpEm0F0WAsTpJFSkN3De1u8BNlw9k4hQtFwoD4GPyLdNZHKEYQIl_LwkN940CYqQmn0WDV-5yXJLzoNa6sd6cjmY9t37x694WqW9T6f-GLpg4YQGOZk9gqi-3pxkmBFUIt6WqmQqc7IEdHQEv9YvhoQ_Hh3nEr0516f5QD2ScTXokRzeLStI7KXY8dYquQmLzSzI9DqAQeH6ULmk27zEMcNv6JyEfYZsyU6uxBzZwrs_diqtJKYryYLisPA2gbn21LZJzKafiiP_J8hNezWInX1FxG_v3v-UBGIl9TGsPyeqnbBxuquUbcWqqKvpRHkeShBKK1rbYhPrgel0gXwvrSSpNpHI770Z7Ks9SaRVeC6Mp5gx1uWtOva5T3PDuUxHoCq3m1wmU9pgDAbX7FtvRWmoN8zSPSH742sCBeYYK6jOlcdfJlamUQ1GQCV7Nc8cefBfOcKS9BfyitA=w1366-h768-s-no?authuser=0',
+  },
+  {
+    id: 3,
+    name: 'София',
+    age: 24,
+    hobby: 'Настольные игры, рисование',
+    about: 'Увлекаюсь игрой на музыкальных инструментах',
+    imageUrl:
+      'https://lh3.googleusercontent.com/pw/AIL4fc80ARFXNHdHHLX74xCl3ZvVvykXryZP_7Op5DLgKVgNo2uiu_MtkD6LTb4eMbq_4SHMNqzpylfAXMErXdKZSvQlJcSZYyp7IDawFwKt3SOXXvcS1ZxAyLZtEmkdehgNz5t-5eFVSxcc3Nv76h02skxo-LoJdMh8X26tiutKMvQljVV9r3L11s-BeIYg6Hpa_48LjswJQMSw5mOXFeEVPa16MVl0fBKngy_ikdnsAHeceDmvto8oCVtaj-ogCEIBYXpspEBQ9TdvCkfNfR28y-NL1-3w4opO5qjbicrs1blZXYaZV56D3HL1cuFtefIFit0pflcT1URH6rrMqBuaO2KWo6cmUnnRg_ceXmZ4-ZYer9ITB2AcOkwQq3h9nv3WKIuTpz7_WxevzWpV8yKEW0mMng7GyrkNrgNGnp_AFjbAOlNFeWatbd8Q4ZdRXVptPF5DZicBmJE8uhtUhSiStqX-wKe1MAMB_BQbqKHLGX8mz84o1lTPPtFkcHvReBUdTCF3ivy4x32LyPEdjRJXDuq7_Muoe_AugrbDKaoNKSQuqZRN0WI5NPAmBmnUk3GaQmOv3Z_9vPS9HSGr-wFbAfKS8poYBcmx2zAMeMhsnBpGjVSg5uZ1VRGmfZYNITuBmjobA9QKV-imYY3xP4ffjoR7aaB5ucunixitswkUQHt8L7vJNwM4i5ZawgeIza7Hdb3c-0IvK5pbKJ1c9fUA6_n9DJ6I4hvqi9ZQX2hnxcwV8wZ4LFOAzpU9wST3CWlBND75uPeJq-1XG0az7vbbkz35gA9Y9ZXJxxCu1U9oqwyKi_bElQpYzilyVhyz_muJxsWZZCRUQ-J5AaE1ObzXsEwodB7Hxq6Q4K3FN_N_yuKzVThgEdXT9ZCKs9om3vETP0__h9Yr1VJuAO096YJ-rh20nA=w1366-h768-s-no?authuser=0',
+  },
+  {
+    id: 4,
+    name: 'Анастасия',
+    age: 49,
+    hobby: 'Настольные игры',
+    about: 'Люблю смотреть телевизор, ищу достойного мужчину',
+    imageUrl:
+      'https://lh3.googleusercontent.com/pw/AIL4fc9Bie1-LoTJsUxPy7Md8CvoB3Ws4FLKRrHnC1zRcf3CVzmWXnr1Un-8_uYQeuiSTLR5h4E550oM2uRMeFma6cMGAXMhIjR_ZIeIZxzqqv2jMcw7U0s300HYiWKywAxIlJDlXcgpZyYuP-J79xk_TS9NJ3YUbpHZab57NQWp1C3OPmew0RSyE2Hmvw3ErSAt8zL4eNKuhRb2YbxnEdgC9fpUxCmjL-mUq5UrEphbIqxvc6YGtQ5gbcEz2DPd9bOapT29KfRIc_tgoARuSyakoe2g2n5Jm1pvl19cRb-qMkweG4Z3kaBry7MjBqHHQ31sEu8aJNl0RpeFbuNreqOWKz3TZV7553xrf8Ful-StfRc-D8qzP0toZjLH60jOiUyVyNokRCavmL81LDCGEIett9ikA810O_-jwpN4n_INQZ1nGD1v9ik6k-z5_Cz-kovG6I9lRFNL2JULHtBvtauAtaUFM3Fqr3GCBdMyPVyoa-gO6zUVBQ0pjmL3q36vSer5C697k6u1gXnfiXD3FzIFjan1j-Sny3vzCyuBGUHuTYPYsudXzjhJ1dGpD8UreWM0GRI10vm4lMMshPHZmiNOyetzTv7Y2gZgHQOd7Z3xBug_lIiMg2uOC0yewxcLuf5dFsAuMS75oQzR-SDZqARLcxwsJXWySK4IWh1YyEAsWddwd4Q7SfP3fkLxU6GBj9si4xGVNDJEoiPTq7Abk1VGHAKvoZ4T9K8YaNjbU7qJlWNbA-XaOL_RI35U0Ats_5ij4t6ZJFg2I_KPUltSg--kIgnZbYIXRlPgsqyzlhmceELYmZLiuqm42GXOUt1i8v5zNXKnRFnItUa0NpzZuKoo_d9sRREMEl3p-fid4TLyaWLx9uQrCM-O45SKFlcT2oC4JZAo70lZ0HJ2f6UM452LEKw3FQ=w399-h224-no?authuser=0',
+  },
+];
+
+export const likesCards: ICards[] = [
+  {
+    id: 17,
+    name: 'Елизавета',
+    age: 22,
+    hobby: 'Программирование',
+    about: '...',
+    imageUrl:
+      'https://lh3.googleusercontent.com/pw/AIL4fc-tX8xZ7gi1JWIDYSrNJ2rpIQJ9U1hEA4MolpMb5aq4oEeuMzqG96YJMw9-j7DDC7ZKwsrcK8ZVCaElvHimmXYNM9m2Dp3ex_8NTNk4a3K_GiFJ8W-KgbN3mwDphz6oOW4a5BtXfN3Wq1OuFT_5rw-xUDXonIz6yWZjBU9i7sKUMcYvy8Dn9Osv8BpuY2r2bWcG_gBI47jilsOtHMuPnBWlGxKFE1ikkO8qeaqPN6X-8_hYW3Kr1hl7x42gOzWzyJ71H8xH0E8zFuj-MMn9_wLXdIPi-uWpZa8x8_ve61Sqh1szB6P5e5Mx_-HStSOSBJUARzL8zt2mQLthOLIJsClt0ydADYlrWusNf0u7H554u2tiLUH5won5kVg9F6N7RxhQJSw011mZLCUCl--JE11qes7cmvdPbnL4gRDrLBRDX386ABwW-81XeZFH_atgm8TM2VbZgvlBcHn8ggsRWtxEdBRH3k6WB-X12_ev_5hsVabjvIrV0-oxcf7tnXfVwOHh96HpxxmyAe4qZbzH0unyN0QJo878N5xNdxHqFZXGiCQcoqb1d_i8ZWsLa-gxbGZ91FD4IKC3tZjb961aYwy0oy-ZEHzwQy0cT2FPly3WBKOXIY6fnnRfUAG99VkSEKJNHiZTahalD-0w9CufNdBNgSk_GTEGfhNu55CnRVQv36Am77LtMPESpr-xfPCVZX_r_6foX4a_GVmYeUHFi_v7guMM6W_CyYpkmITsq8yD7Q7nfjasmDvnkDJ2xUeBYoaWF2XfuP2XRH-tK4KBBJxJLMV5htt40T1p5vsSSPo5ff2myp8Z8rjIFfwiO1oM6UIyTqAVtRD7cwKqxzkMwZdD7un1phyK7TYpHbOHTtnR4xjQ1_RJF7X02demBQKMMuCS6Rx-Nnuz0JRkwJfLEhXSsw=w1366-h768-s-no?authuser=0',
+  },
+  {
+    id: 18,
+    name: 'Марина',
+    age: 25,
+    hobby: 'Настольные игры',
+    about: '123',
+    imageUrl:
+      'https://lh3.googleusercontent.com/pw/AIL4fc8CUFUvS7pzefTnSaTCpj_vCx12wgIc7rM1BbvaDY_5478Y4QrIzZfWOTmxzt5HT4sUZo4aUTP7pra0al48uD4bGaS4JMDvp8y7wXsk4csxcO5mNflTHE4CbJJwJnrTpNJxdhbdT7KXvOZ3cSS1pWuhrbG3uUbS6c_0HVLttlBXV41FQslvBanaB_1VPFsYw5QIHgcsTI04bTQRuiEsw3qeTdNVaQgCa5BoK6Wzlku6VYkQw1ne47ev83wTXBgZDaTLoTTbFaJgTMsxT5FjbDvl3bGECZvgmvHthh1-BAfTEkixTeNI3LW0eBtEgXBw51XzmyCcGcnXCH_ARhadiG4Zc1AZ-AhqUJcSgYtv1wFqdkUiV-EBBhSMJfaqMUh9i1IE8ia-fD3AC5Z5fLw-96EPuRyiiI4g9Qhuby0U-9DFALADNuzAfiBf9X6qcN90FPNERL7Q_2OOpEm0F0WAsTpJFSkN3De1u8BNlw9k4hQtFwoD4GPyLdNZHKEYQIl_LwkN940CYqQmn0WDV-5yXJLzoNa6sd6cjmY9t37x694WqW9T6f-GLpg4YQGOZk9gqi-3pxkmBFUIt6WqmQqc7IEdHQEv9YvhoQ_Hh3nEr0516f5QD2ScTXokRzeLStI7KXY8dYquQmLzSzI9DqAQeH6ULmk27zEMcNv6JyEfYZsyU6uxBzZwrs_diqtJKYryYLisPA2gbn21LZJzKafiiP_J8hNezWInX1FxG_v3v-UBGIl9TGsPyeqnbBxuquUbcWqqKvpRHkeShBKK1rbYhPrgel0gXwvrSSpNpHI770Z7Ks9SaRVeC6Mp5gx1uWtOva5T3PDuUxHoCq3m1wmU9pgDAbX7FtvRWmoN8zSPSH742sCBeYYK6jOlcdfJlamUQ1GQCV7Nc8cefBfOcKS9BfyitA=w1366-h768-s-no?authuser=0',
+  },
+  {
+    id: 19,
+    name: 'Мария',
+    age: 18,
+    hobby: 'Спорт',
+    about: '456',
+    imageUrl:
+      'https://lh3.googleusercontent.com/pw/AIL4fc80ARFXNHdHHLX74xCl3ZvVvykXryZP_7Op5DLgKVgNo2uiu_MtkD6LTb4eMbq_4SHMNqzpylfAXMErXdKZSvQlJcSZYyp7IDawFwKt3SOXXvcS1ZxAyLZtEmkdehgNz5t-5eFVSxcc3Nv76h02skxo-LoJdMh8X26tiutKMvQljVV9r3L11s-BeIYg6Hpa_48LjswJQMSw5mOXFeEVPa16MVl0fBKngy_ikdnsAHeceDmvto8oCVtaj-ogCEIBYXpspEBQ9TdvCkfNfR28y-NL1-3w4opO5qjbicrs1blZXYaZV56D3HL1cuFtefIFit0pflcT1URH6rrMqBuaO2KWo6cmUnnRg_ceXmZ4-ZYer9ITB2AcOkwQq3h9nv3WKIuTpz7_WxevzWpV8yKEW0mMng7GyrkNrgNGnp_AFjbAOlNFeWatbd8Q4ZdRXVptPF5DZicBmJE8uhtUhSiStqX-wKe1MAMB_BQbqKHLGX8mz84o1lTPPtFkcHvReBUdTCF3ivy4x32LyPEdjRJXDuq7_Muoe_AugrbDKaoNKSQuqZRN0WI5NPAmBmnUk3GaQmOv3Z_9vPS9HSGr-wFbAfKS8poYBcmx2zAMeMhsnBpGjVSg5uZ1VRGmfZYNITuBmjobA9QKV-imYY3xP4ffjoR7aaB5ucunixitswkUQHt8L7vJNwM4i5ZawgeIza7Hdb3c-0IvK5pbKJ1c9fUA6_n9DJ6I4hvqi9ZQX2hnxcwV8wZ4LFOAzpU9wST3CWlBND75uPeJq-1XG0az7vbbkz35gA9Y9ZXJxxCu1U9oqwyKi_bElQpYzilyVhyz_muJxsWZZCRUQ-J5AaE1ObzXsEwodB7Hxq6Q4K3FN_N_yuKzVThgEdXT9ZCKs9om3vETP0__h9Yr1VJuAO096YJ-rh20nA=w1366-h768-s-no?authuser=0',
+  },
+];

@@ -147,4 +147,19 @@ export const allPeople = [
     username: 'Яша',
     age: 27,
   },
+  {
+    id: 17,
+    username: 'Елизавета',
+    age: 22
+  },
+  {
+    id: 18,
+    username: 'Марина',
+    age: 25
+  },
+  {
+    id: 19,
+    username: 'Мария',
+    age: 18
+  },
 ];

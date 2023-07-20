@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { IChatMessage } from '../models/chatMessage';
 import { BehaviorSubject } from 'rxjs';
 import { messageLinkInterlocutor, messageLinkOwn } from '../data/messagesData';
-import { TypeActionAddNewMessage } from '../utils/const';
 import { PersonPageService } from './person-page.service';
 import { IPersonInfo } from '../models/personInfo';
 

@@ -3,13 +3,25 @@
     class="friends-page__title text-[24px] py-[22px] border-b-[1px] border-[#EBEBEB] flex justify-center items-center"
   >
     <a
+      appActiveLink
+      [argLinks]="searchFriends"
+      [ngClass]="{
+        'text-[#00A3FF]':
+          this.friendsService.activeFriendsLinks.searchFriends === 'active'
+      }"
       routerLink="/friends/search" class="friends-page__title-two mr-[48px] hover:text-[#00A3FF] duration-[250ms] cursor-pointer"
     >
       Поиск друзей
     </a>
     <a
+      appActiveLink
+      [argLinks]="addedFriends"
       routerLink="/friends/added" class="friends-page__title-one hover:text-[#00A3FF] duration-[250ms] cursor-pointer"
-    >
+      [ngClass]="{
+        'text-[#00A3FF]':
+          this.friendsService.activeFriendsLinks.addedFriends=== 'active'
+      }"
+      >
       Мои друзья
     </a>
   </div>

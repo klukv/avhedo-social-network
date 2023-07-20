@@ -8,6 +8,9 @@ import { FriendsService } from 'src/app/services/friends.service';
   styleUrls: ['./friends-page.component.css'],
 })
 export class FriendsPageComponent {
+  searchFriends = 'searchFriends'
+  addedFriends = 'addedFriends'
+
   constructor(public friendsService: FriendsService) {
   }
 }
