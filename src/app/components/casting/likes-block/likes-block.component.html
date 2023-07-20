@@ -40,6 +40,7 @@
           class="likes-page__card-chat bg-[#00A3FF] rounded-[50%] flex items-center justify-center w-[36px] h-[36px] hover:bg-[#56C2FF] duration-[250ms] invisible opacity-0 mr-[8px]"
           #chatButton
           title="Вы можете написать сообщение"
+          (click)="clickChatButton(likeCard.id)"
         >
           <svg
             width="22"
