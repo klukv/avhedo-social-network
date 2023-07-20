@@ -36,6 +36,8 @@ import { ClickListenerDirective } from './directives/click-listener.directive';
 import { FilterHobbyPipe } from './pipes/filter-hobby.pipe';
 import { FriendsAddComponent } from './components/friends/friends-add/friends-add.component';
 import { FriendsSearchComponent } from './components/friends/friends-search/friends-search.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,8 @@ import { FriendsSearchComponent } from './components/friends/friends-search/frie
     FilterHobbyPipe,
     FriendsAddComponent,
     FriendsSearchComponent,
+    LoginPageComponent,
+    SignupPageComponent,
   ],
   imports: [
     BrowserModule,

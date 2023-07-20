@@ -10,9 +10,23 @@ import { FriendsPageComponent } from './pages/friends-page/friends-page.componen
 import { PersonPageComponent } from './pages/person-page/person-page.component';
 import { FriendsAddComponent } from './components/friends/friends-add/friends-add.component';
 import { FriendsSearchComponent } from './components/friends/friends-search/friends-search.component';
-import { CASTING_PAGE, CASTING_PAGE_CONTACTS, CASTING_PAGE_LIKES, CHAT_PAGE, FRIENDS_ADDED, FRIENDS_PAGE, FRIENDS_SEARCH, MAIN_PAGE, MESSAGES_PAGE, PERSON_PAGE } from './utils/const';
-
-
+import {
+  CASTING_PAGE,
+  CASTING_PAGE_CONTACTS,
+  CASTING_PAGE_LIKES,
+  CHAT_PAGE,
+  FRIENDS_ADDED,
+  FRIENDS_PAGE,
+  FRIENDS_SEARCH,
+  LOGIN_PAGE,
+  MAIN_PAGE,
+  MESSAGES_PAGE,
+  PERSON_PAGE,
+  REGISTRATION_PAGE,
+} from './utils/const';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { SignupPageComponent } from './pages/signup-page/signup-page.component';
+import { LoginService } from './services/login.service';
 
 const castingRoutes: Routes = [
   { path: CASTING_PAGE_CONTACTS, component: ContactsBlockComponent },
@@ -21,16 +35,27 @@ const castingRoutes: Routes = [
 
 const friendsRoute = [
   { path: FRIENDS_ADDED, component: FriendsAddComponent },
-  { path: FRIENDS_SEARCH, component: FriendsSearchComponent }
-]
+  { path: FRIENDS_SEARCH, component: FriendsSearchComponent },
+];
 
 const routes: Routes = [
-  { path: MAIN_PAGE, component: MainPageComponent },
-  { path: FRIENDS_PAGE, component: FriendsPageComponent, children: friendsRoute},
+  { path: LOGIN_PAGE, component: LoginPageComponent },
+  { path: REGISTRATION_PAGE, component: SignupPageComponent },
+  { path: MAIN_PAGE, component: MainPageComponent, canActivateChild:[LoginService] },
+  {
+    path: FRIENDS_PAGE,
+    component: FriendsPageComponent,
+    children: friendsRoute,
+  },
   { path: MESSAGES_PAGE, component: MessagesPageComponent },
   { path: CHAT_PAGE, component: ChatPageComponent },
-  { path: CASTING_PAGE, component: CastingPageComponent, children: castingRoutes },
-  { path: PERSON_PAGE, component: PersonPageComponent},
+  {
+    path: CASTING_PAGE,
+    component: CastingPageComponent,
+    children: castingRoutes,
+  },
+  { path: PERSON_PAGE, component: PersonPageComponent },
+  { path: '**', component: MainPageComponent },
 ];
 
 @NgModule({

@@ -5,7 +5,7 @@
       <div class="main__inner flex mt-[68px] justify-between">
         <router-outlet class="hidden"></router-outlet>
         <div
-          *ngIf="!hasRoute('person')"
+        *ngIf="!hasRoute('signin') && !hasRoute('signup') && !hasRoute('person')"
           class="main__additionally-info flex flex-col"
         >
           <app-my-page class="mb-[48px]"></app-my-page>
