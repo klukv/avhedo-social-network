@@ -1,1 +1,56 @@
-<p>signup-page works!</p>
+<div class="register">
+  <div class="container mx-auto max-w-[400px]">
+    <div class="register__inner min-h-[600px] bg-[#fff] rounded-[8px] flex flex-col items-center">
+      <h1 class="register__title text-[24px] py-[24px] grow-0">Регистрация</h1>
+      <div class="register__info grow">
+        <form class="register__form flex flex-col justify-between" [formGroup]="form">
+          <div class="form-group">
+            <label class="register__form__username-title">Имя</label>
+            <input
+              formControlName="username"
+              type="text"
+              class="register__form__username"
+              placeholder="Введите ваше имя"
+            />
+          </div>
+          <div class="form-group">
+            <label class="register__form__username-title">Пароль</label>
+            <input
+              formControlName="password"
+              type="password"
+              class="register__form__password"
+            />
+          </div>
+          <div class="form-group">
+            <label class="register__form__username-title">Email</label>
+            <input
+              formControlName="email"
+              type="text"
+              class="register__form__email"
+            />
+          </div>
+          <div class="form-group">
+            <label class="register__form__username-title">Пол</label>
+            <input
+              formControlName="gender"
+              type="checkbox"
+              class="register__form__gender"
+              value="Мужской"
+            />
+            <input
+              formControlName="gender"
+              type="checkbox"
+              class="register__form__gender"
+              value="Женский"
+            />
+          </div>
+          <div class="form-group">
+            <button class="register__form__btn" type="submit">
+              Зарегистрироваться
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
