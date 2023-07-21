@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -39,6 +40,7 @@ import { FriendsSearchComponent } from './components/friends/friends-search/frie
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { ActiveLinkDirective } from './directives/active-link.directive';
+import { httpInterceptorProviders } from './_helpers/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -81,10 +83,11 @@ import { ActiveLinkDirective } from './directives/active-link.directive';
     MatNativeDateModule,
     MatDatepickerModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
 
-  providers: [FriendsService, PostsService],
+  providers: [FriendsService, PostsService, httpInterceptorProviders],
 
   bootstrap: [AppComponent],
 })

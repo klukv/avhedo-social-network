@@ -14,6 +14,18 @@ export const PERSON_PAGE = 'person'
 export const MESSAGES_PAGE = 'messages'
 export const CHAT_PAGE = 'messages/chat'
 
+//Backend requests const
+
+export const API_URL = 'http://localhost:8080';
+export const AUTH_URL = '/api/auth/signin';
+export const SIGNUP_URL = '/api/auth/signup';
+export const LOGOUT_URL = '/api/auth/logout';
+
+//SessionStorage keys
+
+export const USER_KEY = 'auth-user'
+
+//Enums
 
 export enum TypeEditVariants{
     TYPE_AGE = 'age',
