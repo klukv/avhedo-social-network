@@ -1,1 +1,56 @@
-<p>login-page works!</p>
+<div class="login">
+  <div class="container mx-auto max-w-[400px]">
+    <div
+      class="login__inner min-h-[600px] bg-[#fff] rounded-[8px] flex flex-col items-center"
+    >
+      <h1 class="login__title text-[24px] py-[24px] grow-0">Авторизация</h1>
+      <div class="login__info grow w-full">
+        <form
+          class="login__form flex flex-col justify-between px-[20px]"
+          [formGroup]="formLogin"
+        >
+          <div class="form-group my-[16px]">
+            <label
+              class="login__form__username-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF]"
+              >Имя</label
+            >
+            <input
+              formControlName="username"
+              type="text"
+              class="login__form__username text-[16px] px-[8px] py-[16px] rounded-[8px] bg-[#ebebeb] w-full outline-none placeholder:text-[16px]"
+              placeholder="Введите ваше имя"
+            />
+          </div>
+          <div class="form-group my-[16px]">
+            <label
+              class="login__form__username-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF]"
+              >Пароль</label
+            >
+            <input
+              formControlName="password"
+              type="password"
+              class="login__form__password text-[16px] px-[8px] py-[16px] rounded-[8px] bg-[#ebebeb] w-full outline-none placeholder:text-[16px]"
+              placeholder="Введите пароль"
+            />
+          </div>
+          <div class="form-group flex justify-center items-center mt-[16px]">
+            <button
+              class="login__form__btn px-[30px] py-[8px] mb-[20px] bg-[#00A3FF] text-[16px] text-[#ffffff] rounded-[8px] hover:bg-[#52C1FF] duration-[250ms] cursor-pointer"
+              type="submit"
+            >
+              Войти
+            </button>
+          </div>
+          <div class="login__link text-center text-[14px]">
+            <p>Если у вас ещё нет аккаунта, вы можете</p>
+            <a
+              routerLink="/signup"
+              class="login__link-to-register text-[#00A3FF] hover:text-[#52C1FF] duration-[250ms] cursor-pointer"
+              >зарегистрироваться</a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

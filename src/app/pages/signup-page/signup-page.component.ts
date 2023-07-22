@@ -19,8 +19,13 @@ export class SignupPageComponent {
       username: ['', Validators.required],
       password: ['', Validators.required],
       email: ['', Validators.required],
+      age: ['', Validators.required],
       gender: [{man: 'мужской', woman: 'женский'}, Validators.required],
     })
+  }
+
+  setRegisterAgeValue(selectedDate: Date){
+
   }
 
 }

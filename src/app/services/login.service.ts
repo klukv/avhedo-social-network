@@ -21,10 +21,10 @@ export class LoginService {
     );
   }
 
-  register(username: string, email: string, password: string, gender: string) {
+  register(username: string, password: string, age:number, email: string,  gender: string) {
     return this._http.post(
       API_URL + SIGNUP_URL,
-      { username, email, password, gender },
+      { username, password, age, email, gender },
       httpOptions
     );
   }

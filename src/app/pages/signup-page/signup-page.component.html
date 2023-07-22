@@ -1,51 +1,92 @@
 <div class="register">
   <div class="container mx-auto max-w-[400px]">
-    <div class="register__inner min-h-[600px] bg-[#fff] rounded-[8px] flex flex-col items-center">
+    <div
+      class="register__inner min-h-[600px] bg-[#fff] rounded-[8px] flex flex-col items-center"
+    >
       <h1 class="register__title text-[24px] py-[24px] grow-0">Регистрация</h1>
-      <div class="register__info grow">
-        <form class="register__form flex flex-col justify-between" [formGroup]="form">
-          <div class="form-group">
-            <label class="register__form__username-title">Имя</label>
+      <div class="register__info grow w-full">
+        <form
+          class="register__form flex flex-col justify-between px-[20px]"
+          [formGroup]="form"
+        >
+          <div class="form-group my-[16px]">
+            <label
+              class="register__form__username-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF]"
+              >Имя</label
+            >
             <input
               formControlName="username"
               type="text"
-              class="register__form__username"
+              class="register__form__username text-[16px] px-[8px] py-[16px] rounded-[8px] bg-[#ebebeb] w-full outline-none placeholder:text-[16px]"
               placeholder="Введите ваше имя"
             />
           </div>
-          <div class="form-group">
-            <label class="register__form__username-title">Пароль</label>
+          <div class="form-group my-[16px]">
+            <label
+              class="register__form__username-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF]"
+              >Пароль</label
+            >
             <input
               formControlName="password"
               type="password"
-              class="register__form__password"
+              class="register__form__password text-[16px] px-[8px] py-[16px] rounded-[8px] bg-[#ebebeb] w-full outline-none placeholder:text-[16px]"
+              placeholder="Введите пароль"
             />
           </div>
-          <div class="form-group">
-            <label class="register__form__username-title">Email</label>
+          <div class="form-group my-[16px]">
+            <label
+              class="register__form__username-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF]"
+              >Email</label
+            >
             <input
               formControlName="email"
               type="text"
-              class="register__form__email"
+              class="register__form__email text-[16px] px-[8px] py-[16px] rounded-[8px] bg-[#ebebeb] w-full outline-none placeholder:text-[16px]"
+              placeholder="Введите ваш Email"
             />
           </div>
           <div class="form-group">
-            <label class="register__form__username-title">Пол</label>
-            <input
-              formControlName="gender"
-              type="checkbox"
-              class="register__form__gender"
-              value="Мужской"
-            />
-            <input
-              formControlName="gender"
-              type="checkbox"
-              class="register__form__gender"
-              value="Женский"
-            />
+            <label class="register__form__age-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF]">Возраст</label>
+              <mat-form-field class="w-full">
+                <mat-label>Введите дату рождения</mat-label>
+                <input
+                  matInput
+                  formControlName="age"
+                  [matDatepicker]="picker"
+                  (dateChange)="setRegisterAgeValue($event.value)"
+                />
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          <div class="form-group my-[16px] pl-[8px]">
+            <label
+              class="register__form__username-title block mb-[4px] text-[18px] text-[#00A3FF]"
+              >Пол</label
+            >
+            <div class="register__from__gender-group flex items-center">
+              <input
+                formControlName="gender"
+                type="checkbox"
+                class="register__form__gender"
+              />
+              <span class="pl-[4px] text-[16px] mr-[25px]">Мужской</span>
+              <input
+                formControlName="gender"
+                type="checkbox"
+                class="register__form__gender"
+                value="Женский"
+              /><span class="pl-[4px] text-[16px]">Женский</span>
+            </div>
           </div>
-          <div class="form-group">
-            <button class="register__form__btn" type="submit">
+          <div class="form-group flex justify-center items-center">
+            <button
+              class="register__form__btn px-[25px] py-[8px] mb-[20px] bg-[#00A3FF] text-[16px] text-[#ffffff] rounded-[8px] hover:bg-[#52C1FF] duration-[250ms] cursor-pointer"
+              type="submit"
+            >
               Зарегистрироваться
             </button>
           </div>

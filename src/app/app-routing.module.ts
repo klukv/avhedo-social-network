@@ -51,8 +51,8 @@ const friendsRoute = [
 ];
 
 const routes: Routes = [
-  { path: LOGIN_PAGE, component: LoginPageComponent },
   { path: REGISTRATION_PAGE, component: SignupPageComponent },
+  { path: LOGIN_PAGE, component: LoginPageComponent },
   { path: MAIN_PAGE, component: MainPageComponent, canActivate: [AuthGuard] },
   {
     path: FRIENDS_PAGE,
