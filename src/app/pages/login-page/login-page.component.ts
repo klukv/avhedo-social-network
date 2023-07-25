@@ -21,4 +21,16 @@ export class LoginPageComponent {
       password: ['', Validators.required],
     })
   }
+
+  clickLoginButton(){
+    console.log(this.formLogin);
+  }
+
+  get username(){
+    return this.formLogin.get('username');
+  }
+
+  get password(){
+    return this.formLogin.get('password');
+  }
 }

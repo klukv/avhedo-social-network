@@ -8,6 +8,7 @@
         <form
           class="register__form flex flex-col justify-between px-[20px]"
           [formGroup]="form"
+          (submit)="logInfo()"
         >
           <div class="form-group my-[16px]">
             <label
@@ -17,9 +18,22 @@
             <input
               formControlName="username"
               type="text"
-              class="register__form__username text-[16px] px-[8px] py-[16px] rounded-[8px] bg-[#ebebeb] w-full outline-none placeholder:text-[16px]"
+              class="register__form__username text-[16px] px-[8px] py-[16px] rounded-[8px] bg-[#ebebeb] w-full placeholder:text-[16px] outline-none border-transparent border-[2px] focus:border-[#00A3FF] duration-[150ms]"
               placeholder="Введите ваше имя"
             />
+            <div
+              *ngIf="
+                username?.invalid && (username?.touched || username?.dirty)
+              "
+              class="form__errors text-[red] mt-[8px]"
+            >
+              <div
+                class="form__errors-required"
+                *ngIf="username?.errors?.['required']"
+              >
+                Вы не заполнили поле
+              </div>
+            </div>
           </div>
           <div class="form-group my-[16px]">
             <label
@@ -29,9 +43,28 @@
             <input
               formControlName="password"
               type="password"
-              class="register__form__password text-[16px] px-[8px] py-[16px] rounded-[8px] bg-[#ebebeb] w-full outline-none placeholder:text-[16px]"
+              class="register__form__password text-[16px] px-[8px] py-[16px] rounded-[8px] bg-[#ebebeb] w-full placeholder:text-[16px] outline-none border-transparent border-[2px] focus:border-[#00A3FF] duration-[150ms]"
               placeholder="Введите пароль"
             />
+            <div
+              *ngIf="
+                password?.invalid && (password?.touched || password?.dirty)
+              "
+              class="form__errors text-[red] mt-[8px]"
+            >
+              <div
+                class="form__errors-required"
+                *ngIf="password?.errors?.['required']"
+              >
+                Вы не заполнили поле
+              </div>
+              <div
+                class="form__errors-length"
+                *ngIf="password?.errors?.['minlength']"
+              >
+                Пароль должен быть длиннее 3 символов
+              </div>
+            </div>
           </div>
           <div class="form-group my-[16px]">
             <label
@@ -41,44 +74,78 @@
             <input
               formControlName="email"
               type="text"
-              class="register__form__email text-[16px] px-[8px] py-[16px] rounded-[8px] bg-[#ebebeb] w-full outline-none placeholder:text-[16px]"
+              class="register__form__email text-[16px] px-[8px] py-[16px] rounded-[8px] bg-[#ebebeb] w-full placeholder:text-[16px] outline-none border-transparent border-[2px] focus:border-[#00A3FF] duration-[150ms]"
               placeholder="Введите ваш Email"
             />
+            <div
+              *ngIf="email?.invalid && (email?.touched || email?.dirty)"
+              class="form__errors text-[red] mt-[8px]"
+            >
+              <div
+                class="form__errors-required"
+                *ngIf="email?.errors?.['required']"
+              >
+                Вы не заполнили поле
+              </div>
+            </div>
           </div>
           <div class="form-group">
-            <label class="register__form__age-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF]">Возраст</label>
-              <mat-form-field class="w-full">
-                <mat-label>Введите дату рождения</mat-label>
-                <input
-                  matInput
-                  formControlName="age"
-                  [matDatepicker]="picker"
-                  (dateChange)="setRegisterAgeValue($event.value)"
-                />
-                <mat-datepicker-toggle
-                  matIconSuffix
-                  [for]="picker"
-                ></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
+            <label
+              class="register__form__age-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF]"
+              >Возраст</label
+            >
+            <mat-form-field class="w-full">
+              <mat-label>Введите дату рождения</mat-label>
+              <input
+                matInput
+                formControlName="birthday"
+                [matDatepicker]="picker"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div
+              *ngIf="
+                birthday?.invalid && (birthday?.touched || birthday?.dirty)
+              "
+              class="form__errors text-[red] mt-[8px]"
+            >
+              <div
+                class="form__errors-required"
+                *ngIf="birthday?.errors?.['required']"
+              >
+                Вы не заполнили поле
+              </div>
             </div>
+          </div>
           <div class="form-group my-[16px] pl-[8px]">
             <label
+              for="gender"
               class="register__form__username-title block mb-[4px] text-[18px] text-[#00A3FF]"
               >Пол</label
             >
             <div class="register__from__gender-group flex items-center">
               <input
-                formControlName="gender"
+                formControlName="genderMan"
                 type="checkbox"
                 class="register__form__gender"
+                id="gender"
+                name="gender"
+                (change)="changeValueCheckbox('man')"
+                #refCheckboxMan
               />
               <span class="pl-[4px] text-[16px] mr-[25px]">Мужской</span>
               <input
-                formControlName="gender"
+                formControlName="genderWoman"
                 type="checkbox"
                 class="register__form__gender"
-                value="Женский"
+                id="gender"
+                name="gender"
+                (change)="changeValueCheckbox('woman')"
+                #refCheckboxWoman
               /><span class="pl-[4px] text-[16px]">Женский</span>
             </div>
           </div>

@@ -8,6 +8,7 @@
         <form
           class="login__form flex flex-col justify-between px-[20px]"
           [formGroup]="formLogin"
+          (submit)="clickLoginButton()"
         >
           <div class="form-group my-[16px]">
             <label
@@ -17,9 +18,22 @@
             <input
               formControlName="username"
               type="text"
-              class="login__form__username text-[16px] px-[8px] py-[16px] rounded-[8px] bg-[#ebebeb] w-full outline-none placeholder:text-[16px]"
+              class="login__form__username text-[16px] px-[8px] py-[16px] rounded-[8px] bg-[#ebebeb] w-full placeholder:text-[16px] outline-none border-transparent border-[2px] focus:border-[#00A3FF] duration-[150ms]"
               placeholder="Введите ваше имя"
             />
+            <div
+              *ngIf="
+                username?.invalid && (username?.touched || username?.dirty)
+              "
+              class="form__errors text-[red] mt-[8px]"
+            >
+              <div
+                class="form__errors-required"
+                *ngIf="username?.errors?.['required']"
+              >
+                Вы не заполнили поле
+              </div>
+            </div>
           </div>
           <div class="form-group my-[16px]">
             <label
@@ -29,9 +43,22 @@
             <input
               formControlName="password"
               type="password"
-              class="login__form__password text-[16px] px-[8px] py-[16px] rounded-[8px] bg-[#ebebeb] w-full outline-none placeholder:text-[16px]"
+              class="login__form__password text-[16px] px-[8px] py-[16px] rounded-[8px] bg-[#ebebeb] w-full placeholder:text-[16px] outline-none border-transparent border-[2px] focus:border-[#00A3FF] duration-[150ms]"
               placeholder="Введите пароль"
             />
+            <div
+              *ngIf="
+                password?.invalid && (password?.touched || password?.dirty)
+              "
+              class="form__errors text-[red] mt-[8px]"
+            >
+              <div
+                class="form__errors-required"
+                *ngIf="password?.errors?.['required']"
+              >
+                Вы не заполнили поле
+              </div>
+            </div>
           </div>
           <div class="form-group flex justify-center items-center mt-[16px]">
             <button
