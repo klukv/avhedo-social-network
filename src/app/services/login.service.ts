@@ -21,10 +21,17 @@ export class LoginService {
     );
   }
 
-  register(username: string, password: string, age:number, email: string,  gender: string) {
-    return this._http.post(
+  register(
+    username: string,
+    email: string,
+    password: string,
+    role: string[],
+    age: number,
+    gender: string
+  ): Observable<string> {
+    return this._http.post<string>(
       API_URL + SIGNUP_URL,
-      { username, password, age, email, gender },
+      { username, email, password, role, age, gender },
       httpOptions
     );
   }

@@ -1,18 +1,28 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription, tap } from 'rxjs';
+import { LoginService } from 'src/app/services/login.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-signup-page',
   templateUrl: './signup-page.component.html',
   styleUrls: ['./signup-page.component.css'],
 })
-export class SignupPageComponent {
+export class SignupPageComponent implements OnDestroy{
   @ViewChild('refCheckboxMan') refChecboxMan: ElementRef;
   @ViewChild('refCheckboxWoman') refChecboxWoman: ElementRef;
 
   form: FormGroup;
+  responseRegister: string = '';
+  private agePerson: number = 0;
+  private sub: Subscription;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: LoginService,
+    private storageService: StorageService
+  ) {
     this._createForm();
   }
 
@@ -20,26 +30,70 @@ export class SignupPageComponent {
     this.form = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(4)]],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       birthday: ['', [Validators.required]],
       genderMan: [false, [Validators.required]],
       genderWoman: [false, [Validators.required]],
     });
   }
 
-  setRegisterAgeValue(selectedDate: Date) {}
+  setRegisterAgeValue(selectedDate: Date) {
+    const today = new Date();
+    const birthday = new Date(selectedDate);
+    const diffMonth = today.getMonth() - birthday.getMonth();
+    this.agePerson = today.getFullYear() - birthday.getFullYear();
 
-  logInfo() {
-    console.log(this.password?.errors);
-    console.log(this.form);
+    if (
+      diffMonth < 0 ||
+      (diffMonth === 0 && today.getDate() < birthday.getDate())
+    ) {
+      this.agePerson--;
+    }
   }
 
-  changeValueCheckbox(type: string){
-    if(type === 'man'){
-      this.refChecboxWoman.nativeElement['checked'] = false
+  saveInfoUser() {
+    if (this.form.invalid) {
+      console.log(`ошибка`);
+      return;
     }
-    if(type === 'woman'){
-      this.refChecboxMan.nativeElement['checked'] = false
+    console.log(`Всё хорошо`);
+    let genderPerson: string = '';
+
+    if (this.genderMan?.value === true) {
+      genderPerson = 'man';
+    }
+    if (this.genderWoman?.value === true) {
+      genderPerson = 'woman';
+    }
+
+    this.sub = this.authService
+      .register(
+        this.username?.value,
+        this.email?.value,
+        this.password?.value,
+        ['admin, moderator'],
+        this.agePerson,
+        genderPerson
+      )
+      .subscribe((response) => {
+        this.storageService.saveInfoUser({
+          username: this.username?.value,
+          email: this.email?.value,
+          role: ['admin, moderator'],
+          password: this.password?.value,
+          age: this.agePerson,
+          gender: genderPerson,
+        });
+
+      });
+  }
+
+  changeValueCheckbox(type: string) {
+    if (type === 'man') {
+      this.refChecboxWoman.nativeElement['checked'] = false;
+    }
+    if (type === 'woman') {
+      this.refChecboxMan.nativeElement['checked'] = false;
     }
   }
 
@@ -65,5 +119,9 @@ export class SignupPageComponent {
 
   get genderWoman() {
     return this.form.get('genderWoman');
+  }
+
+  ngOnDestroy(){
+    this.sub.unsubscribe();
   }
 }

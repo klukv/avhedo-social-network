@@ -1,4 +1,4 @@
-<div class="register">
+<div class="register mb-[64px]">
   <div class="container mx-auto max-w-[400px]">
     <div
       class="register__inner min-h-[600px] bg-[#fff] rounded-[8px] flex flex-col items-center"
@@ -8,7 +8,7 @@
         <form
           class="register__form flex flex-col justify-between px-[20px]"
           [formGroup]="form"
-          (submit)="logInfo()"
+          (submit)="saveInfoUser()"
         >
           <div class="form-group my-[16px]">
             <label
@@ -87,6 +87,9 @@
               >
                 Вы не заполнили поле
               </div>
+              <div class="form__errors-email" *ngIf="email?.errors?.['email']">
+                Данное поле не соответствует стандарту
+              </div>
             </div>
           </div>
           <div class="form-group">
@@ -100,6 +103,7 @@
                 matInput
                 formControlName="birthday"
                 [matDatepicker]="picker"
+                (dateChange)="setRegisterAgeValue($event.value)"
               />
               <mat-datepicker-toggle
                 matIconSuffix
@@ -158,6 +162,7 @@
             </button>
           </div>
         </form>
+        {{ responseRegister }}
       </div>
     </div>
   </div>
