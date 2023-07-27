@@ -18,10 +18,14 @@ export class LoginPageComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: LoginService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    public authService: LoginService
   ) {
     this._createFormLogin();
+
+    setTimeout(() => {
+      this.authService.setValueIsRegister(false);
+    }, 2000);
   }
 
   private _createFormLogin() {
@@ -32,21 +36,26 @@ export class LoginPageComponent {
   }
 
   clickLoginButton() {
-    console.log(this.formLogin);
+    if (this.formLogin.invalid) {
+      return;
+    }
 
     this.authService
       .login(this.username?.value, this.password?.value)
       .pipe(
         map((userData) => {
-          this.storageService.saveInfoUser({
-            username: this.username?.value,
-            password: this.password?.value,
-          }, userData.token);
+          this.storageService.saveInfoUser(
+            {
+              username: this.username?.value,
+              password: this.password?.value,
+            },
+            userData.token
+          );
           return userData;
         })
       )
       .subscribe(() => {
-        this.router.navigate(['/'])
+        this.router.navigate(['/']);
       });
   }
 

@@ -76,6 +76,7 @@ export class SignupPageComponent implements OnDestroy {
         genderPerson
       )
       .subscribe(() => {
+        this.authService.setValueIsRegister(true);
         this.router.navigate(['signin']);
       });
   }

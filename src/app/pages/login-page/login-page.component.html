@@ -81,3 +81,17 @@
     </div>
   </div>
 </div>
+<div
+  class="login__success-register mt-[15px]"
+  [ngClass]="{ 'opacity-0 duration-100 invisible': (this.authService.isRegister$ | async) === false }"
+>
+  <div class="container max-w-[400px] mx-auto">
+    <div
+      class="login__success-register__text border-[1px] border-[#00A3FF] rounded-[8px] px-[5px] py-[10px] text-[16px] text-center"
+    >
+      <p>
+        Вы успешно зарегистрировались! Теперь вы можете войти в свой аккаунт.
+      </p>
+    </div>
+  </div>
+</div>
