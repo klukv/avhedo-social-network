@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IUser } from '../models/user';
-import { USER_KEY } from '../utils/const';
+import { TOKEN_KEY, USER_KEY } from '../utils/const';
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +12,14 @@ export class StorageService {
     window.sessionStorage.clear();
   }
 
-  saveInfoUser(user: IUser) {
+  saveInfoUser(user: IUser, token: string) {
+    const modifiedToken = 'Bearer ' + token;
+
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+
+    window.sessionStorage.removeItem(TOKEN_KEY);
+    window.sessionStorage.setItem(TOKEN_KEY, modifiedToken);
   }
 
   getUser() {
@@ -26,10 +31,20 @@ export class StorageService {
     return {};
   }
 
-  isLoggedIn():boolean {
-    const user = window.sessionStorage.getItem(USER_KEY);
+  getToken(): string {
+    const token = window.sessionStorage.getItem(TOKEN_KEY);
 
-    if (user) {
+    if (token) {
+      return token;
+    }
+    return 'Token doesn"t exist';
+  }
+
+  isLoggedIn(): boolean {
+    const user = window.sessionStorage.getItem(USER_KEY);
+    const token = window.sessionStorage.getItem(TOKEN_KEY);
+
+    if (user && token) {
       return true;
     }
     return false;

@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { API_URL, AUTH_URL, LOGOUT_URL, SIGNUP_URL } from '../utils/const';
+import { API_URL, LOGIN_URL, LOGOUT_URL, SIGNUP_URL } from '../utils/const';
+import { IResponseUser } from '../models/user';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -14,8 +15,8 @@ export class LoginService {
   constructor(private _http: HttpClient) {}
 
   login(username: string, password: string) {
-    return this._http.post(
-      API_URL + AUTH_URL,
+    return this._http.post<IResponseUser>(
+      API_URL + LOGIN_URL,
       { username, password },
       httpOptions
     );

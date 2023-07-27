@@ -1,15 +1,15 @@
 import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription, tap } from 'rxjs';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/services/login.service';
-import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-signup-page',
   templateUrl: './signup-page.component.html',
   styleUrls: ['./signup-page.component.css'],
 })
-export class SignupPageComponent implements OnDestroy{
+export class SignupPageComponent implements OnDestroy {
   @ViewChild('refCheckboxMan') refChecboxMan: ElementRef;
   @ViewChild('refCheckboxWoman') refChecboxWoman: ElementRef;
 
@@ -20,8 +20,8 @@ export class SignupPageComponent implements OnDestroy{
 
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private authService: LoginService,
-    private storageService: StorageService
   ) {
     this._createForm();
   }
@@ -75,16 +75,8 @@ export class SignupPageComponent implements OnDestroy{
         this.agePerson,
         genderPerson
       )
-      .subscribe((response) => {
-        this.storageService.saveInfoUser({
-          username: this.username?.value,
-          email: this.email?.value,
-          role: ['admin, moderator'],
-          password: this.password?.value,
-          age: this.agePerson,
-          gender: genderPerson,
-        });
-
+      .subscribe(() => {
+        this.router.navigate(['signin']);
       });
   }
 
@@ -121,7 +113,7 @@ export class SignupPageComponent implements OnDestroy{
     return this.form.get('genderWoman');
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.sub.unsubscribe();
   }
 }

@@ -127,7 +127,6 @@
           </div>
           <div class="form-group my-[16px] pl-[8px]">
             <label
-              for="gender"
               class="register__form__username-title block mb-[4px] text-[18px] text-[#00A3FF]"
               >Пол</label
             >
@@ -136,8 +135,6 @@
                 formControlName="genderMan"
                 type="checkbox"
                 class="register__form__gender"
-                id="gender"
-                name="gender"
                 (change)="changeValueCheckbox('man')"
                 #refCheckboxMan
               />
@@ -146,8 +143,6 @@
                 formControlName="genderWoman"
                 type="checkbox"
                 class="register__form__gender"
-                id="gender"
-                name="gender"
                 (change)="changeValueCheckbox('woman')"
                 #refCheckboxWoman
               /><span class="pl-[4px] text-[16px]">Женский</span>
