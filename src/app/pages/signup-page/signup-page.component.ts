@@ -1,7 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, catchError, throwError } from 'rxjs';
+import { ErrorService } from 'src/app/services/error.service';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -22,6 +24,7 @@ export class SignupPageComponent implements OnDestroy {
     private fb: FormBuilder,
     private router: Router,
     private authService: LoginService,
+    public errorService: ErrorService
   ) {
     this._createForm();
   }
@@ -75,6 +78,7 @@ export class SignupPageComponent implements OnDestroy {
         this.agePerson,
         genderPerson
       )
+      .pipe(catchError(this.errorHandler.bind(this)))
       .subscribe(() => {
         this.authService.setValueIsRegister(true);
         this.router.navigate(['signin']);
@@ -112,6 +116,15 @@ export class SignupPageComponent implements OnDestroy {
 
   get genderWoman() {
     return this.form.get('genderWoman');
+  }
+
+  closeErrorBlock(){
+    this.errorService.clear();
+  }
+
+  private errorHandler(error: HttpErrorResponse) {
+    this.errorService.handle(error.message);
+    return throwError(() => error.message);
   }
 
   ngOnDestroy() {

@@ -162,3 +162,46 @@
     </div>
   </div>
 </div>
+
+<div
+  class="error__block-register max-w-[400px] mx-auto mt-[15px] mb-[64px] rounded-[8px] bg-[#fc3737] text-[#fff] relative"
+  *ngIf="this.errorService.error$ | async"
+>
+  <button class="error__close-btn w-[18px] h-[18px] absolute right-[5px] top-[5px]" (click)="closeErrorBlock()">
+    <svg
+      class="w-full h-full"
+      viewBox="-0.5 0 25 25"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      stroke="#ffffff"
+    >
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></g>
+      <g id="SVGRepo_iconCarrier">
+        <path
+          d="M3 21.32L21 3.32001"
+          stroke="#ffffff"
+          stroke-width="1.575"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></path>
+        <path
+          d="M3 3.32001L21 21.32"
+          stroke="#ffffff"
+          stroke-width="1.575"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></path>
+      </g>
+    </svg>
+  </button>
+  <div
+    class="error__block-register-text px-[5px] py-[10px] text-center text-[18px]"
+  >
+    <p>{{ this.errorService.error$ | async }}</p>
+  </div>
+</div>
