@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map } from 'rxjs';
@@ -12,6 +12,8 @@ import { REGISTRATION_PAGE, USER_KEY } from 'src/app/utils/const';
   styleUrls: ['./login-page.component.css'],
 })
 export class LoginPageComponent {
+  @ViewChild('refInputElement') inputElement: ElementRef;
+
   signupLink = REGISTRATION_PAGE;
   formLogin: FormGroup;
 
@@ -22,10 +24,16 @@ export class LoginPageComponent {
     public authService: LoginService
   ) {
     this._createFormLogin();
+  }
 
+  ngOnInit() {
     setTimeout(() => {
       this.authService.setValueIsRegister(false);
     }, 2000);
+  }
+
+  ngAfterViewInit() {
+    this.inputElement.nativeElement.focus();
   }
 
   private _createFormLogin() {
@@ -56,6 +64,7 @@ export class LoginPageComponent {
       )
       .subscribe(() => {
         this.router.navigate(['/']);
+        window.location.reload();
       });
   }
 

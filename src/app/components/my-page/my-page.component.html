@@ -1,8 +1,38 @@
 <div class="page__inner bg-[#fff] rounded-[10px] max-w-[460px]">
   <div
-    class="page__header py-[22px] pl-[34px] pr-[270px] border-b-[1px] border-solid border-[#EBEBEB]"
+    class="page__header py-[22px] pl-[34px] pr-[30px] border-b-[1px] border-solid border-[#EBEBEB] flex justify-between items-center"
   >
     <h1 class="page__header-title text-[22px]">Моя страница</h1>
+    <div class="page__header-logout w-[25px] h-[25px] cursor-pointer" title="Выйти из аккаунта" (click)="clickLogoutButton()">
+      <svg
+        class="w-full h-full"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M15 12L2 12M2 12L5.5 9M2 12L5.5 15"
+            stroke="#1C274C"
+            stroke-width="1.152"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+          <path
+            d="M9.00195 7C9.01406 4.82497 9.11051 3.64706 9.87889 2.87868C10.7576 2 12.1718 2 15.0002 2L16.0002 2C18.8286 2 20.2429 2 21.1215 2.87868C22.0002 3.75736 22.0002 5.17157 22.0002 8L22.0002 16C22.0002 18.8284 22.0002 20.2426 21.1215 21.1213C20.3531 21.8897 19.1752 21.9862 17 21.9983M9.00195 17C9.01406 19.175 9.11051 20.3529 9.87889 21.1213C10.5202 21.7626 11.4467 21.9359 13 21.9827"
+            stroke="#1C274C"
+            stroke-width="1.152"
+            stroke-linecap="round"
+          ></path>
+        </g>
+      </svg>
+    </div>
   </div>
   <div class="page__user-information pb-[29px] pl-[34px] pr-[22px]">
     <div class="page__user py-[48px] flex items-center">
@@ -11,7 +41,9 @@
       </div>
       <div class="page__user-links">
         <div class="page__user-links_header">
-          <h2 class="page__user-links_username text-[22px]">{{personService.personInfo.username}}</h2>
+          <h2 class="page__user-links_username text-[22px]">
+            {{ personService.personInfo.username }}
+          </h2>
         </div>
         <div class="page__user-links_messages-block relative mb-[7px]">
           <a
@@ -96,7 +128,9 @@
             </svg>
           </button>
         </div>
-        <div class="page__info-age_text text-[#7A7A7A]">{{(personService.personInfo$ | async)?.age}}</div>
+        <div class="page__info-age_text text-[#7A7A7A]">
+          {{ (personService.personInfo$ | async)?.age }}
+        </div>
       </div>
       <div class="page__info-hobby mb-[16px]">
         <div class="page__info-hobby_header inline-block relative mb-[8px]">
@@ -130,7 +164,7 @@
           </button>
         </div>
         <div class="page__info-hobby_text text-[#7A7A7A] break-words">
-          {{(personService.personInfo$ | async)?.hobby}}
+          {{ (personService.personInfo$ | async)?.hobby }}
         </div>
       </div>
       <div class="page__info-about">
@@ -166,7 +200,7 @@
         </div>
 
         <div class="page__info-about_text text-[#7A7A7A] break-words">
-          {{personService.personInfo.about}}
+          {{ personService.personInfo.about }}
         </div>
       </div>
     </div>

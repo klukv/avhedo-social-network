@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { API_URL, LOGIN_URL, LOGOUT_URL, SIGNUP_URL } from '../utils/const';
+import { API_URL, LOGIN_URL, SIGNUP_URL } from '../utils/const';
 import { IResponseUser } from '../models/user';
+import { StorageService } from './storage.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -12,7 +13,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class LoginService {
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, private storageService: StorageService) {}
 
   private isRegister = new BehaviorSubject<boolean>(false);
   isRegister$ = this.isRegister.asObservable();
@@ -40,8 +41,9 @@ export class LoginService {
     );
   }
 
-  logout(): Observable<any> {
-    return this._http.post(API_URL + LOGOUT_URL, {}, httpOptions);
+  logout(){
+    this.storageService.infoUserClear();
+    window.location.reload();
   }
 
   setValueIsRegister(value: boolean) {

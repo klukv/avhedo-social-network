@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IPersonInfo } from 'src/app/models/personInfo';
+import { LoginService } from 'src/app/services/login.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { PersonPageService } from 'src/app/services/person-page.service';
 import { TypeEditVariants } from 'src/app/utils/const';
@@ -13,6 +14,11 @@ export class MyPageComponent {
   variantsEdit = TypeEditVariants;
   constructor(
     public modalService: ModalService,
-    public personService: PersonPageService
+    public personService: PersonPageService,
+    private authService: LoginService
   ) {}
+
+  clickLogoutButton(){
+    this.authService.logout();
+  }
 }
