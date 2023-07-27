@@ -64,7 +64,9 @@ export class LoginPageComponent {
       )
       .subscribe(() => {
         this.router.navigate(['/']);
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 150);
       });
   }
 
