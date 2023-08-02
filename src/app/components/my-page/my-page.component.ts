@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { IPersonInfo } from 'src/app/models/personInfo';
+import { IUser } from 'src/app/models/user';
 import { LoginService } from 'src/app/services/login.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { PersonPageService } from 'src/app/services/person-page.service';
-import { TypeEditVariants } from 'src/app/utils/const';
+import { StorageService } from 'src/app/services/storage.service';
+import { TypeEditVariants, TypeModalWindows } from 'src/app/utils/const';
 
 @Component({
   selector: 'app-my-page',
@@ -12,13 +14,21 @@ import { TypeEditVariants } from 'src/app/utils/const';
 })
 export class MyPageComponent {
   variantsEdit = TypeEditVariants;
+  variantsModals = TypeModalWindows;
+
   constructor(
     public modalService: ModalService,
     public personService: PersonPageService,
-    private authService: LoginService
+    private authService: LoginService,
+    private storageService: StorageService
   ) {}
 
-  clickLogoutButton(){
+  ngOnInit() {
+    this.personService.setPersonInfo(this.storageService.getUser());
+  }
+
+  clickLogoutButton() {
     this.authService.logout();
   }
+
 }

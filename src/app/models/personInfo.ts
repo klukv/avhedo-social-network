@@ -4,11 +4,11 @@ export interface IPersonItem<T> {
 }
 
 export interface IPersonInfo {
-    id:number,
+    id?:number,
     username: string,
-    age: number,
-    hobby: string,
-    about: string
+    age: number | undefined,
+    hobby: string | undefined,
+    about: string | undefined
 }
 
 export interface IHobbyInfo {

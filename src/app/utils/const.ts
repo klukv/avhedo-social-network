@@ -19,6 +19,7 @@ export const CHAT_PAGE = 'messages/chat'
 export const API_URL = 'http://localhost:8080';
 export const LOGIN_URL = '/api/auth/signin';
 export const SIGNUP_URL = '/api/auth/signup';
+export const USER_INFO_URL = '/userInfo'
 
 //SessionStorage keys
 
@@ -36,4 +37,9 @@ export enum TypeEditVariants{
 export enum TypeActionAddNewMessage{
     TYPE_ADD_MESSAGE = 'ADD_MESSAGE',
     TYPE_CLEAR_STASH = 'TYPE_CLEAR_STASH'
+}
+
+export enum TypeModalWindows {
+    TYPE_MODAL_EDIT = 'TYPE_MODAL_EDIT',
+    TYPE_MODAL_FORM = 'TYPE_MODAL_FORM'
 }

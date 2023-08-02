@@ -31,12 +31,10 @@ export class LoginService {
     email: string,
     password: string,
     role: string[],
-    age: number,
-    gender: string
   ): Observable<string> {
     return this._http.post<string>(
       API_URL + SIGNUP_URL,
-      { username, email, password, role, age, gender },
+      { username, email, password, role},
       httpOptions
     );
   }

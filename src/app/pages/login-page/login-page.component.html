@@ -84,7 +84,10 @@
 </div>
 <div
   class="login__success-register mt-[15px]"
-  [ngClass]="{ 'opacity-0 duration-100 invisible': (this.authService.isRegister$ | async) === false }"
+  [ngClass]="{
+    'opacity-0 duration-100 invisible':
+      (this.authService.isRegister$ | async) === false
+  }"
 >
   <div class="container max-w-[400px] mx-auto">
     <div
@@ -96,3 +99,4 @@
     </div>
   </div>
 </div>
+<app-error></app-error>

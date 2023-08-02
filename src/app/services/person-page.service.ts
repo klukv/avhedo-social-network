@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { IHobbyInfo, IPersonInfo, IPersonItem } from '../models/personInfo';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { API_URL, USER_INFO_URL } from '../utils/const';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+};
 @Injectable({
   providedIn: 'root',
 })
@@ -18,7 +23,7 @@ export class PersonPageService {
 
   personInfo$ = this._personInfo.asObservable();
 
-  constructor() {}
+  constructor(private _http: HttpClient) {}
 
   get personInfo() {
     return this._personInfo.getValue();
@@ -55,4 +60,8 @@ export class PersonPageService {
       (hobby) => hobby.id !== id
     );
   }
+
+  // getInfoUser(id: string): Observable{
+  //   return this._http.get(API_URL + USER_INFO_URL + '/' + id, httpOptions)
+  // }
 }

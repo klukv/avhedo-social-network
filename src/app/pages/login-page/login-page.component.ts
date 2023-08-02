@@ -1,7 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { map } from 'rxjs';
+import { catchError, map, throwError } from 'rxjs';
+import { ErrorService } from 'src/app/services/error.service';
 import { LoginService } from 'src/app/services/login.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { REGISTRATION_PAGE, USER_KEY } from 'src/app/utils/const';
@@ -21,6 +23,7 @@ export class LoginPageComponent {
     private fb: FormBuilder,
     private router: Router,
     private storageService: StorageService,
+    private errorService: ErrorService,
     public authService: LoginService
   ) {
     this._createFormLogin();
@@ -54,20 +57,26 @@ export class LoginPageComponent {
         map((userData) => {
           this.storageService.saveInfoUser(
             {
+              id: userData.id,
               username: this.username?.value,
-              password: this.password?.value,
             },
             userData.token
           );
           return userData;
         })
       )
+      .pipe(catchError(this.errorHandler.bind(this)))
       .subscribe(() => {
         this.router.navigate(['/']);
         setTimeout(() => {
           window.location.reload();
         }, 150);
       });
+  }
+
+  private errorHandler(error: HttpErrorResponse) {
+    this.errorService.handle(error.message);
+    return throwError(() => error.message);
   }
 
   get username() {
@@ -78,3 +87,4 @@ export class LoginPageComponent {
     return this.formLogin.get('password');
   }
 }
+

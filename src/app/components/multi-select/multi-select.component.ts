@@ -44,14 +44,17 @@ export class MultiSelectComponent {
 
   ngOnInit() {
     this.personService.personInfo$.subscribe((infoPerson) => {
-      const arrayCurrentHobby = infoPerson.hobby.split(', ');
-      if (arrayCurrentHobby.length === 0) return;
+      if (infoPerson.hobby) {
+        const arrayCurrentHobby = infoPerson.hobby.split(', ');
 
-      for (let i = 0; i < arrayCurrentHobby.length; i++) {
-        const findHobby = this.hobbyList.filter(
-          (hobbyValue) => hobbyValue.information === arrayCurrentHobby[i]
-        )[0];
-        this.personService.setCurrentHobbyItems(findHobby);
+        if (arrayCurrentHobby.length === 0) return;
+
+        for (let i = 0; i < arrayCurrentHobby.length; i++) {
+          const findHobby = this.hobbyList.filter(
+            (hobbyValue) => hobbyValue.information === arrayCurrentHobby[i]
+          )[0];
+          this.personService.setCurrentHobbyItems(findHobby);
+        }
       }
     });
   }

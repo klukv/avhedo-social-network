@@ -41,6 +41,8 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { ActiveLinkDirective } from './directives/active-link.directive';
 import { httpInterceptorProviders } from './_helpers/auth.interceptor';
+import { ErrorComponent } from './components/error/error.component';
+import { CreateInfoUserComponent } from './components/create-info-user/create-info-user.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import { httpInterceptorProviders } from './_helpers/auth.interceptor';
     LoginPageComponent,
     SignupPageComponent,
     ActiveLinkDirective,
+    ErrorComponent,
+    CreateInfoUserComponent,
   ],
   imports: [
     BrowserModule,

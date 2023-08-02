@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalService } from './services/modal.service';
+import { TypeModalWindows } from './utils/const';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { ModalService } from './services/modal.service';
 export class AppComponent {
   showBlockFriends: boolean;
   showBlockAdditionally: boolean;
+  variantsModals = TypeModalWindows;
 
   constructor(private router: Router, public modalService: ModalService) {}
 

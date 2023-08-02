@@ -3,7 +3,7 @@ export interface IUser {
   username: string;
   email?: string;
   role?: string[];
-  password: string;
+  password?: string;
   age?: number;
   gender?: string;
 }

@@ -38,6 +38,32 @@
           <div class="form-group my-[16px]">
             <label
               class="register__form__username-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF]"
+              >Email</label
+            >
+            <input
+              formControlName="email"
+              type="text"
+              class="register__form__email text-[16px] px-[8px] py-[16px] rounded-[8px] bg-[#ebebeb] w-full placeholder:text-[16px] outline-none border-transparent border-[2px] focus:border-[#00A3FF] duration-[150ms]"
+              placeholder="Введите ваш Email"
+            />
+            <div
+              *ngIf="email?.invalid && (email?.touched || email?.dirty)"
+              class="form__errors text-[red] mt-[8px]"
+            >
+              <div
+                class="form__errors-required"
+                *ngIf="email?.errors?.['required']"
+              >
+                Вы не заполнили поле
+              </div>
+              <div class="form__errors-email" *ngIf="email?.errors?.['email']">
+                Данное поле не соответствует стандарту
+              </div>
+            </div>
+          </div>
+          <div class="form-group my-[16px]">
+            <label
+              class="register__form__username-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF]"
               >Пароль</label
             >
             <input
@@ -66,88 +92,6 @@
               </div>
             </div>
           </div>
-          <div class="form-group my-[16px]">
-            <label
-              class="register__form__username-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF]"
-              >Email</label
-            >
-            <input
-              formControlName="email"
-              type="text"
-              class="register__form__email text-[16px] px-[8px] py-[16px] rounded-[8px] bg-[#ebebeb] w-full placeholder:text-[16px] outline-none border-transparent border-[2px] focus:border-[#00A3FF] duration-[150ms]"
-              placeholder="Введите ваш Email"
-            />
-            <div
-              *ngIf="email?.invalid && (email?.touched || email?.dirty)"
-              class="form__errors text-[red] mt-[8px]"
-            >
-              <div
-                class="form__errors-required"
-                *ngIf="email?.errors?.['required']"
-              >
-                Вы не заполнили поле
-              </div>
-              <div class="form__errors-email" *ngIf="email?.errors?.['email']">
-                Данное поле не соответствует стандарту
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label
-              class="register__form__age-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF]"
-              >Возраст</label
-            >
-            <mat-form-field class="w-full">
-              <mat-label>Введите дату рождения</mat-label>
-              <input
-                matInput
-                formControlName="birthday"
-                [matDatepicker]="picker"
-                (dateChange)="setRegisterAgeValue($event.value)"
-              />
-              <mat-datepicker-toggle
-                matIconSuffix
-                [for]="picker"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-            <div
-              *ngIf="
-                birthday?.invalid && (birthday?.touched || birthday?.dirty)
-              "
-              class="form__errors text-[red] mt-[8px]"
-            >
-              <div
-                class="form__errors-required"
-                *ngIf="birthday?.errors?.['required']"
-              >
-                Вы не заполнили поле
-              </div>
-            </div>
-          </div>
-          <div class="form-group my-[16px] pl-[8px]">
-            <label
-              class="register__form__username-title block mb-[4px] text-[18px] text-[#00A3FF]"
-              >Пол</label
-            >
-            <div class="register__from__gender-group flex items-center">
-              <input
-                formControlName="genderMan"
-                type="checkbox"
-                class="register__form__gender"
-                (change)="changeValueCheckbox('man')"
-                #refCheckboxMan
-              />
-              <span class="pl-[4px] text-[16px] mr-[25px]">Мужской</span>
-              <input
-                formControlName="genderWoman"
-                type="checkbox"
-                class="register__form__gender"
-                (change)="changeValueCheckbox('woman')"
-                #refCheckboxWoman
-              /><span class="pl-[4px] text-[16px]">Женский</span>
-            </div>
-          </div>
           <div class="form-group flex justify-center items-center">
             <button
               class="register__form__btn px-[25px] py-[8px] mb-[20px] bg-[#00A3FF] text-[16px] text-[#ffffff] rounded-[8px] hover:bg-[#52C1FF] duration-[250ms] cursor-pointer"
@@ -157,53 +101,16 @@
             </button>
           </div>
         </form>
-        {{ responseRegister }}
+      </div>
+      <div class="register__redirect-login text-center pt-[4px] pb-[16px]">
+        Если у вас уже есть аккаунт, то вы можете
+        <a
+          routerLink="/signin"
+          class="register__link text-[#00A3FF] hover:text-[#52C1FF] duration-[250ms] cursor-pointer"
+          >авторизироваться</a
+        >
       </div>
     </div>
   </div>
 </div>
-
-<div
-  class="error__block max-w-[400px] mx-auto mt-[15px] mb-[64px] rounded-[8px] bg-[#fc3737] text-[#fff] relative"
-  *ngIf="this.errorService.error$ | async"
->
-  <h1 class="error__block-title text-[22px] text-center py-[8px]">Ошибка</h1>
-  <button
-    class="error__close-btn w-[18px] h-[18px] absolute right-[5px] top-[5px]"
-    (click)="closeErrorBlock()"
-  >
-    <svg
-      class="w-full h-full"
-      viewBox="-0.5 0 25 25"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      stroke="#ffffff"
-    >
-      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-      <g
-        id="SVGRepo_tracerCarrier"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      ></g>
-      <g id="SVGRepo_iconCarrier">
-        <path
-          d="M3 21.32L21 3.32001"
-          stroke="#ffffff"
-          stroke-width="1.575"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></path>
-        <path
-          d="M3 3.32001L21 21.32"
-          stroke="#ffffff"
-          stroke-width="1.575"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></path>
-      </g>
-    </svg>
-  </button>
-  <div class="error__block-text px-[5px] py-[10px] text-center text-[18px]">
-    <p>{{ this.errorService.error$ | async }}</p>
-  </div>
-</div>
+<app-error></app-error>
