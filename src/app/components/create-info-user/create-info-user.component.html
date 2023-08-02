@@ -1,52 +1,134 @@
-<div class="form-group">
-  <label
-    class="register__form__age-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF]"
-    >Возраст</label
-  >
-  <mat-form-field class="w-full">
-    <mat-label>Введите дату рождения</mat-label>
-    <input
-      matInput
-      formControlName="birthday"
-      [matDatepicker]="picker"
-      (dateChange)="setAgeValue($event.value)"
-    />
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-  <div
-    *ngIf="
-      birthdayPerson?.invalid &&
-      (birthdayPerson?.touched || birthdayPerson?.dirty)
-    "
-    class="form__errors text-[red] mt-[8px]"
-  >
-    <div class="form__errors-required" *ngIf="birthdayPerson?.errors?.['required']">
-      Вы не заполнили поле
-    </div>
-  </div>
-</div>
-
-<div class="form-group my-[16px] pl-[8px]">
-  <label
-    class="register__form__username-title block mb-[4px] text-[18px] text-[#00A3FF]"
-    >Пол</label
-  >
-  <div class="register__from__gender-group flex items-center">
-    <input
-      formControlName="genderMan"
-      type="checkbox"
-      class="register__form__gender"
-      (change)="changeValueCheckbox('man')"
-      #refCheckboxMan
-    />
-    <span class="pl-[4px] text-[16px] mr-[25px]">Мужской</span>
-    <input
-      formControlName="genderWoman"
-      type="checkbox"
-      class="register__form__gender"
-      (change)="changeValueCheckbox('woman')"
-      #refCheckboxWoman
-    /><span class="pl-[4px] text-[16px]">Женский</span>
+<div class="questionnaire">
+  <div class="questionnaire__inner">
+    <form class="questionnaire__form" [formGroup]="form">
+      <div class="form-group">
+        <label
+          class="questionnaire__form__age-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF]"
+          >Возраст</label
+        >
+        <mat-form-field class="w-full">
+          <mat-label>Введите дату рождения</mat-label>
+          <input
+            matInput
+            formControlName="birthday"
+            [matDatepicker]="picker"
+            (dateChange)="setAgeValue($event.value)"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div
+          *ngIf="
+            birthdayPerson?.invalid &&
+            (birthdayPerson?.touched || birthdayPerson?.dirty)
+          "
+          class="form__errors text-[red] mt-[8px]"
+        >
+          <div
+            class="form__errors-required"
+            *ngIf="birthdayPerson?.errors?.['required']"
+          >
+            Вы не заполнили поле
+          </div>
+        </div>
+      </div>
+      <div class="form-group mb-[16px]">
+        <label
+          class="questionnaire__form__hobby-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF]"
+        >
+          Хобби
+        </label>
+        <div
+          class="hobby__cells py-[8px]"
+          [ngClass]="{ 'hidden': personService.selectHobbyItems.length === 0 }"
+        >
+          <div
+            class="hobby-cell inline-flex items-center px-[8px] py-[4px] rounded-[8px] bg-[#00A3FF] text-[#ffffff] my-[2px] mx-[2px] text-[16px]"
+            *ngFor="let selectHobby of personService.selectHobbyItems"
+          >
+            {{ selectHobby?.information }}
+            <span
+              class="hobby-cell__close inline-flex justify-center items-center w-[20px] h-[20px] ml-[4px] border-solid border-[#ffffff] border-[2px] rounded-[50%] cursor-pointer"
+              (click)="personService.removeSelectHobby(selectHobby.id)"
+            >
+              <svg
+                class="w-full h-full"
+                viewBox="0 0 24.00 24.00"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                stroke="#ffffff"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke="#CCCCCC"
+                  stroke-width="0.672"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <g id="Menu / Close_MD">
+                    <path
+                      id="Vector"
+                      d="M18 18L12 12M12 12L6 6M12 12L18 6M12 12L6 18"
+                      stroke="#ffffff"
+                      stroke-width="2.4"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </g>
+                </g>
+              </svg>
+            </span>
+          </div>
+        </div>
+        <app-multi-select></app-multi-select>
+      </div>
+      <div class="form__group mb-[16px]">
+        <label
+          class="questionnaire__form__about-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF]"
+        >
+          О себе
+        </label>
+        <div class="about__info w-[420px] p-[16px] bg-[#EBEBEB] rounded-[10px]">
+          <textarea
+            type="text"
+            class="form__input w-full text-[18px] outline-none bg-transparent"
+            cdkTextareaAutosize
+            formControlName="aboutPerson"
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"
+            placeholder="Укажите информацию о себе"
+            (change)="setAboutInfo()"
+          ></textarea>
+        </div>
+      </div>
+      <div class="form-group mt-[16px] mb-[32px] pl-[8px]">
+        <label
+          class="questionnaire__form__username-title block mb-[4px] text-[18px] text-[#00A3FF]"
+          >Пол</label
+        >
+        <div class="questionnaire__from__gender-group flex items-center">
+          <input
+            formControlName="genderMan"
+            type="checkbox"
+            class="questionnaire__form__gender"
+            (change)="changeValueCheckbox('man')"
+            #refCheckboxMan
+          />
+          <span class="pl-[4px] text-[16px] mr-[25px]">Мужской</span>
+          <input
+            formControlName="genderWoman"
+            type="checkbox"
+            class="questionnaire__form__gender"
+            (change)="changeValueCheckbox('woman')"
+            #refCheckboxWoman
+          /><span class="pl-[4px] text-[16px]">Женский</span>
+        </div>
+      </div>
+    </form>
   </div>
 </div>

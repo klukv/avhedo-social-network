@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PersonPageService } from 'src/app/services/person-page.service';
 
 @Component({
   selector: 'app-create-info-user',
@@ -13,14 +14,14 @@ export class CreateInfoUserComponent {
   private _agePerson: number;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, public personService: PersonPageService) {
     this._createFrom();
   }
 
   private _createFrom() {
     this.form = this.fb.group({
       birthday: ['', [Validators.required]],
-      hobby: ['', [Validators.required]],
+      hobbyPerson: ['', [Validators.required]],
       aboutPerson: ['', [Validators.required, Validators.maxLength(350)]],
       genderMan: ['', [Validators.required]],
       genderWoman: ['', [Validators.required]],
@@ -48,6 +49,10 @@ export class CreateInfoUserComponent {
     if (type === 'woman') {
       this.refChecboxMan.nativeElement['checked'] = false;
     }
+  }
+
+  setAboutInfo(){
+    
   }
 
   clickSaveInfoUser() {
