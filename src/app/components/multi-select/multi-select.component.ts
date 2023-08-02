@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { IHobbyInfo } from 'src/app/models/personInfo';
 import { ModalService } from 'src/app/services/modal.service';
 import { PersonPageService } from 'src/app/services/person-page.service';
@@ -10,6 +10,7 @@ import { PersonPageService } from 'src/app/services/person-page.service';
 })
 export class MultiSelectComponent {
   searchHobby: string = '';
+
   private _hobbyList: IHobbyInfo[] = [
     {
       id: 0,

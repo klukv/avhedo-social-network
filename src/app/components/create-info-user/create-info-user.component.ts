@@ -56,6 +56,8 @@ export class CreateInfoUserComponent {
   }
 
   clickSaveInfoUser() {
+    console.log(this.aboutPerson?.errors)
+
     let genderPerson: string = '';
 
     if (this.genderMan?.value === true) {
