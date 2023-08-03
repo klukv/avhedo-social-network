@@ -20,6 +20,10 @@
     "@angular/platform-browser": "^16.0.0",
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
+    "@ngneat/content-loader": "^7.0.0",
+    "install": "^0.13.0",
+    "npm": "^9.8.1",
+    "or": "^0.2.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

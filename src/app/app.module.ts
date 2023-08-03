@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { HttpClientModule } from '@angular/common/http';
+import { ContentLoaderModule } from '@ngneat/content-loader';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -42,7 +43,7 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { ActiveLinkDirective } from './directives/active-link.directive';
 import { httpInterceptorProviders } from './_helpers/auth.interceptor';
 import { ErrorComponent } from './components/error/error.component';
-import { CreateInfoUserComponent } from './components/create-info-user/create-info-user.component';
+import { CreateInfoUserComponent } from './components/create-info-user/create-info-user.component'
 
 @NgModule({
   declarations: [
@@ -75,7 +76,7 @@ import { CreateInfoUserComponent } from './components/create-info-user/create-in
     SignupPageComponent,
     ActiveLinkDirective,
     ErrorComponent,
-    CreateInfoUserComponent,
+    CreateInfoUserComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +89,8 @@ import { CreateInfoUserComponent } from './components/create-info-user/create-in
     MatDatepickerModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ContentLoaderModule,
   ],
 
   providers: [FriendsService, PostsService, httpInterceptorProviders],

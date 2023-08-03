@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { IPersonInfo } from 'src/app/models/personInfo';
-import { IUser } from 'src/app/models/user';
+import { ErrorService } from 'src/app/services/error.service';
 import { LoginService } from 'src/app/services/login.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { PersonPageService } from 'src/app/services/person-page.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { TypeEditVariants, TypeModalWindows } from 'src/app/utils/const';
+import { map, catchError } from 'rxjs';
 
 @Component({
   selector: 'app-my-page',
@@ -15,23 +15,43 @@ import { TypeEditVariants, TypeModalWindows } from 'src/app/utils/const';
 export class MyPageComponent {
   variantsEdit = TypeEditVariants;
   variantsModals = TypeModalWindows;
-  private _userId:string = this.storageService.getUser().id;
+  private currentInfoUser = this.storageService.getUser();
 
   constructor(
     public modalService: ModalService,
     public personService: PersonPageService,
     private authService: LoginService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private errorService: ErrorService
   ) {}
 
   ngOnInit() {
-    this.personService.setPersonInfo(this.storageService.getUser());
-    console.log(this.storageService.getUser());
-     this.personService.getInfoUser(this._userId)
+    this.personService.setPersonInfo(this.currentInfoUser);
+
+    if (!this.personService.isLoaded) {
+      this.personService
+        .getInfoUser(this.currentInfoUser.id)
+        .pipe(
+          map((userData) => {
+            this.personService.setPersonInfo({
+              id: userData.userDto.id,
+              username: this.currentInfoUser.username,
+              age: userData.dateOfBirthday,
+              gender: userData.sex,
+              hobby: userData.hobby,
+              about: userData.aboutMe,
+              urlImage: userData.url,
+            });
+          }),
+          catchError(this.errorService.handle.bind(this))
+        )
+        .subscribe(() => {
+          this.personService.setLoaded(true);
+        });
+    }
   }
 
   clickLogoutButton() {
     this.authService.logout();
   }
-
 }

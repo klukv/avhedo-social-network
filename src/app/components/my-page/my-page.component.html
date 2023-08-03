@@ -102,19 +102,19 @@
     </div>
     <div
       class="page__info"
-      *ngIf="
-        (this.personService.personInfo$ | async)?.age !== undefined &&
-        (this.personService.personInfo$ | async)?.hobby !== undefined &&
-        (this.personService.personInfo$ | async)?.about !== undefined; else btnCreateInfoUser
-      
-      "
+      *ngIf="this.personService.isLoaded; else loaderPerson"
     >
       <div class="page__info-age mb-[16px]">
         <div class="page__info-age_header inline-block relative mb-[8px]">
           <h2 class="page__info-age_title text-[22px]">Возраст</h2>
           <button
             class="page__info-age_edit absolute inset-y-0 right-[-25px]"
-            (click)="modalService.open(variantsEdit.TYPE_AGE, variantsModals.TYPE_MODAL_EDIT)"
+            (click)="
+              modalService.open(
+                variantsEdit.TYPE_AGE,
+                variantsModals.TYPE_MODAL_EDIT
+              )
+            "
           >
             <svg
               width="18"
@@ -149,7 +149,12 @@
           <h2 class="page__info-hobby_title text-[22px]">Хобби</h2>
           <button
             class="page__info-hobby_edit absolute inset-y-0 right-[-25px]"
-            (click)="modalService.open(variantsEdit.TYPE_HOBBY, variantsModals.TYPE_MODAL_EDIT)"
+            (click)="
+              modalService.open(
+                variantsEdit.TYPE_HOBBY,
+                variantsModals.TYPE_MODAL_EDIT
+              )
+            "
           >
             <svg
               width="18"
@@ -184,7 +189,12 @@
           <h2 class="page__info-about_title text-[22px]">О себе</h2>
           <button
             class="page__info-about_edit absolute inset-y-0 right-[-25px]"
-            (click)="modalService.open(variantsEdit.TYPE_ABOUT, variantsModals.TYPE_MODAL_EDIT)"
+            (click)="
+              modalService.open(
+                variantsEdit.TYPE_ABOUT,
+                variantsModals.TYPE_MODAL_EDIT
+              )
+            "
           >
             <svg
               width="18"
@@ -216,8 +226,26 @@
         </div>
       </div>
     </div>
-    <ng-template #btnCreateInfoUser>
-      <button class="page__user__create-info__btn px-[25px] py-[8px] mb-[20px] bg-[#00A3FF] text-[16px] text-[#ffffff] rounded-[8px] hover:bg-[#52C1FF] duration-[250ms] cursor-pointer" (click)="modalService.open('' ,variantsModals.TYPE_MODAL_FORM)">Заполнить анкету</button>
-    </ng-template>
   </div>
 </div>
+
+<ng-template #btnCreateInfoUser>
+  <button
+    class="page__user__create-info__btn px-[25px] py-[8px] mb-[20px] bg-[#00A3FF] text-[16px] text-[#ffffff] rounded-[8px] hover:bg-[#52C1FF] duration-[250ms] cursor-pointer"
+    (click)="modalService.open('', variantsModals.TYPE_MODAL_FORM)"
+  >
+    Заполнить анкету
+  </button>
+</ng-template>
+
+<ng-template #loaderPerson>
+  <content-loader
+    viewBox="0 0 322 239"
+    [speed]="2"
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb"
+  >
+    <svg:rect x="0" y="0" rx="4" ry="4" width="100" height="28" />
+    <svg:rect x="0" y="38" rx="4" ry="4" width="320" height="20" />
+  </content-loader>
+</ng-template>

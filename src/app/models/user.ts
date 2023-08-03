@@ -28,6 +28,7 @@ export interface IResponseUser {
 export interface IResponseInfoUser {
   dateOfBirthday: string;
   aboutMe: string;
+  hobby: string,
   url: string;
   sex: string;
   userDto: {

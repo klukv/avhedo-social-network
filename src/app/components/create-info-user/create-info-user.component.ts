@@ -4,6 +4,7 @@ import { PersonPageService } from 'src/app/services/person-page.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { catchError } from 'rxjs';
 import { ErrorService } from 'src/app/services/error.service';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-create-info-user',
@@ -23,7 +24,8 @@ export class CreateInfoUserComponent {
     public personService: PersonPageService,
     private fb: FormBuilder,
     private storageService: StorageService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
+    private modalService: ModalService
   ) {
     this._createFrom();
   }
@@ -88,8 +90,9 @@ export class CreateInfoUserComponent {
       )
       .pipe(catchError(this.errorService.handle.bind(this)))
       .subscribe(() => {
-        this.personService.setIsAddInfoUser(true);
+        this.modalService.close();
       });
+
   }
 
   get birthdayPerson() {

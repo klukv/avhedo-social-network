@@ -12,12 +12,13 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class PersonPageService {
+  private _isLoaded: boolean = false;
+
   private _selectHobbyItems: IHobbyInfo[] = [];
-  private _isAdditionallyInfo = new BehaviorSubject<boolean>(false);
   private _personInfo = new BehaviorSubject<IPersonInfo>({
     id: 0,
     username: 'Артём',
-    age: 21,
+    age: '21',
     gender: 'man',
     hobby: 'Настольные игры, Спорт, Рисование',
     about:
@@ -26,7 +27,6 @@ export class PersonPageService {
   });
 
   personInfo$ = this._personInfo.asObservable();
-  isAdditionallyInfo$ = this._isAdditionallyInfo.asObservable();
 
   constructor(private _http: HttpClient) {}
 
@@ -38,9 +38,6 @@ export class PersonPageService {
     this._personInfo.next(newValue);
   }
 
-  setIsAddInfoUser(value: boolean) {
-    this._isAdditionallyInfo.next(value);
-  }
 
   setNewPersonInfo(newInfo: IPersonItem<string>) {
     let oldState = this.personInfo;
@@ -53,6 +50,14 @@ export class PersonPageService {
 
   get selectHobbyItems() {
     return this._selectHobbyItems;
+  }
+
+  get isLoaded(){
+    return this._isLoaded;
+  }
+
+  setLoaded(value: boolean){
+    this._isLoaded = value;
   }
 
   setCurrentHobbyItems(currentHobby: IHobbyInfo) {
