@@ -19,7 +19,8 @@ export const CHAT_PAGE = 'messages/chat'
 export const API_URL = 'http://localhost:8080';
 export const LOGIN_URL = '/api/auth/signin';
 export const SIGNUP_URL = '/api/auth/signup';
-export const USER_INFO_URL = '/userInfo'
+export const GET_USER_INFO = '/userInfo'
+export const ADD_USER_INFO = '/userAddInfo'
 
 //SessionStorage keys
 

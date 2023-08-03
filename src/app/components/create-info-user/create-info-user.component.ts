@@ -1,6 +1,9 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PersonPageService } from 'src/app/services/person-page.service';
+import { StorageService } from 'src/app/services/storage.service';
+import { catchError } from 'rxjs';
+import { ErrorService } from 'src/app/services/error.service';
 
 @Component({
   selector: 'app-create-info-user',
@@ -12,19 +15,24 @@ export class CreateInfoUserComponent {
   @ViewChild('refCheckboxWoman') refChecboxWoman: ElementRef;
 
   private _agePerson: number;
+  private _genderPerson: string;
+  private _idUser: string = this.storageService.getUser().id;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, public personService: PersonPageService) {
+  constructor(
+    public personService: PersonPageService,
+    private fb: FormBuilder,
+    private storageService: StorageService,
+    private errorService: ErrorService
+  ) {
     this._createFrom();
   }
 
   private _createFrom() {
     this.form = this.fb.group({
       birthday: ['', [Validators.required]],
-      hobbyPerson: ['', [Validators.required]],
       aboutPerson: ['', [Validators.required, Validators.maxLength(350)]],
-      genderMan: ['', [Validators.required]],
-      genderWoman: ['', [Validators.required]],
+      gender: ['', Validators.required],
     });
   }
 
@@ -45,27 +53,43 @@ export class CreateInfoUserComponent {
   changeValueCheckbox(type: string) {
     if (type === 'man') {
       this.refChecboxWoman.nativeElement['checked'] = false;
+      this._genderPerson = type;
     }
     if (type === 'woman') {
       this.refChecboxMan.nativeElement['checked'] = false;
+      this._genderPerson = type;
     }
   }
 
-  setAboutInfo(){
-    
-  }
+  setAboutInfo() {}
 
   clickSaveInfoUser() {
-    console.log(this.aboutPerson?.errors)
-
-    let genderPerson: string = '';
-
-    if (this.genderMan?.value === true) {
-      genderPerson = 'man';
+    if (
+      this.form.invalid ||
+      this.personService.selectHobbyItems.length === 0 ||
+      this._idUser === undefined
+    ) {
+      console.log('запрос не прошёл');
+      return;
     }
-    if (this.genderWoman?.value === true) {
-      genderPerson = 'woman';
-    }
+    console.log('запрос прошёл');
+    this.personService
+      .addAdditionallyInfoUser(
+        {
+          dateOfBirthday: this._agePerson,
+          hobby: this.personService.selectHobbyItems
+            .map((hobby) => hobby.information)
+            .join(', '),
+          aboutMe: this.aboutPerson?.value,
+          sex: this._genderPerson,
+          url: '',
+        },
+        this._idUser
+      )
+      .pipe(catchError(this.errorService.handle.bind(this)))
+      .subscribe(() => {
+        this.personService.setIsAddInfoUser(true);
+      });
   }
 
   get birthdayPerson() {

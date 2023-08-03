@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IHobbyInfo, IPersonInfo, IPersonItem } from '../models/personInfo';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { API_URL, USER_INFO_URL } from '../utils/const';
+import { ADD_USER_INFO, API_URL, GET_USER_INFO } from '../utils/const';
+import { IAdditionallyInfoUser, IResponseInfoUser } from '../models/user';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -12,16 +13,20 @@ const httpOptions = {
 })
 export class PersonPageService {
   private _selectHobbyItems: IHobbyInfo[] = [];
+  private _isAdditionallyInfo = new BehaviorSubject<boolean>(false);
   private _personInfo = new BehaviorSubject<IPersonInfo>({
     id: 0,
     username: 'Артём',
     age: 21,
+    gender: 'man',
     hobby: 'Настольные игры, Спорт, Рисование',
     about:
       'Hi, i am jhon kates, i am 20 years old and worked as a web developer in microsoft',
+    urlImage: '',
   });
 
   personInfo$ = this._personInfo.asObservable();
+  isAdditionallyInfo$ = this._isAdditionallyInfo.asObservable();
 
   constructor(private _http: HttpClient) {}
 
@@ -31,6 +36,10 @@ export class PersonPageService {
 
   setPersonInfo(newValue: IPersonInfo) {
     this._personInfo.next(newValue);
+  }
+
+  setIsAddInfoUser(value: boolean) {
+    this._isAdditionallyInfo.next(value);
   }
 
   setNewPersonInfo(newInfo: IPersonItem<string>) {
@@ -61,7 +70,23 @@ export class PersonPageService {
     );
   }
 
-  // getInfoUser(id: string): Observable{
-  //   return this._http.get(API_URL + USER_INFO_URL + '/' + id, httpOptions)
-  // }
+  //Backend requests
+
+  addAdditionallyInfoUser(
+    additionallyInfo: IAdditionallyInfoUser,
+    id: string
+  ): Observable<any> {
+    return this._http.post(
+      API_URL + ADD_USER_INFO + '/' + id,
+      additionallyInfo,
+      httpOptions
+    );
+  }
+
+  getInfoUser(id: string): Observable<IResponseInfoUser> {
+    return this._http.get<IResponseInfoUser>(
+      API_URL + GET_USER_INFO + '/' + id,
+      httpOptions
+    );
+  }
 }

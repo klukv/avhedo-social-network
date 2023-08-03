@@ -15,6 +15,7 @@ import { TypeEditVariants, TypeModalWindows } from 'src/app/utils/const';
 export class MyPageComponent {
   variantsEdit = TypeEditVariants;
   variantsModals = TypeModalWindows;
+  private _userId:string = this.storageService.getUser().id;
 
   constructor(
     public modalService: ModalService,
@@ -25,6 +26,8 @@ export class MyPageComponent {
 
   ngOnInit() {
     this.personService.setPersonInfo(this.storageService.getUser());
+    console.log(this.storageService.getUser());
+     this.personService.getInfoUser(this._userId)
   }
 
   clickLogoutButton() {

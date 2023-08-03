@@ -50,7 +50,7 @@ export class SignupPageComponent implements OnDestroy {
         ['admin, moderator']
       )
       .pipe(    
-        catchError(this.errorHandler.bind(this))
+        catchError(this.errorService.handle.bind(this))
       )
       .subscribe(() => {
         this.authService.setValueIsRegister(true);
@@ -68,12 +68,6 @@ export class SignupPageComponent implements OnDestroy {
 
   get email() {
     return this.form.get('email');
-  }
-
-
-  private errorHandler(error: HttpErrorResponse) {
-    this.errorService.handle(error.message);
-    return throwError(() => error.message);
   }
 
   ngOnDestroy() {

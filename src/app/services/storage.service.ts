@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IUser } from '../models/user';
 import { TOKEN_KEY, USER_KEY } from '../utils/const';
+import { IPersonInfo } from '../models/personInfo';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ export class StorageService {
     window.sessionStorage.clear();
   }
 
-  saveInfoUser(user: IUser, token: string) {
+  saveInfoUser(user: IPersonInfo, token: string) {
     const modifiedToken = 'Bearer ' + token;
 
     window.sessionStorage.removeItem(USER_KEY);

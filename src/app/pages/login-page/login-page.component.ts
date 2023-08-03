@@ -59,24 +59,24 @@ export class LoginPageComponent {
             {
               id: userData.id,
               username: this.username?.value,
+              age: undefined,
+              gender: undefined,
+              hobby: undefined,
+              about: undefined,
+              urlImage: undefined
             },
             userData.token
           );
           return userData;
         })
       )
-      .pipe(catchError(this.errorHandler.bind(this)))
+      .pipe(catchError(this.errorService.handle.bind(this)))
       .subscribe(() => {
         this.router.navigate(['/']);
         setTimeout(() => {
           window.location.reload();
         }, 150);
       });
-  }
-
-  private errorHandler(error: HttpErrorResponse) {
-    this.errorService.handle(error.message);
-    return throwError(() => error.message);
   }
 
   get username() {

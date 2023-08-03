@@ -1,6 +1,10 @@
 <div class="questionnaire">
   <div class="questionnaire__inner">
-    <form class="questionnaire__form" [formGroup]="form" (submit)="clickSaveInfoUser()">
+    <form
+      class="questionnaire__form"
+      [formGroup]="form"
+      (submit)="clickSaveInfoUser()"
+    >
       <div class="form-group">
         <label
           class="questionnaire__form__age-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF]"
@@ -87,17 +91,10 @@
         </div>
         <app-multi-select></app-multi-select>
         <div
-          *ngIf="
-            hobbyPerson?.invalid && (hobbyPerson?.touched || hobbyPerson?.dirty)
-          "
+          *ngIf="this.personService.selectHobbyItems.length === 0"
           class="form__errors text-[red] mt-[8px]"
         >
-          <div
-            class="form__errors-required"
-            *ngIf="hobbyPerson?.errors?.['required']"
-          >
-            Вы не заполнили поле
-          </div>
+          Вы не заполнили поле
         </div>
       </div>
       <div class="form__group mb-[16px]">
@@ -145,7 +142,7 @@
         >
         <div class="questionnaire__from__gender-group flex items-center">
           <input
-            formControlName="genderMan"
+            formControlName="gender"
             type="checkbox"
             class="questionnaire__form__gender"
             (change)="changeValueCheckbox('man')"
@@ -153,7 +150,7 @@
           />
           <span class="pl-[4px] text-[16px] mr-[25px]">Мужской</span>
           <input
-            formControlName="genderWoman"
+            formControlName="gender"
             type="checkbox"
             class="questionnaire__form__gender"
             (change)="changeValueCheckbox('woman')"
@@ -162,8 +159,14 @@
         </div>
       </div>
       <div class="form__group flex justify-center">
-        <button class="questionnaire__btn px-[25px] py-[8px] mb-[20px] bg-[#00A3FF] text-[16px] text-[#ffffff] rounded-[8px] hover:bg-[#52C1FF] duration-[250ms] cursor-pointer" type="submit">Сохранить</button>
+        <button
+          class="questionnaire__btn px-[25px] py-[8px] mb-[20px] bg-[#00A3FF] text-[16px] text-[#ffffff] rounded-[8px] hover:bg-[#52C1FF] duration-[250ms] cursor-pointer"
+          type="submit"
+        >
+          Сохранить
+        </button>
       </div>
     </form>
   </div>
+  <app-error></app-error>
 </div>
