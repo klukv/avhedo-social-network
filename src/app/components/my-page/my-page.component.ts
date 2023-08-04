@@ -26,7 +26,9 @@ export class MyPageComponent {
   ) {}
 
   ngOnInit() {
-    this.personService.setPersonInfo(this.currentInfoUser);
+    if (!this.storageService.isExistUser()) {
+      this.personService.setPersonInfo(this.currentInfoUser);
+    }
 
     if (!this.personService.isLoaded) {
       this.personService

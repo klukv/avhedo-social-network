@@ -1,3 +1,8 @@
+type TRoles = {
+  id: number;
+  name: string;
+}
+
 export interface IUser {
   id?: number;
   username: string;
@@ -9,7 +14,7 @@ export interface IUser {
 }
 
 export interface IAdditionallyInfoUser {
-  dateOfBirthday: number;
+  dateOfBirthday: number | string;
   hobby: string;
   aboutMe: string;
   sex: string;
@@ -35,4 +40,20 @@ export interface IResponseInfoUser {
     id: number;
     username: string;
   };
+}
+
+export interface IResponseEditInfo {
+  id: number;
+  dateOfBirthday: string;
+  aboutMe: string;
+  hobby: string;
+  url: string | null;
+  sex: string;
+  userInfo: {
+    id: number;
+    username: string;
+    email: string;
+    password: string;
+    roles: TRoles[];
+  }
 }

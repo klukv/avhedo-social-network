@@ -1,13 +1,12 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, ViewChild } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalService } from 'src/app/services/modal.service';
 import { PersonPageService } from 'src/app/services/person-page.service';
+import { StorageService } from 'src/app/services/storage.service';
 import { TypeEditVariants } from 'src/app/utils/const';
+import { catchError } from 'rxjs';
+import { ErrorService } from 'src/app/services/error.service';
 
 @Component({
   selector: 'app-create-product',
@@ -19,16 +18,23 @@ export class CreateProductComponent {
 
   private _age: number;
   private _about: string;
+  private _infoUser: any;
+  private _infoUserFromStore = this.storageService.getUser();
 
   variantsEdit = TypeEditVariants;
   form: FormGroup;
 
   constructor(
+    private storageService: StorageService,
+    private fb: FormBuilder,
+    private errorService: ErrorService,
     public modalService: ModalService,
-    public personService: PersonPageService,
-    private fb: FormBuilder
+    public personService: PersonPageService
   ) {
     this._createForm();
+    this.personService.personInfo$.subscribe((infoUser) => {
+      this._infoUser = infoUser;
+    });
   }
 
   private _createForm() {
@@ -68,7 +74,9 @@ export class CreateProductComponent {
       case this.variantsEdit.TYPE_HOBBY:
         this.personService.setNewPersonInfo({
           value: this.variantsEdit.TYPE_HOBBY,
-          text: this.personService.selectHobbyItems.map(hobby => hobby.information).join(', '),
+          text: this.personService.selectHobbyItems
+            .map((hobby) => hobby.information)
+            .join(', '),
         });
         break;
       case this.variantsEdit.TYPE_ABOUT:
@@ -78,6 +86,19 @@ export class CreateProductComponent {
         });
         break;
     }
+    this.personService
+      .editInfoUser(
+        {
+          dateOfBirthday: this._infoUser.age,
+          hobby: this._infoUser.hobby,
+          aboutMe: this._infoUser.about,
+          sex: this._infoUser.gender,
+          url: this._infoUser.urlImage,
+        },
+        this._infoUserFromStore.id
+      )
+      .pipe(catchError(this.errorService.handle.bind(this)))
+      .subscribe(() => {});
     this.modalService.close();
   }
 

@@ -1,9 +1,18 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { IHobbyInfo, IPersonInfo, IPersonItem } from '../models/personInfo';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ADD_USER_INFO, API_URL, GET_USER_INFO } from '../utils/const';
-import { IAdditionallyInfoUser, IResponseInfoUser } from '../models/user';
+import {
+  ADD_USER_INFO,
+  API_URL,
+  EDIT_USER_INFO,
+  GET_USER_INFO,
+} from '../utils/const';
+import {
+  IAdditionallyInfoUser,
+  IResponseEditInfo,
+  IResponseInfoUser,
+} from '../models/user';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -13,6 +22,7 @@ const httpOptions = {
 })
 export class PersonPageService {
   private _isLoaded: boolean = false;
+  private _isShowDataInfo: boolean = false;
 
   private _selectHobbyItems: IHobbyInfo[] = [];
   private _personInfo = new BehaviorSubject<IPersonInfo>({
@@ -38,7 +48,6 @@ export class PersonPageService {
     this._personInfo.next(newValue);
   }
 
-
   setNewPersonInfo(newInfo: IPersonItem<string>) {
     let oldState = this.personInfo;
     oldState = {
@@ -52,11 +61,15 @@ export class PersonPageService {
     return this._selectHobbyItems;
   }
 
-  get isLoaded(){
+  get isLoaded() {
     return this._isLoaded;
   }
 
-  setLoaded(value: boolean){
+  get isShowDataInfo() {
+    return this._isShowDataInfo;
+  }
+
+  setLoaded(value: boolean) {
     this._isLoaded = value;
   }
 
@@ -89,8 +102,30 @@ export class PersonPageService {
   }
 
   getInfoUser(id: string): Observable<IResponseInfoUser> {
-    return this._http.get<IResponseInfoUser>(
-      API_URL + GET_USER_INFO + '/' + id,
+    return this._http
+      .get<IResponseInfoUser>(API_URL + GET_USER_INFO + '/' + id, httpOptions)
+      .pipe(
+        tap((userAdditionallyInfo) => {
+          if (
+            userAdditionallyInfo.dateOfBirthday === undefined ||
+            userAdditionallyInfo.aboutMe === undefined ||
+            userAdditionallyInfo.hobby === ''
+          ) {
+            this._isShowDataInfo = false;
+          } else {
+            this._isShowDataInfo = true;
+          }
+        })
+      );
+  }
+
+  editInfoUser(
+    infoUser: IAdditionallyInfoUser,
+    id: string
+  ): Observable<IResponseEditInfo> {
+    return this._http.post<IResponseEditInfo>(
+      API_URL + EDIT_USER_INFO + '/' + id,
+      infoUser,
       httpOptions
     );
   }

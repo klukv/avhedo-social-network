@@ -32,6 +32,15 @@ export class StorageService {
     return {};
   }
 
+  isExistUser():boolean {
+    const user = window.sessionStorage.getItem(USER_KEY);
+
+    if (user) {
+      return true;
+    }
+    return false;
+  }
+
   getToken(): string {
     const token = window.sessionStorage.getItem(TOKEN_KEY);
 

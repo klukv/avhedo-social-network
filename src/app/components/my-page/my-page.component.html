@@ -101,47 +101,52 @@
       </div>
     </div>
     <div
-      class="page__info"
+      class="page__info loader"
       *ngIf="this.personService.isLoaded; else loaderPerson"
     >
-      <div class="page__info-age mb-[16px]">
-        <div class="page__info-age_header inline-block relative mb-[8px]">
-          <h2 class="page__info-age_title text-[22px]">Возраст</h2>
-          <button
-            class="page__info-age_edit absolute inset-y-0 right-[-25px]"
-            (click)="
-              modalService.open(
-                variantsEdit.TYPE_AGE,
-                variantsModals.TYPE_MODAL_EDIT
-              )
-            "
-          >
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+      <div
+        class="page__info-block"
+        *ngIf="this.personService.isShowDataInfo; else btnCreateInfoUser"
+      >
+        <div class="page__info-age mb-[16px]">
+          <div class="page__info-age_header inline-block relative mb-[8px]">
+            <h2 class="page__info-age_title text-[22px]">Возраст</h2>
+            <button
+              class="page__info-age_edit absolute inset-y-0 right-[-25px]"
+              (click)="
+                modalService.open(
+                  variantsEdit.TYPE_AGE,
+                  variantsModals.TYPE_MODAL_EDIT
+                )
+              "
             >
-              <path
-                d="M15 12V15C15 15.3978 14.842 15.7794 14.5607 16.0607C14.2794 16.342 13.8978 16.5 13.5 16.5H3C2.60218 16.5 2.22064 16.342 1.93934 16.0607C1.65804 15.7794 1.5 15.3978 1.5 15V4.5C1.5 4.10218 1.65804 3.72064 1.93934 3.43934C2.22064 3.15804 2.60218 3 3 3H6"
-                stroke="#7A7A7A"
-                stroke-width="1.28"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M9.375 11.85L16.5 4.65L13.35 1.5L6.225 8.625L6 12L9.375 11.85Z"
-                stroke="#7A7A7A"
-                stroke-width="1.28"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
-        </div>
-        <div class="page__info-age_text text-[#7A7A7A]">
-          {{ (personService.personInfo$ | async)?.age }}
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15 12V15C15 15.3978 14.842 15.7794 14.5607 16.0607C14.2794 16.342 13.8978 16.5 13.5 16.5H3C2.60218 16.5 2.22064 16.342 1.93934 16.0607C1.65804 15.7794 1.5 15.3978 1.5 15V4.5C1.5 4.10218 1.65804 3.72064 1.93934 3.43934C2.22064 3.15804 2.60218 3 3 3H6"
+                  stroke="#7A7A7A"
+                  stroke-width="1.28"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M9.375 11.85L16.5 4.65L13.35 1.5L6.225 8.625L6 12L9.375 11.85Z"
+                  stroke="#7A7A7A"
+                  stroke-width="1.28"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="page__info-age_text text-[#7A7A7A]">
+            {{ (personService.personInfo$ | async)?.age }}
+          </div>
         </div>
       </div>
       <div class="page__info-hobby mb-[16px]">
@@ -245,7 +250,11 @@
     backgroundColor="#f3f3f3"
     foregroundColor="#ecebeb"
   >
-    <svg:rect x="0" y="0" rx="4" ry="4" width="100" height="28" />
-    <svg:rect x="0" y="38" rx="4" ry="4" width="320" height="20" />
+    <svg:rect x="0" y="0" rx="4" ry="4" width="100" height="23" />
+    <svg:rect x="0" y="33" rx="4" ry="4" width="320" height="20" />
+    <svg:rect x="0" y="71" rx="4" ry="4" width="100" height="23" />
+    <svg:rect x="0" y="104" rx="4" ry="4" width="320" height="20" />
+    <svg:rect x="0" y="145" rx="4" ry="4" width="100" height="23" />
+    <svg:rect x="0" y="178" rx="4" ry="4" width="320" height="20" />
   </content-loader>
 </ng-template>

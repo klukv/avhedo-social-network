@@ -21,6 +21,7 @@ export const LOGIN_URL = '/api/auth/signin';
 export const SIGNUP_URL = '/api/auth/signup';
 export const GET_USER_INFO = '/userInfo'
 export const ADD_USER_INFO = '/userAddInfo'
+export const EDIT_USER_INFO = '/editUserInfo'
 
 //SessionStorage keys
 
