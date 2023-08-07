@@ -1,9 +1,17 @@
 import { Injectable } from '@angular/core';
 import { IFriends } from '../models/friends';
 import { allPeople, friendsData } from '../data/friendsData';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { WebsocketService } from './websocket.service';
+import { HttpClient } from '@angular/common/http';
+import {
+  ADD_FRIEND,
+  API_URL,
+  DELETE_FRIEND,
+  GET_ALL_FRIENDS,
+  httpOptions,
+} from '../utils/const';
 
 @Injectable({
   providedIn: 'root',
@@ -18,17 +26,21 @@ export class FriendsService {
 
   private _activeFriendsLinks = {
     searchFriends: 'active',
-    addedFriends: 'not_active'
-  }
+    addedFriends: 'not_active',
+  };
   private _friendsList: IFriends[] = friendsData;
   private _friendsListSearch: IFriends[] = allPeople;
 
   friendInfo$ = this._friendInfo.asObservable();
   searchUsernameFriend$ = this._searchUsernameFriend.asObservable();
 
-  constructor(private router: Router, private websocketService: WebsocketService) {}
+  constructor(
+    private router: Router,
+    private websocketService: WebsocketService,
+    private _http: HttpClient
+  ) {}
 
-  get activeFriendsLinks(){
+  get activeFriendsLinks() {
     return this._activeFriendsLinks;
   }
 
@@ -44,20 +56,20 @@ export class FriendsService {
     this._friendsList = newFriends;
   }
 
-  setActiveFriendLink(selectLink: string){
-    Object.keys(this._activeFriendsLinks).map(key => {
-      if(key === selectLink){
+  setActiveFriendLink(selectLink: string) {
+    Object.keys(this._activeFriendsLinks).map((key) => {
+      if (key === selectLink) {
         this._activeFriendsLinks = {
           ...this._activeFriendsLinks,
           [key]: 'active',
-        }
-      }else{
+        };
+      } else {
         this._activeFriendsLinks = {
           ...this._activeFriendsLinks,
-          [key]: 'not_active'
-        }
+          [key]: 'not_active',
+        };
       }
-    })
+    });
   }
 
   setSearchUsername(value: string) {
@@ -90,5 +102,26 @@ export class FriendsService {
         id: id,
       },
     });
+  }
+
+  // Backend requests
+
+  addFriend(ownerId: number, friendId: number): Observable<string> {
+    return this._http.post<string>(
+      API_URL + ADD_FRIEND + '/' + ownerId + '/' + friendId,
+      {},
+      httpOptions
+    );
+  }
+
+  deleteFriend(ownerId: number, friendId: number): Observable<string> {
+    return this._http.delete<string>(
+      API_URL + DELETE_FRIEND + '/' + ownerId + '/' + friendId,
+      httpOptions
+    );
+  }
+
+  getAllFriends(ownerId: number): Observable<any>{
+    return this._http.get<any>(API_URL + GET_ALL_FRIENDS + '/' + ownerId, httpOptions)
   }
 }

@@ -90,6 +90,8 @@ export class CreateInfoUserComponent {
       )
       .pipe(catchError(this.errorService.handle.bind(this)))
       .subscribe(() => {
+        this.storageService.saveShowInfoUser(true);
+        this.personService.setLoaded(false);
         this.modalService.close();
       });
 

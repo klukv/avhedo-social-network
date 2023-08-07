@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IUser } from '../models/user';
-import { TOKEN_KEY, USER_KEY } from '../utils/const';
+import { IS_SHOW_DATA_KEY, TOKEN_KEY, USER_KEY } from '../utils/const';
 import { IPersonInfo } from '../models/personInfo';
 
 @Injectable({
@@ -23,6 +23,23 @@ export class StorageService {
     window.sessionStorage.setItem(TOKEN_KEY, modifiedToken);
   }
 
+  // Методы, при помощи которых определяется, первый раз зашёл пользователь или нет
+  saveShowInfoUser(value: boolean) {
+    window.sessionStorage.setItem(IS_SHOW_DATA_KEY, JSON.stringify(value));
+  }
+
+  isShowInfoUser(): boolean {
+    const isShowData = window.sessionStorage.getItem(IS_SHOW_DATA_KEY);
+
+    if (isShowData) {
+      return JSON.parse(isShowData);
+    }
+
+    return false;
+  }
+
+  //===============================================================================
+
   getUser() {
     const user = window.sessionStorage.getItem(USER_KEY);
 
@@ -32,7 +49,7 @@ export class StorageService {
     return {};
   }
 
-  isExistUser():boolean {
+  isExistUser(): boolean {
     const user = window.sessionStorage.getItem(USER_KEY);
 
     if (user) {

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { IHobbyInfo, IPersonInfo, IPersonItem } from '../models/personInfo';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {
   ADD_USER_INFO,
   API_URL,
   EDIT_USER_INFO,
   GET_USER_INFO,
+  httpOptions,
 } from '../utils/const';
 import {
   IAdditionallyInfoUser,
@@ -14,29 +15,25 @@ import {
   IResponseInfoUser,
 } from '../models/user';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-};
 @Injectable({
   providedIn: 'root',
 })
 export class PersonPageService {
-  private _isLoaded: boolean = false;
-  private _isShowDataInfo: boolean = false;
-
   private _selectHobbyItems: IHobbyInfo[] = [];
+
+  private _isLoaded = new BehaviorSubject<boolean>(false);
   private _personInfo = new BehaviorSubject<IPersonInfo>({
     id: 0,
-    username: 'Артём',
-    age: '21',
-    gender: 'man',
-    hobby: 'Настольные игры, Спорт, Рисование',
-    about:
-      'Hi, i am jhon kates, i am 20 years old and worked as a web developer in microsoft',
+    username: '',
+    age: undefined,
+    gender: undefined,
+    hobby: undefined,
+    about: undefined,
     urlImage: '',
   });
 
   personInfo$ = this._personInfo.asObservable();
+  isLoaded$ = this._isLoaded.asObservable();
 
   constructor(private _http: HttpClient) {}
 
@@ -61,16 +58,8 @@ export class PersonPageService {
     return this._selectHobbyItems;
   }
 
-  get isLoaded() {
-    return this._isLoaded;
-  }
-
-  get isShowDataInfo() {
-    return this._isShowDataInfo;
-  }
-
   setLoaded(value: boolean) {
-    this._isLoaded = value;
+    this._isLoaded.next(value);
   }
 
   setCurrentHobbyItems(currentHobby: IHobbyInfo) {
@@ -102,21 +91,10 @@ export class PersonPageService {
   }
 
   getInfoUser(id: string): Observable<IResponseInfoUser> {
-    return this._http
-      .get<IResponseInfoUser>(API_URL + GET_USER_INFO + '/' + id, httpOptions)
-      .pipe(
-        tap((userAdditionallyInfo) => {
-          if (
-            userAdditionallyInfo.dateOfBirthday === undefined ||
-            userAdditionallyInfo.aboutMe === undefined ||
-            userAdditionallyInfo.hobby === ''
-          ) {
-            this._isShowDataInfo = false;
-          } else {
-            this._isShowDataInfo = true;
-          }
-        })
-      );
+    return this._http.get<IResponseInfoUser>(
+      API_URL + GET_USER_INFO + '/' + id,
+      httpOptions
+    );
   }
 
   editInfoUser(

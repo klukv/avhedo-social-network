@@ -1,13 +1,10 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { API_URL, LOGIN_URL, SIGNUP_URL } from '../utils/const';
+import { API_URL, LOGIN_URL, SIGNUP_URL, httpOptions } from '../utils/const';
 import { IResponseUser } from '../models/user';
 import { StorageService } from './storage.service';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-};
 
 @Injectable({
   providedIn: 'root',

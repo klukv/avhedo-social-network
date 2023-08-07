@@ -1,3 +1,5 @@
+import { IResponseEditInfo } from './user';
+
 export interface IPost {
   id: number;
   linkAvatar: string;
@@ -6,9 +8,21 @@ export interface IPost {
   textPost: string;
   comments: IComment[];
 }
-interface IComment {
+export interface IComment {
   id: number;
   linkAvatarComment: string;
   username: string;
   textComment: string;
+}
+
+export interface IRequestCreatePost {
+  titleMessage: string;
+  textMessage: string;
+}
+
+export interface IResponseCreatePost {
+  id: number;
+  titleMessage: string;
+  textMessage: string;
+  userMessage: IResponseEditInfo;
 }

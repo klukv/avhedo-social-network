@@ -35,6 +35,8 @@ export class CreateProductComponent {
     this.personService.personInfo$.subscribe((infoUser) => {
       this._infoUser = infoUser;
     });
+    console.log(this.personService.selectHobbyItems.length);
+    
   }
 
   private _createForm() {
@@ -64,25 +66,26 @@ export class CreateProductComponent {
   }
   // =============================================================================== Main-block
   setEditions(edit: string | number) {
+
     switch (edit) {
       case this.variantsEdit.TYPE_AGE:
         this.personService.setNewPersonInfo({
           value: this.variantsEdit.TYPE_AGE,
-          text: this._age,
+          text: this._age !== undefined ? this._age : 'Данное поле не заполнено',
         });
         break;
       case this.variantsEdit.TYPE_HOBBY:
         this.personService.setNewPersonInfo({
           value: this.variantsEdit.TYPE_HOBBY,
-          text: this.personService.selectHobbyItems
+          text: this.personService.selectHobbyItems.length !== 0 ? this.personService.selectHobbyItems
             .map((hobby) => hobby.information)
-            .join(', '),
+            .join(', ') : 'Данное поле не заполнено',
         });
         break;
       case this.variantsEdit.TYPE_ABOUT:
         this.personService.setNewPersonInfo({
           value: this.variantsEdit.TYPE_ABOUT,
-          text: this._about,
+          text: this._about !== undefined ? this._about : 'Данное поле не заполнено',
         });
         break;
     }

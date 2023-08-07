@@ -1,3 +1,5 @@
+import { HttpHeaders } from "@angular/common/http"
+
 export const MAIN_PAGE = ''
 
 export const FRIENDS_PAGE = 'friends'
@@ -22,11 +24,16 @@ export const SIGNUP_URL = '/api/auth/signup';
 export const GET_USER_INFO = '/userInfo'
 export const ADD_USER_INFO = '/userAddInfo'
 export const EDIT_USER_INFO = '/editUserInfo'
+export const CREATE_POST = '/userAddMessage'
+export const ADD_FRIEND = '/addFriends'
+export const DELETE_FRIEND = '/deleteFriends'
+export const GET_ALL_FRIENDS = '/allFriendsUser'
 
 //SessionStorage keys
 
 export const USER_KEY = 'auth-user'
 export const TOKEN_KEY = 'token-user'
+export const IS_SHOW_DATA_KEY = 'is-show-data-user'
 
 //Enums
 
@@ -45,3 +52,9 @@ export enum TypeModalWindows {
     TYPE_MODAL_EDIT = 'TYPE_MODAL_EDIT',
     TYPE_MODAL_FORM = 'TYPE_MODAL_FORM'
 }
+
+// Headers requests
+
+export const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };

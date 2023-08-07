@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
-import { IPost } from '../models/post';
+import { IPost, IRequestCreatePost, IResponseCreatePost,  } from '../models/post';
 import { postsData } from '../data/postsData';
+import { HttpClient } from '@angular/common/http';
+import { API_URL, CREATE_POST, httpOptions } from '../utils/const';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostsService {
-  constructor() {}
+  constructor(private _http: HttpClient) {}
 
   private _postsData: IPost[] = postsData;
 
@@ -16,5 +19,15 @@ export class PostsService {
 
   set posts(newPosts: IPost[]) {
     this._postsData = newPosts;
+  }
+
+  // Backend requests
+
+  createPost(infoPost: IRequestCreatePost, id: number): Observable<IResponseCreatePost> {
+    return this._http.post<IResponseCreatePost>(
+      API_URL + CREATE_POST + '/' + id,
+      infoPost,
+      httpOptions
+    );
   }
 }
