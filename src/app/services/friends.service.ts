@@ -30,6 +30,7 @@ export class FriendsService {
   };
   private _friendsList: IFriends[] = friendsData;
   private _friendsListSearch: IFriends[] = allPeople;
+  private _isLoaded: boolean = false;
 
   friendInfo$ = this._friendInfo.asObservable();
   searchUsernameFriend$ = this._searchUsernameFriend.asObservable();
@@ -52,8 +53,16 @@ export class FriendsService {
     return this._friendsListSearch;
   }
 
+  get isLoaded() {
+    return this._isLoaded;
+  }
+
   set listFriends(newFriends: IFriends[]) {
     this._friendsList = newFriends;
+  }
+
+  setLoaded(value: boolean) {
+    this._isLoaded = value;
   }
 
   setActiveFriendLink(selectLink: string) {
@@ -109,7 +118,6 @@ export class FriendsService {
   addFriend(ownerId: number, friendId: number): Observable<string> {
     return this._http.post<string>(
       API_URL + ADD_FRIEND + '/' + ownerId + '/' + friendId,
-      {},
       httpOptions
     );
   }
@@ -121,7 +129,10 @@ export class FriendsService {
     );
   }
 
-  getAllFriends(ownerId: number): Observable<any>{
-    return this._http.get<any>(API_URL + GET_ALL_FRIENDS + '/' + ownerId, httpOptions)
+  getAllFriends(ownerId: number): Observable<any> {
+    return this._http.get<any>(
+      API_URL + GET_ALL_FRIENDS + '/' + ownerId,
+      httpOptions
+    );
   }
 }

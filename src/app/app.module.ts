@@ -43,7 +43,8 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { ActiveLinkDirective } from './directives/active-link.directive';
 import { httpInterceptorProviders } from './_helpers/auth.interceptor';
 import { ErrorComponent } from './components/error/error.component';
-import { CreateInfoUserComponent } from './components/create-info-user/create-info-user.component'
+import { CreateInfoUserComponent } from './components/create-info-user/create-info-user.component';
+import { LoaderSpinnerComponent } from './components/loader-spinner/loader-spinner.component'
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { CreateInfoUserComponent } from './components/create-info-user/create-in
     SignupPageComponent,
     ActiveLinkDirective,
     ErrorComponent,
-    CreateInfoUserComponent
+    CreateInfoUserComponent,
+    LoaderSpinnerComponent
   ],
   imports: [
     BrowserModule,
