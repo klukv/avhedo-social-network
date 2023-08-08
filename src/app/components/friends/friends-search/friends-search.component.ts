@@ -12,13 +12,15 @@ import { PersonPageService } from 'src/app/services/person-page.service';
 })
 export class FriendsSearchComponent {
   private userInfo: IPersonInfo;
+
   selectedIndexButton: number;
+  searchPerson: string = '';
 
   constructor(
     public friendsService: FriendsService,
     private personService: PersonPageService,
     public friendService: FriendsService,
-    private errorService: ErrorService,
+    private errorService: ErrorService
   ) {}
 
   ngOnInit() {

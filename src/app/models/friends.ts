@@ -1,11 +1,6 @@
-import { TRoles } from './user';
-
 type TUserInfo = {
   id: number;
   username: string;
-  email: string;
-  password: string;
-  roles: TRoles[];
 };
 
 export interface IFriends {
@@ -14,14 +9,16 @@ export interface IFriends {
   age: number;
   about?: string;
 }
-
+export interface ISubscribes {
+  id: number;
+  username: string;
+  age: string;
+  url: string;
+}
 export interface IResponseSubscribesInfo {
-  ownerPage: {
-    userInfo: TUserInfo;
-    url: string;
-  };
   friends: {
     userInfo: TUserInfo;
+    dateOfBirthday: string;
     url: string;
   };
 }

@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
-import { IFriends, IResponseSubscribesInfo } from '../models/friends';
+import {
+  IFriends,
+  IResponseSubscribesInfo,
+  ISubscribes,
+} from '../models/friends';
 import { allPeople, friendsData } from '../data/friendsData';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { WebsocketService } from './websocket.service';
 import { HttpClient } from '@angular/common/http';
@@ -30,6 +34,7 @@ export class FriendsService {
     ownSubscribers: 'not_active',
   };
 
+  private _subscribesList: ISubscribes[] = [];
   private _friendsList: IFriends[] = friendsData;
   private _friendsListSearch: IFriends[] = allPeople;
   private _isLoaded: boolean = false;
@@ -62,6 +67,10 @@ export class FriendsService {
 
   get isLoadedMySubscribes() {
     return this._isLoadedMySubscribes;
+  }
+
+  get listSubcribes() {
+    return this._subscribesList;
   }
 
   set listFriends(newFriends: IFriends[]) {
@@ -124,6 +133,12 @@ export class FriendsService {
     });
   }
 
+  isExistSubscribe(id: number) {
+    return this._subscribesList.every(
+      (infoSubscribe) => infoSubscribe.id !== id
+    );
+  }
+
   // Backend requests
 
   addFriend(ownerId: number, friendId: number): Observable<string> {
@@ -140,10 +155,25 @@ export class FriendsService {
     );
   }
 
-  getAllFriends(ownerId: number): Observable<IResponseSubscribesInfo> {
-    return this._http.get<IResponseSubscribesInfo>(
-      API_URL + GET_ALL_FRIENDS + '/' + ownerId,
-      httpOptions
-    );
+  getAllFriends(ownerId: number): Observable<IResponseSubscribesInfo[]> {
+    return this._http
+      .get<IResponseSubscribesInfo[]>(
+        API_URL + GET_ALL_FRIENDS + '/' + ownerId,
+        httpOptions
+      )
+      .pipe(
+        tap((subscribesData) => {
+          subscribesData.map((infoSubscribe) => {
+            if (this.isExistSubscribe(infoSubscribe.friends.userInfo.id)) {
+              this._subscribesList.push({
+                id: infoSubscribe.friends.userInfo.id,
+                username: infoSubscribe.friends.userInfo.username,
+                age: infoSubscribe.friends.dateOfBirthday,
+                url: infoSubscribe.friends.url,
+              });
+            }
+          });
+        })
+      );
   }
 }
