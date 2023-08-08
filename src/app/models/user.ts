@@ -1,4 +1,4 @@
-type TRoles = {
+export type TRoles = {
   id: number;
   name: string;
 }

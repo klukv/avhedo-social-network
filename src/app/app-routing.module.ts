@@ -15,18 +15,20 @@ import {
   CASTING_PAGE_CONTACTS,
   CASTING_PAGE_LIKES,
   CHAT_PAGE,
-  FRIENDS_ADDED,
-  FRIENDS_PAGE,
-  FRIENDS_SEARCH,
   LOGIN_PAGE,
   MAIN_PAGE,
   MESSAGES_PAGE,
+  MY_SUBSCRIBERS,
   PERSON_PAGE,
   REGISTRATION_PAGE,
+  SUBSCRIBERS_ADDED,
+  SUBSCRIBERS_PAGE,
+  SUBSCRIBERS_SEARCH,
 } from './utils/const';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { AuthGuard, AuthGuardChild } from './services/guard.service';
+import { FriendsMyFriendsComponent } from './components/friends/friends-my-friends/friends-my-friends.component';
 
 const castingRoutes: Routes = [
   {
@@ -41,11 +43,15 @@ const castingRoutes: Routes = [
 
 const friendsRoute = [
   {
-    path: FRIENDS_ADDED,
+    path: MY_SUBSCRIBERS,
+    component: FriendsMyFriendsComponent,
+  },
+  {
+    path: SUBSCRIBERS_ADDED,
     component: FriendsAddComponent,
   },
   {
-    path: FRIENDS_SEARCH,
+    path: SUBSCRIBERS_SEARCH,
     component: FriendsSearchComponent,
   },
 ];
@@ -55,7 +61,7 @@ const routes: Routes = [
   { path: LOGIN_PAGE, component: LoginPageComponent },
   { path: MAIN_PAGE, component: MainPageComponent, canActivate: [AuthGuard] },
   {
-    path: FRIENDS_PAGE,
+    path: SUBSCRIBERS_PAGE,
     component: FriendsPageComponent,
     children: friendsRoute,
     canActivate: [AuthGuard],

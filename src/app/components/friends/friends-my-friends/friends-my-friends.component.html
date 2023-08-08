@@ -1,0 +1,59 @@
+<ul
+  *ngIf="friendsService.isLoadedMySubscribes; else loader_my_subscribers"
+  class="friends-page__list-friends px-[32px] pb-[64px]"
+>
+  <li
+    class="friends-page__list-friends__content flex items-center pt-[16px] pb-[32px] pl-[8px] border-b-[1px] border-solid border-[#EBEBEB]"
+    *ngFor="let friend of friendsService.listFriends; let i = index"
+  >
+    <div class="list-friends__content-avatar pr-[16px] w-[82px] h-[82px]">
+      <img
+        class="w-full h-full"
+        src="../../../assets/img/avatar.svg"
+        alt="user-avatar"
+      />
+    </div>
+    <div class="list-friends__content-info">
+      <h2
+        class="list-friends__content-info info__username text-[20px] mb-[4px] cursor-pointer hover:text-[#00A3FF] duration-[250ms]"
+        (click)="friendsService.goToPageFriend(friend.id)"
+      >
+        {{ friend.username }}
+      </h2>
+      <div class="list-friends__content-info content-block">
+        <div
+          class="list-friends__content-info info__text text-[#7A7A7A] mb-[4px]"
+        >
+          Возраст: {{ friend.age }}
+        </div>
+        <a
+          class="list-friends__content-info friend__link text-[#00A3FF] cursor-pointer hover:text-[#56C2FF] duration-[250ms]"
+          (click)="friendsService.goToChat(friend.id)"
+          >Написать сообщение</a
+        >
+      </div>
+    </div>
+  </li>
+</ul>
+
+<ng-template #loader_my_subscribers>
+    <content-loader
+    viewBox="0 0 872 420"
+    [speed]="2"
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb" 
+  >
+    <svg:circle cx="76" cy="52" r="36" /> 
+    <svg:rect x="138" y="45" rx="4" ry="4" width="80" height="20" /> 
+    <svg:rect x="138" y="69" rx="4" ry="4" width="140" height="17" /> 
+    <svg:rect x="138" y="16" rx="4" ry="4" width="140" height="25" /> 
+    <svg:circle cx="76" cy="182" r="36" /> 
+    <svg:rect x="138" y="175" rx="4" ry="4" width="80" height="20" /> 
+    <svg:rect x="138" y="199" rx="4" ry="4" width="140" height="17" /> 
+    <svg:rect x="138" y="146" rx="4" ry="4" width="140" height="25" /> 
+    <svg:circle cx="76" cy="312" r="36" /> 
+    <svg:rect x="138" y="305" rx="4" ry="4" width="80" height="20" /> 
+    <svg:rect x="138" y="329" rx="4" ry="4" width="140" height="17" /> 
+    <svg:rect x="138" y="276" rx="4" ry="4" width="140" height="25" />
+  </content-loader>
+</ng-template>

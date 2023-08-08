@@ -45,7 +45,8 @@ import { httpInterceptorProviders } from './_helpers/auth.interceptor';
 import { ErrorComponent } from './components/error/error.component';
 import { CreateInfoUserComponent } from './components/create-info-user/create-info-user.component';
 import { LoaderSpinnerComponent } from './components/loader-spinner/loader-spinner.component';
-import { FriendsRoutingComponent } from './components/friends-routing/friends-routing.component'
+import { FriendsRoutingComponent } from './components/friends-routing/friends-routing.component';
+import { FriendsMyFriendsComponent } from './components/friends/friends-my-friends/friends-my-friends.component'
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { FriendsRoutingComponent } from './components/friends-routing/friends-ro
     ErrorComponent,
     CreateInfoUserComponent,
     LoaderSpinnerComponent,
-    FriendsRoutingComponent
+    FriendsRoutingComponent,
+    FriendsMyFriendsComponent
   ],
   imports: [
     BrowserModule,

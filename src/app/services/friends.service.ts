@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IFriends } from '../models/friends';
+import { IFriends, IResponseSubscribesInfo } from '../models/friends';
 import { allPeople, friendsData } from '../data/friendsData';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -25,12 +25,15 @@ export class FriendsService {
   });
 
   private _activeFriendsLinks = {
-    searchFriends: 'active',
-    addedFriends: 'not_active',
+    searchSubscribes: 'not_active',
+    addedSubscribers: 'active',
+    ownSubscribers: 'not_active',
   };
+
   private _friendsList: IFriends[] = friendsData;
   private _friendsListSearch: IFriends[] = allPeople;
   private _isLoaded: boolean = false;
+  private _isLoadedMySubscribes: boolean = false;
 
   friendInfo$ = this._friendInfo.asObservable();
   searchUsernameFriend$ = this._searchUsernameFriend.asObservable();
@@ -57,12 +60,20 @@ export class FriendsService {
     return this._isLoaded;
   }
 
+  get isLoadedMySubscribes() {
+    return this._isLoadedMySubscribes;
+  }
+
   set listFriends(newFriends: IFriends[]) {
     this._friendsList = newFriends;
   }
 
   setLoaded(value: boolean) {
     this._isLoaded = value;
+  }
+
+  setLoadedMySubscribes(value: boolean) {
+    this._isLoadedMySubscribes = value;
   }
 
   setActiveFriendLink(selectLink: string) {
@@ -129,8 +140,8 @@ export class FriendsService {
     );
   }
 
-  getAllFriends(ownerId: number): Observable<any> {
-    return this._http.get<any>(
+  getAllFriends(ownerId: number): Observable<IResponseSubscribesInfo> {
+    return this._http.get<IResponseSubscribesInfo>(
       API_URL + GET_ALL_FRIENDS + '/' + ownerId,
       httpOptions
     );

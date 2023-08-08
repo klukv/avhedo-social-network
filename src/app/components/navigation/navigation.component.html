@@ -47,7 +47,11 @@
       </div>
       <div
         class="notifications absolute z-[500] min-w-[379px] left-0 top-[75px] bg-[#DEDEDE] rounded-b-lg"
-        [ngClass]="{ 'invisible opacity-0': !isOpenNotifications, 'visible opacity-100 transition-[opacity] duration-[100ms]': isOpenNotifications }"
+        [ngClass]="{
+          'invisible opacity-0': !isOpenNotifications,
+          'visible opacity-100 transition-[opacity] duration-[100ms]':
+            isOpenNotifications
+        }"
       >
         <div class="notifications__inner pb-[48px]">
           <h2
@@ -79,7 +83,9 @@
       class="navigation__point mr-[36px] hover:bg-[#EBEBEB] transition duration-300 ease-in-out"
     >
       <a
-        routerLink="/friends/added"
+        appActiveLink
+        [argLinks]="addedSubscribers"
+        routerLink="/subscribers/added"
         class="navigation__link after:content-['20'] relative after:absolute after:bottom-[-14px] after:right-[-10px] after:text-[#00A3FF] after:text-[12px]"
       >
         <svg

@@ -16,13 +16,13 @@ export class ActiveLinkDirective {
   @HostListener('click', ['$event'])
   setActiveLink() {
     const castingLinks = this.castingService.getActiveLinks();
-    const friendsLinks = this.friendsService.activeFriendsLinks;
+    const subscibersLinks = this.friendsService.activeFriendsLinks;
 
     if (Object.keys(castingLinks).indexOf(this.selectLink) !== -1) {
       this.castingService.setNewActiveLink(this.selectLink);
     }
 
-    if (Object.keys(friendsLinks).indexOf(this.selectLink) !== -1) {
+    if (Object.keys(subscibersLinks).indexOf(this.selectLink) !== -1) {
       this.friendsService.setActiveFriendLink(this.selectLink);
     }
   }

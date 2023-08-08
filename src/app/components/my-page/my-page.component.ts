@@ -26,13 +26,14 @@ export class MyPageComponent {
   ) {}
 
   ngOnInit() {
+
     if (!this.storageService.isShowInfoUser()) {
       this.personService.setPersonInfo(this.currentInfoUser);
       this.personService.setLoaded(true);
     }
 
     this.personService.isLoaded$.subscribe((isLoad) => {
-      if (!isLoad && this.storageService.isShowInfoUser()) {
+      if (!isLoad) {
         this.personService
           .getInfoUser(this.currentInfoUser.id)
           .pipe(
@@ -47,7 +48,6 @@ export class MyPageComponent {
                 urlImage: userData.url,
               });
             }),
-
 
             catchError(this.errorService.handle.bind(this))
           )
