@@ -1,0 +1,42 @@
+<div class="friends__links bg-[#fff] rounded-[10px] w-[460px] mb-[18px]">
+  <div class="friends__links__inner">
+    <ul class="friends__links-list">
+      <li
+        class="friends__links-point border-b-[1px] border-solid border-[#EBEBEB] px-[10px] py-[10px]"
+      >
+        <a
+          class="text-[20px] px-[20px] py-[10px] block rounded-[8px] hover:bg-[#EBEBEB] duration-[150ms] cursor-pointer"
+          >Мои подписки</a
+        >
+      </li>
+      <li
+        class="friends__links-point border-b-[1px] border-solid border-[#EBEBEB] px-[10px] py-[10px]"
+      >
+        <a
+          appActiveLink
+          [argLinks]="addedFriends"
+          routerLink="/friends/added"
+          class="text-[20px] px-[20px] py-[10px] block rounded-[8px] hover:bg-[#EBEBEB] duration-[150ms] cursor-pointer"
+          [ngClass]="{
+            'bg-[#EBEBEB]':
+              this.friendsService.activeFriendsLinks.addedFriends === 'active'
+          }"
+          >Подписчики</a
+        >
+      </li>
+      <li class="friends__links-point px-[10px] py-[10px]">
+        <a
+          appActiveLink
+          [argLinks]="searchFriends"
+          routerLink="/friends/search"
+          class="text-[20px] px-[20px] py-[10px] block rounded-[8px] hover:bg-[#EBEBEB] duration-[150ms] cursor-pointer"
+          [ngClass]="{
+            'bg-[#EBEBEB]':
+              this.friendsService.activeFriendsLinks.searchFriends === 'active'
+          }"
+          >Поиск людей</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>

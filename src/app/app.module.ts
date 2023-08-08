@@ -44,7 +44,8 @@ import { ActiveLinkDirective } from './directives/active-link.directive';
 import { httpInterceptorProviders } from './_helpers/auth.interceptor';
 import { ErrorComponent } from './components/error/error.component';
 import { CreateInfoUserComponent } from './components/create-info-user/create-info-user.component';
-import { LoaderSpinnerComponent } from './components/loader-spinner/loader-spinner.component'
+import { LoaderSpinnerComponent } from './components/loader-spinner/loader-spinner.component';
+import { FriendsRoutingComponent } from './components/friends-routing/friends-routing.component'
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { LoaderSpinnerComponent } from './components/loader-spinner/loader-spinn
     ActiveLinkDirective,
     ErrorComponent,
     CreateInfoUserComponent,
-    LoaderSpinnerComponent
+    LoaderSpinnerComponent,
+    FriendsRoutingComponent
   ],
   imports: [
     BrowserModule,

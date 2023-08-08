@@ -5,9 +5,12 @@
       <div class="main__inner flex mt-[68px] justify-between">
         <router-outlet class="hidden"></router-outlet>
         <div
-        *ngIf="!hasRoute('signin') && !hasRoute('signup') && !hasRoute('person')"
+          *ngIf="
+            !hasRoute('signin') && !hasRoute('signup') && !hasRoute('person')
+          "
           class="main__additionally-info flex flex-col"
         >
+          <app-friends-routing *ngIf="hasRoute('friends')"></app-friends-routing>
           <app-my-page class="mb-[48px]"></app-my-page>
           <app-friends-block
             *ngIf="!hasRoute('friends')"
@@ -18,7 +21,11 @@
     </div>
   </main>
   <app-modal *ngIf="modalService.$isVisible | async">
-    <app-create-product *ngIf="modalService.typeModal === variantsModals.TYPE_MODAL_EDIT"></app-create-product>
-    <app-create-info-user *ngIf="modalService.typeModal === variantsModals.TYPE_MODAL_FORM"></app-create-info-user>
+    <app-create-product
+      *ngIf="modalService.typeModal === variantsModals.TYPE_MODAL_EDIT"
+    ></app-create-product>
+    <app-create-info-user
+      *ngIf="modalService.typeModal === variantsModals.TYPE_MODAL_FORM"
+    ></app-create-info-user>
   </app-modal>
 </div>

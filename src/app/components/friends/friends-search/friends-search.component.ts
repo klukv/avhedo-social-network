@@ -12,14 +12,13 @@ import { PersonPageService } from 'src/app/services/person-page.service';
 })
 export class FriendsSearchComponent {
   private userInfo: IPersonInfo;
-
-  isShowAcceptBlock: boolean = false;
+  selectedIndexButton: number;
 
   constructor(
     public friendsService: FriendsService,
     private personService: PersonPageService,
     public friendService: FriendsService,
-    private errorService: ErrorService
+    private errorService: ErrorService,
   ) {}
 
   ngOnInit() {
@@ -28,11 +27,12 @@ export class FriendsSearchComponent {
     );
   }
 
-  clickAddFriendBtn(friendId: number) {
-    this.isShowAcceptBlock = true;
-
+  clickAddFriendBtn(friendId: number, indexButton: number) {
     if (this.userInfo.id) {
       console.log(`запрос прошёл`);
+
+      this.selectedIndexButton = indexButton;
+
       this.friendService
         .addFriend(this.userInfo.id, friendId)
         // .pipe(catchError(this.errorService.handle.bind(this)))

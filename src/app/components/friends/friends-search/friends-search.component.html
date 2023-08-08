@@ -32,14 +32,13 @@
     </div>
     <button
       class="friends__page-button flex justify-center items-center w-[52px] h-[52px] mt-[16px] p-[12px] rounded-[50%] ml-auto mr-0 hover:bg-[#EBEBEB] transition duration-300 ease-in-out"
-      [ngClass]="{'hover:bg-transparent cursor-default': this.isShowAcceptBlock === true}"
-      >
+      [ngClass]="{
+        'hover:bg-transparent cursor-default': this.selectedIndexButton === i
+      }"
+    >
       <svg
-      (click)="clickAddFriendBtn(1)"
-        [ngClass]="{
-          'hidden': this.isShowAcceptBlock === true,
-          'block': this.isShowAcceptBlock === false
-        }"
+        (click)="clickAddFriendBtn(1, i)"
+        [ngClass]="{ hidden: this.selectedIndexButton === i }"
         class="w-full h-full"
         viewBox="0 0 64.00 64.00"
         xmlns="http://www.w3.org/2000/svg"
@@ -65,16 +64,12 @@
       </svg>
       <div
         class="friends__accept-svg"
-        [ngClass]="{
-          'hidden': this.isShowAcceptBlock === false,
-          'block': this.isShowAcceptBlock === true
-        }"
+        [ngClass]="{ hidden: this.selectedIndexButton !== i }"
       >
         <svg
           *ngIf="this.friendService.isLoaded === true; else loader_spinner"
-          width="30px"
-          height="30px"
-          viewBox="0 0 20.00 20.00"
+          class="w-full h-full"
+          viewBox="0 0 20 20"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
           fill="#000000"
@@ -89,7 +84,12 @@
             <g id="layer1">
               <path
                 d="M 18.837891 3.2832031 L 6.8183594 15.302734 L 1.1621094 9.6464844 L 0.453125 10.353516 L 6.8183594 16.716797 L 19.546875 3.9902344 L 18.837891 3.2832031 z "
-                style="fill: #222222; fill-opacity: 1; stroke-width: 0.0002"
+                style="
+                  fill: #00a3ff;
+                  fill-opacity: 1;
+                  stroke: none;
+                  stroke-width: 0px;
+                "
               ></path>
             </g>
           </g>
