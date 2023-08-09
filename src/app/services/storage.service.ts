@@ -64,7 +64,7 @@ export class StorageService {
     if (token) {
       return token;
     }
-    return 'Token doesn"t exist';
+    return "not exist's";
   }
 
   isLoggedIn(): boolean {

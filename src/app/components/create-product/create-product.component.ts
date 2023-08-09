@@ -100,7 +100,7 @@ export class CreateProductComponent {
         },
         this._infoUserFromStore.id
       )
-      .pipe(catchError(this.errorService.handle.bind(this)))
+      .pipe(catchError(error => this.errorService.handle(error)))
       .subscribe(() => {});
     this.modalService.close();
   }

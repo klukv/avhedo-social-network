@@ -65,7 +65,7 @@ export class LoginPageComponent {
           return userData;
         })
       )
-      .pipe(catchError(this.errorService.handle.bind(this)))
+      .pipe(catchError(error => this.errorService.handle(error)))
       .subscribe(() => {
         this.router.navigate(['/']);
         setTimeout(() => {

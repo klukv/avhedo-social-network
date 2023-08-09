@@ -49,7 +49,7 @@ export class SignupPageComponent implements OnDestroy {
         ['admin, moderator']
       )
       .pipe(    
-        catchError(this.errorService.handle.bind(this))
+        catchError(error => this.errorService.handle(error))
       )
       .subscribe(() => {
         this.authService.setValueIsRegister(true);

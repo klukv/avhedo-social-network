@@ -88,7 +88,7 @@ export class CreateInfoUserComponent {
         },
         this._idUser
       )
-      .pipe(catchError(this.errorService.handle.bind(this)))
+      .pipe(catchError(error => this.errorService.handle(error)))
       .subscribe(() => {
         this.storageService.saveShowInfoUser(true);
         this.personService.setLoaded(false);

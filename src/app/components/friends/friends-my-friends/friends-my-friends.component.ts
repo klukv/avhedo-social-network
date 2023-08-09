@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { catchError, map } from 'rxjs';
+import { catchError } from 'rxjs';
 import { IPersonInfo } from 'src/app/models/personInfo';
 import { ErrorService } from 'src/app/services/error.service';
 import { FriendsService } from 'src/app/services/friends.service';
-import { PersonPageService } from 'src/app/services/person-page.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
@@ -24,9 +23,7 @@ export class FriendsMyFriendsComponent {
     if (this.userInfo.id !== undefined) {
       this.friendsService
         .getAllFriends(this.userInfo.id)
-        .pipe(map(subcribesData => {
-          
-        }))
+        .pipe(catchError(error => this.errorService.handle(error)))
         .subscribe(() => {
           this.friendsService.setLoadedMySubscribes(true);
         });

@@ -5,7 +5,8 @@ import { ModalService } from 'src/app/services/modal.service';
 import { PersonPageService } from 'src/app/services/person-page.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { TypeEditVariants, TypeModalWindows } from 'src/app/utils/const';
-import { map, catchError } from 'rxjs';
+import { map, catchError, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-my-page',
@@ -26,14 +27,8 @@ export class MyPageComponent {
   ) {}
 
   ngOnInit() {
-
-    if (!this.storageService.isShowInfoUser()) {
-      this.personService.setPersonInfo(this.currentInfoUser);
-      this.personService.setLoaded(true);
-    }
-
     this.personService.isLoaded$.subscribe((isLoad) => {
-      if (!isLoad) {
+      if (!isLoad && this.storageService.getToken() !== "not exist's") {
         this.personService
           .getInfoUser(this.currentInfoUser.id)
           .pipe(
@@ -48,10 +43,20 @@ export class MyPageComponent {
                 urlImage: userData.url,
               });
             }),
+            catchError((error: HttpErrorResponse) => {
+              if (error.status === 404) {
 
-            catchError(this.errorService.handle.bind(this))
+                this.personService.setPersonInfo(this.currentInfoUser);
+                this.storageService.saveShowInfoUser(false);
+                this.personService.setLoaded(true);
+                return throwError(() => '');
+                
+              }
+              return this.errorService.handle(error);
+            })
           )
           .subscribe(() => {
+            this.storageService.saveShowInfoUser(true);
             this.personService.setLoaded(true);
           });
       }
