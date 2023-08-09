@@ -6,6 +6,7 @@ import { IPersonInfo } from 'src/app/models/personInfo';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { catchError } from 'rxjs';
 import { ErrorService } from 'src/app/services/error.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-main-page',
@@ -14,25 +15,24 @@ import { ErrorService } from 'src/app/services/error.service';
 })
 export class MainPageComponent implements AfterViewInit {
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
+
   isPostsOpen: boolean;
 
-  private userInfo: IPersonInfo;
+  private userInfo: IPersonInfo = this.storageService.getUser();
 
   form: FormGroup;
 
   constructor(
     public postService: PostsService,
-    private personService: PersonPageService,
     private fb: FormBuilder,
+    private storageService: StorageService,
     private errorService: ErrorService
   ) {
     this._createFrom();
   }
 
   ngOnInit() {
-    this.personService.personInfo$.subscribe(
-      (infoUser) => (this.userInfo = infoUser)
-    );
+    this.postService.getPosts(-1).subscribe(() => {});
   }
 
   ngAfterViewInit(): void {
@@ -47,10 +47,11 @@ export class MainPageComponent implements AfterViewInit {
   }
 
   clickCreatePost() {
-    
     if (this.userInfo.id && this.form.valid) {
       console.log(`всё хорошо`);
-      
+
+      this.postService.setLoadedPosts(false);
+
       this.postService
         .createPost(
           {
@@ -59,8 +60,15 @@ export class MainPageComponent implements AfterViewInit {
           },
           this.userInfo.id
         )
-        .pipe(catchError(this.errorService.handle.bind(this)))
-        .subscribe(() => {});
+        .pipe(catchError((error) => this.errorService.handle(error)))
+        .subscribe(() => {
+          this.form.setValue({
+            titlePost: '',
+            textPost: '',
+          });
+          this.postService.setLoadedPosts(true);
+          this.isPostsOpen = false;
+        });
     }
   }
 

@@ -22,10 +22,17 @@ export const CHAT_PAGE = 'messages/chat';
 export const API_URL = 'http://localhost:8080';
 export const LOGIN_URL = '/api/auth/signin';
 export const SIGNUP_URL = '/api/auth/signup';
+
 export const GET_USER_INFO = '/userInfo';
 export const ADD_USER_INFO = '/userAddInfo';
 export const EDIT_USER_INFO = '/editUserInfo';
+
 export const CREATE_POST = '/userAddMessage';
+export const GET_POSTS = '/InfoForMessage';
+export const CREATE_COMMENT_POST = '/usersAddCommentsMessage';
+export const ADD_LIKE_POST = '/usersAddLikeMessage';
+export const DELETE_LIKE_POST = '/usersDeleteLikeMessage';
+
 export const ADD_FRIEND = '/addFriends';
 export const DELETE_FRIEND = '/deleteFriends';
 export const GET_ALL_FRIENDS = '/allFriendsUser';

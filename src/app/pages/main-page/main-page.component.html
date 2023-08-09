@@ -1,9 +1,19 @@
 <div class="home-page mr-[18px] w-[872px]">
-  <div class="home__news">
+  <div
+    class="home__news rounded-[10px] bg-[#fff] pl-[48px] pr-[24px] overflow-hidden"
+    [ngClass]="{
+      'min-h-[276px] relative': !this.postService.isLoadedPosts
+    }"
+  >
     <div
-      class="home__news-post flex flex-col rounded-[10px] bg-[#fff] pl-[48px] pr-[24px] overflow-hidden"
+      class="home__news-post"
+      *ngIf="this.postService.isLoadedPosts; else loader__posts"
     >
-      <form [formGroup]="form" class="home__news-post__form" (ngSubmit)="clickCreatePost()">
+      <form
+        [formGroup]="form"
+        class="home__news-post__form flex flex-col"
+        (ngSubmit)="clickCreatePost()"
+      >
         <input
           type="text"
           class="home__news-title placeholder:text-[22px] text-[22px] w-full py-[16px] outline-none border-b-[1px] border-solid border-[#EBEBEB]"
@@ -15,7 +25,7 @@
           placeholder="Укажите заголовок"
         />
         <textarea
-          class="home__news-input text-[22px] placeholder:text-[22px] outline-none py-[16px] w-full min-h-[60px] resize-none overflow-hidden border-b-[1px] border-solid border-[#EBEBEB]"
+          class="home__news-input text-[18px] placeholder:text-[22px] outline-none py-[16px] w-full min-h-[60px] resize-none overflow-hidden border-b-[1px] border-solid border-[#EBEBEB]"
           [ngClass]="{
             'mt-0': !isPostsOpen,
             'mt-[40px]': isPostsOpen
@@ -39,10 +49,15 @@
           Выложить
         </button>
       </form>
+      <app-error></app-error>
     </div>
   </div>
   <app-post-block
-    *ngFor="let post of postService.posts; let i = index"
+    *ngFor="let post of postService.postsData; let i = index"
     [post]="post"
   ></app-post-block>
 </div>
+
+<ng-template #loader__posts>
+  <app-lodaer-spin-v1></app-lodaer-spin-v1>
+</ng-template>

@@ -44,9 +44,10 @@ import { ActiveLinkDirective } from './directives/active-link.directive';
 import { httpInterceptorProviders } from './_helpers/auth.interceptor';
 import { ErrorComponent } from './components/error/error.component';
 import { CreateInfoUserComponent } from './components/create-info-user/create-info-user.component';
-import { LoaderSpinnerComponent } from './components/loader-spinner/loader-spinner.component';
 import { FriendsRoutingComponent } from './components/friends-routing/friends-routing.component';
-import { FriendsMyFriendsComponent } from './components/friends/friends-my-friends/friends-my-friends.component'
+import { FriendsMyFriendsComponent } from './components/friends/friends-my-friends/friends-my-friends.component';
+import { LodaerSpinV1Component } from './components/loading/lodaer-spin-v1/lodaer-spin-v1.component';
+import { LodaerSpinV2Component } from './components/loading/lodaer-spin-v2/lodaer-spin-v2.component'
 
 @NgModule({
   declarations: [
@@ -80,9 +81,10 @@ import { FriendsMyFriendsComponent } from './components/friends/friends-my-frien
     ActiveLinkDirective,
     ErrorComponent,
     CreateInfoUserComponent,
-    LoaderSpinnerComponent,
     FriendsRoutingComponent,
-    FriendsMyFriendsComponent
+    FriendsMyFriendsComponent,
+    LodaerSpinV1Component,
+    LodaerSpinV2Component
   ],
   imports: [
     BrowserModule,
