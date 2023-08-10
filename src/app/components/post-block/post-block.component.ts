@@ -1,9 +1,4 @@
-import {
-  Component,
-  Input,
-  ElementRef,
-  ViewChild,
-} from '@angular/core';
+import { Component, Input, ElementRef, ViewChild } from '@angular/core';
 import { IPersonInfo } from 'src/app/models/personInfo';
 import { IComments, IResponseGetPosts } from 'src/app/models/post';
 import { PersonPageService } from 'src/app/services/person-page.service';
@@ -20,16 +15,29 @@ export class PostBlockComponent {
 
   textComment = '';
   isClickLike: boolean = false;
+  countLikes: number = 0;
 
   private userInfo: IPersonInfo;
 
   constructor(
     private postService: PostsService,
-    private personService: PersonPageService,
+    private personService: PersonPageService
   ) {}
 
+  isLikeCurrentPost() {
+    this.isClickLike = this.post.likesDtos.some(
+      (infoLiker) =>
+        infoLiker.infoUserFromLentaDto.userInfo.id === this.userInfo.id
+    );
+  }
+
   ngAfterViewInit() {
+    this.countLikes = this.post.likesDtos.length;
     this.personService.personInfo$.subscribe((info) => (this.userInfo = info));
+
+    if (this.userInfo.id) {
+      this.isLikeCurrentPost();
+    }
   }
 
   clickIconComment() {
@@ -37,7 +45,22 @@ export class PostBlockComponent {
   }
 
   clickIconLike() {
-    this.isClickLike = !this.isClickLike;
+    if (this.userInfo.id !== undefined) {
+      this.isClickLike = !this.isClickLike;
+      if (this.isClickLike) {
+        this.postService
+          .addLikeInPosts(this.userInfo.id, this.post.messageDto.id)
+          .subscribe(() => {
+            this.countLikes++;
+          });
+      } else {
+        this.postService
+          .deleteLikeFromPost(this.userInfo.id, this.post.messageDto.id)
+          .subscribe(() => {
+            this.countLikes--;
+          });
+      }
+    }
   }
 
   clickCreateComment(idPost: number) {

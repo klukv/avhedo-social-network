@@ -24,6 +24,14 @@ export interface IComment {
   textComment: string;
 }
 
+export interface ILike {
+  infoUserFromLentaDto: TinfoUserFromLentaDTO,
+  messageIdDto: {
+    id: number
+  },
+  likesMessage: boolean
+}
+
 export interface IComments {
   textComments: string;
   infoUserFromLentaDto: TinfoUserFromLentaDTO;
@@ -46,5 +54,5 @@ export interface IResponseCreatePost {
 export interface IResponseGetPosts {
   messageDto: TMessageDTO;
   commentsDtoList: IComments[];
-  likesDtos: string[];
+  likesDtos: ILike[];
 }

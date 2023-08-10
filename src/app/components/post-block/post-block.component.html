@@ -13,7 +13,7 @@
   </div>
   <div class="post__info bg-[#fff] rounded-[10px] px-[25px]">
     <div
-      class="post__block-info pt-[23px] pb-[8px] border-b-[1px] border-solid border-[#EBEBEB]r"
+      class="post__block-info pt-[23px] pb-[25px] border-b-[1px] border-solid border-[#EBEBEB]r"
     >
       <h2 class="post__block-info_title text-[26px]">
         {{ post.messageDto.titleMessage }}
@@ -24,14 +24,15 @@
       <div class="post__block-info_icons flex items-center mb-[8px] relative">
         <div class="post__block-like mr-[16px] cursor-pointer">
           <button class="scattering" [ngClass]="{'active': this.isClickLike === true}" (click)="clickIconLike()"></button>
+          <span class="post__block-like__counter text-[20px] text-[#5a5a5a] absolute left-[33px] top-0">{{this.countLikes !== 0 ? this.countLikes : ''}}</span>
         </div>
         <div
-          class="post__block-comment cursor-pointer absolute z-[2] left-[38px]"
+          class="post__block-comment cursor-pointer absolute z-[2] left-[60px] top-[2px]"
           (click)="clickIconComment()"
         >
           <svg
-            width="30"
-            height="30"
+            width="28"
+            height="28"
             viewBox="0 0 30 30"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
