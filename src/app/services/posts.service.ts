@@ -15,7 +15,7 @@ import {
   GET_POSTS,
   httpOptions,
 } from '../utils/const';
-import { Observable, catchError, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, tap } from 'rxjs';
 import { ErrorService } from './error.service';
 
 @Injectable({
@@ -24,8 +24,11 @@ import { ErrorService } from './error.service';
 export class PostsService {
   constructor(private _http: HttpClient, private errorService: ErrorService) {}
 
+  private _isGetPosts = new BehaviorSubject<boolean>(true);
   private _postsDatav: IResponseGetPosts[] = [];
   private _isLoadedPosts: boolean = true;
+
+  isGetPosts$ = this._isGetPosts.asObservable();
 
 
   get postsData() {
@@ -38,6 +41,10 @@ export class PostsService {
 
   setLoadedPosts(value: boolean) {
     this._isLoadedPosts = value;
+  }
+
+  setValueIsGetPosts(value: boolean){
+    this._isGetPosts.next(value);
   }
 
   // Backend requests

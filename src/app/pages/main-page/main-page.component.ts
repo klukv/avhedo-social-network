@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { catchError } from 'rxjs';
 import { ErrorService } from 'src/app/services/error.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { IResponseGetPosts } from 'src/app/models/post';
 
 @Component({
   selector: 'app-main-page',
@@ -38,12 +39,16 @@ export class MainPageComponent implements AfterViewInit {
   }
 
   ngOnInit() {
-    this.postService.getPosts(-1).subscribe(() => {});
-    console.log(this.postService.isLoadedPosts);
+    this.postService.isGetPosts$.subscribe((isGet) => {
+      if (isGet) {
+        this.postService.getPosts(-1).subscribe(() => {
+          this.postService.setValueIsGetPosts(false);
+        });
+      }
+    });
   }
 
   ngAfterViewInit(): void {
-    
     document.addEventListener('click', this.handleClickMenu.bind(this));
   }
 
@@ -74,6 +79,7 @@ export class MainPageComponent implements AfterViewInit {
             titlePost: '',
             textPost: '',
           });
+          this.postService.setValueIsGetPosts(true);
           this.postService.setLoadedPosts(true);
           this.isPostsOpen = false;
         });
