@@ -1,7 +1,12 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  QueryList,
+  ViewChild,
+} from '@angular/core';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { PostsService } from 'src/app/services/posts.service';
-import { PersonPageService } from 'src/app/services/person-page.service';
 import { IPersonInfo } from 'src/app/models/personInfo';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { catchError } from 'rxjs';
@@ -17,6 +22,7 @@ export class MainPageComponent implements AfterViewInit {
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
   isPostsOpen: boolean;
+  isChangePostsBlock: boolean = false;
 
   private userInfo: IPersonInfo = this.storageService.getUser();
 
@@ -33,9 +39,11 @@ export class MainPageComponent implements AfterViewInit {
 
   ngOnInit() {
     this.postService.getPosts(-1).subscribe(() => {});
+    console.log(this.postService.isLoadedPosts);
   }
 
   ngAfterViewInit(): void {
+    
     document.addEventListener('click', this.handleClickMenu.bind(this));
   }
 

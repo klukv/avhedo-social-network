@@ -3,10 +3,6 @@ import { IResponseEditInfo } from './user';
 
 // Типы
 
-export type TCommentRequest = {
-  textComments: string
-}
-
 export type TinfoUserFromLentaDTO = {
   userInfo: TUserInfo;
   dateOfBirthday: string;
@@ -15,19 +11,12 @@ export type TinfoUserFromLentaDTO = {
 
 export type TMessageDTO = {
   infoUserFromLentaDto: TinfoUserFromLentaDTO;
+  id: number;
   textMessage: string;
   titleMessage: string;
 };
 
 //Интерфейсы
-export interface IPost {
-  id: number;
-  linkAvatar: string;
-  username: string;
-  titlePost: string;
-  textPost: string;
-  comments: IComment[];
-}
 export interface IComment {
   id: number;
   linkAvatarComment: string;

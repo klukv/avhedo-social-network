@@ -1,0 +1,25 @@
+.scattering {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 13px;
+    top: 0px;
+    transform: translate(-50%, -50%);
+    background: url(http://zornet.ru/ABVUN/Aba/detunis/supasnab/heart.png) no-repeat;
+    background-position: 0 0;
+    cursor: pointer;
+    animation: fave-heart 1s steps(28);
+    z-index: 1;
+  }
+  .active {
+    background-position: -2800px 0;
+    transition: background 1s steps(28);
+  }
+  @keyframes fave-heart {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: -2800px 0;
+    }
+  }

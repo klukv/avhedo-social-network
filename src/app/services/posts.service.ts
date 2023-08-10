@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import {
-  IPost,
+  IComments,
   IRequestCreatePost,
   IResponseCreatePost,
   IResponseGetPosts,
-  TCommentRequest,
 } from '../models/post';
-import { postsData } from '../data/postsData';
 import { HttpClient } from '@angular/common/http';
 import {
   ADD_LIKE_POST,
@@ -26,13 +24,9 @@ import { ErrorService } from './error.service';
 export class PostsService {
   constructor(private _http: HttpClient, private errorService: ErrorService) {}
 
-  private _postsData: IPost[] = postsData;
   private _postsDatav: IResponseGetPosts[] = [];
   private _isLoadedPosts: boolean = true;
 
-  get posts() {
-    return this._postsData;
-  }
 
   get postsData() {
     return this._postsDatav;
@@ -40,10 +34,6 @@ export class PostsService {
 
   get isLoadedPosts() {
     return this._isLoadedPosts;
-  }
-
-  set posts(newPosts: IPost[]) {
-    this._postsData = newPosts;
   }
 
   setLoadedPosts(value: boolean) {
@@ -75,7 +65,7 @@ export class PostsService {
   createCommentInPost(
     userId: number,
     postId: number,
-    comment: TCommentRequest
+    comment: IComments
   ) {
     return this._http
       .post(

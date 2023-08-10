@@ -38,7 +38,7 @@ export class LikesBlockComponent {
     ) {
       const currentLikeButtonsBlock = this.likeButtonsBlock.toArray()[indexCard].nativeElement;
       const currentChatBlock = this.chatButton.toArray()[indexCard].nativeElement;
-
+      
       this._widthButtonsBlock = currentLikeButtonsBlock.offsetWidth - currentChatBlock.offsetWidth;
 
       this.render.setStyle(

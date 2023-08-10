@@ -59,6 +59,8 @@ export class LoginPageComponent {
             {
               id: userData.id,
               username: this.username?.value,
+              age: '',
+              urlImage: ''
             },
             userData.token
           );

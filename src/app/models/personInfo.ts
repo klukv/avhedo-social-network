@@ -6,11 +6,11 @@ export interface IPersonItem<T> {
 export interface IPersonInfo {
   id?: number;
   username: string;
-  age?: string;
+  age: string;
   gender?: string;
   hobby?: string;
   about?: string;
-  urlImage?: string;
+  urlImage: string;
 }
 
 export interface IHobbyInfo {

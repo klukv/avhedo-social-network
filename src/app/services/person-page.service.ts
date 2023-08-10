@@ -25,7 +25,7 @@ export class PersonPageService {
   private _personInfo = new BehaviorSubject<IPersonInfo>({
     id: 0,
     username: '',
-    age: undefined,
+    age: '',
     gender: undefined,
     hobby: undefined,
     about: undefined,

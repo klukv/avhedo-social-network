@@ -1,8 +1,13 @@
-import { Component, Input, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  Input,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { IPersonInfo } from 'src/app/models/personInfo';
-import { IPost, IResponseGetPosts } from 'src/app/models/post';
+import { IComments, IResponseGetPosts } from 'src/app/models/post';
+import { PersonPageService } from 'src/app/services/person-page.service';
 import { PostsService } from 'src/app/services/posts.service';
-import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-post-block',
@@ -14,25 +19,50 @@ export class PostBlockComponent {
   @ViewChild('inputComment') inputComment: ElementRef;
 
   textComment = '';
+  isClickLike: boolean = false;
 
-  private userInfo: IPersonInfo = this.storageService.getUser();
+  private userInfo: IPersonInfo;
 
   constructor(
     private postService: PostsService,
-    private storageService: StorageService
+    private personService: PersonPageService,
   ) {}
+
+  ngAfterViewInit() {
+    this.personService.personInfo$.subscribe((info) => (this.userInfo = info));
+  }
 
   clickIconComment() {
     this.inputComment.nativeElement.focus();
   }
 
-  clickCreateComment() {
+  clickIconLike() {
+    this.isClickLike = !this.isClickLike;
+  }
+
+  clickCreateComment(idPost: number) {
     if (this.textComment.length !== 0 && this.userInfo.id !== undefined) {
+      const commentObject: IComments = {
+        textComments: this.textComment,
+        infoUserFromLentaDto: {
+          userInfo: {
+            id: this.userInfo.id,
+            username: this.userInfo.username,
+          },
+          dateOfBirthday: this.userInfo.age,
+          url: this.userInfo.urlImage,
+        },
+        messageDto: {
+          id: idPost,
+        },
+      };
+
       this.postService
-        .createCommentInPost(this.userInfo.id, 3, {
-          textComments: this.textComment,
-        })
-        .subscribe(() => {});
+        .createCommentInPost(this.userInfo.id, idPost, commentObject)
+        .subscribe(() => {
+          this.post.commentsDtoList.unshift(commentObject);
+          this.textComment = '';
+        });
     }
   }
 }

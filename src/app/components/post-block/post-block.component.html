@@ -7,34 +7,28 @@
         alt="user-avatar"
       />
     </div>
-    <h2 class="post__block-user_username text-[24px]">{{ post.messageDto.infoUserFromLentaDto.userInfo.username }}</h2>
+    <h2 class="post__block-user_username text-[24px]">
+      {{ post.messageDto.infoUserFromLentaDto.userInfo.username }}
+    </h2>
   </div>
   <div class="post__info bg-[#fff] rounded-[10px] px-[25px]">
     <div
       class="post__block-info pt-[23px] pb-[8px] border-b-[1px] border-solid border-[#EBEBEB]r"
     >
-      <h2 class="post__block-info_title text-[26px]">{{ post.messageDto.titleMessage }}</h2>
+      <h2 class="post__block-info_title text-[26px]">
+        {{ post.messageDto.titleMessage }}
+      </h2>
       <p class="post__block-info_text text-[18px] pt-[22px] pb-[16px]">
         {{ post.messageDto.textMessage }}
       </p>
-      <div class="post__block-info_icons flex items-center mb-[8px]">
+      <div class="post__block-info_icons flex items-center mb-[8px] relative">
         <div class="post__block-like mr-[16px] cursor-pointer">
-          <svg
-            width="30"
-            height="26"
-            viewBox="0 0 30 26"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M21.2539 1.43469C24.9949 1.43469 28.0284 4.46813 28.0284 8.20919C28.0284 10.1313 27.2273 11.8631 25.9416 13.0967L15.0011 24.0925L3.86182 12.898C2.69307 11.6804 1.97269 10.0303 1.97269 8.20919C1.97269 4.46706 5.00613 1.43469 8.74719 1.43469C11.5649 1.43469 13.98 3.15594 15.0011 5.60394C16.0221 3.15594 18.4361 1.43469 21.2539 1.43469ZM21.2539 0.302063C18.7623 0.302063 16.4737 1.45913 15 3.36631C13.5274 1.45913 11.2388 0.302063 8.74613 0.302063C4.38563 0.302063 0.839005 3.84975 0.839005 8.20919C0.839005 10.2577 1.62207 12.2021 3.04369 13.6832L15 25.699L26.7438 13.8968C28.2951 12.4071 29.161 10.382 29.161 8.21025C29.161 3.84975 25.6133 0.303126 21.2539 0.303126V0.302063Z"
-              fill="black"
-              stroke="black"
-              stroke-width="0.00064"
-            />
-          </svg>
+          <button class="scattering" [ngClass]="{'active': this.isClickLike === true}" (click)="clickIconLike()"></button>
         </div>
-        <div class="post__block-comment cursor-pointer" (click)="clickIconComment()">
+        <div
+          class="post__block-comment cursor-pointer absolute z-[2] left-[38px]"
+          (click)="clickIconComment()"
+        >
           <svg
             width="30"
             height="30"
@@ -79,7 +73,7 @@
         />
         <button
           class="send-svg absolute top-[6px] right-[10px] w-[28px] h-[28px]"
-          (click)="clickCreateComment()"
+          (click)="clickCreateComment(post.messageDto.id)"
         >
           <svg
             class="w-full h-full"
@@ -94,7 +88,10 @@
           </svg>
         </button>
       </div>
-      <div class="post__block-comments_users pb-[36px]">
+      <div
+        class="post__block-comments_users pb-[36px]"
+        *ngIf="post.commentsDtoList.length !== 0; else emptyComments"
+      >
         <div
           class="post__block_one-comment flex items-center pb-[22px]"
           *ngFor="let comment of post.commentsDtoList; let i = index"
@@ -110,7 +107,11 @@
             <h3
               class="post__block-comments_title text-[18px] hover:text-[#00A3FF] duration-[250ms] cursor-pointer"
             >
-              <a routerLink="#" class="border-b-[#EBEBEB] border-solid border-b-[1px] pb-[2px]">{{ comment.infoUserFromLentaDto.userInfo.username }}</a>
+              <a
+                routerLink="#"
+                class="border-b-[#EBEBEB] border-solid border-b-[1px] pb-[2px]"
+                >{{ comment.infoUserFromLentaDto.userInfo.username }}</a
+              >
             </h3>
             <p class="post__block-comments_text text-[15px]">
               {{ comment.textComments }}
@@ -121,3 +122,9 @@
     </div>
   </div>
 </div>
+
+<ng-template #emptyComments>
+  <div class="empty-comments flex justify-center items-center pb-[42px]">
+    <p class="text-[18px]">Нет комментариев к данной записи.</p>
+  </div></ng-template
+>
