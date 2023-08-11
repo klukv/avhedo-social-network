@@ -30,7 +30,6 @@ export class PostsService {
 
   isGetPosts$ = this._isGetPosts.asObservable();
 
-
   get postsData() {
     return this._postsDatav;
   }
@@ -43,7 +42,7 @@ export class PostsService {
     this._isLoadedPosts = value;
   }
 
-  setValueIsGetPosts(value: boolean){
+  setValueIsGetPosts(value: boolean) {
     this._isGetPosts.next(value);
   }
 
@@ -64,16 +63,20 @@ export class PostsService {
     return this._http
       .get<IResponseGetPosts[]>(API_URL + GET_POSTS + '/' + postId, httpOptions)
       .pipe(
-        tap((postsData) => (this._postsDatav = postsData)),
+        tap((postsData) => {
+          if (postId !== -1) {
+            this._postsDatav = this._postsDatav.concat(postsData);
+            console.log(this.postsData);
+            
+          } else {
+            this._postsDatav = postsData;
+          }
+        }),
         catchError((error) => this.errorService.handle(error))
       );
   }
 
-  createCommentInPost(
-    userId: number,
-    postId: number,
-    comment: IComments
-  ) {
+  createCommentInPost(userId: number, postId: number, comment: IComments) {
     return this._http
       .post(
         API_URL + CREATE_COMMENT_POST + '/' + userId + '/' + postId,

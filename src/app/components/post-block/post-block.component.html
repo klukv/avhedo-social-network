@@ -109,7 +109,7 @@
               class="post__block-comments_title text-[18px] hover:text-[#00A3FF] duration-[250ms] cursor-pointer"
             >
               <a
-                routerLink="#"
+                (click)="goToPageFriend(comment.infoUserFromLentaDto.userInfo.id)"
                 class="border-b-[#EBEBEB] border-solid border-b-[1px] pb-[2px]"
                 >{{ comment.infoUserFromLentaDto.userInfo.username }}</a
               >

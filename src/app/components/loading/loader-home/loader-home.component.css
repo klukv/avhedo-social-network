@@ -1,0 +1,42 @@
+:host{
+    display: flex;
+    justify-content: center;
+}
+.loading {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0px 0px 25px 0px;
+  }
+  .loading div {
+    display: inline-block;
+    position: absolute;
+    left: 8px;
+    width: 8px;
+    background: #00A3FF;
+    animation: loading 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  }
+  .loading div:nth-child(1) {
+    left: 20px;
+    animation-delay: -0.24s;
+  }
+  .loading div:nth-child(2) {
+    left: 34px;
+    animation-delay: -0.12s;
+  }
+  .loading div:nth-child(3) {
+    left: 48px;
+    animation-delay: 0;
+  }
+  @keyframes loading {
+    0% {
+      top: 5px;
+      height: 54px;
+    }
+    50%, 100% {
+      top: 20px;
+      height: 22px;
+    }
+  }
+  

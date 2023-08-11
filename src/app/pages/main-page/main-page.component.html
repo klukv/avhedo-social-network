@@ -1,4 +1,4 @@
-<div class="home-page mr-[18px] w-[872px]">
+<div class="home-page mr-[18px] w-[872px]" #homePage (scroll)="trackingScrollPosts($event)">
   <div
     class="home__news rounded-[10px] bg-[#fff] pl-[48px] pr-[24px] overflow-hidden"
     [ngClass]="{
@@ -56,8 +56,13 @@
     *ngFor="let post of postService.postsData; let i = index"
     [post]="post"
   ></app-post-block>
+    <div class="loader__additionally__posts" *ngIf="this.isLoadedAdditionallyPosts; else loader__additionally__posts"></div>
 </div>
 
 <ng-template #loader__posts>
   <app-lodaer-spin-v1></app-lodaer-spin-v1>
+</ng-template>
+
+<ng-template #loader__additionally__posts>
+  <app-loader-home></app-loader-home>
 </ng-template>

@@ -2,7 +2,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  QueryList,
+  HostListener,
   ViewChild,
 } from '@angular/core';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
@@ -21,9 +21,14 @@ import { IResponseGetPosts } from 'src/app/models/post';
 })
 export class MainPageComponent implements AfterViewInit {
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
+  @ViewChild('homePage') homePage: ElementRef;
 
   isPostsOpen: boolean;
   isChangePostsBlock: boolean = false;
+  isLoadedAdditionallyPosts = false;
+
+  // это флаг для отслеживания - был ли уже отправлен запрос на бекенд при достижении конца страницы при скролле (страница с постами)
+  isSendRequestGetPosts: boolean = false;
 
   private userInfo: IPersonInfo = this.storageService.getUser();
 
@@ -50,6 +55,37 @@ export class MainPageComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     document.addEventListener('click', this.handleClickMenu.bind(this));
+  }
+
+  @HostListener('document:scroll', ['$event'])
+  trackingScrollPosts(event: any) {
+    const clientHeight = document.body.clientHeight;
+    const homePageHeight = this.homePage.nativeElement.offsetHeight;
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+    if (clientHeight + scrollTop >= homePageHeight) {
+        if (!this.isSendRequestGetPosts) {
+          this.isLoadedAdditionallyPosts = false;
+          this.getMorePosts();
+          this.isSendRequestGetPosts = true; 
+        }
+    }else{
+      this.isSendRequestGetPosts = false;
+    }
+  }
+
+  getMorePosts() {
+    const idCurrentLastPost =
+      this.postService.postsData[this.postService.postsData.length - 1]
+        .messageDto.id;
+
+    this.postService.getPosts(idCurrentLastPost - 1).subscribe((postsData) => {
+      if(postsData.length === 0){
+        this.isLoadedAdditionallyPosts = false
+      }else{
+        this.isLoadedAdditionallyPosts = true;
+      }
+    });
   }
 
   private _createFrom() {

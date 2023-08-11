@@ -1,4 +1,5 @@
 import { Component, Input, ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { IPersonInfo } from 'src/app/models/personInfo';
 import { IComments, IResponseGetPosts } from 'src/app/models/post';
 import { PersonPageService } from 'src/app/services/person-page.service';
@@ -21,7 +22,8 @@ export class PostBlockComponent {
 
   constructor(
     private postService: PostsService,
-    private personService: PersonPageService
+    private personService: PersonPageService,
+    private router: Router
   ) {}
 
   isLikeCurrentPost() {
@@ -42,6 +44,14 @@ export class PostBlockComponent {
 
   clickIconComment() {
     this.inputComment.nativeElement.focus();
+  }
+
+  goToPageFriend(id: number) {
+    this.router.navigate(['person'], {
+      queryParams: {
+        id: id,
+      },
+    });
   }
 
   clickIconLike() {
