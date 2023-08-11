@@ -31,7 +31,7 @@ export class PostBlockComponent {
     );
   }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.countLikes = this.post.likesDtos.length;
     this.personService.personInfo$.subscribe((info) => (this.userInfo = info));
 
