@@ -66,8 +66,6 @@ export class PostsService {
         tap((postsData) => {
           if (postId !== -1) {
             this._postsDatav = this._postsDatav.concat(postsData);
-            console.log(this.postsData);
-            
           } else {
             this._postsDatav = postsData;
           }

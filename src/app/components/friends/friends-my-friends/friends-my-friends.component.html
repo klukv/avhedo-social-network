@@ -1,5 +1,5 @@
 <ul
-  *ngIf="friendsService.isLoadedMySubscribes; else loader_my_subscribers"
+  *ngIf="friendsService.isLoadedMySubscribes; else loader_my_subscribes"
   class="friends-page__list-friends px-[32px] pb-[64px]"
 >
   <li
@@ -38,7 +38,7 @@
 
 <app-error></app-error>
 
-<ng-template #loader_my_subscribers>
+<ng-template #loader_my_subscribes>
     <content-loader
     viewBox="0 0 872 420"
     [speed]="2"

@@ -25,7 +25,7 @@
           >
             <li
               class="header__search-popup__list-point border-b-[1px] border-solid border-b-[#B6B6B6] p-[8px] hover:bg-[#B6B6B6] duration-[200ms] cursor-pointer"
-              *ngFor="let friendInfo of friendsService.listFriends | filterFriends : searchUsername | slice : 0 : 5"
+              *ngFor="let friendInfo of friendsService.listSubsribers | filterFriends : searchUsername | slice : 0 : 5"
               (click)="goToPageFriend(friendInfo.id)"
             >
               <div class="header__search-popup__list-point__info flex">
@@ -46,7 +46,7 @@
                 </div>
               </div>
             </li>
-            <a routerLink="/friends/added" class="search__popup-link text-[16px] text-[#00A3FF] hover:text-[#56C2FF] duration-[200ms] flex items-center justify-center p-[8px]"
+            <a routerLink="/subscribers/added" class="search__popup-link text-[16px] text-[#00A3FF] hover:text-[#56C2FF] duration-[200ms] flex items-center justify-center p-[8px]"
             >Показать все резальтаты
             <span class="w-[12px] h-[12px] inline-block ml-[4px] pt-[1px]"
               ><svg

@@ -36,6 +36,7 @@ export const DELETE_LIKE_POST = '/usersDeleteLikeMessage';
 export const ADD_FRIEND = '/addFriends';
 export const DELETE_FRIEND = '/deleteFriends';
 export const GET_ALL_FRIENDS = '/allFriendsUser';
+export const GET_ALL_SUBCRIBERS = '/allSubFriendsUser';
 
 //SessionStorage keys
 

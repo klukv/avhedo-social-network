@@ -9,7 +9,7 @@
 <ul class="friends-page__list-search px-[32px] pb-[64px]">
   <li
     class="friends-page__list-friends__content flex items-center pt-[16px] pb-[32px] pl-[8px] border-b-[1px] border-solid border-[#EBEBEB]"
-    *ngFor="let friend of friendsService.listSearchFriends | filterFriends : searchPerson; let i = index"
+    *ngFor="let friend of friendsService.listSubsribers | filterFriends : searchPerson; let i = index"
   >
     <div class="list-friends__content-avatar pr-[16px] w-[82px] h-[82px]">
       <img

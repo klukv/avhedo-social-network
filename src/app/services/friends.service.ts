@@ -5,7 +5,7 @@ import {
   ISubscribes,
 } from '../models/friends';
 import { allPeople, friendsData } from '../data/friendsData';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { WebsocketService } from './websocket.service';
 import { HttpClient } from '@angular/common/http';
@@ -14,8 +14,10 @@ import {
   API_URL,
   DELETE_FRIEND,
   GET_ALL_FRIENDS,
+  GET_ALL_SUBCRIBERS,
   httpOptions,
 } from '../utils/const';
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root',
@@ -35,10 +37,12 @@ export class FriendsService {
   };
 
   private _subscribesList: ISubscribes[] = [];
+  private _subscribersList: ISubscribes[] = [];
   private _friendsList: IFriends[] = friendsData;
   private _friendsListSearch: IFriends[] = allPeople;
   private _isLoaded: boolean = false;
   private _isLoadedMySubscribes: boolean = false;
+  private _isLoadedSubscribers: boolean = false;
 
   friendInfo$ = this._friendInfo.asObservable();
   searchUsernameFriend$ = this._searchUsernameFriend.asObservable();
@@ -46,7 +50,8 @@ export class FriendsService {
   constructor(
     private router: Router,
     private websocketService: WebsocketService,
-    private _http: HttpClient
+    private _http: HttpClient,
+    private errorService: ErrorService
   ) {}
 
   get activeFriendsLinks() {
@@ -69,8 +74,16 @@ export class FriendsService {
     return this._isLoadedMySubscribes;
   }
 
+  get isLoadedSubscribers(){
+    return this._isLoadedSubscribers;
+  }
+
   get listSubcribes() {
     return this._subscribesList;
+  }
+
+  get listSubsribers() {
+    return this._subscribersList;
   }
 
   set listFriends(newFriends: IFriends[]) {
@@ -83,6 +96,10 @@ export class FriendsService {
 
   setLoadedMySubscribes(value: boolean) {
     this._isLoadedMySubscribes = value;
+  }
+
+  setLoadedSubscribers(value: boolean) {
+    this._isLoadedSubscribers = value;
   }
 
   setActiveFriendLink(selectLink: string) {
@@ -133,8 +150,8 @@ export class FriendsService {
     });
   }
 
-  isExistSubscribe(id: number) {
-    return this._subscribesList.every(
+  isExistSubscribe(id: number, list: ISubscribes[]) {
+    return list.every(
       (infoSubscribe) => infoSubscribe.id !== id
     );
   }
@@ -155,7 +172,7 @@ export class FriendsService {
     );
   }
 
-  getAllFriends(ownerId: number): Observable<IResponseSubscribesInfo[]> {
+  getAllSubscribes(ownerId: number): Observable<IResponseSubscribesInfo[]> {
     return this._http
       .get<IResponseSubscribesInfo[]>(
         API_URL + GET_ALL_FRIENDS + '/' + ownerId,
@@ -163,13 +180,44 @@ export class FriendsService {
       )
       .pipe(
         tap((subscribesData) => {
-          subscribesData.map((infoSubscribe) => {
-            if (this.isExistSubscribe(infoSubscribe.friends.userInfo.id)) {
+          subscribesData.map((infoSubscribe) => {   
+            if (
+              this.isExistSubscribe(
+                infoSubscribe.friends.userInfo.id,
+                this.listSubcribes
+              )
+            ) {
               this._subscribesList.push({
                 id: infoSubscribe.friends.userInfo.id,
                 username: infoSubscribe.friends.userInfo.username,
                 age: infoSubscribe.friends.dateOfBirthday,
                 url: infoSubscribe.friends.url,
+              });
+            }
+          });
+        }),
+      );
+  }
+
+  getAllSubscribers(ownerId: number): Observable<IResponseSubscribesInfo[]> {
+    return this._http
+      .get<IResponseSubscribesInfo[]>(
+        API_URL + GET_ALL_SUBCRIBERS + '/' + ownerId
+      )
+      .pipe(
+        tap((subscribersData) => {
+          subscribersData.map((infoSubscriber) => {
+            if (
+              this.isExistSubscribe(
+                infoSubscriber.friends.userInfo.id,
+                this.listSubsribers
+              )
+            ) {
+              this._subscribersList.push({
+                id: infoSubscriber.friends.userInfo.id,
+                username: infoSubscriber.friends.userInfo.username,
+                age: infoSubscriber.friends.dateOfBirthday,
+                url: infoSubscriber.friends.url,
               });
             }
           });
