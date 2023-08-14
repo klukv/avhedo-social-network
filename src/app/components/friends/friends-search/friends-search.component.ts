@@ -58,6 +58,11 @@ export class FriendsSearchComponent {
     }
   }
 
+
+// TODO: перенести метод удаления в компонент с подписками
+
+
+
   clickDeleteFriendBtn(friendId: number) {
     if (this.userInfo.id && this.userInfo.id !== 0) {
       this.friendService
