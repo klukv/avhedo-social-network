@@ -6,10 +6,16 @@
     [(ngModel)]="searchPerson"
   />
 </div>
-<ul class="friends-page__list-search px-[32px] pb-[64px]">
+<ul
+  class="friends-page__list-search px-[32px] pb-[64px]"
+  *ngIf="friendsService.isLoadedAllUsers; else loader_all_users"
+>
   <li
     class="friends-page__list-friends__content flex items-center pt-[16px] pb-[32px] pl-[8px] border-b-[1px] border-solid border-[#EBEBEB]"
-    *ngFor="let friend of friendsService.listSubsribers | filterFriends : searchPerson; let i = index"
+    *ngFor="
+      let friend of friendsService.listAllUsers | filterFriends : searchPerson;
+      let i = index
+    "
   >
     <div class="list-friends__content-avatar pr-[16px] w-[82px] h-[82px]">
       <img
@@ -45,8 +51,8 @@
       }"
     >
       <svg
-        (click)="clickAddFriendBtn(1, i)"
-        [ngClass]="{ hidden: this.selectedIndexButton === i }"
+        (click)="clickAddFriendBtn(friend.id, i)"
+        [ngClass]="{ 'hidden': this.selectedIndexButton === i || hasSubscribes(friend.id)}"
         class="w-full h-full"
         viewBox="0 0 64.00 64.00"
         xmlns="http://www.w3.org/2000/svg"
@@ -72,10 +78,16 @@
       </svg>
       <div
         class="friends__accept-svg"
-        [ngClass]="{ hidden: this.selectedIndexButton !== i }"
+        [ngClass]="{
+          'hidden': this.selectedIndexButton !== i && !hasSubscribes(friend.id)
+        }"
       >
         <svg
-          *ngIf="this.friendService.isLoaded === true; else loader_spinner"
+          (click)="clickDeleteFriendBtn(friend.id)"
+          *ngIf="
+            this.friendService.isLoaded === true || hasSubscribes(friend.id);
+            else loader_spinner
+          "
           class="w-full h-full"
           viewBox="0 0 20 20"
           version="1.1"
@@ -109,4 +121,26 @@
 
 <ng-template #loader_spinner>
   <app-lodaer-spin-v2></app-lodaer-spin-v2>
+</ng-template>
+
+<ng-template #loader_all_users>
+  <content-loader
+    viewBox="0 0 872 420"
+    [speed]="2"
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb"
+  >
+    <svg:circle cx="76" cy="52" r="36" />
+    <svg:rect x="138" y="45" rx="4" ry="4" width="80" height="20" />
+    <svg:rect x="138" y="69" rx="4" ry="4" width="140" height="17" />
+    <svg:rect x="138" y="16" rx="4" ry="4" width="140" height="25" />
+    <svg:circle cx="76" cy="182" r="36" />
+    <svg:rect x="138" y="175" rx="4" ry="4" width="80" height="20" />
+    <svg:rect x="138" y="199" rx="4" ry="4" width="140" height="17" />
+    <svg:rect x="138" y="146" rx="4" ry="4" width="140" height="25" />
+    <svg:circle cx="76" cy="312" r="36" />
+    <svg:rect x="138" y="305" rx="4" ry="4" width="80" height="20" />
+    <svg:rect x="138" y="329" rx="4" ry="4" width="140" height="17" />
+    <svg:rect x="138" y="276" rx="4" ry="4" width="140" height="25" />
+  </content-loader>
 </ng-template>

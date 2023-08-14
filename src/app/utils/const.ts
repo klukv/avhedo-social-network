@@ -37,6 +37,7 @@ export const ADD_FRIEND = '/addFriends';
 export const DELETE_FRIEND = '/deleteFriends';
 export const GET_ALL_FRIENDS = '/allFriendsUser';
 export const GET_ALL_SUBCRIBERS = '/allSubFriendsUser';
+export const GET_ALL_USERS = '/AlluserInfo';
 
 //SessionStorage keys
 

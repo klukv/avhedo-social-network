@@ -9,7 +9,7 @@ export interface IFriends {
   age: number;
   about?: string;
 }
-export interface ISubscribes {
+export interface IPersonSub {
   id: number;
   username: string;
   age: string;
@@ -21,5 +21,11 @@ export interface IResponseSubscribesInfo {
     dateOfBirthday: string;
     url: string;
   };
+}
+
+export interface IResponseAllUsers {
+  userInfo: TUserInfo,
+  dateOfBirthday: string,
+  url: string
 }
 

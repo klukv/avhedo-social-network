@@ -61,31 +61,35 @@ export class MainPageComponent implements AfterViewInit {
   trackingScrollPosts(event: any) {
     const clientHeight = document.body.clientHeight;
     const homePageHeight = this.homePage.nativeElement.offsetHeight;
-    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop || 0;
 
     if (clientHeight + scrollTop >= homePageHeight) {
-        if (!this.isSendRequestGetPosts) {
-          this.isLoadedAdditionallyPosts = false;
-          this.getMorePosts();
-          this.isSendRequestGetPosts = true; 
-        }
-    }else{
+      if (!this.isSendRequestGetPosts) {
+        this.isLoadedAdditionallyPosts = false;
+        this.getMorePosts();
+        this.isSendRequestGetPosts = true;
+      }
+    } else {
       this.isSendRequestGetPosts = false;
     }
   }
 
   getMorePosts() {
-    const idCurrentLastPost =
-      this.postService.postsData[this.postService.postsData.length - 1]
-        .messageDto.id;
-
-    this.postService.getPosts(idCurrentLastPost - 1).subscribe((postsData) => {
-      if(postsData.length === 0){
-        this.isLoadedAdditionallyPosts = false
-      }else{
-        this.isLoadedAdditionallyPosts = true;
-      }
-    });
+    if (this.postService.postsData) {
+      const idCurrentLastPost =
+        this.postService.postsData[this.postService.postsData.length - 1]
+          .messageDto.id;
+      this.postService
+        .getPosts(idCurrentLastPost - 1)
+        .subscribe((postsData) => {
+          if (postsData.length === 0) {
+            this.isLoadedAdditionallyPosts = false;
+          } else {
+            this.isLoadedAdditionallyPosts = true;
+          }
+        });
+    }
   }
 
   private _createFrom() {
