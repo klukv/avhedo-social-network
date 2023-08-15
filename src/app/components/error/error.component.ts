@@ -8,9 +8,4 @@ import { ErrorService } from 'src/app/services/error.service';
 })
 export class ErrorComponent {
   constructor(public errorService: ErrorService) {}
-
-  closeErrorBlock(){
-    this.errorService.clear();
-  }
-
 }

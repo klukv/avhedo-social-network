@@ -1,44 +1,49 @@
 <div
-  class="error__block max-w-[400px] mx-auto mt-[15px] mb-[64px] rounded-[8px] bg-[#fc3737] text-[#fff] relative"
-  *ngIf="this.errorService.error$ | async"
+  class="error__view fixed top-0 right-0 bottom-0 left-0 bg-black/50 z-[1000] flex justify-center"
+  (click)="errorService.closeErrorModal()"
 >
-  <h1 class="error__block-title text-[22px] text-center py-[8px]">Ошибка</h1>
-  <button
-    class="error__close-btn w-[18px] h-[18px] absolute right-[5px] top-[5px]"
-    (click)="closeErrorBlock()"
+  <div
+    appStopPropagination
+    class="error__block max-w-[400px] m-auto px-[24px] pt-[16px] pb-[64px] inline-flex flex-col self-start rounded-[8px] bg-[#fc3737] text-[#fff] relative"
   >
-    <svg
-      class="w-full h-full"
-      viewBox="-0.5 0 25 25"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      stroke="#ffffff"
+    <h1 class="error__block-title text-[22px] text-center py-[8px]">Ошибка</h1>
+    <button
+      class="error__close-btn w-[18px] h-[18px] absolute right-[5px] top-[5px]"
+      (click)="errorService.closeErrorModal()"
     >
-      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-      <g
-        id="SVGRepo_tracerCarrier"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      ></g>
-      <g id="SVGRepo_iconCarrier">
-        <path
-          d="M3 21.32L21 3.32001"
-          stroke="#ffffff"
-          stroke-width="1.575"
+      <svg
+        class="w-full h-full"
+        viewBox="-0.5 0 25 25"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        stroke="#ffffff"
+      >
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g
+          id="SVGRepo_tracerCarrier"
           stroke-linecap="round"
           stroke-linejoin="round"
-        ></path>
-        <path
-          d="M3 3.32001L21 21.32"
-          stroke="#ffffff"
-          stroke-width="1.575"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></path>
-      </g>
-    </svg>
-  </button>
-  <div class="error__block-text px-[5px] py-[10px] text-center text-[18px]">
-    <p>{{ this.errorService.error$ | async }}</p>
+        ></g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M3 21.32L21 3.32001"
+            stroke="#ffffff"
+            stroke-width="1.575"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+          <path
+            d="M3 3.32001L21 21.32"
+            stroke="#ffffff"
+            stroke-width="1.575"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </g>
+      </svg>
+    </button>
+    <div class="error__block-text px-[5px] py-[10px] text-center text-[18px]">
+      <p>{{ this.errorService.error$ | async }}</p>
+    </div>
   </div>
 </div>

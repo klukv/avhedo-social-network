@@ -10,7 +10,9 @@
           "
           class="main__additionally-info flex flex-col"
         >
-          <app-friends-routing *ngIf="hasRoute('subscribers')"></app-friends-routing>
+          <app-friends-routing
+            *ngIf="hasRoute('subscribers')"
+          ></app-friends-routing>
           <app-my-page class="mb-[48px]"></app-my-page>
           <app-friends-block
             *ngIf="!hasRoute('friends')"
@@ -28,4 +30,5 @@
       *ngIf="modalService.typeModal === variantsModals.TYPE_MODAL_FORM"
     ></app-create-info-user>
   </app-modal>
+  <app-error *ngIf="errorService.isVisibleErrorModal$ | async"></app-error>
 </div>
