@@ -81,12 +81,12 @@
       <div
         class="friends__accept-svg"
         [ngClass]="{
-          hidden: this.selectedIndexButton !== i && !hasSubscribes(friend.id)
+          hidden: !hasSubscribes(friend.id)
         }"
       >
         <svg
           *ngIf="
-            this.friendService.isLoaded === true || hasSubscribes(friend.id);
+            (this.friendService.isLoaded === true && hasSubscribes(friend.id)) || this.selectedIndexButton !== i;
             else loader_spinner
           "
           class="w-full h-full"

@@ -36,7 +36,9 @@ export class FriendsSearchComponent {
       this.friendsService
         .getAllSubscribes(this.userInfo.id)
         .pipe(catchError((error) => this.errorService.handle(error)))
-        .subscribe(() => {});
+        .subscribe(() => {
+          this.friendService.setLoaded(true);
+        });
     }
   }
 
@@ -58,8 +60,8 @@ export class FriendsSearchComponent {
       this.selectedIndexButton = indexButton;
       this.arrayAddedSubscribe.push(person);
 
+      this.friendService.setLoaded(false);
       this.friendService.addFriend(this.userInfo.id, friendId).subscribe(() => {
-        this.friendService.setLoadedMySubscribes(false);
         this.friendService.setLoaded(true);
       });
     }
