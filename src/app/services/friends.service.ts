@@ -34,7 +34,7 @@ export class FriendsService {
 
   private _activeFriendsLinks = {
     searchSubscribes: 'not_active',
-    addedSubscribers: 'active',
+    addedSubscribers: 'not_active',
     ownSubscribers: 'not_active',
   };
 
@@ -72,16 +72,16 @@ export class FriendsService {
     return this._friendsListSearch;
   }
 
-  get isLoaded() {
+  get isLoaded(){
     return this._isLoaded;
-  }
-
-  get isLoadedMySubscribes() {
-    return this._isLoadedMySubscribes;
   }
 
   get isLoadedSubscribers() {
     return this._isLoadedSubscribers;
+  }
+
+  get isLoadedSubscribes(){
+    return this._isLoadedMySubscribes;
   }
 
   get isLoadedAllUsers() {
@@ -102,6 +102,10 @@ export class FriendsService {
 
   set listFriends(newFriends: IFriends[]) {
     this._friendsList = newFriends;
+  }
+
+  setListSubscribes(listSub: IPersonSub[]){
+    this._subscribesList = listSub;
   }
 
   setLoaded(value: boolean) {

@@ -52,7 +52,9 @@
     >
       <svg
         (click)="clickAddFriendBtn(friend.id, i)"
-        [ngClass]="{ 'hidden': this.selectedIndexButton === i || hasSubscribes(friend.id)}"
+        [ngClass]="{
+          hidden: this.selectedIndexButton === i || hasSubscribes(friend.id)
+        }"
         class="w-full h-full"
         viewBox="0 0 64.00 64.00"
         xmlns="http://www.w3.org/2000/svg"
@@ -79,11 +81,10 @@
       <div
         class="friends__accept-svg"
         [ngClass]="{
-          'hidden': this.selectedIndexButton !== i && !hasSubscribes(friend.id)
+          hidden: this.selectedIndexButton !== i && !hasSubscribes(friend.id)
         }"
       >
         <svg
-          (click)="clickDeleteFriendBtn(friend.id)"
           *ngIf="
             this.friendService.isLoaded === true || hasSubscribes(friend.id);
             else loader_spinner

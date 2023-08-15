@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./navigation.component.css'],
 })
 export class NavigationComponent {
-  addedSubscribers = 'addedSubscribers'
+  ownSubscribers = 'ownSubscribers'
   isOpenNotifications: boolean;
 
   ngAfterViewInit(): void {

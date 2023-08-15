@@ -13,6 +13,8 @@ import { StorageService } from 'src/app/services/storage.service';
 export class FriendsMyFriendsComponent {
   private userInfo: IPersonInfo = this.storageService.getUser();
 
+  activeButton: number;
+
   constructor(
     public friendsService: FriendsService,
     private storageService: StorageService,
@@ -20,15 +22,29 @@ export class FriendsMyFriendsComponent {
   ) {}
 
   ngOnInit() {
-    if (this.userInfo.id !== undefined) {
+    if (this.userInfo.id && this.userInfo.id !== 0) {
       this.friendsService.setLoadedMySubscribes(false);
-
       this.friendsService
         .getAllSubscribes(this.userInfo.id)
-        .pipe(catchError(error => this.errorService.handle(error)))
+        .pipe(catchError((error) => this.errorService.handle(error)))
         .subscribe(() => {
           this.friendsService.setLoadedMySubscribes(true);
         });
+    }
+  }
+
+  clickDeleteFriendBtn(friendId: number, indexBtn: number) {
+    if (this.userInfo.id && this.userInfo.id !== 0) {
+      this.activeButton = indexBtn;
+
+      const filterListSubscribes = this.friendsService.listSubcribes.filter(
+        (infoSubscribe) => infoSubscribe.id !== friendId
+      );
+      this.friendsService.setListSubscribes(filterListSubscribes);
+
+      this.friendsService
+        .deleteFriend(this.userInfo.id, friendId)
+        .subscribe(() => {});
     }
   }
 }

@@ -53,21 +53,10 @@ export class FriendsSearchComponent {
       this.selectedIndexButton = indexButton;
 
       this.friendService.addFriend(this.userInfo.id, friendId).subscribe(() => {
+        this.friendService.setLoadedMySubscribes(false);
         this.friendService.setLoaded(true);
       });
     }
   }
 
-
-// TODO: перенести метод удаления в компонент с подписками
-
-
-
-  clickDeleteFriendBtn(friendId: number) {
-    if (this.userInfo.id && this.userInfo.id !== 0) {
-      this.friendService
-        .deleteFriend(this.userInfo.id, friendId)
-        .subscribe(() => {});
-    }
-  }
 }
