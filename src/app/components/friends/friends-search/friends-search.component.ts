@@ -4,6 +4,7 @@ import { ErrorService } from 'src/app/services/error.service';
 import { FriendsService } from 'src/app/services/friends.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { catchError } from 'rxjs';
+import { IPersonSub } from 'src/app/models/friends';
 
 @Component({
   selector: 'app-friends-search',
@@ -12,6 +13,7 @@ import { catchError } from 'rxjs';
 })
 export class FriendsSearchComponent {
   private userInfo: IPersonInfo = this.storageService.getUser();
+  private arrayAddedSubscribe: IPersonSub[] = [];
 
   selectedIndexButton: number;
   searchPerson: string = '';
@@ -39,18 +41,22 @@ export class FriendsSearchComponent {
   }
 
   hasSubscribes(personId: number): boolean {
-    const result =
-      this.friendService.listSubcribes.filter(
-        (infoUser) => infoUser.id == personId
-      ).length !== 0;
-    return result;
+    const arrayCurrentSubscribes = this.friendService.listSubcribes.concat(
+      this.arrayAddedSubscribe
+    );
+
+    return (
+      arrayCurrentSubscribes.filter((infoUser) => infoUser.id == personId)
+        .length !== 0
+    );
   }
 
-  clickAddFriendBtn(friendId: number, indexButton: number) {
+  clickAddFriendBtn(friendId: number, indexButton: number, person: IPersonSub) {
     if (this.userInfo.id && this.userInfo.id !== 0) {
       console.log(`запрос прошёл`);
 
       this.selectedIndexButton = indexButton;
+      this.arrayAddedSubscribe.push(person);
 
       this.friendService.addFriend(this.userInfo.id, friendId).subscribe(() => {
         this.friendService.setLoadedMySubscribes(false);
@@ -58,5 +64,4 @@ export class FriendsSearchComponent {
       });
     }
   }
-
 }

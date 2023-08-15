@@ -51,7 +51,7 @@
       }"
     >
       <svg
-        (click)="clickAddFriendBtn(friend.id, i)"
+        (click)="clickAddFriendBtn(friend.id, i, friend)"
         [ngClass]="{
           hidden: this.selectedIndexButton === i || hasSubscribes(friend.id)
         }"
