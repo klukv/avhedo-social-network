@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { catchError } from 'rxjs';
 import { IFriends } from 'src/app/models/friends';
+import { IResponseInfoUser } from 'src/app/models/user';
+import { ErrorService } from 'src/app/services/error.service';
 import { FriendsService } from 'src/app/services/friends.service';
+import { PersonPageService } from 'src/app/services/person-page.service';
 
 @Component({
   selector: 'app-person-page',
@@ -9,26 +13,35 @@ import { FriendsService } from 'src/app/services/friends.service';
   styleUrls: ['./person-page.component.css'],
 })
 export class PersonPageComponent {
-  friendInfo: IFriends;
+  personInfo: IResponseInfoUser;
 
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
+    private personService: PersonPageService,
+    private errorService: ErrorService,
     public friendsService: FriendsService
   ) {}
 
   ngOnInit() {
-    const userId = this.activeRoute.snapshot.queryParams['id'];
-    this.friendsService.changeInfoFriend(userId);
-  }
+    this.activeRoute.queryParams.subscribe((params) => {
+      this.personService
+        .getInfoUser(params.id)
+        .pipe(catchError((error) => this.errorService.handle(error)))
+        .subscribe((infoUser) => this.friendsService.setInfoFriend(infoUser));
 
-  ngDoCheck() {
+      this.friendsService
+        .getAllSubscribers(params.id, true)
+        .pipe(catchError((error) => this.errorService.handle(error)))
+        .subscribe(() => {});
+    });
+
     this.friendsService.friendInfo$.subscribe(
-      (friendInfo) => (this.friendInfo = friendInfo)
+      (infoPersonCurrent) => (this.personInfo = infoPersonCurrent)
     );
   }
+
   goToPageFriend(id: number) {
-    this.friendsService.changeInfoFriend(id);
     this.router.navigate(['person'], {
       queryParams: {
         id: id,

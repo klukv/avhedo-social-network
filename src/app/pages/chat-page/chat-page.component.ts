@@ -1,8 +1,10 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, catchError } from 'rxjs';
 import { IFriends } from 'src/app/models/friends';
 import { IPersonInfo } from 'src/app/models/personInfo';
+import { IResponseInfoUser } from 'src/app/models/user';
+import { ErrorService } from 'src/app/services/error.service';
 import { FriendsService } from 'src/app/services/friends.service';
 import { PersonPageService } from 'src/app/services/person-page.service';
 import { WebsocketService } from 'src/app/services/websocket.service';
@@ -15,7 +17,7 @@ import { WebsocketService } from 'src/app/services/websocket.service';
 export class ChatPageComponent {
   private subscription: Subscription;
   private _user_id: string;
-  currentFriendChat: IFriends;
+  currentFriendChat: IResponseInfoUser;
   personInfo: IPersonInfo;
   messageContent: string = '';
 
@@ -23,6 +25,7 @@ export class ChatPageComponent {
     private router: Router,
     private activeRoute: ActivatedRoute,
     private personService: PersonPageService,
+    private errorService: ErrorService,
     public friendsService: FriendsService,
     public websocketService: WebsocketService
   ) {
@@ -37,7 +40,12 @@ export class ChatPageComponent {
   }
 
   ngOnInit() {
-    this.friendsService.changeInfoFriend(Number(this._user_id));
+    this.personService
+      .getInfoUser(this._user_id)
+      .pipe(catchError((error) => this.errorService.handle(error)))
+      .subscribe((infoUser) => {
+        this.friendsService.setInfoFriend(infoUser);
+      });
     this.subscription = this.friendsService.friendInfo$.subscribe(
       (friendInfo) => (this.currentFriendChat = friendInfo)
     );
@@ -49,12 +57,17 @@ export class ChatPageComponent {
       }
     });
     this._connectWebsocket();
-    this.websocketService.getAllMessages(`${this.personInfo.id}_${this._user_id}`)
+    this.websocketService.getAllMessages(
+      `${this.personInfo.id}_${this._user_id}`
+    );
   }
 
-  clickBtnSendMessage(){
-    this.websocketService.sendMessage(this.messageContent, this.currentFriendChat);
-    this.messageContent = ''
+  clickBtnSendMessage() {
+    this.websocketService.sendMessage(
+      this.messageContent,
+      this.currentFriendChat
+    );
+    this.messageContent = '';
   }
 
   ngOnDestroy() {

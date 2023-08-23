@@ -30,7 +30,7 @@ export class HeaderComponent {
   }
 
   goToPageFriend(id: number) {
-    this.friendsService.changeInfoFriend(id);
+   // this.friendsService.changeInfoFriend(id);
     this.route.navigate(['person'], {
       queryParams: {
         id: id,

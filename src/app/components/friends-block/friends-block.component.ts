@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { IPersonInfo } from 'src/app/models/personInfo';
 import { FriendsService } from 'src/app/services/friends.service';
-import { WebsocketService } from 'src/app/services/websocket.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-friends-block',
@@ -9,14 +10,29 @@ import { WebsocketService } from 'src/app/services/websocket.service';
   styleUrls: ['./friends-block.component.css'],
 })
 export class FriendsBlockComponent {
-  constructor(private websocketService: WebsocketService, private router: Router, public friendsService: FriendsService) {}
+  personInfo: IPersonInfo;
+  constructor(
+    private router: Router,
+    public friendsService: FriendsService,
+    private storageService: StorageService
+  ) {}
+
+  ngOnInit() {
+    this.personInfo = this.storageService.getUser();
+    if (this.personInfo.id && this.personInfo.id !== 0) {
+      this.friendsService
+        .getAllSubscribes(this.personInfo.id)
+        .subscribe(() => {});
+    }
+  }
+
   goToChat(id: number) {
     this.router.navigate([`messages/chat`], {
       queryParams: {
         id: id,
       },
     });
-    this.friendsService.changeInfoFriend(id);
+  //  this.friendsService.changeInfoFriend(id);
   }
   goToPageFriend(id: number) {
     this.router.navigate(['person'], {

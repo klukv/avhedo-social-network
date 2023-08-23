@@ -27,7 +27,7 @@ export class FriendsAddComponent {
       this.friendsService.setLoadedSubscribers(false)
       
       this.friendsService
-        .getAllSubscribers(this.userInfo.id)
+        .getAllSubscribers(this.userInfo.id, false)
         .pipe(catchError((error) => this.errorService.handle(error)))
         .subscribe(() => {this.friendsService.setLoadedSubscribers(true)});
     }

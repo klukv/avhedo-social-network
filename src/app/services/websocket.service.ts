@@ -8,6 +8,7 @@ import { IFriends } from '../models/friends';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { StorageService } from './storage.service';
+import { IResponseInfoUser } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -54,14 +55,14 @@ export class WebsocketService {
     console.log('Соединение прервано');
   }
 
-  sendMessage(msg: string, friend: IFriends) {
+  sendMessage(msg: string, recipient: IResponseInfoUser) {
     console.log('отправка сообщения');
     if (msg.trim() !== '') {
       const message = {
         senderId: this.personInfo.id,
-        recipientId: friend.id,
+        recipientId: recipient.userDto.id,
         senderName: this.personInfo.username,
-        recipientName: friend.username,
+        recipientName: recipient.userDto.username,
         content: msg,
         timestamp: new Date(),
       };

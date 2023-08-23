@@ -7,19 +7,19 @@
     ></div>
     <div class="person-page__info-content px-[32px] py-[48px]">
       <h2 class="person-page__username text-[32px] mb-[16px] mr-[12px]">
-        {{friendInfo.username}}
+        {{ this.personInfo.userDto.username }}
       </h2>
 
       <div class="person-page__info-content__age flex items-center mb-[16px]">
         <h2 class="person-page__age-title mr-[12px] text-[24px]">Возраст:</h2>
         <div class="person-page__age-text text-[18px] text-[#7A7A7A]">
-          {{friendInfo.age}} лет
+          {{ this.personInfo.dateOfBirthday }} лет
         </div>
       </div>
       <div class="person-page__info-content__hobby flex items-center mb-[11px]">
         <h2 class="person-page__hobby-title mr-[12px] text-[24px]">Хобби:</h2>
         <div class="person-page__hobby-text text-[18px] text-[#7A7A7A]">
-          машины, гонки
+          {{ this.personInfo.hobby }}
         </div>
       </div>
       <div class="person-page__info-content__about flex items-center">
@@ -29,31 +29,52 @@
         <div
           class="person-page__about-text text-[18px] text-[#7A7A7A] pt-[5px]"
         >
-          Люби, мечтай, страдай, влюбляйся, но никогда не унижайся!
+          {{ this.personInfo.aboutMe }}
         </div>
       </div>
     </div>
   </div>
   <div class="person-page__friends bg-[#fff] rounded-[10px] self-start">
-    <h2
-      class="person-page__friends-title text-center py-[16px] border-b-[1px] border-[#EBEBEB] text-[20px]" 
-    >
-      Друзья
-    </h2>
     <div
-      class="person-page__friends-list grid gap-[16px] grid-cols-3 grid-rows-2 p-[24px]"
+      class="person-page__friends-inner"
+      *ngIf="
+        friendsService.listSubscribersPerson.length !== 0;
+        else empty_subscribers
+      "
     >
-      <div
-        class="person-page__friends-friend flex flex-col justify-center items-center"
-        *ngFor="let friend of friendsService.listFriends | slice : 0 : 6; let i = index"
+      <h2
+        class="person-page__friends-title text-center py-[16px] border-b-[1px] border-[#EBEBEB] text-[20px]"
       >
-        <div class="person-page__friend-avatar mb-[8px]">
-          <img src="../../../assets/img/avatar.svg" alt="avatar-friend" />
-        </div>
-        <div class="person-page__friend-username text-[#7A7A7A] hover:text-[#00A3FF] duration-[250ms] cursor-pointer" (click)="goToPageFriend(friend.id)">
-          {{ friend.username }}
+        Подписчики
+      </h2>
+      <div
+        class="person-page__friends-list grid gap-[16px] grid-cols-3 grid-rows-2 p-[24px]"
+      >
+        <div
+          class="person-page__friends-friend flex flex-col justify-center items-center"
+          *ngFor="
+            let subscribe of friendsService.listSubscribersPerson
+              | slice : 0 : 6;
+            let i = index
+          "
+        >
+          <div class="person-page__friend-avatar mb-[8px]">
+            <img src="../../../assets/img/avatar.svg" alt="avatar-friend" />
+          </div>
+          <div
+            class="person-page__friend-username text-[#7A7A7A] hover:text-[#00A3FF] duration-[250ms] cursor-pointer"
+            (click)="goToPageFriend(subscribe.friends.userInfo.id)"
+          >
+            {{ subscribe.friends.userInfo.username }}
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #empty_subscribers>
+  <div class="empty__list-subscribers p-[35px] text-[20px] text-[#7A7A7A]">
+    <p>Подписчиков нет</p>
+  </div>
+</ng-template>
