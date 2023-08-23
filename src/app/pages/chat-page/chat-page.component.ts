@@ -15,7 +15,6 @@ import { WebsocketService } from 'src/app/services/websocket.service';
 export class ChatPageComponent {
   private subscription: Subscription;
   private _user_id: string;
- // private _ws: WebSocket = new WebSocket('ws://localhost:5000');
   currentFriendChat: IFriends;
   personInfo: IPersonInfo;
   messageContent: string = '';
@@ -31,66 +30,36 @@ export class ChatPageComponent {
       (currentPersonInfo) => (this.personInfo = currentPersonInfo)
     );
     this._user_id = this.activeRoute.snapshot.queryParams['id'];
-   // this._connectWebsocket();
   }
 
-  // private _connectWebsocket() {
-  //   this._ws.onopen = () => {
-  //     const message = {
-  //       event: 'connection',
-  //       id: Math.random(),
-  //       chatId: `${this.personInfo.id}_${this._user_id}`,
-  //       senderId: this.personInfo.id,
-  //       recipientId: this._user_id,
-  //       content: this.messageContent,
-  //     };
-  //     this._ws.send(JSON.stringify(message));
-  //     console.log(`Подключение с вебсокетом установлено`);
-  //   };
+  private _connectWebsocket() {
+    this.websocketService.connect('http://localhost:8080/ws');
+  }
 
-  //   this._ws.onmessage = (event) => {
-  //     const data = JSON.parse(event.data);
-  //     if (data.content !== undefined) {
-  //       this.websocketService.addNewMessage(data);
-  //     }
-  //   };
+  ngOnInit() {
+    this.friendsService.changeInfoFriend(Number(this._user_id));
+    this.subscription = this.friendsService.friendInfo$.subscribe(
+      (friendInfo) => (this.currentFriendChat = friendInfo)
+    );
+    this.router.events.subscribe((event) => {
+      let currentUrl = this.router.url;
 
-  //   this._ws.onclose = () => {
-  //     console.log(`Подключение остановлено`);
-  //   };
-  // }
+      if (event instanceof NavigationEnd && currentUrl.includes('chat')) {
+        window.location.reload();
+      }
+    });
+    this._connectWebsocket();
+    this.websocketService.getAllMessages(`${this.personInfo.id}_${this._user_id}`)
+  }
 
-  // ngOnInit() {
-  //   this.friendsService.changeInfoFriend(Number(this._user_id));
-  //   this.subscription = this.friendsService.friendInfo$.subscribe(
-  //     (friendInfo) => (this.currentFriendChat = friendInfo)
-  //   );
-  //   this.router.events.subscribe((event) => {
-  //     let currentUrl = this.router.url;
+  clickBtnSendMessage(){
+    this.websocketService.sendMessage(this.messageContent, this.currentFriendChat);
+    this.messageContent = ''
+  }
 
-  //     if (event instanceof NavigationEnd && currentUrl.includes('chat')) {
-  //       window.location.reload();
-  //     }
-  //   });
-  //   this.websocketService.getAllMessages(`${this.personInfo.id}_${this._user_id}`)
-  // }
-
-  // sendMessageWs() {
-  //   const message = {
-  //     id: Math.random(),
-  //     chatId: `${this.personInfo.id}_${this._user_id}`,
-  //     senderId: this.personInfo.id,
-  //     recipientId: this._user_id,
-  //     content: this.messageContent,
-  //     event: 'message',
-  //   };
-  //   this._ws.send(JSON.stringify(message));
-  //   this.messageContent = '';
-  // }
-
-  // ngOnDestroy() {
-  //   this.websocketService.clearMessages();
-  //   this._ws.close();
-  //   this.subscription.unsubscribe();
-  // }
+  ngOnDestroy() {
+    this.websocketService.clearMessages();
+    this.websocketService.disconnect();
+    this.subscription.unsubscribe();
+  }
 }

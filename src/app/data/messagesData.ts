@@ -33,23 +33,6 @@ export const messagesData = [
   },
 ];
 
-export const messageLinkInterlocutor: IChatMessage[] = [
-  {
-    id: 3,
-    chatId: `0_3`,
-    senderId: "3",
-    recipientId: "0",
-    content: 'Hello world!',
-  },
-];
 
-export const messageLinkOwn = [
-  {
-    id: 0,
-    chatId: `0_3`,
-    senderId: "0",
-    recipientId: "3",
-    content: 'hello',
-  },
-];
+
 

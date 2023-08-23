@@ -69,7 +69,7 @@ export const allPeople = [
   },
   {
     id: 1,
-    username: 'Надежда',
+    username: 'Александр',
     age: 25,
   },
   {

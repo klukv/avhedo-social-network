@@ -17,7 +17,7 @@
   </div>
   <div class="chat-page__list-messages__container flex-grow overflow-y-auto">
     <ul class="chat-page__list-messages flex flex-col justify-end h-full">
-      <li class="chat-page__list-messages__group mt-[34px] mx-[64px]">
+      <!-- <li class="chat-page__list-messages__group mt-[34px] mx-[64px]">
         <div
           class="chat-page__message interlocutor my-[10px] break-all"
           *ngFor="
@@ -32,12 +32,12 @@
             {{ message.content }}
           </p>
         </div>
-      </li>
+      </li> -->
       <li class="chat-page__list-messages__group mt-[34px] mx-[64px]">
         <div
           class="chat-page__message own__message_block my-[10px] flex flex-row-reverse items-center break-all"
           *ngFor="
-            let message of this.websocketService.messagesOwn$ | async;
+            let message of this.websocketService.messages$ | async;
             let i = index
           "
         >
@@ -59,9 +59,9 @@
         placeholder="Написать сообщение"
         [(ngModel)]="messageContent"
       />
-      <!-- <div
+      <div
         class="chat-page__entry-svg w-[28px] h-[28px] absolute top-[21px] right-[21px] cursor-pointer"
-        (click)="sendMessageWs()"
+        (click)="clickBtnSendMessage()"
       >
         <svg
           class="w-full h-full"
@@ -74,7 +74,7 @@
             fill="#00A3FF"
           />
         </svg>
-      </div> -->
+      </div>
     </div>
   </div>
 </div>

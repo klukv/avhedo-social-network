@@ -28,6 +28,9 @@ export class ErrorService {
       case 500:
         this._error.next('Сервер недоступен');
         break;
+      default:
+        this._error.next('Произошла ошибка');
+        break;
     }
     return throwError(() => error.message);
   }

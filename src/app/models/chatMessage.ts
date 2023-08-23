@@ -1,7 +1,8 @@
-export interface IChatMessage{
-    id: number | null,
-    chatId: string,
-    senderId: string,
-    recipientId: string,
-    content: string
+export interface IChatMessage {
+  senderId: number | undefined;
+  recipientId: number;
+  senderName: string;
+  recipientName: string;
+  content: string;
+  timestamp: Date;
 }
