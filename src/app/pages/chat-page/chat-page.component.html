@@ -17,36 +17,34 @@
   </div>
   <div class="chat-page__list-messages__container flex-grow overflow-y-auto">
     <ul class="chat-page__list-messages flex flex-col justify-end h-full">
-      <!-- <li class="chat-page__list-messages__group mt-[34px] mx-[64px]">
-        <div
-          class="chat-page__message interlocutor my-[10px] break-all"
-          *ngFor="
-            let message of this.websocketService.messagesInterlocutor$ | async;
-            let i = index
-          "
-        >
-          <p
-            class="message-text p-[10px] border-[1px] border-[#000000] rounded-[10px] inline-block"
-            *ngIf="message.content"
-          >
-            {{ message.content }}
-          </p>
-        </div>
-      </li> -->
       <li class="chat-page__list-messages__group mt-[34px] mx-[64px]">
         <div
-          class="chat-page__message own__message_block my-[10px] flex flex-row-reverse items-center break-all"
+          class="chat-page__message"
           *ngFor="
-            let message of this.websocketService.messages$ | async;
+            let message of this.chatService.allMessagesChat;
             let i = index
           "
         >
-          <p
-            class="message-text own rounded-[10px] p-[10px] inline-block"
-            *ngIf="message.content"
+          <div
+            class="chat-page__message-inner my-[10px] break-all"
+            [ngClass]="{
+              'own__message_block flex flex-row-reverse items-center':
+                this.isOwnMessage(message.senderId),
+              interlocutor: !this.isOwnMessage(message.senderId)
+            }"
           >
-            {{ message.content }}
-          </p>
+            <p
+              class="message-text rounded-[10px] p-[10px] inline-block"
+              [ngClass]="{
+                'own':
+                  this.isOwnMessage(message.senderId),
+                'border-[1px] border-[#000000]': !this.isOwnMessage(message.senderId)
+              }"
+              *ngIf="message.content"
+            >
+              {{ message.content }}
+            </p>
+          </div>
         </div>
       </li>
     </ul>

@@ -39,6 +39,8 @@ export const GET_ALL_FRIENDS = '/allFriendsUser';
 export const GET_ALL_SUBCRIBERS = '/allSubFriendsUser';
 export const GET_ALL_USERS = '/AlluserInfo';
 
+export const GET_ALL_CHATS_USER = '/AllChatUser'
+export const GET_ALL_MESSAGES_CHAT = '/ChatMessages'
 //SessionStorage keys
 
 export const USER_KEY = 'auth-user';

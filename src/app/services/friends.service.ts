@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import {
-  IFriends,
   IResponseAllUsers,
   IResponseSubscribesInfo,
   IPersonSub,
 } from '../models/friends';
-import { allPeople, friendsData } from '../data/friendsData';
-import { BehaviorSubject, Observable, catchError, map, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { WebsocketService } from './websocket.service';
 import { HttpClient } from '@angular/common/http';

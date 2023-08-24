@@ -4,6 +4,7 @@ import { Subscription, catchError } from 'rxjs';
 import { IFriends } from 'src/app/models/friends';
 import { IPersonInfo } from 'src/app/models/personInfo';
 import { IResponseInfoUser } from 'src/app/models/user';
+import { ChatService } from 'src/app/services/chat.service';
 import { ErrorService } from 'src/app/services/error.service';
 import { FriendsService } from 'src/app/services/friends.service';
 import { PersonPageService } from 'src/app/services/person-page.service';
@@ -26,6 +27,7 @@ export class ChatPageComponent {
     private activeRoute: ActivatedRoute,
     private personService: PersonPageService,
     private errorService: ErrorService,
+    public chatService: ChatService,
     public friendsService: FriendsService,
     public websocketService: WebsocketService
   ) {
@@ -46,9 +48,11 @@ export class ChatPageComponent {
       .subscribe((infoUser) => {
         this.friendsService.setInfoFriend(infoUser);
       });
+
     this.subscription = this.friendsService.friendInfo$.subscribe(
       (friendInfo) => (this.currentFriendChat = friendInfo)
     );
+
     this.router.events.subscribe((event) => {
       let currentUrl = this.router.url;
 
@@ -56,10 +60,16 @@ export class ChatPageComponent {
         window.location.reload();
       }
     });
+
     this._connectWebsocket();
-    this.websocketService.getAllMessages(
-      `${this.personInfo.id}_${this._user_id}`
-    );
+  
+    this.chatService
+      .getAllMessagesChat(this.chatService.currentChatId)
+      .subscribe(() => {});
+  }
+
+  isOwnMessage(senderId: string): boolean{
+    return this.personInfo.id === Number(senderId);
   }
 
   clickBtnSendMessage() {
