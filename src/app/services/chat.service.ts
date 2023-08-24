@@ -9,7 +9,7 @@ import {
 import { Observable, catchError, tap } from 'rxjs';
 import { IAllChats } from '../models/chat';
 import { ErrorService } from './error.service';
-import { IResponseAllChatMessages } from '../models/chatMessage';
+import { IChatMessage, IResponseAllChatMessages } from '../models/chatMessage';
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +36,22 @@ export class ChatService {
 
   setChatId(id: string) {
     this._currentChatId = id;
+  }
+
+  addMessageChat(message: IChatMessage){
+    const lastMessage = this._allMessagesChat[this._allMessagesChat.length - 1];
+
+    this._allMessagesChat.push({
+      id: lastMessage.id++,
+      chatId: lastMessage.chatId,
+      senderId: message.senderId.toString(),
+      recipientId: message.recipientId.toString(),
+      senderName: message.senderName,
+      recipientName: message.recipientName,
+      content: message.content,
+      timestamp: message.timestamp,
+      status: message.status
+    });
   }
 
   //backend requests

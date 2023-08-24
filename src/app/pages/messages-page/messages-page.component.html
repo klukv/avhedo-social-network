@@ -11,7 +11,7 @@
     <li
       class="messages-page__list-messages__content flex items-center pt-[16px] pb-[32px] pl-[8px] border-b-[1px] border-solid border-[#EBEBEB] hover:bg-[#EBEBEB] duration-[250ms] cursor-pointer"
       *ngFor="let chat of this.chatService.allChatsUser; let i = index"
-      (click)="goToChat(chat.recipientId, chat.chatId)"
+      (click)="this.isOwnChat(chat.chatId) ? goToChat(chat.recipientId) : goToChat(chat.senderId)"
     >
       <div class="list-messages__content-avatar pr-[16px]">
         <img src="../../../assets/img/avatar.svg" alt="user-avatar" />
@@ -20,10 +20,10 @@
         <h2
           class="list-messages__content-info info__username text-[20px] mb-[6px]"
         >
-          {{ chat.recipientName }}
+          {{ this.isOwnChat(chat.chatId) ? chat.recipientName : chat.senderName}}
         </h2>
         <div class="list-messages__content-info info__text text-[#7A7A7A] flex items-center">
-          <span class="pr-[5px]" *ngIf="this.isOwnMessage(chat.senderId)">Вы:</span>
+          <span class="pr-[5px]" *ngIf="this.isOwnChat(chat.chatId)">Вы:</span>
           {{ chat.content }}
         </div>
       </div>

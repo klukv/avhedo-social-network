@@ -1,10 +1,11 @@
 export interface IChatMessage {
-  senderId: number | undefined;
+  senderId: number;
   recipientId: number;
   senderName: string;
   recipientName: string;
   content: string;
   timestamp: Date;
+   status: string;
 }
 
 export interface IResponseAllChatMessages {
@@ -16,5 +17,5 @@ export interface IResponseAllChatMessages {
   recipientName: string;
   content: string;
   timestamp: Date;
-  status: string | null;
+  status: string;
 }

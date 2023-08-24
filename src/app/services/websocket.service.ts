@@ -9,6 +9,7 @@ import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { StorageService } from './storage.service';
 import { IResponseInfoUser } from '../models/user';
+import { ChatService } from './chat.service';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +29,7 @@ export class WebsocketService {
   stompClient: any = null;
   urlMessageWebsocket: string;
 
-  constructor(private storageService:StorageService) {
+  constructor(private storageService:StorageService, private chatService: ChatService) {
   }
 
   connect(endPointWebSocket: string) {
@@ -57,7 +58,7 @@ export class WebsocketService {
 
   sendMessage(msg: string, recipient: IResponseInfoUser) {
     console.log('отправка сообщения');
-    if (msg.trim() !== '') {
+    if (msg.trim() !== '' && this.personInfo.id) {
       const message = {
         senderId: this.personInfo.id,
         recipientId: recipient.userDto.id,
@@ -65,12 +66,12 @@ export class WebsocketService {
         recipientName: recipient.userDto.username,
         content: msg,
         timestamp: new Date(),
+        status: 'RECEIVED'
       };
 
       this.stompClient.send('/app/chat', {}, JSON.stringify(message));
 
-      this._arrayMessages.push(message);
-      this._messages.next(this._arrayMessages);
+      this.chatService.addMessageChat(message);
     }
   }
 
@@ -78,8 +79,11 @@ export class WebsocketService {
     console.log('errorCallBack -> ' + error);
   }
 
-  private _onMessageReceived(message: IChatMessage) {
-    console.log('Message Recieved from Server :: ' + message);
+  private _onMessageReceived(message: any) {
+    const parseMessage = JSON.parse(message.body);
+    console.log(parseMessage);
+    
+    this.chatService.addMessageChat(parseMessage);
   }
 
   clearMessages() {

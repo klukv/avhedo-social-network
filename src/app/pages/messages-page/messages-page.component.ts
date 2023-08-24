@@ -26,14 +26,15 @@ export class MessagesPageComponent {
     }
   }
 
-  isOwnMessage(idSender: string): boolean {
-    return this.userInfo.id === Number(idSender);
+  isOwnChat(chatId:string) {
+    if(this.userInfo.id && this.userInfo.id !== 0){
+     return chatId.split('_')[0] === this.userInfo.id.toString()
+    }
+    return;
   }
 
-  goToChat(id: string, chatId: string) {
-    
-    this.chatService.setChatId(chatId);
-
+  goToChat(id: string) {
+  
     this.router.navigate([`messages/chat`], {
       queryParams: {
         id: id,

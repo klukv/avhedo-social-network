@@ -64,7 +64,7 @@ export class ChatPageComponent {
     this._connectWebsocket();
   
     this.chatService
-      .getAllMessagesChat(this.chatService.currentChatId)
+      .getAllMessagesChat('2_1')
       .subscribe(() => {});
   }
 
