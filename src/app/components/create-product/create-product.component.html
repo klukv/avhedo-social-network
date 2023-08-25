@@ -32,7 +32,7 @@
     >
       <div
         class="hobby__cells py-[8px]"
-        [ngClass]="{ 'hidden': this.personService.selectHobbyItems.length === 0 }"
+        [ngClass]="{ hidden: this.personService.selectHobbyItems.length === 0 }"
       >
         <div
           class="hobby-cell inline-flex items-center px-[8px] py-[4px] rounded-[8px] bg-[#00A3FF] text-[#ffffff] my-[2px] mx-[2px] text-[16px]"
@@ -90,6 +90,12 @@
         placeholder="Новое значение"
         (change)="setAboutInfo()"
       ></textarea>
+    </div>
+    <div
+      class="form__input-info__image"
+      *ngSwitchCase="variantsEdit.TYPE_AVATAR"
+    >
+      <input type="file" accept="image/*" class="form__image-avatar" (change)="onFileChange($event)"/>
     </div>
     <button
       class="form__button inline-flex my-[8px] w-[40px] h-[40px] rounded-[50%] bg-[#00A3FF] justify-center items-center hover:bg-[#52C1FF] duration-[250ms]"

@@ -46,7 +46,7 @@ export class SignupPageComponent implements OnDestroy {
         this.username?.value,
         this.email?.value,
         this.password?.value,
-        ['admin, moderator']
+        ['admin, moderator'],
       )
       .pipe(    
         catchError(error => this.errorService.handle(error))

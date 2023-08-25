@@ -33,6 +33,13 @@ export class MessagesPageComponent {
     return;
   }
 
+  isOwnLastMessage(idLastSender: string){
+    if(this.userInfo.id && this.userInfo.id !== 0){
+      return this.userInfo.id.toString() === idLastSender
+     }
+     return;
+  }
+
   goToChat(id: string) {
   
     this.router.navigate([`messages/chat`], {

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, tap } from 'rxjs';
 import { IHobbyInfo, IPersonInfo, IPersonItem } from '../models/personInfo';
 import { HttpClient } from '@angular/common/http';
 import {
+  ADD_IMAGE_AVATAR,
   ADD_USER_INFO,
   API_URL,
   EDIT_USER_INFO,
@@ -14,6 +15,7 @@ import {
   IResponseEditInfo,
   IResponseInfoUser,
 } from '../models/user';
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +37,7 @@ export class PersonPageService {
   personInfo$ = this._personInfo.asObservable();
   isLoaded$ = this._isLoaded.asObservable();
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, private errorService: ErrorService) {}
 
   get personInfo() {
     return this._personInfo.getValue();
@@ -88,6 +90,12 @@ export class PersonPageService {
       additionallyInfo,
       httpOptions
     );
+  }
+
+  addImageAvatar(userId: number, formData: FormData) {
+    return this._http
+      .post(API_URL + ADD_IMAGE_AVATAR + '/' + userId, formData)
+      .pipe(catchError((error) => this.errorService.handle(error)));
   }
 
   getInfoUser(id: string): Observable<IResponseInfoUser> {

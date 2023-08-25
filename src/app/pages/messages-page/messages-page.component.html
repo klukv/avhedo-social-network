@@ -23,8 +23,8 @@
           {{ this.isOwnChat(chat.chatId) ? chat.recipientName : chat.senderName}}
         </h2>
         <div class="list-messages__content-info info__text text-[#7A7A7A] flex items-center">
-          <span class="pr-[5px]" *ngIf="this.isOwnChat(chat.chatId)">Вы:</span>
-          {{ chat.content }}
+          <span class="pr-[5px]" *ngIf="this.isOwnLastMessage(chat.idLastSender)">Вы:</span>
+          {{ chat.content.length > 30 ? (chat.content | slice : 0 : 30) + '...' : chat.content}}
         </div>
       </div>
     </li>

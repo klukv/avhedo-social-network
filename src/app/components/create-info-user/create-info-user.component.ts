@@ -5,6 +5,7 @@ import { StorageService } from 'src/app/services/storage.service';
 import { catchError } from 'rxjs';
 import { ErrorService } from 'src/app/services/error.service';
 import { ModalService } from 'src/app/services/modal.service';
+import { IPersonInfo } from 'src/app/models/personInfo';
 
 @Component({
   selector: 'app-create-info-user',
@@ -14,10 +15,12 @@ import { ModalService } from 'src/app/services/modal.service';
 export class CreateInfoUserComponent {
   @ViewChild('refCheckboxMan') refChecboxMan: ElementRef;
   @ViewChild('refCheckboxWoman') refChecboxWoman: ElementRef;
+  @ViewChild('fileInput') fileInput: ElementRef;
 
   private _agePerson: number;
   private _genderPerson: string;
-  private _idUser: string = this.storageService.getUser().id;
+  private _userInfo: IPersonInfo = this.storageService.getUser();
+  private _formData: FormData = new FormData();
   form: FormGroup;
 
   constructor(
@@ -35,7 +38,64 @@ export class CreateInfoUserComponent {
       birthday: ['', [Validators.required]],
       aboutPerson: ['', [Validators.required, Validators.maxLength(350)]],
       gender: ['', Validators.required],
+      imageAvatar: [
+        {
+          filename: '',
+          filetype: '',
+          value: '',
+        },
+        Validators.required,
+      ],
     });
+  }
+
+  get birthdayPerson() {
+    return this.form.get('birthday');
+  }
+
+  get hobbyPerson() {
+    return this.form.get('hobby');
+  }
+
+  get aboutPerson() {
+    return this.form.get('aboutPerson');
+  }
+
+  get genderMan() {
+    return this.form.get('genderMan');
+  }
+
+  get genderWoman() {
+    return this.form.get('genderWoman');
+  }
+
+  get imageAvatar() {
+    return this.form.get('imageAvatar');
+  }
+
+  //Метод для загрузки фото в форму
+
+  onFileChange(event: any) {
+    let reader = new FileReader();
+    if (event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+
+      reader.readAsDataURL(file);
+
+      this._formData.append('file', file);
+
+      reader.onload = () => {
+        const imageControl = this.form.get('imageAvatar');
+
+        if (imageControl && typeof reader.result === 'string') {
+          imageControl.setValue({
+            filename: file.name,
+            filetype: file.type,
+            value: reader.result.split(',')[1],
+          });
+        }
+      };
+    }
   }
 
   setAgeValue(selectedDate: Date) {
@@ -63,15 +123,14 @@ export class CreateInfoUserComponent {
     }
   }
 
-  setAboutInfo() {}
-
   clickSaveInfoUser() {
     if (
       this.form.invalid ||
       this.personService.selectHobbyItems.length === 0 ||
-      this._idUser === undefined
+      this._userInfo.id === undefined
     ) {
       console.log('запрос не прошёл');
+      console.log(this.imageAvatar);
       return;
     }
     console.log('запрос прошёл');
@@ -84,36 +143,18 @@ export class CreateInfoUserComponent {
             .join(', '),
           aboutMe: this.aboutPerson?.value,
           sex: this._genderPerson,
-          url: '',
+          url: `assets/avatars/${this.imageAvatar?.value.filename}`,
         },
-        this._idUser
+        this._userInfo.id.toString()
       )
-      .pipe(catchError(error => this.errorService.handle(error)))
+      .pipe(catchError((error) => this.errorService.handle(error)))
       .subscribe(() => {
         this.storageService.saveShowInfoUser(true);
         this.personService.setLoaded(false);
         this.modalService.close();
       });
-
-  }
-
-  get birthdayPerson() {
-    return this.form.get('birthday');
-  }
-
-  get hobbyPerson() {
-    return this.form.get('hobby');
-  }
-
-  get aboutPerson() {
-    return this.form.get('aboutPerson');
-  }
-
-  get genderMan() {
-    return this.form.get('genderMan');
-  }
-
-  get genderWoman() {
-    return this.form.get('genderWoman');
+    if (this._formData.getAll.length !== 0) {
+      this.personService.addImageAvatar(this._userInfo.id, this._formData);
+    }
   }
 }

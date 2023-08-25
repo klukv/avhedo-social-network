@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IFriends, IPersonSub } from '../models/friends';
+import { IPersonSub } from '../models/friends';
 
 @Pipe({
   name: 'filterFriends'

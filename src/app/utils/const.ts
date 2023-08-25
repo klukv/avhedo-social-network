@@ -27,6 +27,8 @@ export const GET_USER_INFO = '/userInfo';
 export const ADD_USER_INFO = '/userAddInfo';
 export const EDIT_USER_INFO = '/editUserInfo';
 
+export const ADD_IMAGE_AVATAR = '/upload'
+
 export const CREATE_POST = '/userAddMessage';
 export const GET_POSTS = '/InfoForMessage';
 export const CREATE_COMMENT_POST = '/usersAddCommentsMessage';
@@ -41,6 +43,7 @@ export const GET_ALL_USERS = '/AlluserInfo';
 
 export const GET_ALL_CHATS_USER = '/AllChatUser'
 export const GET_ALL_MESSAGES_CHAT = '/ChatMessages'
+export const GET_SPECIFICALLY_MESSAGE = '/MessageChatForId'
 //SessionStorage keys
 
 export const USER_KEY = 'auth-user';
@@ -53,6 +56,7 @@ export enum TypeEditVariants {
   TYPE_AGE = 'age',
   TYPE_HOBBY = 'hobby',
   TYPE_ABOUT = 'about',
+  TYPE_AVATAR = 'TYPE_AVATAR'
 }
 
 export enum TypeActionAddNewMessage {

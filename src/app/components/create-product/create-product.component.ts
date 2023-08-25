@@ -20,6 +20,7 @@ export class CreateProductComponent {
   private _about: string;
   private _infoUser: any;
   private _infoUserFromStore = this.storageService.getUser();
+  private _formData: FormData = new FormData();
 
   variantsEdit = TypeEditVariants;
   form: FormGroup;
@@ -35,8 +36,6 @@ export class CreateProductComponent {
     this.personService.personInfo$.subscribe((infoUser) => {
       this._infoUser = infoUser;
     });
-    console.log(this.personService.selectHobbyItems.length);
-    
   }
 
   private _createForm() {
@@ -44,6 +43,14 @@ export class CreateProductComponent {
       ageValue: ['', Validators.required],
       hobbyName: ['', Validators.required],
       aboutInfo: ['', Validators.required],
+      imageAvatar: [
+        {
+          filename: '',
+          filetype: '',
+          value: '',
+        },
+        Validators.required,
+      ],
     });
   }
   // =============================================================================== Age-block
@@ -60,34 +67,69 @@ export class CreateProductComponent {
       this._age--;
     }
   }
+
+  onFileChange(event: any) {
+    let reader = new FileReader();
+    if (event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      console.log(file);
+      
+      reader.readAsDataURL(file);
+
+      this._formData.append('file', file);
+
+      reader.onload = () => {
+        const imageControl = this.form.get('imageAvatar');
+
+        if (imageControl && typeof reader.result === 'string') {
+          imageControl.setValue({
+            filename: file.name,
+            filetype: file.type,
+            value: reader.result.split(',')[1],
+          });
+        }
+      };
+    }
+  }
   // =============================================================================== About-block
   setAboutInfo() {
     this._about = this.form.value.aboutInfo;
   }
   // =============================================================================== Main-block
   setEditions(edit: string | number) {
-
     switch (edit) {
       case this.variantsEdit.TYPE_AGE:
         this.personService.setNewPersonInfo({
           value: this.variantsEdit.TYPE_AGE,
-          text: this._age !== undefined ? this._age : 'Данное поле не заполнено',
+          text:
+            this._age !== undefined ? this._age : 'Данное поле не заполнено',
         });
         break;
       case this.variantsEdit.TYPE_HOBBY:
         this.personService.setNewPersonInfo({
           value: this.variantsEdit.TYPE_HOBBY,
-          text: this.personService.selectHobbyItems.length !== 0 ? this.personService.selectHobbyItems
-            .map((hobby) => hobby.information)
-            .join(', ') : 'Данное поле не заполнено',
+          text:
+            this.personService.selectHobbyItems.length !== 0
+              ? this.personService.selectHobbyItems
+                  .map((hobby) => hobby.information)
+                  .join(', ')
+              : 'Данное поле не заполнено',
         });
         break;
       case this.variantsEdit.TYPE_ABOUT:
         this.personService.setNewPersonInfo({
           value: this.variantsEdit.TYPE_ABOUT,
-          text: this._about !== undefined ? this._about : 'Данное поле не заполнено',
+          text:
+            this._about !== undefined
+              ? this._about
+              : 'Данное поле не заполнено',
         });
         break;
+      case this.variantsEdit.TYPE_AVATAR:
+        this.personService.setNewPersonInfo({
+          value: this.variantsEdit.TYPE_AVATAR,
+          text: `assets/avatar/${this.imageAvatar?.value.filename}`,
+        });
     }
     this.personService
       .editInfoUser(
@@ -100,8 +142,13 @@ export class CreateProductComponent {
         },
         this._infoUserFromStore.id
       )
-      .pipe(catchError(error => this.errorService.handle(error)))
-      .subscribe(() => {});
+      .pipe(catchError((error) => this.errorService.handle(error)))
+      .subscribe(() => {
+        this.personService
+          .addImageAvatar(this._infoUser.id, this._formData)
+          .subscribe(() => {});
+      });
+
     this.modalService.close();
   }
 
@@ -111,5 +158,9 @@ export class CreateProductComponent {
 
   get currentAbout() {
     return this._about;
+  }
+
+  get imageAvatar() {
+    return this.form.get('imageAvatar');
   }
 }

@@ -1,13 +1,13 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subscription, catchError } from 'rxjs';
-import { IFriends } from 'src/app/models/friends';
 import { IPersonInfo } from 'src/app/models/personInfo';
 import { IResponseInfoUser } from 'src/app/models/user';
 import { ChatService } from 'src/app/services/chat.service';
 import { ErrorService } from 'src/app/services/error.service';
 import { FriendsService } from 'src/app/services/friends.service';
 import { PersonPageService } from 'src/app/services/person-page.service';
+import { StorageService } from 'src/app/services/storage.service';
 import { WebsocketService } from 'src/app/services/websocket.service';
 
 @Component({
@@ -27,13 +27,11 @@ export class ChatPageComponent {
     private activeRoute: ActivatedRoute,
     private personService: PersonPageService,
     private errorService: ErrorService,
+    private storageService: StorageService,
     public chatService: ChatService,
     public friendsService: FriendsService,
     public websocketService: WebsocketService
   ) {
-    personService.personInfo$.subscribe(
-      (currentPersonInfo) => (this.personInfo = currentPersonInfo)
-    );
     this._user_id = this.activeRoute.snapshot.queryParams['id'];
   }
 
@@ -42,6 +40,8 @@ export class ChatPageComponent {
   }
 
   ngOnInit() {
+    this.personInfo = this.storageService.getUser();
+
     this.personService
       .getInfoUser(this._user_id)
       .pipe(catchError((error) => this.errorService.handle(error)))
@@ -62,13 +62,15 @@ export class ChatPageComponent {
     });
 
     this._connectWebsocket();
-  
-    this.chatService
-      .getAllMessagesChat('2_1')
-      .subscribe(() => {});
+    
+    if (this.personInfo.id && this.personInfo.id !== 0) {
+      this.chatService
+        .getAllMessagesChat(this.personInfo.id.toString(), this._user_id)
+        .subscribe(() => {});
+    }
   }
 
-  isOwnMessage(senderId: string): boolean{
+  isOwnMessage(senderId: string): boolean {
     return this.personInfo.id === Number(senderId);
   }
 

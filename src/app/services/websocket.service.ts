@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IChatMessage } from '../models/chatMessage';
 import { BehaviorSubject } from 'rxjs';
-import { PersonPageService } from './person-page.service';
 import { IPersonInfo } from '../models/personInfo';
-import { IFriends } from '../models/friends';
 
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
@@ -83,7 +81,9 @@ export class WebsocketService {
     const parseMessage = JSON.parse(message.body);
     console.log(parseMessage);
     
-    this.chatService.addMessageChat(parseMessage);
+    this.chatService.getSpecificallyMessage(parseMessage.id).subscribe((message) => {
+      this.chatService.addMessageChat(message);
+    })
   }
 
   clearMessages() {

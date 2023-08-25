@@ -10,5 +10,6 @@ export interface IAllChats {
     recipientId: string,
     senderName: string,
     recipientName: string,
-    content: string
+    content: string,
+    idLastSender: string
 }

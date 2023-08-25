@@ -43,6 +43,12 @@
       <div class="page__user-avatar pr-[14px] w-[90px] h-[90px]">
         <img class="h-full" src="../../../assets/img/avatar.svg" alt="avatar" />
       </div>
+      <button (click)="
+      modalService.open(
+        variantsEdit.TYPE_AVATAR,
+        variantsModals.TYPE_MODAL_EDIT
+      )
+    " class="test p-[20px] bg-[#00A3FF] text-[#fff] text-[18px] rounded-[8px] mr-[10px]">Фото</button>
       <div class="page__user-links">
         <div class="page__user-links_header">
           <h2 class="page__user-links_username text-[22px] mb-[4px]">
