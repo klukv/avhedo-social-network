@@ -10,10 +10,14 @@
     class="friends-page__list-friends__content flex items-center pt-[16px] pb-[32px] pl-[8px] border-b-[1px] border-solid border-[#EBEBEB]"
     *ngFor="let friend of friendsService.listSubcribes; let i = index"
   >
-    <div class="list-friends__content-avatar pr-[16px] w-[82px] h-[82px]">
+    <div
+      class="list-friends__content-avatar mr-[16px] w-[80px] h-[80px] rounded-[50px] overflow-hidden"
+    >
       <img
         class="w-full h-full"
-        src="../../../assets/img/avatar.svg"
+        [src]="
+          friend.url !== '' ? friend.url : '../../../assets/img/avatar.svg'
+        "
         alt="user-avatar"
       />
     </div>
@@ -37,9 +41,7 @@
         >
       </div>
     </div>
-    <div
-      class="list-friends__btn-block mr-0 ml-auto"
-    >
+    <div class="list-friends__btn-block mr-0 ml-auto">
       <button
         class="list-friends__button-delete px-[20px] py-[8px] rounded-[6px] text-[#ffffff] text-[16px] bg-[#00A3FF] hover:bg-[#56C2FF] duration-[250ms]"
         (click)="clickDeleteFriendBtn(friend.id, i)"
@@ -49,7 +51,6 @@
     </div>
   </li>
 </ul>
-
 
 <ng-template #loader_my_subscribes>
   <content-loader
