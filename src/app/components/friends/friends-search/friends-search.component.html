@@ -17,10 +17,14 @@
       let i = index
     "
   >
-    <div class="list-friends__content-avatar pr-[16px] w-[82px] h-[82px]">
+    <div
+      class="list-friends__content-avatar mr-[16px] w-[80px] h-[80px] rounded-[50px] overflow-hidden"
+    >
       <img
         class="w-full h-full"
-        src="../../../assets/img/avatar.svg"
+        [src]="
+          friend.url !== '' ? friend.url : '../../../assets/img/avatar.svg'
+        "
         alt="user-avatar"
       />
     </div>
@@ -86,7 +90,9 @@
       >
         <svg
           *ngIf="
-            (this.friendService.isLoaded === true && hasSubscribes(friend.id)) || this.selectedIndexButton !== i;
+            (this.friendService.isLoaded === true &&
+              hasSubscribes(friend.id)) ||
+              this.selectedIndexButton !== i;
             else loader_spinner
           "
           class="w-full h-full"

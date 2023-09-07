@@ -40,15 +40,30 @@
   </div>
   <div class="page__user-information pb-[29px] pl-[34px] pr-[22px]">
     <div class="page__user py-[48px] flex items-center">
-      <div class="page__user-avatar pr-[14px] w-[90px] h-[90px]">
-        <img class="h-full" src="../../../assets/img/avatar.svg" alt="avatar" />
+      <div
+        class="page__user-avatar mr-[14px] w-[80px] h-[80px] rounded-[50px] overflow-hidden"
+      >
+        <img
+          class="h-full"
+          [src]="
+            (this.personService.personInfo$ | async)?.urlImage !== ''
+              ? (this.personService.personInfo$ | async)?.urlImage
+              : '../../../assets/img/avatar.svg'
+          "
+          alt="avatar"
+        />
       </div>
-      <button (click)="
-      modalService.open(
-        variantsEdit.TYPE_AVATAR,
-        variantsModals.TYPE_MODAL_EDIT
-      )
-    " class="test p-[20px] bg-[#00A3FF] text-[#fff] text-[18px] rounded-[8px] mr-[10px]">Фото</button>
+      <button
+        (click)="
+          modalService.open(
+            variantsEdit.TYPE_AVATAR,
+            variantsModals.TYPE_MODAL_EDIT
+          )
+        "
+        class="test p-[20px] bg-[#00A3FF] text-[#fff] text-[18px] rounded-[8px] mr-[10px]"
+      >
+        Фото
+      </button>
       <div class="page__user-links">
         <div class="page__user-links_header">
           <h2 class="page__user-links_username text-[22px] mb-[4px]">

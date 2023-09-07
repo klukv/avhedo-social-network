@@ -44,7 +44,6 @@ export class CreateInfoUserComponent {
           filetype: '',
           value: '',
         },
-        Validators.required,
       ],
     });
   }
@@ -129,8 +128,9 @@ export class CreateInfoUserComponent {
       this.personService.selectHobbyItems.length === 0 ||
       this._userInfo.id === undefined
     ) {
+      console.log(this._formData.getAll('file').length);
+
       console.log('запрос не прошёл');
-      console.log(this.imageAvatar);
       return;
     }
     console.log('запрос прошёл');
@@ -143,7 +143,7 @@ export class CreateInfoUserComponent {
             .join(', '),
           aboutMe: this.aboutPerson?.value,
           sex: this._genderPerson,
-          url: `assets/avatars/${this.imageAvatar?.value.filename}`,
+          url: ``,
         },
         this._userInfo.id.toString()
       )
@@ -153,8 +153,10 @@ export class CreateInfoUserComponent {
         this.personService.setLoaded(false);
         this.modalService.close();
       });
-    if (this._formData.getAll.length !== 0) {
-      this.personService.addImageAvatar(this._userInfo.id, this._formData);
+    if (this._formData.getAll('file').length !== 0) {
+      this.personService
+        .addImageAvatar(this._userInfo.id, this._formData)
+        .subscribe(() => {});
     }
   }
 }

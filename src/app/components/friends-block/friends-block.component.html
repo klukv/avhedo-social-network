@@ -7,15 +7,36 @@
   <ul class="friends__list pt-[33px] pl-[34px] pb-[64px]">
     <li
       class="friends__list-point mb-[24px] last:mb-0"
-      *ngFor="let subscribe of friendsService.listSubcribes | slice : 0 : 5; let i = index"
+      *ngFor="
+        let subscribe of friendsService.listSubcribes | slice : 0 : 5;
+        let i = index
+      "
     >
       <div class="friends__info flex items-center">
-        <div class="friends__info-avatar mr-[18px]">
-          <img src="../../../assets/img/avatar.svg" alt="avatar-friend" />
+        <div class="friends__info-avatar mr-[18px] w-[60px] h-[60px] rounded-[50px] overflow-hidden">
+          <img
+            [src]="
+              subscribe.url !== ''
+                ? subscribe.url
+                : '../../../assets/img/avatar.svg'
+            "
+            class="h-full"
+            alt="avatar-friend"
+          />
         </div>
         <div class="friends__info-links">
-            <h2 class="friends__info-links_username text-[20px] hover:text-[#56C2FF] transition duration-300 cursor-pointer" (click)="goToPageFriend(subscribe.id)">{{subscribe.username}}</h2>
-            <a routerLink="" class="friends__info-links_message text-[13px] text-[#00A3FF] hover:text-[#56C2FF] transition duration-300" (click)="goToChat(subscribe.id)">Написать сообщение</a>
+          <h2
+            class="friends__info-links_username text-[20px] hover:text-[#56C2FF] transition duration-300 cursor-pointer"
+            (click)="goToPageFriend(subscribe.id)"
+          >
+            {{ subscribe.username }}
+          </h2>
+          <a
+            routerLink=""
+            class="friends__info-links_message text-[13px] text-[#00A3FF] hover:text-[#56C2FF] transition duration-300"
+            (click)="goToChat(subscribe.id)"
+            >Написать сообщение</a
+          >
         </div>
       </div>
     </li>

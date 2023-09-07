@@ -5,6 +5,7 @@ import { FriendsService } from 'src/app/services/friends.service';
 import { StorageService } from 'src/app/services/storage.service';
 import { catchError } from 'rxjs';
 import { IPersonSub } from 'src/app/models/friends';
+import { PersonPageService } from 'src/app/services/person-page.service';
 
 @Component({
   selector: 'app-friends-search',
@@ -29,6 +30,8 @@ export class FriendsSearchComponent {
     if (this.userInfo && this.userInfo.id && this.userInfo.id !== 0) {
       this.friendService.setLoadedAllUsers(false);
       this.friendService.getAllUsers(this.userInfo.id).subscribe(() => {
+        console.log(this.friendService.listAllUsers);
+
         this.friendService.setLoadedAllUsers(true);
       });
 

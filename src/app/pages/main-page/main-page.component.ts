@@ -12,7 +12,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { catchError } from 'rxjs';
 import { ErrorService } from 'src/app/services/error.service';
 import { StorageService } from 'src/app/services/storage.service';
-import { IResponseGetPosts } from 'src/app/models/post';
 
 @Component({
   selector: 'app-main-page',

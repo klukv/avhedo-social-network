@@ -73,7 +73,7 @@ export class CreateProductComponent {
     if (event.target.files && event.target.files.length > 0) {
       let file = event.target.files[0];
       console.log(file);
-      
+
       reader.readAsDataURL(file);
 
       this._formData.append('file', file);
@@ -144,9 +144,11 @@ export class CreateProductComponent {
       )
       .pipe(catchError((error) => this.errorService.handle(error)))
       .subscribe(() => {
-        this.personService
-          .addImageAvatar(this._infoUser.id, this._formData)
-          .subscribe(() => {});
+        if (this._formData.getAll('file').length !== 0) {
+          this.personService
+            .addImageAvatar(this._infoUser.id, this._formData)
+            .subscribe(() => {});
+        }
       });
 
     this.modalService.close();
