@@ -41,7 +41,7 @@
   <div class="page__user-information pb-[29px] pl-[34px] pr-[22px]">
     <div class="page__user py-[48px] flex items-center">
       <div
-        class="page__user-avatar mr-[14px] w-[80px] h-[80px] rounded-[50px] overflow-hidden"
+        class="page__user-avatar mr-[14px] w-[80px] h-[80px] rounded-[50px] overflow-hidden relative"
       >
         <img
           class="h-full"
@@ -52,18 +52,58 @@
           "
           alt="avatar"
         />
+        <div class="page__user-avatar__edit-button absolute w-full h-full top-0 left-0 flex justify-center items-center">
+          <span
+            (click)="
+              modalService.open(
+                variantsEdit.TYPE_AVATAR,
+                variantsModals.TYPE_MODAL_EDIT
+              )
+            "
+            class="page__user-avatar__edit-svg opacity-0 w-[26px] h-[26px]"
+          >
+            <svg
+              class="w-full h-full"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="#ffffff"
+              stroke="#ffffff"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <title></title>
+                <g id="Complete">
+                  <g id="edit">
+                    <g>
+                      <path
+                        d="M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8"
+                        fill="none"
+                        stroke="#ffffff"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="0.8640000000000001"
+                      ></path>
+                      <polygon
+                        fill="none"
+                        points="12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8"
+                        stroke="#ffffff"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="0.8640000000000001"
+                      ></polygon>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </span>
+        </div>
       </div>
-      <button
-        (click)="
-          modalService.open(
-            variantsEdit.TYPE_AVATAR,
-            variantsModals.TYPE_MODAL_EDIT
-          )
-        "
-        class="test p-[20px] bg-[#00A3FF] text-[#fff] text-[18px] rounded-[8px] mr-[10px]"
-      >
-        Фото
-      </button>
       <div class="page__user-links">
         <div class="page__user-links_header">
           <h2 class="page__user-links_username text-[22px] mb-[4px]">

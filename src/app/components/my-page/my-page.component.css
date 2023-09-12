@@ -1,0 +1,12 @@
+.page__user-avatar__edit-svg,
+.page__user-avatar__edit-button {
+  transition: all 150ms ease-in;
+}
+
+.page__user-avatar:hover .page__user-avatar__edit-button {
+    cursor: pointer;
+    background-color: rgba(0,0,0,.5);
+}
+.page__user-avatar:hover .page__user-avatar__edit-svg {
+  opacity: 1;
+}

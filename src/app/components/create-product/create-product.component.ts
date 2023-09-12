@@ -128,7 +128,7 @@ export class CreateProductComponent {
       case this.variantsEdit.TYPE_AVATAR:
         this.personService.setNewPersonInfo({
           value: this.variantsEdit.TYPE_AVATAR,
-          text: `assets/avatar/${this.imageAvatar?.value.filename}`,
+          text: ``,
         });
     }
     this.personService

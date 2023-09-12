@@ -40,6 +40,8 @@ export class PostBlockComponent {
     if (this.userInfo.id) {
       this.isLikeCurrentPost();
     }
+    console.log(this.post.messageDto.infoUserFromLentaDto.url);
+    
   }
 
   clickIconComment() {
