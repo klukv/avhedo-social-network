@@ -47,7 +47,8 @@ export const GET_SPECIFICALLY_MESSAGE = '/MessageChatForId'
 
 export const GET_CASTING_CARDS = '/InfoAllPeopleLove'
 export const GET_ALL_FANS = '/infoAllLoveYou'
-export const ADD_LIKE_CARD = '/people'
+export const ADD_LIKE_CARD = '/love'
+export const DELETE_LIKE_CARD = '/dontLove'
 //SessionStorage keys
 
 export const USER_KEY = 'auth-user';

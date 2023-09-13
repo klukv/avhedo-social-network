@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ICards } from '../models/likeCards';
 import { BehaviorSubject, Observable, catchError, tap } from 'rxjs';
-import { castingCards, likesCards } from '../data/likesCards';
 import { HttpClient } from '@angular/common/http';
 import {
   ADD_LIKE_CARD,
   API_URL,
+  DELETE_LIKE_CARD,
   GET_ALL_FANS,
   GET_CASTING_CARDS,
   httpOptions,
@@ -22,7 +22,7 @@ export class CastingService {
   );
   listCastingPeople$ = this._listCastingPeople.asObservable();
 
-  private _listArrayLikesCard: ICards[] = likesCards;
+  private _listArrayLikesCard: ICards[] = [];
   private _listLikesPeople = new BehaviorSubject<ICards[]>(
     this._listArrayLikesCard
   );
@@ -80,17 +80,18 @@ export class CastingService {
 
   getCastingCards(
     idOwner: number,
-    idLastCastingPreson: number
-  ): Observable<ICards[]> {
+  ): Observable<ICards> {
     return this._http
-      .get<ICards[]>(
-        API_URL + GET_CASTING_CARDS + '/' + idOwner + '/' + idLastCastingPreson,
+      .get<ICards>(
+        API_URL + GET_CASTING_CARDS + '/' + idOwner,
         httpOptions
       )
       .pipe(
         tap((cardsData) => {
-          this._listArrayCastingCard = cardsData;
-          this._listCastingPeople.next(cardsData);
+          const emptyArray:ICards[] = [];
+          emptyArray.push(cardsData);
+          this._listArrayCastingCard = emptyArray;
+          this._listCastingPeople.next(emptyArray);
         }),
         catchError((error) => this.errorService.handle(error))
       );
@@ -99,15 +100,38 @@ export class CastingService {
   likeCard(idOwner: number, idLovers: number) {
     return this._http
       .post(
-        API_URL + ADD_LIKE_CARD + '/' + idOwner + '/love' + '/' + idLovers,
+        API_URL + '/' + 'people' + '/' + idOwner + ADD_LIKE_CARD + '/' + idLovers,
         httpOptions
       )
       .pipe(catchError((error) => this.errorService.handle(error)));
   }
 
+  likeMutualCard(idOwner: number, idLovers: number){
+    return this._http.post(
+      API_URL + '/' + idLovers + ADD_LIKE_CARD + '/' + idOwner, 
+      httpOptions
+    )
+    .pipe(catchError((error) => this.errorService.handle(error)));
+  }
+
+  dislikeCard(idOwner: number, idLovers: number){
+    return this._http
+      .delete(
+        API_URL + '/' + 'people' + '/' + idOwner + DELETE_LIKE_CARD + '/' + idLovers,
+        httpOptions
+      )
+    .pipe(catchError((error) => this.errorService.handle(error)));
+  }
+
   getAllFans(idOwner: number): Observable<ICards[]> {
     return this._http
       .get<ICards[]>(API_URL + GET_ALL_FANS + '/' + idOwner, httpOptions)
-      .pipe(catchError((error) => this.errorService.handle(error)));
+      .pipe(
+        tap((fansData) => {
+          (this._listArrayLikesCard = fansData),
+            this._listLikesPeople.next(fansData);
+        }),
+        catchError((error) => this.errorService.handle(error))
+      );
   }
 }

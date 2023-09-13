@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { CastingService } from 'src/app/services/casting.service';
 import { FriendsService } from 'src/app/services/friends.service';
+import { StorageService } from 'src/app/services/storage.service';
 import { CASTING_PAGE, CASTING_PAGE_CONTACTS } from 'src/app/utils/const';
 
 @Component({
@@ -20,6 +21,7 @@ export class LikesBlockComponent {
   @ViewChildren('like__buttons') likeButtons: QueryList<ElementRef>;
 
   private _widthButtonsBlock: number;
+  private userInfo = this.storageService.getUser();
 
   castingLink = `/${CASTING_PAGE}/${CASTING_PAGE_CONTACTS}`;
   castingPageLink = 'castingLink';
@@ -27,19 +29,27 @@ export class LikesBlockComponent {
   constructor(
     public friendsService: FriendsService,
     public castingService: CastingService,
-    private render: Renderer2,
+    private storageService: StorageService,
+    private render: Renderer2
   ) {}
 
-  clickLikeCard(indexCard: number) {
+  ngOnInit() {
+    this.castingService.getAllFans(this.userInfo.id).subscribe(() => {});
+  }
+
+  clickLikeCard(indexCard: number, idFan: number) {
     if (
       this.likeButtonsBlock !== undefined &&
       this.chatButton !== undefined &&
       this.likeButtons !== undefined
     ) {
-      const currentLikeButtonsBlock = this.likeButtonsBlock.toArray()[indexCard].nativeElement;
-      const currentChatBlock = this.chatButton.toArray()[indexCard].nativeElement;
-      
-      this._widthButtonsBlock = currentLikeButtonsBlock.offsetWidth - currentChatBlock.offsetWidth;
+      const currentLikeButtonsBlock =
+        this.likeButtonsBlock.toArray()[indexCard].nativeElement;
+      const currentChatBlock =
+        this.chatButton.toArray()[indexCard].nativeElement;
+
+      this._widthButtonsBlock =
+        currentLikeButtonsBlock.offsetWidth - currentChatBlock.offsetWidth;
 
       this.render.setStyle(
         this.likeButtons.toArray()[indexCard].nativeElement,
@@ -58,11 +68,19 @@ export class LikesBlockComponent {
           `translateX(${this._widthButtonsBlock}px)`
         );
       }, 200);
+
+      //запрос на бекенд
+      this.castingService.likeMutualCard(this.userInfo.id, idFan).subscribe(() => {});
     }
   }
 
-  clickDislikeCard(indexCard: number) {
+  clickDislikeCard(indexCard: number, idFan: number) {
     this.castingService.deleteUnlikeCard(indexCard);
+
+    //запрос на бекенд
+    this.castingService
+      .dislikeCard(this.userInfo.id, idFan)
+      .subscribe(() => {});
   }
 
   clickChatButton(idLikePerson: number) {

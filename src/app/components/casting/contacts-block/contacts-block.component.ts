@@ -21,7 +21,7 @@ export class ContactsBlockComponent {
   ngOnInit() {
     if (!this.castingService.getValueGettingCards()) {
       this.castingService
-        .getCastingCards(this.infoUser.id, -1)
+        .getCastingCards(this.infoUser.id)
         .subscribe(() => {
           this.castingService.setValueGettingCards(true);
         });

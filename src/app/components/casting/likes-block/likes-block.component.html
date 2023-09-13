@@ -71,7 +71,7 @@
         >
           <button
             class="likes-page__card-like mr-[25px] bg-[#00A3FF] rounded-[50%] flex items-center justify-center w-[36px] h-[36px] hover:bg-[#56C2FF] duration-[250ms]"
-            (click)="clickLikeCard(i)"
+            (click)="clickLikeCard(i, likeCard.id)"
           >
             <svg
               class="button__like-svg"
@@ -91,7 +91,7 @@
           </button>
           <button
             class="likes-page__card-unlike bg-[#00A3FF] rounded-[50%] flex items-center justify-center w-[36px] h-[36px] hover:bg-[#56C2FF] duration-[250ms]"
-            (click)="clickDislikeCard(i)"
+            (click)="clickDislikeCard(i, likeCard.id)"
           >
             <svg
               class="button__unlike-svg"

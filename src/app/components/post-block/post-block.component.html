@@ -3,7 +3,7 @@
     <div class="post__block-user_avatar mr-[8px] mb-[8px] w-[64px] h-[64px] rounded-[50px] overflow-hidden">
       <img
         [src]="post.messageDto.infoUserFromLentaDto.url !== '' ? post.messageDto.infoUserFromLentaDto.url : '../../../assets/img/avatar.svg'"
-        class="w-full h-full"
+        class="w-full h-full object-cover"
         alt="user-avatar"
       />
     </div>
