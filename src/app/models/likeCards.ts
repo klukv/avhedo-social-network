@@ -1,8 +1,8 @@
 export interface ICards {
     id: number,
-    name: string,
-    age: number,
+    username: string,
+    aboutMe: string,
     hobby: string,
-    about: string,
-    imageUrl?: string
+    url?: string,
+    dateOfBirthday: number,
 }

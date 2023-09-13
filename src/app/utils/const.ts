@@ -44,6 +44,10 @@ export const GET_ALL_USERS = '/AlluserInfo';
 export const GET_ALL_CHATS_USER = '/AllChatUser'
 export const GET_ALL_MESSAGES_CHAT = '/ChatMessages'
 export const GET_SPECIFICALLY_MESSAGE = '/MessageChatForId'
+
+export const GET_CASTING_CARDS = '/InfoAllPeopleLove'
+export const GET_ALL_FANS = '/infoAllLoveYou'
+export const ADD_LIKE_CARD = '/people'
 //SessionStorage keys
 
 export const USER_KEY = 'auth-user';

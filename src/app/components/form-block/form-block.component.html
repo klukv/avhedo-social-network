@@ -1,16 +1,16 @@
 <div
-  [ngStyle]="{'background-image': 'linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(' + infoCard.imageUrl + ')'}"
-  class="likes-page__card bg-no-repeat bg-cover bg-center rounded-[20px] origin-[50%_100%]"
+  [ngStyle]="{'background-image': 'linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(' + infoCard.url + ')'}"
+  class="likes-page__card bg-no-repeat bg-cover bg-center rounded-[20px] origin-[50%_100%] h-[560px]"
   id="card_swipe"
 >
   <div class="likes-page__card-info text-[#fff] px-[16px] pt-[16px] pb-[260px] object-cover object-top">
-    <h2 class="likes-page__card-username text-[22px]">{{ infoCard.name }}</h2>
+    <h2 class="likes-page__card-username text-[22px]">{{ infoCard.username }}</h2>
     <div class="likes-page__card-age flex items-center mb-[8px]">
       <div class="likes-page__card-age__title text-[18px] pr-[5px]">
         Возраст:
       </div>
       <div class="likes-page__card-age__content text-[14px]">
-        {{infoCard.age}}
+        {{infoCard.dateOfBirthday}}
       </div>
     </div>
     <div class="likes-page__card-hobby flex items-center mb-[8px]">
@@ -27,7 +27,7 @@
         >О себе:</span
       >
       <div class="likes-page__card-about__content text-[14px] pt-[3px]">
-        {{ infoCard.about }}
+        {{ infoCard.aboutMe }}
       </div>
     </div>
   </div>

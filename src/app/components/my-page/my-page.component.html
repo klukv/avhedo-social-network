@@ -44,7 +44,7 @@
         class="page__user-avatar mr-[14px] w-[80px] h-[80px] rounded-[50px] overflow-hidden relative"
       >
         <img
-          class="h-full"
+          class="h-full object-cover"
           [src]="
             (this.personService.personInfo$ | async)?.urlImage !== ''
               ? (this.personService.personInfo$ | async)?.urlImage

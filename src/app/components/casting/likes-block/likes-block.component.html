@@ -15,20 +15,20 @@
     >
       <div
         class="list-friends__content-avatar mr-[16px] w-[75px] h-[75px] rounded-[50%] overflow-hidden bg-cover bg-no-repeat"
-        [ngStyle]="{ 'background-image': 'url(' + likeCard.imageUrl + ')' }"
+        [ngStyle]="{ 'background-image': 'url(' + likeCard.url + ')' }"
       ></div>
       <div class="list-friends__content-info">
         <h2
           class="list-friends__content-info info__username text-[20px] mb-[4px] cursor-pointer hover:text-[#00A3FF] duration-[250ms]"
           (click)="friendsService.goToPageFriend(likeCard.id)"
         >
-          {{ likeCard.name }}
+          {{ likeCard.username }}
         </h2>
         <div class="list-friends__content-info content-block">
           <div
             class="list-friends__content-info info__text text-[#7A7A7A] mb-[4px]"
           >
-            Возраст: {{ likeCard.age }}
+            Возраст: {{ likeCard.dateOfBirthday }}
           </div>
         </div>
       </div>
