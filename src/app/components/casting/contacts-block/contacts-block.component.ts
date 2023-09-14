@@ -11,24 +11,25 @@ import { StorageService } from 'src/app/services/storage.service';
 export class ContactsBlockComponent {
   private infoUser = this.storageService.getUser();
 
-  listCastingCards: ICards[] = [];
-
   constructor(
     public castingService: CastingService,
     private storageService: StorageService
   ) {}
 
   ngOnInit() {
-    if (!this.castingService.getValueGettingCards()) {
-      this.castingService
-        .getCastingCards(this.infoUser.id)
-        .subscribe(() => {
-          this.castingService.setValueGettingCards(true);
-        });
-    }
-
-    this.castingService.listCastingPeople$.subscribe(
-      (currentListCards) => (this.listCastingCards = currentListCards)
-    );
+    this.castingService.listCastingPeople$.subscribe((listCasting) => {
+      if (listCasting.length === 0) {
+        this.castingService
+          .getCastingCards(this.infoUser.id, -1)
+          .subscribe(() => {});
+      }
+           
+      if (listCasting.length === 1) {
+        const lastCard = listCasting[listCasting.length - 1];
+        this.castingService
+          .getCastingCards(this.infoUser.id, lastCard.id)
+          .subscribe(() => {});
+      }
+    });
   }
 }

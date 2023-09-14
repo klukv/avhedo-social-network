@@ -20,16 +20,14 @@ export class FormBlockComponent {
   ) {}
 
   clickLikeButton() {
-    (<HTMLStyleElement>document.getElementById('card_swipe')).style.transition =
-      '.5s';
-    (<HTMLStyleElement>document.getElementById('card_swipe')).style.transform =
-      'translateX(-400px) rotate(-30deg)';
-    (<HTMLStyleElement>document.getElementById('card_swipe')).style.opacity =
-      '0';
+    (<HTMLStyleElement>document.getElementById('card_swipe')).style.transition = '.5s';
+    (<HTMLStyleElement>document.getElementById('card_swipe')).style.transform = 'translateX(-400px) rotate(-30deg)';
+    (<HTMLStyleElement>document.getElementById('card_swipe')).style.opacity = '0';
+
     setTimeout(() => {
       this.castingService.setNewCastingCards(this.indexCard);
     }, 200);
-    
+
     // Отправляем запрос на бекенд
     this.castingService
       .likeCard(this.infoUser.id, this.infoCard.id)

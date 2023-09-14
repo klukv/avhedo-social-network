@@ -5,4 +5,5 @@ export interface ICards {
     hobby: string,
     url?: string,
     dateOfBirthday: number,
+    mutualLike: boolean
 }

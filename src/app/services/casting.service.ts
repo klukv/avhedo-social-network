@@ -29,7 +29,9 @@ export class CastingService {
   listLikesPeople$ = this._listLikesPeople.asObservable();
 
   //переменная для отслеживания был ли уже прокинут один запрос на бекенд по получению карточек знакомств
-  private _isGetRequestCastingCards: boolean = false;
+  private _isGetRequestCastingCards = new BehaviorSubject<boolean>(false);
+
+  isGetRequestCastingCards$ = this._isGetRequestCastingCards.asObservable();
 
   private _activeLinks = {
     castingLink: 'not_active',
@@ -60,11 +62,15 @@ export class CastingService {
   }
 
   setValueGettingCards(value: boolean) {
-    this._isGetRequestCastingCards = value;
+    this._isGetRequestCastingCards.next(value);
   }
 
   getValueGettingCards() {
     return this._isGetRequestCastingCards;
+  }
+
+  getListArrayLikeCards(){
+    return this._listArrayLikesCard;
   }
 
   getActiveLinks() {
@@ -80,18 +86,18 @@ export class CastingService {
 
   getCastingCards(
     idOwner: number,
+    idCard: number
   ): Observable<ICards> {
     return this._http
       .get<ICards>(
-        API_URL + GET_CASTING_CARDS + '/' + idOwner,
+        API_URL + GET_CASTING_CARDS + '/' + idOwner + '/' + idCard,
         httpOptions
       )
       .pipe(
         tap((cardsData) => {
-          const emptyArray:ICards[] = [];
-          emptyArray.push(cardsData);
-          this._listArrayCastingCard = emptyArray;
-          this._listCastingPeople.next(emptyArray);
+          //проблема здесь
+          this._listArrayCastingCard.push(cardsData);
+          this._listCastingPeople.next(this._listArrayCastingCard);
         }),
         catchError((error) => this.errorService.handle(error))
       );

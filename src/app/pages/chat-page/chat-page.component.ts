@@ -62,12 +62,18 @@ export class ChatPageComponent {
     });
 
     this._connectWebsocket();
-    
-    if (this.personInfo.id && this.personInfo.id !== 0) {
-      this.chatService
-        .getAllMessagesChat(this.personInfo.id.toString(), this._user_id)
-        .subscribe(() => {});
-    }
+
+    this.websocketService.isConnected$.subscribe((valueConnecting) => {
+      if (
+        this.personInfo.id &&
+        this.personInfo.id !== 0 &&
+        valueConnecting === true
+      ) {
+        this.chatService
+          .getAllMessagesChat(this.personInfo.id.toString(), this._user_id)
+          .subscribe(() => {});
+      }
+    });
   }
 
   isOwnMessage(senderId: string): boolean {

@@ -4,10 +4,14 @@
   <div
     class="chat-page__header sticky top-0 flex grow-0 items-center justify-center pt-[10px] pb-[5px] border-b-[1px] border-solid border-[#EBEBEB] bg-[#fff]"
   >
-    <div class="chat-page__header-avatar mr-[18px] w-[64px] h-[64px]">
+    <div class="chat-page__header-avatar mr-[18px] w-[64px] h-[64px] rounded-[50px] overflow-hidden">
       <img
-        src="../../../assets/img/avatar.svg"
-        class="w-full h-full"
+        [src]="
+          this.currentFriendChat.url !== ''
+            ? this.currentFriendChat.url
+            : '../../../assets/img/avatar.svg'
+        "
+        class="w-full h-full object-cover"
         alt="user-avatar"
       />
     </div>
@@ -30,7 +34,7 @@
             [ngClass]="{
               'own__message_block flex flex-row-reverse items-center':
                 this.isOwnMessage(message.senderId),
-              'interlocutor': !this.isOwnMessage(message.senderId)
+              interlocutor: !this.isOwnMessage(message.senderId)
             }"
           >
             <p

@@ -15,28 +15,35 @@ import { ChatService } from './chat.service';
 export class WebsocketService {
   private _arrayMessages: IChatMessage[] = [];
 
-  private _messages = new BehaviorSubject<IChatMessage[]>(
-    this._arrayMessages
-  );
+  private _messages = new BehaviorSubject<IChatMessage[]>(this._arrayMessages);
 
   messages$ = this._messages.asObservable();
 
   personInfo: IPersonInfo = this.storageService.getUser();
 
   // Переменные связанные с Stomp и SockJS
+  private isConnected = new BehaviorSubject<boolean>(false);
+
+  isConnected$ = this.isConnected.asObservable();
   stompClient: any = null;
   urlMessageWebsocket: string;
 
-  constructor(private storageService:StorageService, private chatService: ChatService) {
+  constructor(
+    private storageService: StorageService,
+    private chatService: ChatService
+  ) {}
+
+  setValueConnecting(value: boolean) {
+    this.isConnected.next(value);
   }
 
   connect(endPointWebSocket: string) {
     let ws = new SockJS(endPointWebSocket);
     this.stompClient = Stomp.over(ws);
-
     this.stompClient.connect(
       {},
       () => {
+        this.setValueConnecting(true);
         console.log(`Подключение установлено`);
         this.stompClient.subscribe(
           '/user/' + this.personInfo.id + '/queue/messages',
@@ -64,7 +71,7 @@ export class WebsocketService {
         recipientName: recipient.userDto.username,
         content: msg,
         timestamp: new Date(),
-        status: 'RECEIVED'
+        status: 'RECEIVED',
       };
 
       this.stompClient.send('/app/chat', {}, JSON.stringify(message));
@@ -80,10 +87,12 @@ export class WebsocketService {
   private _onMessageReceived(message: any) {
     const parseMessage = JSON.parse(message.body);
     console.log(parseMessage);
-    
-    this.chatService.getSpecificallyMessage(parseMessage.id).subscribe((message) => {
-      this.chatService.addMessageChat(message);
-    })
+
+    this.chatService
+      .getSpecificallyMessage(parseMessage.id)
+      .subscribe((message) => {
+        this.chatService.addMessageChat(message);
+      });
   }
 
   clearMessages() {

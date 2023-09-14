@@ -37,7 +37,11 @@
         #like__buttons_block
       >
         <button
-          class="likes-page__card-chat bg-[#00A3FF] rounded-[50%] flex items-center justify-center w-[36px] h-[36px] hover:bg-[#56C2FF] duration-[250ms] invisible opacity-0 mr-[8px]"
+          class="likes-page__card-chat bg-[#00A3FF] rounded-[50%] flex items-center justify-center w-[36px] h-[36px] hover:bg-[#56C2FF] duration-[250ms]"
+          [ngClass]="{
+            'visible opacity-1 z-2': likeCard.mutualLike === true,
+            'invisible opacity-0': likeCard.mutualLike === false
+          }"
           #chatButton
           title="Вы можете написать сообщение"
           (click)="clickChatButton(likeCard.id)"
@@ -67,6 +71,7 @@
         </button>
         <div
           class="like-page__card-like__block flex justify-between"
+          [ngClass]="{ hidden: likeCard.mutualLike === true }"
           #like__buttons
         >
           <button
@@ -154,7 +159,7 @@
         <div class="like__list-empty_text-two text-[18px]">
           Продолжайте
           <a
-          appActiveLink
+            appActiveLink
             [argLinks]="castingPageLink"
             [routerLink]="castingLink"
             class="text-[#00A3FF] hover:text-[#56C2FF] duration-[250ms] cursor-pointer"
