@@ -18,12 +18,19 @@ export class ContactsBlockComponent {
 
   ngOnInit() {
     this.castingService.listCastingPeople$.subscribe((listCasting) => {
-      if (listCasting.length === 0) {
+      
+      if (listCasting.length === 0 && !this.castingService.getIsEmptyCards()) {
         this.castingService
           .getCastingCards(this.infoUser.id, -1)
-          .subscribe(() => {});
+          .subscribe((cardInfo) => {
+            if (cardInfo.length === 0) {
+              //устанавливаем в true, чтобы показать отсутсвтие данных в БД
+              this.castingService.setIsEmptyCards(true);
+              this.castingService.setEmptyArrayCasting();           
+            }
+          });
       }
-           
+
       if (listCasting.length === 1) {
         const lastCard = listCasting[listCasting.length - 1];
         this.castingService

@@ -11,20 +11,40 @@
     <li
       class="messages-page__list-messages__content flex items-center pt-[16px] pb-[32px] pl-[8px] border-b-[1px] border-solid border-[#EBEBEB] hover:bg-[#EBEBEB] duration-[250ms] cursor-pointer"
       *ngFor="let chat of this.chatService.allChatsUser; let i = index"
-      (click)="this.isOwnChat(chat.chatId) ? goToChat(chat.recipientId) : goToChat(chat.senderId)"
+      (click)="
+        this.isOwnChat(chat.chatId)
+          ? goToChat(chat.recipientId)
+          : goToChat(chat.senderId)
+      "
     >
-      <div class="list-messages__content-avatar pr-[16px]">
-        <img src="../../../assets/img/avatar.svg" alt="user-avatar" />
+      <div class="list-messages__content-avatar mr-[16px] w-[56px] h-[56px] rounded-[50px] overflow-hidden">
+        <img
+          [src]="chat.senderUrl ? chat.senderUrl : '../../../assets/img/avatar.svg'"
+          class="w-full h-full object-cover"
+          alt="user-avatar"
+        />
       </div>
       <div class="list-messages__content-info">
         <h2
           class="list-messages__content-info info__username text-[20px] mb-[6px]"
         >
-          {{ this.isOwnChat(chat.chatId) ? chat.recipientName : chat.senderName}}
+          {{
+            this.isOwnChat(chat.chatId) ? chat.recipientName : chat.senderName
+          }}
         </h2>
-        <div class="list-messages__content-info info__text text-[#7A7A7A] flex items-center">
-          <span class="pr-[5px]" *ngIf="this.isOwnLastMessage(chat.idLastSender)">Вы:</span>
-          {{ chat.content.length > 30 ? (chat.content | slice : 0 : 30) + '...' : chat.content}}
+        <div
+          class="list-messages__content-info info__text text-[#7A7A7A] flex items-center"
+        >
+          <span
+            class="pr-[5px]"
+            *ngIf="this.isOwnLastMessage(chat.idLastSender)"
+            >Вы:</span
+          >
+          {{
+            chat.content.length > 30
+              ? (chat.content | slice : 0 : 30) + "..."
+              : chat.content
+          }}
         </div>
       </div>
     </li>

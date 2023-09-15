@@ -33,6 +33,9 @@ export class CastingService {
 
   isGetRequestCastingCards$ = this._isGetRequestCastingCards.asObservable();
 
+  //переменная для отслеживания есть ли на бекенде еще карточки, которые не лайкал пользователь или не просматривал
+  private _isEmptyCards = false;
+
   private _activeLinks = {
     castingLink: 'not_active',
     likeLink: 'not_active',
@@ -40,8 +43,13 @@ export class CastingService {
 
   constructor(private _http: HttpClient, private errorService: ErrorService) {}
 
-  setNewCastingCards(indexCard: number) {
+  editCastingCards(indexCard: number) {
     this._listArrayCastingCard.splice(indexCard, 1);
+    this._listCastingPeople.next(this._listArrayCastingCard);
+  }
+
+  setEmptyArrayCasting(){
+    this._listArrayCastingCard = [];
     this._listCastingPeople.next(this._listArrayCastingCard);
   }
 
@@ -65,12 +73,20 @@ export class CastingService {
     this._isGetRequestCastingCards.next(value);
   }
 
+  setIsEmptyCards(value: boolean) {
+    this._isEmptyCards = value;
+  }
+
   getValueGettingCards() {
     return this._isGetRequestCastingCards;
   }
 
-  getListArrayLikeCards(){
+  getListArrayLikeCards() {
     return this._listArrayLikesCard;
+  }
+
+  getIsEmptyCards() {
+    return this._isEmptyCards;
   }
 
   getActiveLinks() {
@@ -84,20 +100,19 @@ export class CastingService {
 
   //Backend requests
 
-  getCastingCards(
-    idOwner: number,
-    idCard: number
-  ): Observable<ICards> {
+  getCastingCards(idOwner: number, idCard: number): Observable<ICards[]> {
     return this._http
-      .get<ICards>(
+      .get<ICards[]>(
         API_URL + GET_CASTING_CARDS + '/' + idOwner + '/' + idCard,
         httpOptions
       )
       .pipe(
         tap((cardsData) => {
-          //проблема здесь
-          this._listArrayCastingCard.push(cardsData);
-          this._listCastingPeople.next(this._listArrayCastingCard);
+          if (cardsData.length !== 0) {
+            const cardInfo = cardsData[cardsData.length - 1];
+            this._listArrayCastingCard.push(cardInfo);
+            this._listCastingPeople.next(this._listArrayCastingCard);
+          }
         }),
         catchError((error) => this.errorService.handle(error))
       );
@@ -106,27 +121,42 @@ export class CastingService {
   likeCard(idOwner: number, idLovers: number) {
     return this._http
       .post(
-        API_URL + '/' + 'people' + '/' + idOwner + ADD_LIKE_CARD + '/' + idLovers,
+        API_URL +
+          '/' +
+          'people' +
+          '/' +
+          idOwner +
+          ADD_LIKE_CARD +
+          '/' +
+          idLovers,
         httpOptions
       )
       .pipe(catchError((error) => this.errorService.handle(error)));
   }
 
-  likeMutualCard(idOwner: number, idLovers: number){
-    return this._http.post(
-      API_URL + '/' + idLovers + ADD_LIKE_CARD + '/' + idOwner, 
-      httpOptions
-    )
-    .pipe(catchError((error) => this.errorService.handle(error)));
-  }
-
-  dislikeCard(idOwner: number, idLovers: number){
+  likeMutualCard(idOwner: number, idLovers: number) {
     return this._http
-      .delete(
-        API_URL + '/' + 'people' + '/' + idOwner + DELETE_LIKE_CARD + '/' + idLovers,
+      .post(
+        API_URL + '/' + idLovers + ADD_LIKE_CARD + '/' + idOwner,
         httpOptions
       )
-    .pipe(catchError((error) => this.errorService.handle(error)));
+      .pipe(catchError((error) => this.errorService.handle(error)));
+  }
+
+  dislikeCard(idOwner: number, idLovers: number) {
+    return this._http
+      .delete(
+        API_URL +
+          '/' +
+          'people' +
+          '/' +
+          idOwner +
+          DELETE_LIKE_CARD +
+          '/' +
+          idLovers,
+        httpOptions
+      )
+      .pipe(catchError((error) => this.errorService.handle(error)));
   }
 
   getAllFans(idOwner: number): Observable<ICards[]> {

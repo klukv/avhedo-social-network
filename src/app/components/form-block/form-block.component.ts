@@ -25,7 +25,7 @@ export class FormBlockComponent {
     (<HTMLStyleElement>document.getElementById('card_swipe')).style.opacity = '0';
 
     setTimeout(() => {
-      this.castingService.setNewCastingCards(this.indexCard);
+      this.castingService.editCastingCards(this.indexCard);
     }, 200);
 
     // Отправляем запрос на бекенд
@@ -42,7 +42,7 @@ export class FormBlockComponent {
     (<HTMLStyleElement>document.getElementById('card_swipe')).style.opacity =
       '0';
     setTimeout(() => {
-      this.castingService.setNewCastingCards(this.indexCard);
+      this.castingService.editCastingCards(this.indexCard);
     }, 200);
   }
 }
