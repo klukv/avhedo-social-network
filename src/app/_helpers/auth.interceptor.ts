@@ -7,7 +7,6 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TOKEN_KEY, USER_KEY } from '../utils/const';
 import { StorageService } from '../services/storage.service';
 
 @Injectable()

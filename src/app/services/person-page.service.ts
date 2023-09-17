@@ -92,7 +92,7 @@ export class PersonPageService {
     );
   }
 
-  addImageAvatar(userId: number, formData: FormData) {
+  addImageAvatar(userId: string, formData: FormData) {
     return this._http
       .post(API_URL + ADD_IMAGE_AVATAR + '/' + userId, formData)
       .pipe(catchError((error) => this.errorService.handle(error)));

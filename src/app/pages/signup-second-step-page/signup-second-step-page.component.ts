@@ -29,7 +29,7 @@ export class SignupSecondStepPageComponent {
   form: FormGroup;
   private _agePerson: number;
   private _genderPerson: string;
-  private _userInfo: IPersonInfo = this.storageService.getUser();
+  private _userId: string = this.storageService.getUser();
   private _formData: FormData = new FormData();
   private sub: Subscription;
 
@@ -37,6 +37,7 @@ export class SignupSecondStepPageComponent {
     private fb: FormBuilder,
     private router: Router,
     private storageService: StorageService,
+    private authService: LoginService,
     private modalService: ModalService,
     public errorService: ErrorService,
     public personService: PersonPageService
@@ -66,10 +67,6 @@ export class SignupSecondStepPageComponent {
     if (!clickedElement.closest(this.selectElement)) {
       this.modalService.closePopup();
     }
-  }
-
-  saveAdditionallyInfoUser() {
-    // this.authService.setValueIsRegister(true); устанавливаем значение в true для прохождения регистрации
   }
 
   //Метод для загрузки фото в форму
@@ -123,14 +120,13 @@ export class SignupSecondStepPageComponent {
 
   //сохраняем информацию в бд
 
-  clickSaveInfoUser() {
+  saveAdditionallyInfoUser() {
     if (
       this.form.invalid ||
       this.personService.selectHobbyItems.length === 0 ||
-      this._userInfo.id === undefined
+      this._userId === undefined
     ) {
-      console.log(this._formData.getAll('file').length);
-
+      console.log(this._userId);
       console.log('запрос не прошёл');
       return;
     }
@@ -146,16 +142,25 @@ export class SignupSecondStepPageComponent {
           sex: this._genderPerson,
           url: ``,
         },
-        this._userInfo.id.toString()
+        this._userId.toString()
       )
       .pipe(catchError((error) => this.errorService.handle(error)))
       .subscribe(() => {
         this.storageService.saveShowInfoUser(true);
+        this.authService.setValueIsRegister(true);
         this.personService.setLoaded(false);
+        this.router.navigate(['signin']);
       });
-    if (this._formData.getAll('file').length !== 0) {
+    if (this.imageAvatar?.value.filename.length !== 0) {
       this.personService
-        .addImageAvatar(this._userInfo.id, this._formData)
+        .addImageAvatar(this._userId, this._formData)
+        .subscribe(() => {});
+    } else {
+      this._formData.append('file', '');
+
+      //загружаем пустую строку в бд в поле с фотографией, если пользователь не стал выбирать фото
+      this.personService
+        .addImageAvatar(this._userId, this._formData)
         .subscribe(() => {});
     }
   }

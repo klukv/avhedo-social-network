@@ -26,9 +26,6 @@
     <app-create-product
       *ngIf="modalService.typeModal === variantsModals.TYPE_MODAL_EDIT"
     ></app-create-product>
-    <app-create-info-user
-      *ngIf="modalService.typeModal === variantsModals.TYPE_MODAL_FORM"
-    ></app-create-info-user>
   </app-modal>
   <app-error *ngIf="errorService.isVisibleErrorModal$ | async"></app-error>
 </div>

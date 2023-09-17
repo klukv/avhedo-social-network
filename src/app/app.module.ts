@@ -43,7 +43,6 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { ActiveLinkDirective } from './directives/active-link.directive';
 import { httpInterceptorProviders } from './_helpers/auth.interceptor';
 import { ErrorComponent } from './components/error/error.component';
-import { CreateInfoUserComponent } from './components/create-info-user/create-info-user.component';
 import { FriendsRoutingComponent } from './components/friends-routing/friends-routing.component';
 import { FriendsMyFriendsComponent } from './components/friends/friends-my-friends/friends-my-friends.component';
 import { LodaerSpinV1Component } from './components/loading/lodaer-spin-v1/lodaer-spin-v1.component';
@@ -82,7 +81,6 @@ import { SignupSecondStepPageComponent } from './pages/signup-second-step-page/s
     SignupPageComponent,
     ActiveLinkDirective,
     ErrorComponent,
-    CreateInfoUserComponent,
     FriendsRoutingComponent,
     FriendsMyFriendsComponent,
     LodaerSpinV1Component,

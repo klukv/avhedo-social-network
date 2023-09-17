@@ -28,6 +28,10 @@ export class StorageService {
     window.sessionStorage.setItem(IS_SHOW_DATA_KEY, JSON.stringify(value));
   }
 
+  saveIdUser(userId: string){
+    window.sessionStorage.setItem(USER_KEY, JSON.stringify(userId));
+  }
+
   isShowInfoUser(): boolean {
     const isShowData = window.sessionStorage.getItem(IS_SHOW_DATA_KEY);
 

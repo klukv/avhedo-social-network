@@ -3,6 +3,10 @@ export type TRoles = {
   name: string;
 }
 
+export type TRegisterOneStep = {
+  message: string
+}
+
 export interface IUser {
   id?: number;
   username: string;

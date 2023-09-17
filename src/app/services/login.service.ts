@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { API_URL, LOGIN_URL, SIGNUP_URL, httpOptions } from '../utils/const';
-import { IResponseUser } from '../models/user';
+import { IResponseUser, TRegisterOneStep } from '../models/user';
 import { StorageService } from './storage.service';
 
 
@@ -28,8 +28,8 @@ export class LoginService {
     email: string,
     password: string,
     role: string[],
-  ): Observable<string> {
-    return this._http.post<string>(
+  ): Observable<TRegisterOneStep> {
+    return this._http.post<TRegisterOneStep>(
       API_URL + SIGNUP_URL,
       { username, email, password, role},
       httpOptions
