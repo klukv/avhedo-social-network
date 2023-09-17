@@ -48,7 +48,8 @@ import { FriendsRoutingComponent } from './components/friends-routing/friends-ro
 import { FriendsMyFriendsComponent } from './components/friends/friends-my-friends/friends-my-friends.component';
 import { LodaerSpinV1Component } from './components/loading/lodaer-spin-v1/lodaer-spin-v1.component';
 import { LodaerSpinV2Component } from './components/loading/lodaer-spin-v2/lodaer-spin-v2.component';
-import { LoaderHomeComponent } from './components/loading/loader-home/loader-home.component'
+import { LoaderHomeComponent } from './components/loading/loader-home/loader-home.component';
+import { SignupSecondStepPageComponent } from './pages/signup-second-step-page/signup-second-step-page.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { LoaderHomeComponent } from './components/loading/loader-home/loader-hom
     FriendsMyFriendsComponent,
     LodaerSpinV1Component,
     LodaerSpinV2Component,
-    LoaderHomeComponent
+    LoaderHomeComponent,
+    SignupSecondStepPageComponent,
   ],
   imports: [
     BrowserModule,

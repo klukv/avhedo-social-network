@@ -52,8 +52,7 @@ export class SignupPageComponent implements OnDestroy {
         catchError(error => this.errorService.handle(error))
       )
       .subscribe(() => {
-        this.authService.setValueIsRegister(true);
-        this.router.navigate(['signin']);
+        this.router.navigate(['signup/additionally/info']);
       });
   }
 

@@ -21,6 +21,7 @@ import {
   MY_SUBSCRIBERS,
   PERSON_PAGE,
   REGISTRATION_PAGE,
+  REGISTRATION_SECOND,
   SUBSCRIBERS_ADDED,
   SUBSCRIBERS_PAGE,
   SUBSCRIBERS_SEARCH,
@@ -29,6 +30,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { AuthGuard, AuthGuardChild } from './services/guard.service';
 import { FriendsMyFriendsComponent } from './components/friends/friends-my-friends/friends-my-friends.component';
+import { SignupSecondStepPageComponent } from './pages/signup-second-step-page/signup-second-step-page.component';
 
 const castingRoutes: Routes = [
   {
@@ -58,6 +60,7 @@ const friendsRoute = [
 
 const routes: Routes = [
   { path: REGISTRATION_PAGE, component: SignupPageComponent },
+  { path: REGISTRATION_SECOND, component: SignupSecondStepPageComponent },
   { path: LOGIN_PAGE, component: LoginPageComponent },
   { path: MAIN_PAGE, component: MainPageComponent, canActivate: [AuthGuard] },
   {

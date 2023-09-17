@@ -13,6 +13,7 @@ export const CASTING_PAGE_CONTACTS = 'contacts';
 
 export const LOGIN_PAGE = 'signin';
 export const REGISTRATION_PAGE = 'signup';
+export const REGISTRATION_SECOND = 'signup/additionally/info'
 export const PERSON_PAGE = 'person';
 export const MESSAGES_PAGE = 'messages';
 export const CHAT_PAGE = 'messages/chat';
@@ -49,6 +50,7 @@ export const GET_CASTING_CARDS = '/InfoAllPeopleLove'
 export const GET_ALL_FANS = '/infoAllLoveYou'
 export const ADD_LIKE_CARD = '/love'
 export const DELETE_LIKE_CARD = '/dontLove'
+
 //SessionStorage keys
 
 export const USER_KEY = 'auth-user';

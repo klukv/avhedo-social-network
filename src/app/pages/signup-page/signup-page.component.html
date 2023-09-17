@@ -1,10 +1,13 @@
 <div class="register mb-[64px]">
   <div class="container mx-auto max-w-[400px]">
     <div
-      class="register__inner min-h-[600px] bg-[#fff] rounded-[8px] flex flex-col items-center"
+      class="register__inner min-h-[600px] px-[6px] bg-[#fff] rounded-[8px] flex flex-col items-center"
     >
-      <h1 class="register__title text-[24px] py-[24px] grow-0">Регистрация</h1>
-      <div class="register__info grow w-full">
+      <h1 class="register__title text-[24px] pt-[24px] grow-0">Регистрация</h1>
+      <div class="register__title-step text-[#00A3FF] text-[16px] pt-[3px] text-center max-w-[280px]">
+        Шаг 1: заполнение основных данных
+      </div>
+      <div class="register__info grow w-full mt-[5px]">
         <form
           class="register__form flex flex-col justify-between px-[20px]"
           [formGroup]="form"
@@ -97,7 +100,7 @@
               class="register__form__btn px-[25px] py-[8px] mb-[20px] bg-[#00A3FF] text-[16px] text-[#ffffff] rounded-[8px] hover:bg-[#52C1FF] duration-[250ms] cursor-pointer"
               type="submit"
             >
-              Зарегистрироваться
+              Ввод
             </button>
           </div>
         </form>
