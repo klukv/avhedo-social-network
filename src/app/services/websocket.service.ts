@@ -8,6 +8,8 @@ import * as SockJS from 'sockjs-client';
 import { StorageService } from './storage.service';
 import { IResponseInfoUser } from '../models/user';
 import { ChatService } from './chat.service';
+import { TActiveChat } from '../models/chat';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,24 +19,34 @@ export class WebsocketService {
 
   private _messages = new BehaviorSubject<IChatMessage[]>(this._arrayMessages);
 
-  messages$ = this._messages.asObservable();
-
-  personInfo: IPersonInfo = this.storageService.getUser();
+  // объект для отслеживания в каком чате в данный момент находится пользователь
+  private _activeChat: TActiveChat = {
+    id: undefined,
+    recipientName: undefined,
+  };
 
   // Переменные связанные с Stomp и SockJS
   private isConnected = new BehaviorSubject<boolean>(false);
 
+  messages$ = this._messages.asObservable();
+
+  personInfo: IPersonInfo = this.storageService.getUser();
   isConnected$ = this.isConnected.asObservable();
   stompClient: any = null;
   urlMessageWebsocket: string;
 
   constructor(
     private storageService: StorageService,
-    private chatService: ChatService
+    private chatService: ChatService,
+    private notificationService: NotificationService
   ) {}
 
   setValueConnecting(value: boolean) {
     this.isConnected.next(value);
+  }
+
+  setActiveChat(newInfoChat: TActiveChat) {
+    this._activeChat = newInfoChat;
   }
 
   connect(endPointWebSocket: string) {
@@ -86,13 +98,17 @@ export class WebsocketService {
 
   private _onMessageReceived(message: any) {
     const parseMessage = JSON.parse(message.body);
-    console.log(parseMessage);
+;
+    if (this._activeChat.id === parseMessage.senderId) {
 
-    this.chatService
-      .getSpecificallyMessage(parseMessage.id)
-      .subscribe((message) => {
-        this.chatService.addMessageChat(message);
-      });
+      this.chatService
+        .getSpecificallyMessage(parseMessage.id)
+        .subscribe((message) => {
+          this.chatService.addMessageChat(message);
+        });
+    } else {
+      this.notificationService.addNotification(parseMessage);
+    }
   }
 
   clearMessages() {

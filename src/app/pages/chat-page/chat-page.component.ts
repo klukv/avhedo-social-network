@@ -35,10 +35,6 @@ export class ChatPageComponent {
     this._user_id = this.activeRoute.snapshot.queryParams['id'];
   }
 
-  private _connectWebsocket() {
-    this.websocketService.connect('http://localhost:8080/ws');
-  }
-
   ngOnInit() {
     this.personInfo = this.storageService.getUser();
 
@@ -50,7 +46,15 @@ export class ChatPageComponent {
       });
 
     this.subscription = this.friendsService.friendInfo$.subscribe(
-      (friendInfo) => (this.currentFriendChat = friendInfo)
+      (friendInfo) => {
+        this.currentFriendChat = friendInfo;
+
+        // добавляем информацию о собеседнике в текущем чате
+        this.websocketService.setActiveChat({
+          id: friendInfo.userDto.id.toString(),
+          recipientName: friendInfo.userDto.username,
+        });
+      }
     );
 
     this.router.events.subscribe((event) => {
@@ -60,8 +64,6 @@ export class ChatPageComponent {
         window.location.reload();
       }
     });
-
-    this._connectWebsocket();
 
     this.websocketService.isConnected$.subscribe((valueConnecting) => {
       if (
@@ -89,8 +91,11 @@ export class ChatPageComponent {
   }
 
   ngOnDestroy() {
+    this.websocketService.setActiveChat({
+      id: undefined,
+      recipientName: undefined,
+    });
     this.websocketService.clearMessages();
-    this.websocketService.disconnect();
     this.subscription.unsubscribe();
   }
 }
