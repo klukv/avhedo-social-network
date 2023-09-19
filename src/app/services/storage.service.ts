@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { IUser } from '../models/user';
 import { IS_SHOW_DATA_KEY, TOKEN_KEY, USER_KEY } from '../utils/const';
 import { IPersonInfo } from '../models/personInfo';
 
 @Injectable({
   providedIn: 'root',
 })
-export class StorageService {
+export class StorageService { 
   constructor() {}
 
   infoUserClear() {
@@ -26,6 +25,10 @@ export class StorageService {
   // Методы, при помощи которых определяется, первый раз зашёл пользователь или нет
   saveShowInfoUser(value: boolean) {
     window.sessionStorage.setItem(IS_SHOW_DATA_KEY, JSON.stringify(value));
+  }
+
+  saveIdUser(userId: string){
+    window.sessionStorage.setItem(USER_KEY, JSON.stringify(userId));
   }
 
   isShowInfoUser(): boolean {
