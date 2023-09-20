@@ -76,6 +76,16 @@ export class ChatPageComponent {
     });
   }
 
+  clickKeyupSendMessage(event: KeyboardEvent){
+    if(event.key === 'Enter'){
+      this.websocketService.sendMessage(
+        this.messageContent,
+        this.currentFriendChat
+      );
+      this.messageContent = '';
+    }
+  }
+
   isOwnMessage(senderId: string): boolean {
     return this.personInfo.id === Number(senderId);
   }

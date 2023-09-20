@@ -61,6 +61,7 @@
         class="chat-page__entry_input bg-[#EBEBEB] rounded-[10px] placeholder:text-[#7A7A7A] w-full h-[64px] pl-[18px] pr-[57px] text-[18px] outline-none"
         placeholder="Написать сообщение"
         [(ngModel)]="messageContent"
+        (keyup)="clickKeyupSendMessage($event)"
       />
       <div
         class="chat-page__entry-svg w-[28px] h-[28px] absolute top-[21px] right-[21px] cursor-pointer"
