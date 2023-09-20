@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FriendsService } from 'src/app/services/friends.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-navigation',
@@ -8,6 +10,10 @@ import { Component } from '@angular/core';
 export class NavigationComponent {
   ownSubscribers = 'ownSubscribers'
   isOpenNotifications: boolean;
+
+  constructor(public notificationService: NotificationService, public friendsService: FriendsService){
+
+  }
 
   ngAfterViewInit(): void {
     document.addEventListener('click', this.clickPopupNitifications.bind(this));

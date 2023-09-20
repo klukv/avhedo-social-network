@@ -1,8 +1,14 @@
 <div class="post__block__inner pt-[22px] pb-[38px]">
   <div class="post__block-user flex items-center pl-[25px]">
-    <div class="post__block-user_avatar mr-[8px] mb-[8px] w-[64px] h-[64px] rounded-[50px] overflow-hidden">
+    <div
+      class="post__block-user_avatar mr-[8px] mb-[8px] w-[64px] h-[64px] rounded-[50px] overflow-hidden"
+    >
       <img
-        [src]="post.messageDto.infoUserFromLentaDto.url !== '' ? post.messageDto.infoUserFromLentaDto.url : '../../../assets/img/avatar.svg'"
+        [src]="
+          post.messageDto.infoUserFromLentaDto.url !== ''
+            ? post.messageDto.infoUserFromLentaDto.url
+            : '../../../assets/img/avatar.svg'
+        "
         class="w-full h-full object-cover"
         alt="user-avatar"
       />
@@ -23,8 +29,15 @@
       </p>
       <div class="post__block-info_icons flex items-center mb-[8px] relative">
         <div class="post__block-like mr-[16px] cursor-pointer">
-          <button class="scattering" [ngClass]="{'active': this.isClickLike === true}" (click)="clickIconLike()"></button>
-          <span class="post__block-like__counter text-[20px] text-[#5a5a5a] absolute left-[33px] top-0">{{this.countLikes !== 0 ? this.countLikes : ''}}</span>
+          <button
+            class="scattering"
+            [ngClass]="{ active: this.isClickLike === true }"
+            (click)="clickIconLike()"
+          ></button>
+          <span
+            class="post__block-like__counter text-[20px] text-[#5a5a5a] absolute left-[33px] top-0"
+            >{{ this.countLikes !== 0 ? this.countLikes : "" }}</span
+          >
         </div>
         <div
           class="post__block-comment cursor-pointer absolute z-[2] left-[60px] top-[2px]"
@@ -97,10 +110,14 @@
           class="post__block_one-comment flex items-center pb-[22px]"
           *ngFor="let comment of post.commentsDtoList; let i = index"
         >
-          <div class="post__block-username_avatar w-[50px] h-[50px]">
+          <div class="post__block-username_avatar w-[50px] h-[50px] rounded-[50px] overflow-hidden">
             <img
-              src="../../../assets/img/avatar.svg"
-              class="w-full h-full"
+              [src]="
+                comment.infoUserFromLentaDto.url !== ''
+                  ? comment.infoUserFromLentaDto.url
+                  : '../../../assets/img/avatar.svg'
+              "
+              class="w-full h-full object-cover"
               alt="user-avatar"
             />
           </div>
@@ -109,7 +126,9 @@
               class="post__block-comments_title text-[18px] hover:text-[#00A3FF] duration-[250ms] cursor-pointer"
             >
               <a
-                (click)="goToPageFriend(comment.infoUserFromLentaDto.userInfo.id)"
+                (click)="
+                  goToPageFriend(comment.infoUserFromLentaDto.userInfo.id)
+                "
                 class="border-b-[#EBEBEB] border-solid border-b-[1px] pb-[2px]"
                 >{{ comment.infoUserFromLentaDto.userInfo.username }}</a
               >

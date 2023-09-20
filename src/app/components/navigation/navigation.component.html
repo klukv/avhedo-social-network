@@ -27,9 +27,7 @@
       class="navigation__point notifications__link mr-[36px] hover:bg-[#EBEBEB] transition duration-300 ease-in-out relative"
       (click)="isOpenNotifications = true"
     >
-      <div
-        class="navigation__link after:content-['36'] relative after:absolute after:bottom-[-14px] after:right-[-10px] after:text-[#00A3FF] after:text-[12px]"
-      >
+      <div class="navigation__link relative">
         <svg
           class="w-[30px] h-[30px]"
           viewBox="0 0 24 28"
@@ -44,6 +42,12 @@
             stroke-linejoin="round"
           />
         </svg>
+        <span
+          class="navigation__link-notification__count absolute bottom-[-14px] right-[-8px] text-[#00A3FF] text-[12px]"
+          >{{
+            (this.notificationService.notificationList$ | async)?.length
+          }}</span
+        >
       </div>
       <div
         class="notifications absolute z-[500] min-w-[379px] left-0 top-[75px] bg-[#DEDEDE] rounded-b-lg"
@@ -61,19 +65,22 @@
           </h2>
           <ul class="notifications__list">
             <li
+              *ngFor="
+                let notification of this.notificationService.notificationList$
+                  | async
+              "
               class="notifications__point border-b-[1px] border-solid border-b-[#B6B6B6]"
             >
-              <p class="px-[16px] py-[12px] text-[16px]">Текст1</p>
-            </li>
-            <li
-              class="notifications__point border-b-[1px] border-solid border-b-[#B6B6B6]"
-            >
-              <p class="px-[16px] py-[12px] text-[16px]">Текст2</p>
-            </li>
-            <li
-              class="notifications__point border-b-[1px] border-solid border-b-[#B6B6B6]"
-            >
-              <p class="px-[16px] py-[12px] text-[16px]">Текст3</p>
+              <p class="px-[16px] py-[12px] text-[16px]">
+                Вы получили новое сообщение от
+                <span
+                  class="text-[#00A3FF] hover:text-[#56C2FF] hover:underline duration-[250ms]"
+                  (click)="
+                    this.friendsService.goToPageFriend(notification.senderId)
+                  "
+                  >{{ notification.senderName }}</span
+                >
+              </p>
             </li>
           </ul>
         </div>
@@ -86,7 +93,7 @@
         appActiveLink
         [argLinks]="ownSubscribers"
         routerLink="/subscribers/own"
-        class="navigation__link after:content-['20'] relative after:absolute after:bottom-[-14px] after:right-[-10px] after:text-[#00A3FF] after:text-[12px]"
+        class="navigation__link after:content-[''] relative after:absolute after:bottom-[-14px] after:right-[-10px] after:text-[#00A3FF] after:text-[12px]"
       >
         <svg
           class="w-[30px] h-[30px]"
@@ -109,7 +116,7 @@
     >
       <a
         routerLink="/messages"
-        class="navigation__link after:content-['5'] relative after:absolute after:bottom-[-14px] after:right-[-10px] after:text-[#00A3FF] after:text-[12px]"
+        class="navigation__link after:content-[''] relative after:absolute after:bottom-[-14px] after:right-[-10px] after:text-[#00A3FF] after:text-[12px]"
       >
         <svg
           class="w-[30px] h-[30px]"
@@ -125,6 +132,12 @@
             stroke-linejoin="round"
           />
         </svg>
+        <span
+          class="navigation__link-notification__count absolute bottom-[-14px] right-[-8px] text-[#00A3FF] text-[12px]"
+          >{{
+            (this.notificationService.notificationList$ | async)?.length
+          }}</span
+        >
       </a>
     </li>
     <li
@@ -132,7 +145,7 @@
     >
       <a
         routerLink="/casting"
-        class="navigation__link after:content-['12'] relative after:absolute after:bottom-[-14px] after:right-[-10px] after:text-[#00A3FF] after:text-[12px]"
+        class="navigation__link after:content-[''] relative after:absolute after:bottom-[-14px] after:right-[-10px] after:text-[#00A3FF] after:text-[12px]"
       >
         <svg
           class="w-[30px] h-[30px]"
