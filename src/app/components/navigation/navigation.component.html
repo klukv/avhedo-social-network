@@ -57,13 +57,19 @@
             isOpenNotifications
         }"
       >
-        <div class="notifications__inner pb-[48px]">
+        <div class="notifications__inner">
           <h2
             class="notifications__title text-[22px] text-center py-[24px] border-b-[1px] border-b-[#B6B6B6]"
           >
             Уведомления
           </h2>
-          <ul class="notifications__list">
+          <ul
+            class="notifications__list pb-[48px]"
+            *ngIf="
+              (this.notificationService.notificationList$ | async)?.length !== 0;
+              else empty__list_notifications
+            "
+          >
             <li
               *ngFor="
                 let notification of this.notificationService.notificationList$
@@ -206,3 +212,9 @@
     </li>
   </ul>
 </nav>
+
+<ng-template #empty__list_notifications>
+  <div class="empty__list flex justify-center items-center py-[16px]">
+    <p class="empty__list-text">В данный момент у вас нет уведомлений</p>
+  </div>
+</ng-template>

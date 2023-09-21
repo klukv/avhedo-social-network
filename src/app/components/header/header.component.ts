@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { FriendsService } from 'src/app/services/friends.service';
 
@@ -8,15 +8,13 @@ import { FriendsService } from 'src/app/services/friends.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-
   searchUsername = '';
   isOpenSearchPopup: boolean;
 
   constructor(public friendsService: FriendsService, private route: Router) {}
 
-  ngAfterViewInit(): void {
-    document.addEventListener('click', this.handlePopupSearch.bind(this));
-  }
+  //Прослушивание события клика для закрытия выпадающего списка
+  @HostListener('document:click', ['$event'])
   handlePopupSearch(event: MouseEvent) {
     const clickedElement = event.target as HTMLElement;
 
@@ -30,16 +28,12 @@ export class HeaderComponent {
   }
 
   goToPageFriend(id: number) {
-   // this.friendsService.changeInfoFriend(id);
+    // this.friendsService.changeInfoFriend(id);
     this.route.navigate(['person'], {
       queryParams: {
         id: id,
       },
     });
     this.isOpenSearchPopup = false;
-  }
-
-  ngOnDestroy() {
-    document.removeEventListener('click', this.handlePopupSearch.bind(this));
   }
 }
