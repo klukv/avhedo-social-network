@@ -14,6 +14,21 @@
     font-size: 14px;
     background-color: #ebebeb;
   }
+  * {
+    scrollbar-width: 6px;
+    scrollbar-color: #a1a1a1;
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;               
+  }
+  *::-webkit-scrollbar-track {
+    background: inherit;     
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #a1a1a1;
+    border-radius: 20px;       
+  }
   .navigation__point {
     display: flex;
     justify-content: center;
