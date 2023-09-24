@@ -1,4 +1,8 @@
-<div class="home-page mr-[18px] w-[872px]" #homePage (scroll)="trackingScrollPosts($event)">
+<div
+  class="home-page mr-[18px] w-[872px]"
+  #homePage
+  (scroll)="trackingScrollPosts($event)"
+>
   <div
     class="home__news rounded-[10px] bg-[#fff] pl-[48px] pr-[24px] overflow-hidden"
     [ngClass]="{
@@ -55,7 +59,12 @@
     *ngFor="let post of postService.postsData; let i = index"
     [post]="post"
   ></app-post-block>
-    <div class="loader__additionally__posts" *ngIf="this.isLoadedAdditionallyPosts; else loader__additionally__posts"></div>
+  <div class="loading__posts" *ngIf="!this.isLastPosts; else template_last_posts">
+    <div
+      class="loader__additionally__posts"
+      *ngIf="this.isLoadedAdditionallyPosts; else loader__additionally__posts"
+    ></div>
+  </div>
 </div>
 
 <ng-template #loader__posts>
@@ -64,4 +73,10 @@
 
 <ng-template #loader__additionally__posts>
   <app-loader-home></app-loader-home>
+</ng-template>
+
+<ng-template #template_last_posts>
+  <div class="last__posts text-center mb-[20px]">
+    <p class="last__posts_text text-[18px]">В настоящее время нет новых постов</p>
+  </div>
 </ng-template>

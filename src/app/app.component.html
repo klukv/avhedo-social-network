@@ -2,7 +2,7 @@
 <div class="wrapper">
   <main class="main">
     <div class="container">
-      <div class="main__inner flex mt-[68px] justify-between">
+      <div class="main__inner flex mt-[20px] justify-between">
         <router-outlet class="hidden"></router-outlet>
         <div
           *ngIf="
@@ -13,7 +13,7 @@
           <app-friends-routing
             *ngIf="hasRoute('subscribers')"
           ></app-friends-routing>
-          <app-my-page class="mb-[48px]"></app-my-page>
+          <app-my-page></app-my-page>
           <app-friends-block
             *ngIf="!hasRoute('friends')"
             class="friends bg-[#fff] rounded-[10px]"

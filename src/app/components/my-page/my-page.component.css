@@ -1,3 +1,6 @@
+:host{
+  margin-bottom: 20px;
+}
 .page__user-avatar__edit-svg,
 .page__user-avatar__edit-button {
   transition: all 150ms ease-in;

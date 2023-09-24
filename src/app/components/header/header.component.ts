@@ -27,6 +27,11 @@ export class HeaderComponent {
     this.searchUsername = usernameFriend;
   }
 
+  goToLink(route:string){
+    this.route.navigate([route]);
+  }
+
+
   goToPageFriend(id: number) {
     // this.friendsService.changeInfoFriend(id);
     this.route.navigate(['person'], {

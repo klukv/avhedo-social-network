@@ -34,7 +34,12 @@ export class LikesBlockComponent {
   ) {}
 
   ngOnInit() {
-    this.castingService.getAllFans(this.userInfo.id).subscribe(() => {});
+    if (this.userInfo.id !== 0 && this.userInfo.id) {
+      this.castingService.setLoadedLikes(false);
+      this.castingService.getAllFans(this.userInfo.id).subscribe(() => {
+        this.castingService.setLoadedLikes(true);
+      });
+    }
   }
 
   clickLikeCard(indexCard: number, idFan: number) {
@@ -70,7 +75,9 @@ export class LikesBlockComponent {
       }, 200);
 
       //запрос на бекенд
-      this.castingService.likeMutualCard(this.userInfo.id, idFan).subscribe(() => {});
+      this.castingService
+        .likeMutualCard(this.userInfo.id, idFan)
+        .subscribe(() => {});
     }
   }
 

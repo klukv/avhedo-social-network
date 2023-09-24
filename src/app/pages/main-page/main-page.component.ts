@@ -25,6 +25,7 @@ export class MainPageComponent implements AfterViewInit {
   isPostsOpen: boolean;
   isChangePostsBlock: boolean = false;
   isLoadedAdditionallyPosts = false;
+  isLastPosts:boolean = false; // отслеживание - последние ли данные были получены из базы данных
 
   // это флаг для отслеживания - был ли уже отправлен запрос на бекенд при достижении конца страницы при скролле (страница с постами)
   isSendRequestGetPosts: boolean = false;
@@ -76,16 +77,13 @@ export class MainPageComponent implements AfterViewInit {
 
   getMorePosts() {
     if (this.postService.postsData) {
-      const idCurrentLastPost =
-        this.postService.postsData[this.postService.postsData.length - 1]
-          .messageDto.id;
+      const idCurrentLastPost = this.postService.postsData[this.postService.postsData.length - 1].messageDto.id;
+
       this.postService
         .getPosts(idCurrentLastPost - 1)
         .subscribe((postsData) => {
           if (postsData.length === 0) {
-            this.isLoadedAdditionallyPosts = false;
-          } else {
-            this.isLoadedAdditionallyPosts = true;
+            this.isLastPosts = true;
           }
         });
     }

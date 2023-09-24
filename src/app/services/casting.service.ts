@@ -35,6 +35,7 @@ export class CastingService {
 
   //переменная для отслеживания есть ли на бекенде еще карточки, которые не лайкал пользователь или не просматривал
   private _isEmptyCards = false;
+  private _isLoadedLikes = false;
 
   private _activeLinks = {
     castingLink: 'not_active',
@@ -69,12 +70,20 @@ export class CastingService {
     });
   }
 
+  setLoadedLikes(value: boolean){
+    this._isLoadedLikes = value;
+  }
+
   setValueGettingCards(value: boolean) {
     this._isGetRequestCastingCards.next(value);
   }
 
   setIsEmptyCards(value: boolean) {
     this._isEmptyCards = value;
+  }
+
+  getValueLoadedLikes(){
+    return this._isLoadedLikes;
   }
 
   getValueGettingCards() {
