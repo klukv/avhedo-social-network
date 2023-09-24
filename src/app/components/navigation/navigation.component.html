@@ -2,9 +2,9 @@
   <ul class="navigation__list flex items-center h-full">
     <li
       class="navigation__point mr-[36px] hover:bg-[#EBEBEB] transition duration-300 ease-in-out"
+      (click)="goToNavLink('/')"
     >
       <a
-        routerLink="/"
         class="navigation__link w-full h-full flex items-center justify-center"
       >
         <svg
@@ -94,11 +94,11 @@
     </li>
     <li
       class="navigation__point mr-[36px] hover:bg-[#EBEBEB] transition duration-300 ease-in-out"
+      (click)="goToNavLink('subscribers/own')"
     >
       <a
         appActiveLink
         [argLinks]="ownSubscribers"
-        routerLink="/subscribers/own"
         class="navigation__link after:content-[''] relative after:absolute after:bottom-[-14px] after:right-[-10px] after:text-[#00A3FF] after:text-[12px]"
       >
         <svg
@@ -119,9 +119,9 @@
     </li>
     <li
       class="navigation__point mr-[36px] hover:bg-[#EBEBEB] transition duration-300 ease-in-out"
+      (click)="goToNavLink('messages')"
     >
       <a
-        routerLink="/messages"
         class="navigation__link after:content-[''] relative after:absolute after:bottom-[-14px] after:right-[-10px] after:text-[#00A3FF] after:text-[12px]"
       >
         <svg
@@ -148,9 +148,9 @@
     </li>
     <li
       class="navigation__point hover:bg-[#EBEBEB] transition duration-300 ease-in-out"
+      (click)="goToNavLink('casting')"
     >
       <a
-        routerLink="/casting"
         class="navigation__link after:content-[''] relative after:absolute after:bottom-[-14px] after:right-[-10px] after:text-[#00A3FF] after:text-[12px]"
       >
         <svg

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { FriendsService } from 'src/app/services/friends.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
@@ -8,12 +9,14 @@ import { NotificationService } from 'src/app/services/notification.service';
   styleUrls: ['./navigation.component.css'],
 })
 export class NavigationComponent {
-  ownSubscribers = 'ownSubscribers'
+  ownSubscribers = 'ownSubscribers';
   isOpenNotifications: boolean;
 
-  constructor(public notificationService: NotificationService, public friendsService: FriendsService){
-
-  }
+  constructor(
+    private router: Router,
+    public notificationService: NotificationService,
+    public friendsService: FriendsService
+  ) {}
 
   ngAfterViewInit(): void {
     document.addEventListener('click', this.clickPopupNitifications.bind(this));
@@ -26,7 +29,15 @@ export class NavigationComponent {
       this.isOpenNotifications = false;
     }
   }
+
+  goToNavLink(route: string){
+    this.router.navigate([route]);
+  }
+
   ngOnDestroy() {
-    document.removeEventListener('click', this.clickPopupNitifications.bind(this));
+    document.removeEventListener(
+      'click',
+      this.clickPopupNitifications.bind(this)
+    );
   }
 }
