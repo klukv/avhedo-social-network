@@ -4,7 +4,13 @@
   >
     <h1 class="friends__header-title text-[22px]">Мои подписки</h1>
   </div>
-  <ul class="friends__list pt-[33px] pl-[34px] pb-[64px]">
+  <ul
+    class="friends__list pt-[33px] pl-[34px] pb-[64px]"
+    *ngIf="
+      this.friendsService.isLoadedSubscribes;
+      else skeleton_loader_subscribes
+    "
+  >
     <li
       class="friends__list-point mb-[24px] last:mb-0"
       *ngFor="
@@ -13,7 +19,9 @@
       "
     >
       <div class="friends__info flex items-center">
-        <div class="friends__info-avatar mr-[18px] w-[60px] h-[60px] rounded-[50px] overflow-hidden">
+        <div
+          class="friends__info-avatar mr-[18px] w-[60px] h-[60px] rounded-[50px] overflow-hidden"
+        >
           <img
             [src]="
               subscribe.url !== ''
@@ -42,3 +50,22 @@
     </li>
   </ul>
 </div>
+
+<ng-template #skeleton_loader_subscribes>
+  <content-loader
+    viewBox="0 0 460 400"
+    [speed]="2"
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb" 
+  >
+    <svg:circle cx="64" cy="63" r="30" /> 
+    <svg:rect x="112" y="33" rx="4" ry="4" width="130" height="25" /> 
+    <svg:rect x="112" y="66" rx="0" ry="0" width="130" height="15" /> 
+    <svg:circle cx="64" cy="147" r="30" /> 
+    <svg:rect x="112" y="117" rx="4" ry="4" width="130" height="25" /> 
+    <svg:rect x="112" y="150" rx="0" ry="0" width="130" height="15" /> 
+    <svg:circle cx="64" cy="231" r="30" /> 
+    <svg:rect x="112" y="201" rx="4" ry="4" width="130" height="25" /> 
+    <svg:rect x="112" y="234" rx="0" ry="0" width="130" height="15" />
+  </content-loader>
+</ng-template>

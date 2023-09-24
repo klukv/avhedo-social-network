@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { IPersonInfo } from 'src/app/models/personInfo';
 import { FriendsService } from 'src/app/services/friends.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -10,7 +11,10 @@ import { StorageService } from 'src/app/services/storage.service';
   styleUrls: ['./friends-block.component.css'],
 })
 export class FriendsBlockComponent {
+  private sub: Subscription;
+
   personInfo: IPersonInfo;
+
   constructor(
     private router: Router,
     public friendsService: FriendsService,
@@ -20,9 +24,12 @@ export class FriendsBlockComponent {
   ngOnInit() {
     this.personInfo = this.storageService.getUser();
     if (this.personInfo.id && this.personInfo.id !== 0) {
-      this.friendsService
+      this.friendsService.setLoadedMySubscribes(false);
+      this.sub = this.friendsService
         .getAllSubscribes(this.personInfo.id)
-        .subscribe(() => {});
+        .subscribe(() => {
+          this.friendsService.setLoadedMySubscribes(true);
+        });
     }
   }
 
@@ -32,7 +39,7 @@ export class FriendsBlockComponent {
         id: id,
       },
     });
-  //  this.friendsService.changeInfoFriend(id);
+    //  this.friendsService.changeInfoFriend(id);
   }
   goToPageFriend(id: number) {
     this.router.navigate(['person'], {
@@ -40,5 +47,9 @@ export class FriendsBlockComponent {
         id: id,
       },
     });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }
