@@ -22,6 +22,13 @@ export class ChatService {
   private _allMessagesChat: IResponseAllChatMessages[] = [];
   private _currentChatId: string = '';
 
+  //переменная загрузки
+  private _isLoadedMessages = false;
+
+  get isLoadedMessages(){
+    return this._isLoadedMessages;
+  }
+
   get allChatsUser() {
     return this._allChatsUser;
   }
@@ -33,6 +40,10 @@ export class ChatService {
   get currentChatId() {
     console.log(this._currentChatId);
     return this._currentChatId;
+  }
+
+  setLoadedMessages(value: boolean){
+    this._isLoadedMessages = value;
   }
 
   setChatId(id: string) {

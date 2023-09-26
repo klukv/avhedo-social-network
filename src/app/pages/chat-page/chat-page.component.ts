@@ -36,7 +36,10 @@ export class ChatPageComponent {
   }
 
   ngOnInit() {
+    this.chatService.setLoadedMessages(false);
     this.personInfo = this.storageService.getUser();
+
+    //Устанавливаю переменную в false, то есть показываю, что сооббщения не загружены
 
     this.personService
       .getInfoUser(this._user_id)
@@ -73,13 +76,15 @@ export class ChatPageComponent {
       ) {
         this.chatService
           .getAllMessagesChat(this.personInfo.id.toString(), this._user_id)
-          .subscribe(() => {});
+          .subscribe(() => {
+            this.chatService.setLoadedMessages(true);
+          });
       }
     });
   }
 
-  clickKeyupSendMessage(event: KeyboardEvent){
-    if(event.key === 'Enter'){
+  clickKeyupSendMessage(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
       this.websocketService.sendMessage(
         this.messageContent,
         this.currentFriendChat

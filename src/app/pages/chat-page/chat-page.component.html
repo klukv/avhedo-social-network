@@ -4,7 +4,9 @@
   <div
     class="chat-page__header flex grow-0 items-center justify-center pt-[10px] pb-[5px] border-b-[1px] border-solid border-[#EBEBEB] bg-[#fff]"
   >
-    <div class="chat-page__header-avatar mr-[18px] w-[64px] h-[64px] rounded-[50px] overflow-hidden">
+    <div
+      class="chat-page__header-avatar mr-[18px] w-[64px] h-[64px] rounded-[50px] overflow-hidden"
+    >
       <img
         [src]="
           this.currentFriendChat.url !== ''
@@ -19,9 +21,14 @@
       {{ currentFriendChat.userDto.username }}
     </h1>
   </div>
-  <div class="chat-page__list-messages__container flex-grow">
+  <div
+    class="chat-page__list-messages__container flex-grow"
+    *ngIf="this.chatService.isLoadedMessages; else loader_messages"
+  >
     <ul class="chat-page__list-messages h-[720px] flex flex-col justify-end">
-      <li class="chat-page__list-messages__group pt-[34px] px-[64px] max-h-full overflow-y-auto">
+      <li
+        class="chat-page__list-messages__group pt-[34px] px-[64px] max-h-full overflow-y-auto"
+      >
         <div
           class="chat-page__message"
           *ngFor="
@@ -83,34 +90,6 @@
   </div>
 </div>
 
-<!-- <svg
-  height="84px"
-  width="84px"
-  version="1.1"
-  id="_x32_"
-  xmlns="http://www.w3.org/2000/svg"
-  xmlns:xlink="http://www.w3.org/1999/xlink"
-  viewBox="0 0 512 512"
-  xml:space="preserve"
-  fill="#000000"
->
-  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-  <g
-    id="SVGRepo_tracerCarrier"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  ></g>
-  <g id="SVGRepo_iconCarrier">
-    <style type="text/css">
-      .st0 {
-        fill: #ebebeb;
-      }
-    </style>
-    <g>
-      <path
-        class="st0"
-        d="M464,0H48C21.492,0,0,21.492,0,48v416c0,26.507,21.492,48,48,48h416c26.508,0,48-21.493,48-48V48 C512,21.492,490.508,0,464,0z M444.664,35c10.492,0,19,8.507,19,19c0,10.492-8.508,19-19,19s-19-8.508-19-19 C425.664,43.507,434.172,35,444.664,35z M374.164,35c10.492,0,19,8.507,19,19c0,10.492-8.508,19-19,19s-19-8.508-19-19 C355.164,43.507,363.672,35,374.164,35z M303.664,35c10.492,0,19,8.507,19,19c0,10.492-8.508,19-19,19s-19-8.508-19-19 C284.664,43.507,293.172,35,303.664,35z M472,464c0,4.406-3.586,8-8,8H48c-4.414,0-8-3.594-8-8V104h432V464z"
-      ></path>
-    </g>
-  </g>
-</svg> -->
+<ng-template #loader_messages>
+  <app-lodaer-spin-v1 class="chat__messages grow"></app-lodaer-spin-v1>
+</ng-template>
