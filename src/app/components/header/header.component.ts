@@ -1,7 +1,9 @@
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { IPersonInfo } from 'src/app/models/personInfo';
 import { FriendsService } from 'src/app/services/friends.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-header',
@@ -9,12 +11,15 @@ import { NotificationService } from 'src/app/services/notification.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
+  private userInfo:IPersonInfo = this.storageService.getUser();
+
   searchUsername = '';
   isOpenSearchPopup: boolean;
   isOpenNotifications: boolean;
 
   constructor(
     private route: Router,
+    private storageService: StorageService,
     public notificationService: NotificationService,
     public friendsService: FriendsService
   ) {}
@@ -33,6 +38,10 @@ export class HeaderComponent {
     }
   }
 
+  getUserInfo(){
+    return this.userInfo;
+  }
+
   getSearchUsername(usernameFriend: string) {
     this.searchUsername = usernameFriend;
   }
@@ -41,13 +50,10 @@ export class HeaderComponent {
     this.route.navigate([route]);
   }
 
-  goToPageFriend(id: number) {
-    // this.friendsService.changeInfoFriend(id);
-    this.route.navigate(['person'], {
-      queryParams: {
-        id: id,
-      },
-    });
-    this.isOpenSearchPopup = false;
+  goPersonPage(){
+    if(this.userInfo.id !== 0 && this.userInfo.id){
+      this.friendsService.goToPageFriend(this.userInfo.id);
+    }
   }
+
 }

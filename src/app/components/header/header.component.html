@@ -1,4 +1,4 @@
-<div class="header__inner px-[160px] bg-[#fff] h-[80px]">
+<div class="header__inner h-full max-xl:max-w-[872px] max-xl:mx-auto xl:px-[160px]">
   <div class="container flex items-center justify-between h-full">
     <div class="header__block-one flex items-center">
       <div
@@ -37,7 +37,7 @@
                   | filterFriends : searchUsername
                   | slice : 0 : 5
               "
-              (click)="goToPageFriend(friendInfo.id)"
+              (click)="this.friendsService.goToPageFriend(friendInfo.id)"
             >
               <div class="header__search-popup__list-point__info flex">
                 <div
@@ -182,10 +182,11 @@
           <div class="menu-button"></div>
         </label>
         <ul class="menu">
-          <li>Главная</li>
-          <li>Друзья</li>
-          <li>Сообщения</li>
-          <li>Знакомства</li>
+          <li (click)="goPersonPage()">Моя страница</li>
+          <li (click)="goToLink('/')">Главная</li>
+          <li (click)="goToLink('subscribers/own')">Друзья</li>
+          <li (click)="goToLink('messages')">Сообщения</li>
+          <li (click)="goToLink('casting')">Знакомства</li>
         </ul>
       </div>
       <app-navigation class="max-xl:hidden"></app-navigation>
