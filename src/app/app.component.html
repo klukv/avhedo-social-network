@@ -2,21 +2,21 @@
 <div class="wrapper">
   <main class="main">
     <div class="container">
-      <div class="main__inner flex mt-[20px] justify-between">
+      <div class="main__inner flex mt-[20px] 2xl:justify-between max-[1279px]:justify-center">
         <router-outlet class="hidden"></router-outlet>
         <div
           *ngIf="
             !hasRoute('signin') && !hasRoute('signup') && !hasRoute('person')
           "
-          class="main__additionally-info flex flex-col"
+          class="main__additionally-info flex flex-col max-2xl:w-[365px]  max-[1279px]:hidden w-[460px] mr-[20px]"
         >
           <app-friends-routing
             *ngIf="hasRoute('subscribers')"
           ></app-friends-routing>
-          <app-my-page></app-my-page>
+          <app-my-page class="w-full"></app-my-page>
           <app-friends-block
             *ngIf="!hasRoute('friends')"
-            class="friends bg-[#fff] rounded-[10px]"
+            class="friends bg-[#fff] rounded-[10px] w-full mb-[18px]"
           ></app-friends-block>
         </div>
       </div>

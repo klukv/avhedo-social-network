@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { FriendsService } from 'src/app/services/friends.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-header',
@@ -10,8 +11,13 @@ import { FriendsService } from 'src/app/services/friends.service';
 export class HeaderComponent {
   searchUsername = '';
   isOpenSearchPopup: boolean;
+  isOpenNotifications: boolean;
 
-  constructor(public friendsService: FriendsService, private route: Router) {}
+  constructor(
+    private route: Router,
+    public notificationService: NotificationService,
+    public friendsService: FriendsService
+  ) {}
 
   //Прослушивание события клика для закрытия выпадающего списка
   @HostListener('document:click', ['$event'])
@@ -21,16 +27,19 @@ export class HeaderComponent {
     if (!clickedElement.closest('.header__search')) {
       this.isOpenSearchPopup = false;
     }
+
+    if (!clickedElement.closest('.notifications__link')) {
+      this.isOpenNotifications = false;
+    }
   }
 
   getSearchUsername(usernameFriend: string) {
     this.searchUsername = usernameFriend;
   }
 
-  goToLink(route:string){
+  goToLink(route: string) {
     this.route.navigate([route]);
   }
-
 
   goToPageFriend(id: number) {
     // this.friendsService.changeInfoFriend(id);
