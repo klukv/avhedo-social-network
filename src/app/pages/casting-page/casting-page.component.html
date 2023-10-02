@@ -1,4 +1,4 @@
-<div class="casting-page__inner mr-[18px] w-[872px] max-h-[950px] bg-[#fff] rounded-[10px] overflow-y-auto">
+<div class="casting-page__inner xl:mr-[18px] max-xl:w-full mb-[18px] w-[872px] max-h-[950px] bg-[#fff]  rounded-[10px] overflow-y-auto">
   <div
     class="casting-page__links flex items-center justify-center text-[22px] py-[20px] border-b-[1px] border-[#EBEBEB] w-full"
     [ngClass]="{ hidden: !isClickCard, block: isClickCard }"
@@ -27,11 +27,11 @@
     >
   </div>
   <div
-    class="casting-page__links flex justify-between items-center px-[64px] py-[206px]"
+    class="casting-page__links max-lg:flex-col max-lg:py-[100px] max-lg:px-[30px] flex justify-between items-center px-[64px] py-[206px]"
     [ngClass]="{ hidden: isClickCard, block: !isClickCard }"
   >
     <div
-      class="casting-page__link mr-[26px] bg-[#EBEBEB] rounded-[10px] hover:brightness-[.80] duration-[200ms]"
+      class="casting-page__link lg:mr-[26px] max-lg:mb-[26px] max-lg:max-w-[300px] max-lg:h-[300px] max-lg:flex max-lg:justify-center max-lg:items-center max-[540px]:max-w-[260px] max-[540px]:max-h-[260px] max-[329px]:max-w-[200px] max-[329px]:max-w-[200px] w-[350px] bg-[#EBEBEB] rounded-[10px] hover:brightness-[.80] duration-[200ms]"
     >
       <!-- <div class="casting-page__link-view absolute bg-black/50 inset-0 z-[-1] opacity-0"></div> -->
       <div class="casting-page__link-title">
@@ -39,7 +39,7 @@
           appActiveLink
           [argLinks]="castingLink"
           routerLink="/casting/contacts"
-          class="casting-page__link-title__link text-[26px] px-[90px] h-[550px] flex items-center z-10"
+          class="casting-page__link-title__link text-[26px] max-lg:text-[20px] lg:px-[90px] lg:h-[550px] flex items-center z-10"
         >
           Знакомства
         </a>
@@ -47,7 +47,7 @@
     </div>
 
     <div
-      class="casting-page__link bg-[#EBEBEB] rounded-[10px] hover:brightness-[.80] duration-[200ms]"
+      class="casting-page__link max-lg:max-w-[300px] max-lg:h-[300px] max-lg:flex max-lg:justify-center max-lg:items-center max-[540px]:max-w-[260px] max-[540px]:max-h-[260px] max-[329px]:max-w-[200px] max-[329px]:max-w-[200px] w-[350px] bg-[#EBEBEB] rounded-[10px] hover:brightness-[.80] duration-[200ms]"
     >
       <!-- <div class="casting-page__link-view absolute bg-black/50 inset-0"></div> -->
       <div class="casting-page__link-title">
@@ -55,7 +55,7 @@
           appActiveLink
           [argLinks]="likeLink"
           routerLink="/casting/likes"
-          class="casting-page__link-title__link text-[26px] px-[90px] h-[550px] flex items-center"
+          class="casting-page__link-title__link text-[26px] max-lg:text-[20px] lg:px-[90px] lg:h-[550px] flex items-center"
         >
           Вы нравитесь
         </a>
