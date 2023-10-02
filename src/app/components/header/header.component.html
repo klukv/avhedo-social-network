@@ -1,8 +1,12 @@
-<div class="header__inner h-full max-xl:max-w-[872px] max-xl:mx-auto xl:px-[160px]">
-  <div class="container flex items-center justify-between h-full">
+<div
+  class="header__inner h-full max-xl:max-w-[872px] max-xl:mx-auto xl:px-[160px]"
+>
+  <div
+    class="container flex items-center justify-between h-full max-lg:max-w-[600px] max-sm:max-w-[500px] max-[540px]:max-w-[330px] max-[329px]:max-w-[250px]"
+  >
     <div class="header__block-one flex items-center">
       <div
-        class="header__logo max-xl:w-[100px] mr-[70px] hover:cursor-pointer"
+        class="header__logo max-xl:w-[100px] max-[540px]:w-[90px] mr-[70px] max-sm:mr-[50px] max-[329px]:mr-[21px] hover:cursor-pointer"
         (click)="goToLink('/')"
       >
         <img
@@ -11,7 +15,15 @@
           alt="logo"
         />
       </div>
-      <div class="header__search relative">
+      <div class="header__responsive-search w-[25px] h-[25px] max-[329px]:w-[22px] max-[329px]:h-[22px] sm:hidden">
+        <img
+          class="w-full h-full"
+          src="../../../assets/img/navigation/search.svg"
+          alt="search"
+        />
+
+      </div>
+      <div class="header__search relative max-sm:hidden">
         <app-search
           class="header__search-block"
           (setSearchValue)="getSearchUsername($event)"
@@ -107,12 +119,12 @@
     </div>
     <div class="header__content-info flex items-center">
       <div
-        class="notifications__link w-[70px] h-[70px] mr-[32px] flex justify-center items-center cursor-pointer rounded-[50px] hover:bg-[#EBEBEB] transition duration-300 ease-in-out relative"
+        class="notifications__link w-[70px] h-[70px] mr-[32px] max-[329px]:mr-[7px] flex justify-center items-center cursor-pointer rounded-[50px] hover:bg-[#EBEBEB] transition duration-300 ease-in-out relative"
         (click)="isOpenNotifications = true"
       >
-        <div class="navigation__link relative">
+        <div class="navigation__link flex justify-center relative">
           <svg
-            class="w-[30px] h-[30px]"
+            class="w-[30px] h-[30px] max-[329px]:w-[25px] max-[329px]:h-[25px] max-[329px]:mt-[2px]"
             viewBox="0 0 24 28"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -133,7 +145,7 @@
           >
         </div>
         <div
-          class="notifications absolute z-[500] min-w-[379px] right-0 top-[75px] bg-[#DEDEDE] rounded-b-lg"
+          class="notifications absolute z-[500] min-w-[379px] max-sm:min-w-[260px] max-[329px]:min-w-[200px] right-0 top-[75px] bg-[#DEDEDE] rounded-b-lg"
           [ngClass]="{
             'invisible opacity-0': !isOpenNotifications,
             'visible opacity-100 transition-[opacity] duration-[100ms]':
@@ -142,7 +154,7 @@
         >
           <div class="notifications__inner">
             <h2
-              class="notifications__title text-[22px] text-center py-[24px] border-b-[1px] border-b-[#B6B6B6]"
+              class="notifications__title text-[22px] max-sm:text-[20px] max-[329px]:text-[16px] text-center py-[24px] border-b-[1px] border-b-[#B6B6B6]"
             >
               Уведомления
             </h2>
@@ -161,7 +173,7 @@
                 "
                 class="notifications__point border-b-[1px] border-solid border-b-[#B6B6B6]"
               >
-                <p class="px-[16px] py-[12px] text-[16px]">
+                <p class="px-[16px] py-[12px] text-[16px] max-sm:text-center max-[329px]:text-[13px]">
                   Вы получили новое сообщение от
                   <span
                     class="text-[#00A3FF] hover:text-[#56C2FF] hover:underline duration-[250ms]"
@@ -177,7 +189,7 @@
         </div>
       </div>
       <div class="menu__burger xl:hidden">
-        <input id="menu-toggle" type="checkbox">
+        <input id="menu-toggle" type="checkbox" />
         <label class="menu-button-container" for="menu-toggle">
           <div class="menu-button"></div>
         </label>
@@ -195,7 +207,9 @@
 
   <ng-template #empty__list_notifications>
     <div class="empty__list flex justify-center items-center py-[16px]">
-      <p class="empty__list-text">В данный момент у вас нет уведомлений</p>
+      <p class="empty__list-text max-sm:text-center max-[329px]:text-[13px]">
+        В данный момент у вас нет уведомлений
+      </p>
     </div>
   </ng-template>
 </div>

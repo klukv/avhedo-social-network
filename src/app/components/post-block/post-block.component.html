@@ -1,7 +1,7 @@
 <div class="post__block__inner pt-[22px] pb-[38px]">
   <div class="post__block-user flex items-center pl-[25px]">
     <div
-      class="post__block-user_avatar mr-[8px] mb-[8px] w-[64px] h-[64px] rounded-[50px] overflow-hidden"
+      class="post__block-user_avatar mr-[8px] mb-[8px] w-[64px] h-[64px] max-lg:w-[55px] max-lg:h-[55px] rounded-[50px] overflow-hidden"
     >
       <img
         [src]="
@@ -13,18 +13,18 @@
         alt="user-avatar"
       />
     </div>
-    <h2 class="post__block-user_username text-[24px]">
+    <h2 class="post__block-user_username text-[24px] max-lg:text-[20px]">
       {{ post.messageDto.infoUserFromLentaDto.userInfo.username }}
     </h2>
   </div>
   <div class="post__info bg-[#fff] rounded-[10px] px-[25px]">
     <div
-      class="post__block-info pt-[23px] pb-[25px] border-b-[1px] border-solid border-[#EBEBEB]r"
+      class="post__block-info pt-[23px] pb-[25px] border-b-[1px] border-solid border-[#EBEBEB] break-words"
     >
-      <h2 class="post__block-info_title text-[26px]">
+      <h2 class="post__block-info_title text-[26px] max-lg:text-[20px]">
         {{ post.messageDto.titleMessage }}
       </h2>
-      <p class="post__block-info_text text-[18px] pt-[22px] pb-[16px]">
+      <p class="post__block-info_text text-[18px] pt-[22px] pb-[16px] max-lg:text-[16px] max-lg:pt-[15px] max-lg:pb-[12px]">
         {{ post.messageDto.textMessage }}
       </p>
       <div class="post__block-info_icons flex items-center mb-[8px] relative">
@@ -145,6 +145,6 @@
 
 <ng-template #emptyComments>
   <div class="empty-comments flex justify-center items-center pb-[42px]">
-    <p class="text-[18px]">Нет комментариев к данной записи.</p>
+    <p class="text-[18px] max-lg:text-[16px]">Нет комментариев к данной записи.</p>
   </div></ng-template
 >

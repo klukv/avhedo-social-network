@@ -7,11 +7,11 @@
     *ngIf="this.friendsService.listSubcribes.length !== 0; else empty_list"
   ></li>
   <li
-    class="friends-page__list-friends__content flex items-center pt-[16px] pb-[32px] pl-[8px] border-b-[1px] border-solid border-[#EBEBEB]"
+    class="friends-page__list-friends__content flex max-[540px]:flex-col items-center pt-[16px] pb-[32px] pl-[8px] border-b-[1px] border-solid border-[#EBEBEB]"
     *ngFor="let friend of friendsService.listSubcribes; let i = index"
   >
     <div
-      class="list-friends__content-avatar mr-[16px] w-[80px] h-[80px] rounded-[50px] overflow-hidden"
+      class="list-friends__content-avatar mr-[16px] max-[540px]:mr-[0px] max-[540px]:mb-[8px] w-[80px] h-[80px] rounded-[50px] overflow-hidden"
     >
       <img
         class="w-full h-full object-cover"
@@ -21,16 +21,16 @@
         alt="user-avatar"
       />
     </div>
-    <div class="list-friends__content-info">
+    <div class="list-friends__content-info max-[540px]:text-center">
       <h2
-        class="list-friends__content-info info__username text-[20px] mb-[4px] cursor-pointer hover:text-[#00A3FF] duration-[250ms]"
+        class="list-friends__content-info info__username text-[20px] max-sm:text-[18px] max-[540px]:mb-[8px] mb-[4px] cursor-pointer hover:text-[#00A3FF] duration-[250ms]"
         (click)="friendsService.goToPageFriend(friend.id)"
       >
         {{ friend.username }}
       </h2>
       <div class="list-friends__content-info content-block">
         <div
-          class="list-friends__content-info info__text text-[#7A7A7A] mb-[4px]"
+          class="list-friends__content-info info__text text-[#7A7A7A] max-[540px]:mb-[8px] mb-[4px]"
         >
           Возраст: {{ friend.age }}
         </div>
@@ -41,7 +41,7 @@
         >
       </div>
     </div>
-    <div class="list-friends__btn-block mr-0 ml-auto">
+    <div class="list-friends__btn-block mr-0 ml-auto max-[540px]:m-0 max-[540px]:mt-[12px]">
       <button
         class="list-friends__button-delete px-[20px] py-[8px] rounded-[6px] text-[#ffffff] text-[16px] bg-[#00A3FF] hover:bg-[#56C2FF] duration-[250ms]"
         (click)="clickDeleteFriendBtn(friend.id, i)"
