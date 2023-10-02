@@ -7,14 +7,14 @@
     *ngIf="this.friendsService.listSubsribers.length !== 0; else empty_list"
   ></li>
   <li
-    class="friends-page__list-friends__content flex items-center pt-[16px] pb-[32px] pl-[8px] border-b-[1px] border-solid border-[#EBEBEB]"
+    class="friends-page__list-friends__content max-[540px]:flex-col flex items-center pt-[16px] pb-[32px] pl-[8px] border-b-[1px] border-solid border-[#EBEBEB]"
     *ngFor="
       let subscriber of this.friendsService.listSubsribers
         | filterFriends : searchUsername;
       let i = index
     "
   >
-    <div class="list-friends__content-avatar mr-[16px] w-[80px] h-[80px] rounded-[50px] overflow-hidden">
+    <div class="list-friends__content-avatar max-[540px]:mr-[0px] mr-[16px] w-[80px] h-[80px] rounded-[50px] overflow-hidden">
       <img
         class="w-full h-full object-cover"
         [src]="
@@ -25,7 +25,7 @@
         alt="user-avatar"
       />
     </div>
-    <div class="list-friends__content-info">
+    <div class="list-friends__content-info max-[540px]:text-center max-[540px]:mt-[8px]">
       <h2
         class="list-friends__content-info info__username text-[20px] max-sm:text-[18px] mb-[4px] cursor-pointer hover:text-[#00A3FF] duration-[250ms]"
         (click)="friendsService.goToPageFriend(subscriber.id)"
@@ -39,7 +39,7 @@
           Возраст: {{ subscriber.age }}
         </div>
         <a
-          class="list-friends__content-info friend__link text-[#00A3FF] cursor-pointer hover:text-[#56C2FF] duration-[250ms]"
+          class="list-friends__content-info friend__link max-[540px]:text-[16px] text-[#00A3FF] cursor-pointer hover:text-[#56C2FF] duration-[250ms]"
           (click)="friendsService.goToChat(subscriber.id)"
           >Написать сообщение</a
         >

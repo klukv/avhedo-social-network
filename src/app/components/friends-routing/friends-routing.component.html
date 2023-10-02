@@ -1,14 +1,14 @@
 <div class="friends__links bg-[#fff] rounded-[10px] w-full mb-[18px]">
   <div class="friends__links__inner max-xl:flex max-xl:justify-center max-xl:border-b-[1px] max-xl:border-solid max-xl:border-b-[#EBEBEB]">
-    <ul class="friends__links-list max-xl:flex max-xl:max-w-[600px] max-[540px]:max-w-[330px]">
+    <ul class="friends__links-list max-xl:max-w-[600px] max-[540px]:max-w-[330px]">
       <li
-        class="friends__links-point xl:border-b-[1px] xl:border-solid xl:border-[#EBEBEB] px-[10px] py-[10px]"
+        class="friends__links-point max-xl:text-center xl:border-b-[1px] xl:border-solid xl:border-[#EBEBEB] px-[10px] py-[10px]"
       >
         <a
           appActiveLink
           [argLinks]="ownSubscribers"
           routerLink="/subscribers/own"
-          class="text-[20px] max-sm:text-[18px] max-[540px]:text-[12px] px-[20px] max-sm:px-[15px] max-[540px]:px-[5px] py-[10px] block rounded-[8px] hover:bg-[#EBEBEB] duration-[150ms] cursor-pointer"
+          class="text-[20px] max-sm:text-[18px] px-[20px]  py-[10px] block rounded-[8px] hover:bg-[#EBEBEB] duration-[150ms] cursor-pointer"
           [ngClass]="{
             'bg-[#EBEBEB]':
               this.friendsService.activeFriendsLinks.ownSubscribers === 'active'
@@ -17,13 +17,13 @@
         >
       </li>
       <li
-        class="friends__links-point xl:border-b-[1px] xl:border-solid xl:border-[#EBEBEB] px-[10px] py-[10px]"
+        class="friends__links-point max-xl:text-center xl:border-b-[1px] xl:border-solid xl:border-[#EBEBEB] px-[10px] py-[10px]"
       >
         <a
           appActiveLink
           [argLinks]="addedSubscribers"
           routerLink="/subscribers/added"
-          class="text-[20px] max-sm:text-[18px] max-[540px]:text-[12px] px-[20px] max-sm:px-[15px] max-[540px]:px-[5px] py-[10px] block rounded-[8px] hover:bg-[#EBEBEB] duration-[150ms] cursor-pointer"
+          class="text-[20px] max-sm:text-[18px]  px-[20px] py-[10px] block rounded-[8px] hover:bg-[#EBEBEB] duration-[150ms] cursor-pointer"
           [ngClass]="{
             'bg-[#EBEBEB]':
               this.friendsService.activeFriendsLinks.addedSubscribers ===
@@ -32,12 +32,12 @@
           >Подписчики</a
         >
       </li>
-      <li class="friends__links-point px-[10px] py-[10px]">
+      <li class="friends__links-point max-xl:text-center px-[10px] py-[10px]">
         <a
           appActiveLink
           [argLinks]="searchSubscribes"
           routerLink="/subscribers/search"
-          class="text-[20px] max-sm:text-[18px] max-[540px]:text-[12px] px-[20px] max-sm:px-[15px] max-[540px]:px-[5px] py-[10px] block rounded-[8px] hover:bg-[#EBEBEB] duration-[150ms] cursor-pointer"
+          class="text-[20px] max-sm:text-[18px] px-[20px] py-[10px] block rounded-[8px] hover:bg-[#EBEBEB] duration-[150ms] cursor-pointer"
           [ngClass]="{
             'bg-[#EBEBEB]':
               this.friendsService.activeFriendsLinks.searchSubscribes ===
