@@ -1,40 +1,40 @@
-<div class="person-page__inner flex justify-between max-w-[1000px] mx-auto">
+<div class="person-page__inner flex justify-between max-sm:flex-col max-sm:justify-normal max-w-[1000px] mx-auto">
   <div
-    class="person-page__info bg-[#fff] rounded-[10px] w-[670px] flex flex-col overflow-hidden mb-[64px]"
+    class="person-page__info bg-[#fff] rounded-[10px] w-[670px] flex flex-col overflow-hidden mb-[64px] max-sm:mb-[32px] max-sm:w-full"
   >
     <div class="h-[500px]">
       <img [src]="this.personInfo.url" class="w-full h-full object-cover" alt="image">
     </div>
-    <div class="person-page__info-content px-[32px] py-[48px]">
-      <h2 class="person-page__username text-[32px] mb-[16px] mr-[12px]">
+    <div class="person-page__info-content px-[32px] py-[48px] max-sm:px-[15px] max-sm:py-[20px]">
+      <h2 class="person-page__username text-[32px] mb-[16px] mr-[12px] max-sm:text-[24px]">
         {{ this.personInfo.userDto.username }}
       </h2>
 
       <div class="person-page__info-content__age flex items-center mb-[16px]">
-        <h2 class="person-page__age-title mr-[12px] text-[24px]">Возраст:</h2>
-        <div class="person-page__age-text text-[18px] text-[#7A7A7A]">
+        <h2 class="person-page__age-title mr-[12px] text-[24px] max-sm:text-[20px]">Возраст:</h2>
+        <div class="person-page__age-text text-[18px] text-[#7A7A7A] max-sm:text-[14px] break-all">
           {{ this.personInfo.dateOfBirthday }} лет
         </div>
       </div>
       <div class="person-page__info-content__hobby flex items-center mb-[11px]">
-        <h2 class="person-page__hobby-title mr-[12px] text-[24px]">Хобби:</h2>
-        <div class="person-page__hobby-text text-[18px] text-[#7A7A7A]">
+        <h2 class="person-page__hobby-title mr-[12px] text-[24px] max-sm:text-[20px]">Хобби:</h2>
+        <div class="person-page__hobby-text text-[18px] text-[#7A7A7A] max-sm:text-[14px] break-all">
           {{ this.personInfo.hobby }}
         </div>
       </div>
       <div class="person-page__info-content__about flex items-center">
-        <h2 class="person-page__about-title mr-[12px] text-[24px] self-start">
+        <h2 class="person-page__about-title mr-[12px] text-[24px] self-start max-sm:text-[20px]">
           О себе:
         </h2>
         <div
-          class="person-page__about-text text-[18px] text-[#7A7A7A] pt-[5px]"
+          class="person-page__about-text text-[18px] text-[#7A7A7A] pt-[5px] max-sm:text-[14px] break-all"
         >
           {{ this.personInfo.aboutMe }}
         </div>
       </div>
     </div>
   </div>
-  <div class="person-page__friends bg-[#fff] rounded-[10px] self-start">
+  <div class="person-page__friends bg-[#fff] rounded-[10px] self-start max-lg:ml-[10px] max-sm:mb-[20px] ">
     <div
       class="person-page__friends-inner"
       *ngIf="
@@ -43,12 +43,12 @@
       "
     >
       <h2
-        class="person-page__friends-title text-center py-[16px] border-b-[1px] border-[#EBEBEB] text-[20px]"
+        class="person-page__friends-title text-center p-[16px] border-b-[1px] border-[#EBEBEB] text-[20px]"
       >
         Подписчики
       </h2>
       <div
-        class="person-page__friends-list grid gap-[16px] grid-cols-3 grid-rows-2 p-[24px]"
+        class="person-page__friends-list grid gap-[16px] grid-cols-3 grid-rows-2 p-[24px] max-lg:flex max-lg:flex-col max-lg:items-center max-sm:flex-row"
       >
         <div
           class="person-page__friends-friend flex flex-col justify-center items-center"
