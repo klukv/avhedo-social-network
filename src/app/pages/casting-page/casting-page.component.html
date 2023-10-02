@@ -1,13 +1,13 @@
-<div class="casting-page__inner xl:mr-[18px] max-xl:w-full mb-[18px] w-[872px] max-h-[950px] bg-[#fff]  rounded-[10px] overflow-y-auto">
+<div class="casting-page__inner xl:mr-[18px] max-xl:w-full mb-[18px] w-[872px] max-[540px]:min-w-[275px] max-h-[950px] bg-[#fff]  rounded-[10px]">
   <div
-    class="casting-page__links flex items-center justify-center text-[22px] py-[20px] border-b-[1px] border-[#EBEBEB] w-full"
+    class="casting-page__links flex items-center justify-center text-[22px] max-[540px]:text-[18px] py-[20px] border-b-[1px] border-[#EBEBEB] w-full"
     [ngClass]="{ hidden: !isClickCard, block: isClickCard }"
   >
     <a
       appActiveLink
       [argLinks]="castingLink"
       routerLink="/casting/contacts"
-      class="casting-page__links-contacts hover:text-[#00A3FF] duration-[250ms] mr-[48px]"
+      class="casting-page__links-contacts hover:text-[#00A3FF] duration-[250ms] mr-[48px] max-[540px]:mr-[30px]"
       [ngClass]="{
         'text-[#00A3FF]':
           this.castingService.getActiveLinks().castingLink === 'active'

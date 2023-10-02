@@ -10,17 +10,17 @@
     "
   >
     <li
-      class="likes__point flex items-center pt-[8px] pb-[16px] pl-[8px] border-b-[1px] border-solid border-[#EBEBEB]"
+      class="likes__point max-[540px]:flex-col flex items-center pt-[8px] pb-[16px] pl-[8px] border-b-[1px] border-solid border-[#EBEBEB]"
       *ngFor="
         let likeCard of castingService.listLikesPeople$ | async;
         let i = index
       "
     >
       <div
-        class="list-friends__content-avatar mr-[16px] w-[75px] h-[75px] rounded-[50%] overflow-hidden bg-cover bg-no-repeat"
+        class="list-friends__content-avatar mr-[16px] max-[540px]:mr-[0px] w-[75px] h-[75px] rounded-[50%] overflow-hidden bg-cover bg-no-repeat"
         [ngStyle]="{ 'background-image': 'url(' + likeCard.url + ')' }"
       ></div>
-      <div class="list-friends__content-info">
+      <div class="list-friends__content-info max-[540px]:text-center max-[540px]:my-[8px]">
         <h2
           class="list-friends__content-info info__username text-[20px] mb-[4px] cursor-pointer hover:text-[#00A3FF] duration-[250ms]"
           (click)="friendsService.goToPageFriend(likeCard.id)"
@@ -36,7 +36,7 @@
         </div>
       </div>
       <div
-        class="likes-page__card-buttons flex items-center justify-center mr-[24px] ml-auto"
+        class="likes-page__card-buttons flex items-center justify-center mr-[24px] ml-auto max-[540px]:mr-0 max-[540px]:ml-0"
         #like__buttons_block
       >
         <button
@@ -73,7 +73,7 @@
           </svg>
         </button>
         <div
-          class="like-page__card-like__block flex justify-between"
+          class="like-page__card-like__block flex justify-between max-[540px]:mr-[36px]"
           [ngClass]="{ hidden: likeCard.mutualLike === true }"
           #like__buttons
         >
@@ -156,10 +156,10 @@
         </svg>
       </div>
       <div class="like__list-empty_text text-center">
-        <div class="like__list-empty_text-one text-[26px] mb-[4px]">
+        <div class="like__list-empty_text-one text-[26px] max-[540px]:text-[20px] mb-[4px]">
           Ваш список пока пуст, но не отчаивайтесь!
         </div>
-        <div class="like__list-empty_text-two text-[18px]">
+        <div class="like__list-empty_text-two text-[18px] max-[540px]:text-[14px]">
           Продолжайте
           <a
             appActiveLink

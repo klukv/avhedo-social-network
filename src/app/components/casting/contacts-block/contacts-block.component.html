@@ -1,5 +1,5 @@
 <div
-  class="contacts__inner w-[393px] min-h-[750px] py-[48px] mx-auto relative"
+  class="contacts__inner w-[393px] min-h-[750px] max-[540px]:max-w-[300px] max-[540px]:min-h-[550px] max-[329px]:w-[275px] py-[48px] mx-auto relative"
   *ngIf="
     (castingService.listCastingPeople$ | async)?.length !== 0;
     else emptyListCasting

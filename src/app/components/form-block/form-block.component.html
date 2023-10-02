@@ -1,32 +1,32 @@
 <div
   [ngStyle]="{'background-image': 'linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(' + infoCard.url + ')'}"
-  class="likes-page__card bg-no-repeat bg-cover bg-center rounded-[20px] origin-[50%_100%] h-[560px]"
+  class="likes-page__card bg-no-repeat bg-cover bg-center rounded-[20px] origin-[50%_100%] h-[560px] max-[540px]:h-[420px]"
   id="card_swipe"
 >
-  <div class="likes-page__card-info text-[#fff] px-[16px] pt-[16px] pb-[260px] object-cover object-top">
-    <h2 class="likes-page__card-username text-[22px]">{{ infoCard.username }}</h2>
+  <div class="likes-page__card-info text-[#fff] px-[16px] pt-[16px] pb-[260px] max-[540px]:pb-[120px] object-cover object-top">
+    <h2 class="likes-page__card-username text-[22px] max-[540px]:text-[18px]">{{ infoCard.username }}</h2>
     <div class="likes-page__card-age flex items-center mb-[8px]">
-      <div class="likes-page__card-age__title text-[18px] pr-[5px]">
+      <div class="likes-page__card-age__title text-[18px] max-[540px]:text-[16px] pr-[5px]">
         Возраст:
       </div>
-      <div class="likes-page__card-age__content text-[14px]">
+      <div class="likes-page__card-age__content text-[14px] max-[540px]:text-[12px]">
         {{infoCard.dateOfBirthday}}
       </div>
     </div>
     <div class="likes-page__card-hobby flex items-center mb-[8px]">
-      <div class="likes-page__card-hobby__title text-[18px] pr-[5px]">
+      <div class="likes-page__card-hobby__title text-[18px] max-[540px]:text-[16px] pr-[5px]">
         Хобби:
       </div>
-      <div class="likes-page__card-hobby__content text-[14px]">
+      <div class="likes-page__card-hobby__content text-[14px] max-[540px]:text-[12px]">
         {{ infoCard.hobby }}
       </div>
     </div>
     <div class="likes-page__card-about flex">
       <span
-        class="likes-page__card-about__title text-[18px] pr-[5px] whitespace-nowrap"
+        class="likes-page__card-about__title text-[18px] max-[540px]:text-[16px] pr-[5px] whitespace-nowrap"
         >О себе:</span
       >
-      <div class="likes-page__card-about__content text-[14px] pt-[3px]">
+      <div class="likes-page__card-about__content text-[14px] max-[540px]:text-[12px] pt-[3px]">
         {{ infoCard.aboutMe }}
       </div>
     </div>
