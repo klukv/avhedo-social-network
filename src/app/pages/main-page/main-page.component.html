@@ -1,5 +1,5 @@
 <div
-  class="home-page mx-[18px] w-[872px] max-lg:max-w-[600px] max-sm:max-w-[500px] max-[540px]:max-w-[330px] max-[329px]:max-w-[250px]"
+  class="home-page xl:mx-[18px] w-[872px] max-xl:w-full"
   #homePage
   (scroll)="trackingScrollPosts($event)"
 >
@@ -20,7 +20,7 @@
       >
         <input
           type="text"
-          class="home__news-title placeholder:text-[22px] max-sm:placeholder:text-[18px] max-[329px]:placeholder:text-[14px] text-[22px] w-full py-[16px] outline-none border-b-[1px] border-solid border-[#EBEBEB]"
+          class="home__news-title placeholder:text-[22px] max-sm:placeholder:text-[13px] max-[540px]:placeholder:text-[13px] text-[22px] w-full py-[16px] outline-none border-b-[1px] border-solid border-[#EBEBEB]"
           formControlName="titlePost"
           [ngClass]="{
             hidden: !isPostsOpen,
@@ -29,7 +29,7 @@
           placeholder="Укажите заголовок"
         />
         <textarea
-          class="home__news-input text-[18px] placeholder:text-[22px] max-[329px]:placeholder:text-[13px] max-sm:placeholder:text-[18px] outline-none py-[16px] w-full min-h-[60px] resize-none overflow-hidden border-b-[1px] border-solid border-[#EBEBEB]"
+          class="home__news-input text-[18px] placeholder:text-[22px] max-[540px]:placeholder:text-[13px] max-sm:placeholder:text-[13px] outline-none py-[16px] w-full min-h-[60px] resize-none overflow-hidden border-b-[1px] border-solid border-[#EBEBEB]"
           [ngClass]="{
             'mt-0': !isPostsOpen,
             'mt-[40px]': isPostsOpen

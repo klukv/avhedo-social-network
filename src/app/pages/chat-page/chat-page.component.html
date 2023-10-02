@@ -1,5 +1,5 @@
 <div
-  class="chat-page mr-[18px] mb-[96px] w-[872px] min-h-[950px] bg-[#fff] rounded-[10px] flex flex-col overflow-hidden"
+  class="chat-page xl:mr-[18px] max-xl:w-full mb-[96px] w-[872px] min-h-[950px] bg-[#fff] rounded-[10px] flex flex-col overflow-hidden"
 >
   <div
     class="chat-page__header flex grow-0 items-center justify-center pt-[10px] pb-[5px] border-b-[1px] border-solid border-[#EBEBEB] bg-[#fff]"
@@ -17,7 +17,7 @@
         alt="user-avatar"
       />
     </div>
-    <h1 class="chat-page__header-username text-[22px]">
+    <h1 class="chat-page__header-username text-[22px] max-[540px]:text-[20px]">
       {{ currentFriendChat.userDto.username }}
     </h1>
   </div>
@@ -27,7 +27,7 @@
   >
     <ul class="chat-page__list-messages h-[720px] flex flex-col justify-end">
       <li
-        class="chat-page__list-messages__group pt-[34px] px-[64px] max-h-full overflow-y-auto"
+        class="chat-page__list-messages__group max-[540px]:px-[20px] pt-[34px] px-[64px] max-h-full overflow-y-auto"
       >
         <div
           class="chat-page__message"
@@ -63,9 +63,9 @@
   </div>
 
   <div class="position__block w-full grow-0">
-    <div class="chat-page__entry mt-[64px] mb-[36px] mx-[64px] relative">
+    <div class="chat-page__entry max-[540px]:m-[20px] mt-[64px] mb-[36px] mx-[64px] relative">
       <input
-        class="chat-page__entry_input bg-[#EBEBEB] rounded-[10px] placeholder:text-[#7A7A7A] w-full h-[64px] pl-[18px] pr-[57px] text-[18px] outline-none"
+        class="chat-page__entry_input max-[540px]:placeholder:text-[14px] bg-[#EBEBEB] rounded-[10px] placeholder:text-[#7A7A7A] w-full h-[64px] pl-[18px] pr-[57px] text-[18px] outline-none"
         placeholder="Написать сообщение"
         [(ngModel)]="messageContent"
         (keyup)="clickKeyupSendMessage($event)"
