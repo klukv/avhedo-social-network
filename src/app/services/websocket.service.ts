@@ -98,32 +98,23 @@ export class WebsocketService {
 
   private _onMessageReceived(message: any) {
     const parseMessage = JSON.parse(message.body);
-;
     if (this._activeChat.id === parseMessage.senderId) {
-
       this.chatService
         .getSpecificallyMessage(parseMessage.id)
         .subscribe((message) => {
           this.chatService.addMessageChat(message);
         });
     } else {
-      this.notificationService.addNotification(parseMessage);
+      if (this.personInfo.id !== 0 && this.personInfo.id) {
+        this.notificationService.getAllNotifications(this.personInfo.id).subscribe(notificationsData => {
+          this.notificationService.addNotifications(notificationsData);
+        });
+      }
     }
   }
 
   clearMessages() {
     this._arrayMessages = [];
     this._messages.next(this._arrayMessages);
-  }
-
-  getAllMessages(id: string) {
-    // this._arrayMessagesOwn = messageLinkOwn.filter(
-    //   (messageInfo) => messageInfo.chatId === id
-    // );
-    // this._arrayMessagesInterlocutor = messageLinkInterlocutor.filter(
-    //   (messageInfo) => messageInfo.chatId === id
-    // );
-    // this._messagesOwn.next(this._arrayMessagesOwn);
-    // this._messagesInterlocutor.next(this._arrayMessagesInterlocutor);
   }
 }

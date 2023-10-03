@@ -51,6 +51,9 @@ export const GET_ALL_FANS = '/infoAllLoveYou'
 export const ADD_LIKE_CARD = '/love'
 export const DELETE_LIKE_CARD = '/dontLove'
 
+export const GET_ALL_NOTIFICATIONS = '/NotificationMessages'
+export const DELETE_NOTIFICATIONS = '/deleteNotificationMessages'
+
 //SessionStorage keys
 
 export const USER_KEY = 'auth-user';

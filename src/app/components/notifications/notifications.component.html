@@ -1,0 +1,53 @@
+<div
+  class="notifications absolute z-[500] min-w-[379px] max-sm:min-w-[260px] max-[329px]:min-w-[200px] right-0 top-[75px] bg-[#DEDEDE] rounded-b-lg"
+  [ngClass]="{
+    'invisible opacity-0': !(
+      this.notificationService.isOpenNotifications$ | async
+    ),
+    'visible opacity-100 transition-[opacity] duration-[100ms]':
+      this.notificationService.isOpenNotifications$ | async
+  }"
+>
+  <div class="notifications__inner">
+    <h2
+      class="notifications__title text-[22px] max-sm:text-[20px] max-[329px]:text-[16px] text-center py-[24px] border-b-[1px] border-b-[#B6B6B6]"
+    >
+      Уведомления
+    </h2>
+    <ul
+      #notificationContainer
+      class="notifications__list max-h-[145px] overflow-auto"
+      *ngIf="
+        (this.notificationService.notificationList$ | async)?.length !== 0;
+        else empty__list_notifications
+      "
+    >
+      <li
+        *ngFor="
+          let notification of this.notificationService.notificationList$ | async
+        "
+        class="notifications__point border-b-[1px] border-solid border-b-[#B6B6B6]"
+        [attr.data-sender-id]="notification.senderId"
+      >
+        <p
+          class="px-[16px] py-[12px] text-[16px] max-sm:text-center max-[329px]:text-[13px]"
+        >
+          Вы получили новое сообщение от
+          <span
+            class="text-[#00A3FF] hover:text-[#56C2FF] hover:underline duration-[250ms]"
+            (click)="this.friendsService.goToPageFriend(notification.senderId)"
+            >{{ notification.senderName }}</span
+          >
+        </p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<ng-template #empty__list_notifications>
+  <div class="empty__list flex justify-center items-center py-[16px]">
+    <p class="empty__list-text max-sm:text-center max-[329px]:text-[13px]">
+      В данный момент у вас нет уведомлений
+    </p>
+  </div>
+</ng-template>

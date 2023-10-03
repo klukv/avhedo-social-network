@@ -15,13 +15,14 @@
           alt="logo"
         />
       </div>
-      <div class="header__responsive-search w-[25px] h-[25px] max-[329px]:w-[22px] max-[329px]:h-[22px] sm:hidden">
+      <div
+        class="header__responsive-search w-[25px] h-[25px] max-[329px]:w-[22px] max-[329px]:h-[22px] sm:hidden"
+      >
         <img
           class="w-full h-full"
           src="../../../assets/img/navigation/search.svg"
           alt="search"
         />
-
       </div>
       <div class="header__search relative max-sm:hidden">
         <app-search
@@ -120,7 +121,7 @@
     <div class="header__content-info flex items-center">
       <div
         class="notifications__link w-[70px] h-[70px] mr-[32px] max-[329px]:mr-[7px] flex justify-center items-center cursor-pointer rounded-[50px] hover:bg-[#EBEBEB] transition duration-300 ease-in-out relative"
-        (click)="isOpenNotifications = true"
+        (click)="this.notificationService.setIsOpenNotif(true)"
       >
         <div class="navigation__link flex justify-center relative">
           <svg
@@ -144,49 +145,7 @@
             }}</span
           >
         </div>
-        <div
-          class="notifications absolute z-[500] min-w-[379px] max-sm:min-w-[260px] max-[329px]:min-w-[200px] right-0 top-[75px] bg-[#DEDEDE] rounded-b-lg"
-          [ngClass]="{
-            'invisible opacity-0': !isOpenNotifications,
-            'visible opacity-100 transition-[opacity] duration-[100ms]':
-              isOpenNotifications
-          }"
-        >
-          <div class="notifications__inner">
-            <h2
-              class="notifications__title text-[22px] max-sm:text-[20px] max-[329px]:text-[16px] text-center py-[24px] border-b-[1px] border-b-[#B6B6B6]"
-            >
-              Уведомления
-            </h2>
-            <ul
-              class="notifications__list pb-[48px]"
-              *ngIf="
-                (this.notificationService.notificationList$ | async)?.length !==
-                  0;
-                else empty__list_notifications
-              "
-            >
-              <li
-                *ngFor="
-                  let notification of this.notificationService.notificationList$
-                    | async
-                "
-                class="notifications__point border-b-[1px] border-solid border-b-[#B6B6B6]"
-              >
-                <p class="px-[16px] py-[12px] text-[16px] max-sm:text-center max-[329px]:text-[13px]">
-                  Вы получили новое сообщение от
-                  <span
-                    class="text-[#00A3FF] hover:text-[#56C2FF] hover:underline duration-[250ms]"
-                    (click)="
-                      this.friendsService.goToPageFriend(notification.senderId)
-                    "
-                    >{{ notification.senderName }}</span
-                  >
-                </p>
-              </li>
-            </ul>
-          </div>
-        </div>
+       <app-notifications></app-notifications>
       </div>
       <div class="menu__burger xl:hidden">
         <input id="menu-toggle" type="checkbox" />
@@ -204,12 +163,4 @@
       <app-navigation class="max-xl:hidden"></app-navigation>
     </div>
   </div>
-
-  <ng-template #empty__list_notifications>
-    <div class="empty__list flex justify-center items-center py-[16px]">
-      <p class="empty__list-text max-sm:text-center max-[329px]:text-[13px]">
-        В данный момент у вас нет уведомлений
-      </p>
-    </div>
-  </ng-template>
 </div>

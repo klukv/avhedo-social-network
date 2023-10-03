@@ -25,3 +25,7 @@ export interface INotification {
   senderId: number;
   senderName: string;
 }
+
+export interface IAllNotifications extends INotification{
+  recipientId: string;
+}

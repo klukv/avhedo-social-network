@@ -49,6 +49,7 @@ import { LodaerSpinV1Component } from './components/loading/lodaer-spin-v1/lodae
 import { LodaerSpinV2Component } from './components/loading/lodaer-spin-v2/lodaer-spin-v2.component';
 import { LoaderHomeComponent } from './components/loading/loader-home/loader-home.component';
 import { SignupSecondStepPageComponent } from './pages/signup-second-step-page/signup-second-step-page.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { SignupSecondStepPageComponent } from './pages/signup-second-step-page/s
     LodaerSpinV2Component,
     LoaderHomeComponent,
     SignupSecondStepPageComponent,
+    NotificationsComponent,
   ],
   imports: [
     BrowserModule,

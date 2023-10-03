@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { IPersonInfo } from 'src/app/models/personInfo';
 import { FriendsService } from 'src/app/services/friends.service';
@@ -11,11 +11,10 @@ import { StorageService } from 'src/app/services/storage.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  private userInfo:IPersonInfo = this.storageService.getUser();
+  private userInfo: IPersonInfo = this.storageService.getUser();
 
   searchUsername = '';
   isOpenSearchPopup: boolean;
-  isOpenNotifications: boolean;
 
   constructor(
     private route: Router,
@@ -23,6 +22,16 @@ export class HeaderComponent {
     public notificationService: NotificationService,
     public friendsService: FriendsService
   ) {}
+
+  ngOnInit() {
+    if (this.userInfo.id !== 0 && this.userInfo.id) {
+      this.notificationService
+        .getAllNotifications(this.userInfo.id)
+        .subscribe((notificationsData) => {
+          this.notificationService.addNotifications(notificationsData);
+        });
+    }
+  }
 
   //Прослушивание события клика для закрытия выпадающего списка
   @HostListener('document:click', ['$event'])
@@ -32,13 +41,9 @@ export class HeaderComponent {
     if (!clickedElement.closest('.header__search')) {
       this.isOpenSearchPopup = false;
     }
-
-    if (!clickedElement.closest('.notifications__link')) {
-      this.isOpenNotifications = false;
-    }
   }
 
-  getUserInfo(){
+  getUserInfo() {
     return this.userInfo;
   }
 
@@ -50,10 +55,9 @@ export class HeaderComponent {
     this.route.navigate([route]);
   }
 
-  goPersonPage(){
-    if(this.userInfo.id !== 0 && this.userInfo.id){
+  goPersonPage() {
+    if (this.userInfo.id !== 0 && this.userInfo.id) {
       this.friendsService.goToPageFriend(this.userInfo.id);
     }
   }
-
 }
