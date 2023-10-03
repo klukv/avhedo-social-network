@@ -3,9 +3,9 @@
     <div
       class="register__inner min-h-[600px] px-[20px] bg-[#fff] rounded-[8px] flex flex-col items-center"
     >
-      <h1 class="register__title text-[24px] pt-[24px] grow-0">Регистрация</h1>
+      <h1 class="register__title text-[24px] pt-[24px] grow-0 max-[540px]:text-[20px]">Регистрация</h1>
       <div
-        class="register__title-step text-[#00A3FF] text-[16px] pt-[3px] text-center max-w-[270px]"
+        class="register__title-step text-[#00A3FF] text-[16px] pt-[3px] text-center max-w-[270px] max-[540px]:text-[14px]"
       >
         Шаг 2: заполнение дополнительной информации
       </div>
@@ -17,7 +17,7 @@
         >
           <div class="form-group mt-[16px] mb-[32px] pl-[8px]">
             <label
-              class="registrer__form__avatar-title block mb-[4px] text-[18px] text-[#00A3FF]"
+              class="registrer__form__avatar-title block mb-[4px] text-[18px] text-[#00A3FF] max-[540px]:text-[16px]"
               >Фото</label
             >
             <div class="registrer__form-image">
@@ -32,7 +32,7 @@
           </div>
           <div class="form-group mb-[16px]">
             <label
-              class="registrer__form__hobby-title inline-block text-[18px] pl-[8px] text-[#00A3FF]"
+              class="registrer__form__hobby-title inline-block text-[18px] pl-[8px] text-[#00A3FF] max-[540px]:text-[16px]"
             >
               Хобби
             </label>
@@ -43,7 +43,7 @@
               }"
             >
               <div
-                class="hobby-cell inline-flex items-center px-[8px] py-[4px] rounded-[8px] bg-[#00A3FF] text-[#ffffff] my-[2px] mx-[2px] text-[16px]"
+                class="hobby-cell inline-flex items-center px-[8px] py-[4px] rounded-[8px] bg-[#00A3FF] text-[#ffffff] my-[2px] mx-[2px] text-[16px] max-[540px]:text-[14px]"
                 *ngFor="let selectHobby of personService.selectHobbyItems"
               >
                 {{ selectHobby?.information }}
@@ -92,7 +92,7 @@
           </div>
           <div class="form__group mb-[16px]">
             <label
-              class="registrer__form__about-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF]"
+              class="registrer__form__about-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF] max-[540px]:text-[16px]"
             >
               О себе
             </label>
@@ -101,7 +101,7 @@
             >
               <textarea
                 type="text"
-                class="form__input w-full text-[18px] outline-none bg-transparent"
+                class="form__input w-full text-[18px] outline-none bg-transparent max-[540px]:placeholder:text-[14px] max-[540px]:text-[14px]"
                 cdkTextareaAutosize
                 formControlName="aboutPerson"
                 #autosize="cdkTextareaAutosize"
@@ -132,7 +132,7 @@
           </div>
           <div class="form-group">
             <label
-              class="registrer__form__age-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF]"
+              class="registrer__form__age-title inline-block mb-[4px] text-[18px] pl-[8px] text-[#00A3FF] max-[540px]:text-[16px]"
               >Возраст</label
             >
             <mat-form-field class="w-full">
@@ -147,7 +147,7 @@
                 matIconSuffix
                 [for]="picker"
               ></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
+              <mat-datepicker #picker class="max-[540px]:w-[100px]"></mat-datepicker>
             </mat-form-field>
             <div
               *ngIf="
@@ -166,7 +166,7 @@
           </div>
           <div class="form-group pl-[8px]">
             <label
-              class="registrer__form__username-title block mb-[4px] text-[18px] text-[#00A3FF]"
+              class="registrer__form__username-title block mb-[4px] text-[18px] text-[#00A3FF] max-[540px]:text-[16px]"
               >Пол</label
             >
             <div class="registrer__from__gender-group flex items-center">
@@ -187,7 +187,7 @@
               /><span class="pl-[4px] text-[16px]">Женский</span>
             </div>
           </div>
-          <div class="form__group flex justify-center mt-[16px]">
+          <div class="form__group flex justify-center mt-[16px] max-[540px]:mt-[20px]">
             <button
               class="registrer__btn px-[25px] py-[8px] mb-[20px] bg-[#00A3FF] text-[16px] text-[#ffffff] rounded-[8px] hover:bg-[#52C1FF] duration-[250ms] cursor-pointer"
               type="submit"
