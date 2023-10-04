@@ -42,7 +42,11 @@ export class NotificationService {
   }
 
   setCountNotifications(value: number) {
-    this.countNotifications = value;
+    if (value < 0) {
+      this.countNotifications = 0;
+    } else {
+      this.countNotifications = value;
+    }
   }
 
   getCountNotifications() {
@@ -61,7 +65,9 @@ export class NotificationService {
         tap((notificationsData) => {
           // преобразовываем массив уведомлений (группирую по id отправителя)
           if (notificationsData.length !== 0) {
-            const groupedNotifications = notificationsData.reduce<[IAllNotifications[]]>(
+            const groupedNotifications = notificationsData.reduce<
+              [IAllNotifications[]]
+            >(
               (prevValue, currentNotif) => {
                 const existGroupedNotifications = prevValue.find(
                   (currentGroup: IAllNotifications[]) => {
@@ -79,7 +85,7 @@ export class NotificationService {
               },
               [[]]
             );
-              
+
             //устанавливаю количество уведомлений
             this.setCountNotifications(notificationsData.length);
             //устанавливаю группированные уведомления
