@@ -12,6 +12,8 @@ import { StorageService } from 'src/app/services/storage.service';
 export class NotificationsComponent {
   @ViewChild('notificationContainer') notificationContainer: ElementRef;
 
+  currentCountNotification:number = 0;
+
   private userInfo:IPersonInfo = this.storageService.getUser();
 
   constructor(
@@ -28,8 +30,12 @@ export class NotificationsComponent {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
                 const senderId = entry.target.getAttribute('data-sender-id');
-                console.log(this.userInfo.id);
                 
+                //Уменьшаю количество уведомлений на 1
+                const currentCountNotif = this.notificationService.getCountNotifications(); // текущее кол-во уведомление
+                const countRemoveNotif = entry.target.querySelector('.notifications__point-count')?.innerHTML; // кол-во уведомлений, которые сейчас видны
+                this.notificationService.setCountNotifications(currentCountNotif - Number(countRemoveNotif));
+
                 if(this.userInfo.id !== 0 && this.userInfo.id && senderId){
                   this.notificationService.deleteNotificatons(this.userInfo.id, senderId).subscribe(() => {});
                 }
@@ -47,13 +53,19 @@ export class NotificationsComponent {
             '.notifications__point'
           );
 
-        console.log(notificationElements);
-
         notificationElements.forEach((notificationElement: Element) => {
           observer.observe(notificationElement);
         });
       }
     });
+
+    //Устанавливаю значение текущей длины массива с уведомлениями, чтобы список не показывал пустой шаблон
+    this.notificationService.notificationList$.subscribe(notificationList => {
+      this.currentCountNotification = notificationList.reduce<number>((counter, notificationGroup) => {
+        counter += notificationGroup.length;
+        return counter;
+      }, this.currentCountNotification)
+    })
   }
 
   //Прослушивание события клика для закрытия выпадающего списка

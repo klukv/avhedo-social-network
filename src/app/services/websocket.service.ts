@@ -106,9 +106,16 @@ export class WebsocketService {
         });
     } else {
       if (this.personInfo.id !== 0 && this.personInfo.id) {
-        this.notificationService.getAllNotifications(this.personInfo.id).subscribe(notificationsData => {
-          this.notificationService.addNotifications(notificationsData);
-        });
+        this.notificationService
+          .getAllNotifications(this.personInfo.id)
+          .subscribe((notificationsData) => {
+            // this.notificationService.addNotifications(notificationsData);
+            // if (this.notificationService.getCountNotifications() !== 0) {
+            //   this.notificationService.setCountNotifications(
+            //     this.notificationService.getCountNotifications() + 1
+            //   );
+            // }
+          });
       }
     }
   }

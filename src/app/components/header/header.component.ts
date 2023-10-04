@@ -28,7 +28,8 @@ export class HeaderComponent {
       this.notificationService
         .getAllNotifications(this.userInfo.id)
         .subscribe((notificationsData) => {
-          this.notificationService.addNotifications(notificationsData);
+          // this.notificationService.addNotifications(notificationsData);
+          // this.notificationService.setCountNotifications(notificationsData.length);
         });
     }
   }

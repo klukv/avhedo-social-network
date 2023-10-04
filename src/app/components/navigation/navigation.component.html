@@ -72,7 +72,7 @@
         <span
           class="navigation__link-notification__count absolute bottom-[-14px] right-[-8px] text-[#00A3FF] text-[12px]"
           >{{
-            (this.notificationService.notificationList$ | async)?.length
+            this.notificationService.getCountNotifications()
           }}</span
         >
       </a>

@@ -1,5 +1,5 @@
 <div
-  class="notifications absolute z-[500] min-w-[379px] max-sm:min-w-[260px] max-[329px]:min-w-[200px] right-0 top-[75px] bg-[#DEDEDE] rounded-b-lg"
+  class="notifications absolute z-[500] min-w-[379px] max-sm:min-w-[260px] max-[329px]:min-w-[200px] right-0 top-[75px] bg-[#DEDEDE] rounded-b-lg overflow-hidden"
   [ngClass]="{
     'invisible opacity-0': !(
       this.notificationService.isOpenNotifications$ | async
@@ -8,37 +8,44 @@
       this.notificationService.isOpenNotifications$ | async
   }"
 >
-  <div class="notifications__inner">
+  <div class="notifications__inner" #notificationContainer>
     <h2
       class="notifications__title text-[22px] max-sm:text-[20px] max-[329px]:text-[16px] text-center py-[24px] border-b-[1px] border-b-[#B6B6B6]"
     >
       Уведомления
     </h2>
     <ul
-      #notificationContainer
       class="notifications__list max-h-[145px] overflow-auto"
       *ngIf="
-        (this.notificationService.notificationList$ | async)?.length !== 0;
+        this.currentCountNotification !== 0;
         else empty__list_notifications
       "
     >
       <li
         *ngFor="
-          let notification of this.notificationService.notificationList$ | async
+          let notificationGroup of this.notificationService.notificationList$
+            | async
         "
         class="notifications__point border-b-[1px] border-solid border-b-[#B6B6B6]"
-        [attr.data-sender-id]="notification.senderId"
+        [attr.data-sender-id]="notificationGroup[0].senderId"
       >
-        <p
-          class="px-[16px] py-[12px] text-[16px] max-sm:text-center max-[329px]:text-[13px]"
-        >
-          Вы получили новое сообщение от
-          <span
-            class="text-[#00A3FF] hover:text-[#56C2FF] hover:underline duration-[250ms]"
-            (click)="this.friendsService.goToPageFriend(notification.senderId)"
-            >{{ notification.senderName }}</span
+        <div class="notifications__point-content relative inline-block">
+          <p
+            class="px-[16px] py-[15px] text-[16px] max-sm:text-center max-[329px]:text-[13px]"
           >
-        </p>
+            Вы получили новое сообщение от
+            <span
+              class="text-[#00A3FF] hover:text-[#56C2FF] hover:underline duration-[250ms]"
+              (click)="
+                this.friendsService.goToPageFriend(
+                  notificationGroup[0].senderId
+                )
+              "
+              >{{ notificationGroup[0].senderName }}</span
+            >
+          </p>
+          <span class="notifications__point-count absolute top-[30px] right-0 w-[10px] h-[10px] flex justify-center items-center p-[7px] text-[12px] rounded-[50px] text-[#FFFFFF] bg-[#00A3FF]">{{notificationGroup.length}}</span>
+        </div>
       </li>
     </ul>
   </div>
