@@ -88,7 +88,7 @@
         >
           <ul
             class="header__search-popup__list"
-            *ngIf="friendsService.listSubsribers.length !== 0; else empty"
+            *ngIf="(friendsService.listAllUsers | filterFriends | async)?.length !== 0; else empty"
           >
             <li
               class="header__search-popup__list-point border-b-[1px] border-solid border-b-[#B6B6B6] p-[8px] hover:bg-[#B6B6B6] duration-[200ms] cursor-pointer"

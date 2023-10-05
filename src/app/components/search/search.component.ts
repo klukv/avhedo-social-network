@@ -24,11 +24,11 @@ export class SearchComponent {
 
   ngOnInit() {
     if (this.userInfo.id && this.userInfo.id !== 0) {
-      this.friendService.setLoadedSubscribers(false);
+      this.friendService.setLoadedAllUsers(false);
       this.friendService
-        .getAllSubscribers(this.userInfo.id, false)
+        .getAllUsers(this.userInfo.id)
         .subscribe(() => {
-          this.friendService.setLoadedSubscribers(true);
+          this.friendService.setLoadedAllUsers(true);
         });
     }
 
