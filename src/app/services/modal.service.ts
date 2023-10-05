@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -13,6 +12,9 @@ export class ModalService {
 
   $isVisible = new BehaviorSubject<boolean>(false);
   $isOpenPopup = new BehaviorSubject<boolean>(false);
+  private _isOpenSearch = new BehaviorSubject<boolean>(false);
+
+  isOpenSearch$ = this._isOpenSearch.asObservable();
 
   open(typeEdition: string, typeModalWindow: string) {
     this._typeModal = typeModalWindow;
@@ -30,6 +32,14 @@ export class ModalService {
 
   closePopup() {
     this.$isOpenPopup.next(false);
+  }
+
+  openSearch() {
+    this._isOpenSearch.next(true);
+  }
+
+  closeSearch() {
+    this._isOpenSearch.next(false);
   }
 
   get typeEdit() {

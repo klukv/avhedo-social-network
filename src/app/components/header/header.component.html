@@ -16,13 +16,28 @@
         />
       </div>
       <div
-        class="header__responsive-search w-[25px] h-[25px] max-[329px]:w-[22px] max-[329px]:h-[22px] sm:hidden"
+        class="header__responsive-search relative w-[25px] h-[25px] max-[329px]:w-[22px] max-[329px]:h-[22px] sm:hidden"
+        (click)="this.modalService.openSearch()"
       >
         <img
           class="w-full h-full"
           src="../../../assets/img/navigation/search.svg"
           alt="search"
         />
+        <div
+          appStopPropagination
+          class="header__responsive-search__popup fixed top-0 right-0 bottom-0 left-0 bg-black/50 z-[1000] flex justify-center backdrop-blur-sm"
+          *ngIf="this.modalService.isOpenSearch$ | async"
+          (click)="this.modalService.closeSearch()"
+        >
+            <input
+              appStopPropagination
+              type="text"
+              class="header__responsive-search_input w-[250px] max-h-[35px] rounded-[6px] pl-[25px] pr-[8px] bg-[#FFFFFF] py-[5px] mt-[90px] text-[16px] focus:outline-none placeholder:text-[#7A7A7A]"
+              placeholder="Поиск"
+              (keyup)="setResponsiveSearchUsername($event)"
+            />
+        </div>
       </div>
       <div class="header__search relative max-sm:hidden">
         <app-search
@@ -140,12 +155,10 @@
           </svg>
           <span
             class="navigation__link-notification__count absolute bottom-[-14px] right-[-8px] text-[#00A3FF] text-[12px]"
-            >{{
-              this.notificationService.getCountNotifications()
-            }}</span
+            >{{ this.notificationService.getCountNotifications() }}</span
           >
         </div>
-       <app-notifications></app-notifications>
+        <app-notifications></app-notifications>
       </div>
       <div class="menu__burger xl:hidden">
         <input id="menu-toggle" type="checkbox" />

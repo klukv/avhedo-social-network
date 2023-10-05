@@ -22,3 +22,10 @@ export interface IResponseAllUsers {
   url: string
 }
 
+export interface IPeopleSearch {
+  id: number,
+  username: string,
+  dateOfBirthday: string,
+  url: string
+}
+

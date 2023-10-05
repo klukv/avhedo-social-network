@@ -19,12 +19,12 @@
   </div>
   <div class="post__info bg-[#fff] rounded-[10px] px-[25px]">
     <div
-      class="post__block-info pt-[23px] pb-[25px] border-b-[1px] border-solid border-[#EBEBEB] break-words"
+      class="post__block-info pt-[23px] pb-[25px] border-b-[1px] border-solid border-[#EBEBEB]"
     >
       <h2 class="post__block-info_title text-[26px] max-lg:text-[20px]">
         {{ post.messageDto.titleMessage }}
       </h2>
-      <p class="post__block-info_text text-[18px] pt-[22px] pb-[16px] max-lg:text-[16px] max-lg:pt-[15px] max-lg:pb-[12px]">
+      <p class="post__block-info_text text-[18px] pt-[22px] pb-[16px] max-w-full max-lg:text-[16px] max-lg:pt-[15px] max-lg:pb-[12px] break-words">
         {{ post.messageDto.textMessage }}
       </p>
       <div class="post__block-info_icons flex items-center mb-[8px] relative">

@@ -3,6 +3,7 @@ import {
   IResponseAllUsers,
   IResponseSubscribesInfo,
   IPersonSub,
+  IPeopleSearch,
 } from '../models/friends';
 import { BehaviorSubject, Observable, catchError, tap } from 'rxjs';
 import { Router } from '@angular/router';
@@ -15,6 +16,7 @@ import {
   GET_ALL_FRIENDS,
   GET_ALL_SUBCRIBERS,
   GET_ALL_USERS,
+  GET_SEARCH_PEOPLE,
   httpOptions,
 } from '../utils/const';
 import { ErrorService } from './error.service';
@@ -268,5 +270,11 @@ export class FriendsService {
         }),
         catchError((error) => this.errorService.handle(error))
       );
+  }
+
+  getSearchPeople(searchName: string) {
+    this._http
+      .get<IPeopleSearch[]>(API_URL + GET_SEARCH_PEOPLE + '?name=' + searchName, httpOptions)
+      .pipe(catchError((error) => this.errorService.handle(error)));
   }
 }

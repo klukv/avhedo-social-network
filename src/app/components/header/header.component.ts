@@ -1,7 +1,9 @@
 import { Component, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription, debounce, debounceTime } from 'rxjs';
 import { IPersonInfo } from 'src/app/models/personInfo';
 import { FriendsService } from 'src/app/services/friends.service';
+import { ModalService } from 'src/app/services/modal.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -12,6 +14,7 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class HeaderComponent {
   private userInfo: IPersonInfo = this.storageService.getUser();
+  private subs:Subscription;
 
   searchUsername = '';
   isOpenSearchPopup: boolean;
@@ -20,8 +23,19 @@ export class HeaderComponent {
     private route: Router,
     private storageService: StorageService,
     public notificationService: NotificationService,
-    public friendsService: FriendsService
-  ) {}
+    public friendsService: FriendsService,
+    public modalService: ModalService
+  ) {
+    this._setSearchSubscription();
+  }
+
+  private _setSearchSubscription() {
+    this.subs = this.friendsService.searchUsernameFriend$
+      .pipe(debounceTime(500))
+      .subscribe((searchValue) => {
+        //запрос на бекенд
+      });
+  }
 
   ngOnInit() {
     if (this.userInfo.id !== 0 && this.userInfo.id) {
@@ -32,6 +46,7 @@ export class HeaderComponent {
           // this.notificationService.setCountNotifications(notificationsData.length);
         });
     }
+    this.modalService.isOpenSearch$.subscribe(value => console.log(value));
   }
 
   //Прослушивание события клика для закрытия выпадающего списка
@@ -60,5 +75,9 @@ export class HeaderComponent {
     if (this.userInfo.id !== 0 && this.userInfo.id) {
       this.friendsService.goToPageFriend(this.userInfo.id);
     }
+  }
+
+  setResponsiveSearchUsername(searchUsername: any){
+   this.friendsService.setSearchUsername(searchUsername.target.value);
   }
 }
