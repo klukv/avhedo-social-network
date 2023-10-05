@@ -1,6 +1,6 @@
 import { Component, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription, debounce, debounceTime } from 'rxjs';
+import { Subject, Subscription, debounceTime, fromEvent } from 'rxjs';
 import { IPersonInfo } from 'src/app/models/personInfo';
 import { FriendsService } from 'src/app/services/friends.service';
 import { ModalService } from 'src/app/services/modal.service';
@@ -14,7 +14,7 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class HeaderComponent {
   private userInfo: IPersonInfo = this.storageService.getUser();
-  private subs:Subscription;
+  private _subSearchUsername: Subject<string> = new Subject();
 
   searchUsername = '';
   isOpenSearchPopup: boolean;
@@ -25,17 +25,7 @@ export class HeaderComponent {
     public notificationService: NotificationService,
     public friendsService: FriendsService,
     public modalService: ModalService
-  ) {
-    this._setSearchSubscription();
-  }
-
-  private _setSearchSubscription() {
-    this.subs = this.friendsService.searchUsernameFriend$
-      .pipe(debounceTime(500))
-      .subscribe((searchValue) => {
-        //запрос на бекенд
-      });
-  }
+  ) {}
 
   ngOnInit() {
     if (this.userInfo.id !== 0 && this.userInfo.id) {
@@ -46,7 +36,11 @@ export class HeaderComponent {
           // this.notificationService.setCountNotifications(notificationsData.length);
         });
     }
-    this.modalService.isOpenSearch$.subscribe(value => console.log(value));
+
+    //Устанавливаю имя, введенное пользователем, применив debounceTime (чтобы переменная не перезаписывалась после каждой нажатой кнопки)
+    this._subSearchUsername
+      .pipe(debounceTime(800))
+      .subscribe((searchUsername) => this.friendsService.setSearchUsername(searchUsername));
   }
 
   //Прослушивание события клика для закрытия выпадающего списка
@@ -63,10 +57,6 @@ export class HeaderComponent {
     return this.userInfo;
   }
 
-  getSearchUsername(usernameFriend: string) {
-    this.searchUsername = usernameFriend;
-  }
-
   goToLink(route: string) {
     this.route.navigate([route]);
   }
@@ -77,7 +67,7 @@ export class HeaderComponent {
     }
   }
 
-  setResponsiveSearchUsername(searchUsername: any){
-   this.friendsService.setSearchUsername(searchUsername.target.value);
+  setResponsiveSearchUsername(searchUsername: any) {
+    this._subSearchUsername.next(searchUsername.target.value);
   }
 }

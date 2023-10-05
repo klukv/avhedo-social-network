@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Subscription, debounceTime } from 'rxjs';
+import { Subject, Subscription, debounceTime } from 'rxjs';
 import { IPersonInfo } from 'src/app/models/personInfo';
 import { FriendsService } from 'src/app/services/friends.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -11,6 +11,7 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class SearchComponent {
   private userInfo: IPersonInfo = this.storageService.getUser();
+  private _searchUsername: Subject<string> = new Subject();
 
   @Input() placeholder: string;
   @Output() setSearchValue = new EventEmitter();
@@ -19,9 +20,7 @@ export class SearchComponent {
   constructor(
     private storageService: StorageService,
     public friendService: FriendsService,
-  ) {
-    this._setSearchSubscription();
-  }
+  ) {}
 
   ngOnInit() {
     if (this.userInfo.id && this.userInfo.id !== 0) {
@@ -32,18 +31,13 @@ export class SearchComponent {
           this.friendService.setLoadedSubscribers(true);
         });
     }
+
+    //Устанавливаю имя, введенное пользователем, применив debounceTime
+    this._searchUsername.pipe(debounceTime(800)).subscribe(searchValue => this.friendService.setSearchUsername(searchValue));
   }
 
   updateSearch(newSearchText: any) {
-    this.friendService.setSearchUsername(newSearchText.target.value);
-  }
-
-  private _setSearchSubscription() {
-    this.subs = this.friendService.searchUsernameFriend$
-      .pipe(debounceTime(500))
-      .subscribe((searchValue) => {
-        this.setSearchValue.emit(searchValue);
-      });
+    this._searchUsername.next(newSearchText.target.value);
   }
 
   ngOnDestroy() {
