@@ -95,7 +95,29 @@
       class="form__input-info__image"
       *ngSwitchCase="variantsEdit.TYPE_AVATAR"
     >
-      <input type="file" accept="image/*" class="form__image-avatar" (change)="onFileChange($event)"/>
+      <input
+        type="file"
+        accept="image/*"
+        class="form__image-avatar"
+        (change)="onFileChange($event)"
+      />
+      <div
+        class="form__errors text-[red] mt-[8px]"
+        *ngIf="this.errorImage.status"
+      >
+        <div
+          *ngIf="this.errorImage.typeError === 'size'"
+          class="form__errors-image__size"
+        >
+          Размер фото не должен превышать 2МБ
+        </div>
+        <div
+          *ngIf="this.errorImage.typeError === 'type'"
+          class="form__errors-image__type"
+        >
+          Допустимые форматы фото *.jpg, *.jpeg
+        </div>
+      </div>
     </div>
     <button
       class="form__button inline-flex my-[8px] px-[22px] py-[8px] rounded-[8px] bg-[#00A3FF] text-[16px] text-[#ffffff] justify-center items-center hover:bg-[#52C1FF] duration-[250ms]"

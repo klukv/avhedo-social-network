@@ -25,6 +25,10 @@ export class SignupSecondStepPageComponent {
   @ViewChild('refCheckboxWoman') refChecboxWoman: ElementRef;
   @ViewChild('fileInput') fileInput: ElementRef;
 
+  errorImage = {
+    typeError: '',
+    status: false,
+  };
   selectElement = '.select-hobby__inner';
   form: FormGroup;
   private _agePerson: number;
@@ -60,6 +64,12 @@ export class SignupSecondStepPageComponent {
     });
   }
 
+  ngAfterViewInit() {
+    //Изначальное состояние checkbox
+    this.refChecboxMan.nativeElement['checked'] = true;
+    this._genderPerson = 'man';
+  }
+
   //Метод для закрытия выпадающего окна хобби при клике вне его области
   @HostListener('document:click', ['$event'])
   closePopup(event: MouseEvent) {
@@ -74,6 +84,18 @@ export class SignupSecondStepPageComponent {
     let reader = new FileReader();
     if (event.target.files && event.target.files.length > 0) {
       let file = event.target.files[0];
+
+      this.errorImage.status = false;
+
+      //Проверка размера фото
+      if (file.size > 2 * 1024 * 1024) {
+        this.errorImage.typeError = 'size';
+        this.errorImage.status = true;
+      }
+      if (!file.type.match('image/jpeg') && !file.type.match('image/jpg')) {
+        this.errorImage.typeError = 'type';
+        this.errorImage.status = true;
+      }
 
       reader.readAsDataURL(file);
 
@@ -124,9 +146,9 @@ export class SignupSecondStepPageComponent {
     if (
       this.form.invalid ||
       this.personService.selectHobbyItems.length === 0 ||
+      this.errorImage.status ||
       this._userId === undefined
     ) {
-      console.log(this._userId);
       console.log('запрос не прошёл');
       return;
     }
