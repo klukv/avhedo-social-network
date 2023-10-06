@@ -64,12 +64,6 @@ export class SignupSecondStepPageComponent {
     });
   }
 
-  ngAfterViewInit() {
-    //Изначальное состояние checkbox
-    this.refChecboxMan.nativeElement['checked'] = true;
-    this._genderPerson = 'man';
-  }
-
   //Метод для закрытия выпадающего окна хобби при клике вне его области
   @HostListener('document:click', ['$event'])
   closePopup(event: MouseEvent) {

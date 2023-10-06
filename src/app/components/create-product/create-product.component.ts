@@ -145,7 +145,7 @@ export class CreateProductComponent {
           text: ``,
         });
     }
-    
+
     this.personService
       .editInfoUser(
         {
@@ -163,7 +163,10 @@ export class CreateProductComponent {
           this.personService
             .addImageAvatar(this._infoUser.id, this._formData)
             .subscribe(() => {});
-        } else {
+        } else if (
+          this._formData.getAll('file').length === 0 &&
+          edit === this.variantsEdit.TYPE_AVATAR
+        ) {
           this._formData.append('file', '');
 
           //загружаем пустую строку в бд в поле с фотографией, если пользователь не стал выбирать фото

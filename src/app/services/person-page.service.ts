@@ -29,7 +29,7 @@ export class PersonPageService {
     username: '',
     age: '',
     gender: undefined,
-    hobby: undefined,
+    hobby: '',
     about: undefined,
     urlImage: '',
   });
