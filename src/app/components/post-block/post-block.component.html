@@ -13,7 +13,8 @@
         alt="user-avatar"
       />
     </div>
-    <h2 class="post__block-user_username text-[24px] max-lg:text-[20px]">
+    <h2 class="post__block-user_username text-[24px] max-lg:text-[20px] hover:text-[#52C1FF] cursor-pointer"
+    (click)="goToPageFriend(post.messageDto.infoUserFromLentaDto.userInfo.id)">
       {{ post.messageDto.infoUserFromLentaDto.userInfo.username }}
     </h2>
   </div>
