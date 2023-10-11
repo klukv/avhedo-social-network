@@ -171,13 +171,6 @@ export class SignupSecondStepPageComponent {
       this.personService
         .addImageAvatar(this._userId, this._formData)
         .subscribe(() => {});
-    } else {
-      this._formData.append('file', '');
-
-      //загружаем пустую строку в бд в поле с фотографией, если пользователь не стал выбирать фото
-      this.personService
-        .addImageAvatar(this._userId, this._formData)
-        .subscribe(() => {});
     }
   }
 

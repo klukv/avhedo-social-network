@@ -6,6 +6,7 @@ import {
   ADD_IMAGE_AVATAR,
   ADD_USER_INFO,
   API_URL,
+  DELETE_AVATAR,
   EDIT_USER_INFO,
   GET_USER_INFO,
   httpOptions,
@@ -95,6 +96,12 @@ export class PersonPageService {
   addImageAvatar(userId: string, formData: FormData) {
     return this._http
       .post(API_URL + ADD_IMAGE_AVATAR + '/' + userId, formData)
+      .pipe(catchError((error) => this.errorService.handle(error)));
+  }
+
+  deleteImageAvatar(userId: string) {
+    return this._http
+      .delete(API_URL + DELETE_AVATAR + '/' + userId, httpOptions)
       .pipe(catchError((error) => this.errorService.handle(error)));
   }
 

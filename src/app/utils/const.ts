@@ -29,6 +29,7 @@ export const ADD_USER_INFO = '/userAddInfo';
 export const EDIT_USER_INFO = '/editUserInfo';
 
 export const ADD_IMAGE_AVATAR = '/upload'
+export const DELETE_AVATAR = '/deleteUrl'
 
 export const CREATE_POST = '/userAddMessage';
 export const GET_POSTS = '/InfoForMessage';
