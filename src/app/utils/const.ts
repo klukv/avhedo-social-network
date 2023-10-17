@@ -20,7 +20,8 @@ export const CHAT_PAGE = 'messages/chat';
 
 //Backend requests const
 
-export const API_URL = 'http://localhost:8080';
+//export const API_URL = 'http://localhost:8080';
+export const API_URL = 'http://80.76.43.34:8080'; // адресс хостинга
 export const LOGIN_URL = '/api/auth/signin';
 export const SIGNUP_URL = '/api/auth/signup';
 
