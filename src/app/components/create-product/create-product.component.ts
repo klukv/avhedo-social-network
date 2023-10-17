@@ -24,6 +24,10 @@ export class CreateProductComponent {
 
   variantsEdit = TypeEditVariants;
   form: FormGroup;
+  errorImage = {
+    typeError: '',
+    status: false,
+  };
 
   constructor(
     private storageService: StorageService,
@@ -49,7 +53,6 @@ export class CreateProductComponent {
           filetype: '',
           value: '',
         },
-        Validators.required,
       ],
     });
   }
@@ -72,7 +75,18 @@ export class CreateProductComponent {
     let reader = new FileReader();
     if (event.target.files && event.target.files.length > 0) {
       let file = event.target.files[0];
-      console.log(file);
+
+      this.errorImage.status = false;
+
+      //Проверка размера фото
+      if (file.size > 2 * 1024 * 1024) {
+        this.errorImage.typeError = 'size';
+        this.errorImage.status = true;
+      }
+      if (!file.type.match('image/jpeg') && !file.type.match('image/jpg')) {
+        this.errorImage.typeError = 'type';
+        this.errorImage.status = true;
+      }
 
       reader.readAsDataURL(file);
 
@@ -131,6 +145,7 @@ export class CreateProductComponent {
           text: ``,
         });
     }
+
     this.personService
       .editInfoUser(
         {
@@ -147,6 +162,14 @@ export class CreateProductComponent {
         if (this._formData.getAll('file').length !== 0) {
           this.personService
             .addImageAvatar(this._infoUser.id, this._formData)
+            .subscribe(() => {});
+        } else if (
+          this._formData.getAll('file').length === 0 &&
+          edit === this.variantsEdit.TYPE_AVATAR
+        ) {
+          //загружаем пустую строку в бд в поле с фотографией, если пользователь не стал выбирать фото
+          this.personService
+            .deleteImageAvatar(this._infoUser.id)
             .subscribe(() => {});
         }
       });

@@ -45,15 +45,17 @@ export class MultiSelectComponent {
 
   ngOnInit() {
     this.personService.personInfo$.subscribe((infoPerson) => {
+
       if (infoPerson.hobby) {
         const arrayCurrentHobby = infoPerson.hobby.split(', ');
 
-        if (arrayCurrentHobby.length === 0) return;
+        if (arrayCurrentHobby.length === 0 || arrayCurrentHobby[0] === 'Данное поле не заполнено') return;
 
         for (let i = 0; i < arrayCurrentHobby.length; i++) {
           const findHobby = this.hobbyList.filter(
             (hobbyValue) => hobbyValue.information === arrayCurrentHobby[i]
           )[0];
+          
           this.personService.setCurrentHobbyItems(findHobby);
         }
       }

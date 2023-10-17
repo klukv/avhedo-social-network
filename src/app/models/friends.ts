@@ -5,7 +5,7 @@ export type TUserInfo = {
 export interface IPersonSub {
   id: number;
   username: string;
-  age: string;
+  dateOfBirthday: string;
   url: string;
 }
 export interface IResponseSubscribesInfo {

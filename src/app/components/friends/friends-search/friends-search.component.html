@@ -3,6 +3,7 @@
     type="text"
     class="people-search__input w-full h-[60px] rounded-[10px] px-[12px] bg-[#EBEBEB] py-[5px] text-[18px] focus:outline-none placeholder:text-[#7A7A7A]"
     placeholder="Поиск человека"
+    (keyup)="setSearchPerson($event)"
     [(ngModel)]="searchPerson"
   />
 </div>
@@ -13,7 +14,7 @@
   <li
     class="friends-page__list-friends__content flex max-[540px]:flex-col max-[540px]:items-center items-center pt-[16px] pb-[32px] pl-[8px] border-b-[1px] border-solid border-[#EBEBEB]"
     *ngFor="
-      let friend of friendsService.listAllUsers | filterFriends : searchPerson;
+      let friend of friendsService.listAllUsers | filterFriends | async;
       let i = index
     "
   >
@@ -31,19 +32,19 @@
     <div class="list-friends__content-info max-[540px]:mt-[8px] max-[540px]:text-center">
       <h2
         class="list-friends__content-info info__username text-[20px] max-sm:text-[18px] mb-[4px] cursor-pointer hover:text-[#00A3FF] duration-[250ms]"
-        (click)="friendsService.goToPageFriend(friend.id)"
+        (click)="friendsService.goToPageFriend(friend.userInfo.id)"
       >
-        {{ friend.username }}
+        {{ friend.userInfo.username }}
       </h2>
       <div class="list-friends__content-info content-block">
         <div
           class="list-friends__content-info info__text text-[#7A7A7A] mb-[4px]"
         >
-          Возраст: {{ friend.age }}
+          Возраст: {{ friend.dateOfBirthday }}
         </div>
         <a
           class="list-friends__content-info friend__link text-[#00A3FF] cursor-pointer hover:text-[#56C2FF] duration-[250ms]"
-          (click)="friendsService.goToChat(friend.id)"
+          (click)="friendsService.goToChat(friend.userInfo.id)"
           >Написать сообщение</a
         >
       </div>
@@ -51,13 +52,13 @@
     <button
       class="friends__page-button max-[540px]:mx-auto flex justify-center items-center w-[52px] h-[52px] mt-[16px] p-[12px] rounded-[50%] ml-auto mr-0 hover:bg-[#EBEBEB] transition duration-300 ease-in-out"
       [ngClass]="{
-        'hover:bg-transparent cursor-default': hasSubscribes(friend.id)
+        'hover:bg-transparent cursor-default': hasSubscribes(friend.userInfo.id)
       }"
     >
       <svg
-        (click)="clickAddFriendBtn(friend.id, i, friend)"
+        (click)="clickAddFriendBtn(friend.userInfo.id, i, friend)"
         [ngClass]="{
-          hidden: this.selectedIndexButton === i || hasSubscribes(friend.id)
+          hidden: this.selectedIndexButton === i || hasSubscribes(friend.userInfo.id)
         }"
         class="w-[28px] h-[28px]"
         viewBox="0 0 64.00 64.00"
@@ -85,13 +86,13 @@
       <div
         class="friends__accept-svg"
         [ngClass]="{
-          hidden: !hasSubscribes(friend.id)
+          hidden: !hasSubscribes(friend.userInfo.id)
         }"
       >
         <svg
           *ngIf="
             (this.friendService.isLoaded === true &&
-              hasSubscribes(friend.id)) ||
+              hasSubscribes(friend.userInfo.id)) ||
               this.selectedIndexButton !== i;
             else loader_spinner
           "

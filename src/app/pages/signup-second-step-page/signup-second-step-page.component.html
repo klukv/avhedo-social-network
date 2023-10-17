@@ -3,7 +3,11 @@
     <div
       class="register__inner min-h-[600px] px-[20px] bg-[#fff] rounded-[8px] flex flex-col items-center"
     >
-      <h1 class="register__title text-[24px] pt-[24px] grow-0 max-[540px]:text-[20px]">Регистрация</h1>
+      <h1
+        class="register__title text-[24px] pt-[24px] grow-0 max-[540px]:text-[20px]"
+      >
+        Регистрация
+      </h1>
       <div
         class="register__title-step text-[#00A3FF] text-[16px] pt-[3px] text-center max-w-[270px] max-[540px]:text-[14px]"
       >
@@ -28,6 +32,17 @@
                 (change)="onFileChange($event)"
                 #fileInput
               />
+            </div>
+            <div
+              class="form__errors text-[red] mt-[8px]"
+              *ngIf="this.errorImage.status"
+            >
+                <div *ngIf="this.errorImage.typeError === 'size'" class="form__errors-image__size">
+                  Размер фото не должен превышать 2МБ
+                </div>
+                <div *ngIf="this.errorImage.typeError === 'type'" class="form__errors-image__type">
+                  Допустимые форматы фото *.jpg, *.jpeg
+                </div>
             </div>
           </div>
           <div class="form-group mb-[16px]">
@@ -147,7 +162,10 @@
                 matIconSuffix
                 [for]="picker"
               ></mat-datepicker-toggle>
-              <mat-datepicker #picker class="max-[540px]:w-[100px]"></mat-datepicker>
+              <mat-datepicker
+                #picker
+                class="max-[540px]:w-[100px]"
+              ></mat-datepicker>
             </mat-form-field>
             <div
               *ngIf="
@@ -173,6 +191,7 @@
               <input
                 formControlName="gender"
                 type="checkbox"
+                checked
                 class="registrer__form__gender"
                 (change)="changeValueCheckbox('man')"
                 #refCheckboxMan
@@ -187,7 +206,9 @@
               /><span class="pl-[4px] text-[16px]">Женский</span>
             </div>
           </div>
-          <div class="form__group flex justify-center mt-[16px] max-[540px]:mt-[20px]">
+          <div
+            class="form__group flex justify-center mt-[16px] max-[540px]:mt-[20px]"
+          >
             <button
               class="registrer__btn px-[25px] py-[8px] mb-[20px] bg-[#00A3FF] text-[16px] text-[#ffffff] rounded-[8px] hover:bg-[#52C1FF] duration-[250ms] cursor-pointer"
               type="submit"

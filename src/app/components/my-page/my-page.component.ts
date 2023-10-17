@@ -43,17 +43,7 @@ export class MyPageComponent {
                 urlImage: userData.url,
               });
             }),
-            catchError((error: HttpErrorResponse) => {
-              if (error.status === 404) {
-
-                this.personService.setPersonInfo(this.currentInfoUser);
-                this.storageService.saveShowInfoUser(false);
-                this.personService.setLoaded(true);
-                return throwError(() => '');
-                
-              }
-              return this.errorService.handle(error);
-            })
+            catchError((error: HttpErrorResponse) => this.errorService.handle(error))
           )
           .subscribe(() => {
             this.storageService.saveShowInfoUser(true);

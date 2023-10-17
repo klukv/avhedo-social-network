@@ -48,7 +48,7 @@ export class FriendsService {
   private _subscribesList: IPersonSub[] = [];
   private _subscribersList: IPersonSub[] = [];
   private _subscribersListPerson: IResponseSubscribesInfo[] = []; // массив для хранения информации о друзьях на личной странице каждого пользователя
-  private _allUsers: IPersonSub[] = [];
+  private _allUsers: IResponseAllUsers[] = [];
 
   // переменные загрузки
   private _isLoaded: boolean = false;
@@ -145,6 +145,10 @@ export class FriendsService {
   setInfoFriend(infoFriend: IResponseInfoUser) {
     this._friendInfo.next(infoFriend);
   }
+  
+  setAllUsers(listSearchPeople: IResponseAllUsers[]){
+    this._allUsers = listSearchPeople;
+  }
 
   goToChat(id: number) {
     this.router.navigate([`messages/chat`], {
@@ -205,7 +209,7 @@ export class FriendsService {
               this._subscribesList.push({
                 id: infoSubscribe.friends.userInfo.id,
                 username: infoSubscribe.friends.userInfo.username,
-                age: infoSubscribe.friends.dateOfBirthday,
+                dateOfBirthday: infoSubscribe.friends.dateOfBirthday,
                 url: infoSubscribe.friends.url,
               });
             }
@@ -235,7 +239,7 @@ export class FriendsService {
                 this._subscribersList.push({
                   id: infoSubscriber.friends.userInfo.id,
                   username: infoSubscriber.friends.userInfo.username,
-                  age: infoSubscriber.friends.dateOfBirthday,
+                  dateOfBirthday: infoSubscriber.friends.dateOfBirthday,
                   url: infoSubscriber.friends.url,
                 });
               }
@@ -255,26 +259,9 @@ export class FriendsService {
       )
       .pipe(
         tap((allUsersData) => {
-          allUsersData.map((infoPerson) => {
-            if (
-              this.isExistSubscribe(infoPerson.userInfo.id, this.listAllUsers)
-            ) {
-              this._allUsers.push({
-                id: infoPerson.userInfo.id,
-                username: infoPerson.userInfo.username,
-                age: infoPerson.dateOfBirthday,
-                url: infoPerson.url,
-              });
-            }
-          });
+          this._allUsers = allUsersData;
         }),
         catchError((error) => this.errorService.handle(error))
       );
-  }
-
-  getSearchPeople(searchName: string) {
-    this._http
-      .get<IPeopleSearch[]>(API_URL + GET_SEARCH_PEOPLE + '?name=' + searchName, httpOptions)
-      .pipe(catchError((error) => this.errorService.handle(error)));
   }
 }

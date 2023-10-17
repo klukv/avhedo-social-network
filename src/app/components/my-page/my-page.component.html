@@ -167,7 +167,6 @@
     >
       <div
         class="page__info-block"
-        *ngIf="this.storageService.isShowInfoUser(); else btnCreateInfoUser"
       >
         <div class="page__info-age mb-[16px]">
           <div class="page__info-age_header inline-block relative mb-[8px]">
@@ -294,15 +293,6 @@
     </div>
   </div>
 </div>
-
-<ng-template #btnCreateInfoUser>
-  <button
-    class="page__user__create-info__btn px-[25px] py-[8px] mb-[20px] bg-[#00A3FF] text-[16px] text-[#ffffff] rounded-[8px] hover:bg-[#52C1FF] duration-[250ms] cursor-pointer"
-    (click)="modalService.open('', variantsModals.TYPE_MODAL_FORM)"
-  >
-    Заполнить анкету
-  </button>
-</ng-template>
 
 <ng-template #loaderPerson>
   <content-loader

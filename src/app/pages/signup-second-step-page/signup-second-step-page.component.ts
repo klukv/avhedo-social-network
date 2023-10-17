@@ -25,6 +25,10 @@ export class SignupSecondStepPageComponent {
   @ViewChild('refCheckboxWoman') refChecboxWoman: ElementRef;
   @ViewChild('fileInput') fileInput: ElementRef;
 
+  errorImage = {
+    typeError: '',
+    status: false,
+  };
   selectElement = '.select-hobby__inner';
   form: FormGroup;
   private _agePerson: number;
@@ -75,6 +79,18 @@ export class SignupSecondStepPageComponent {
     if (event.target.files && event.target.files.length > 0) {
       let file = event.target.files[0];
 
+      this.errorImage.status = false;
+
+      //Проверка размера фото
+      if (file.size > 2 * 1024 * 1024) {
+        this.errorImage.typeError = 'size';
+        this.errorImage.status = true;
+      }
+      if (!file.type.match('image/jpeg') && !file.type.match('image/jpg')) {
+        this.errorImage.typeError = 'type';
+        this.errorImage.status = true;
+      }
+
       reader.readAsDataURL(file);
 
       this._formData.append('file', file);
@@ -124,9 +140,9 @@ export class SignupSecondStepPageComponent {
     if (
       this.form.invalid ||
       this.personService.selectHobbyItems.length === 0 ||
+      this.errorImage.status ||
       this._userId === undefined
     ) {
-      console.log(this._userId);
       console.log('запрос не прошёл');
       return;
     }
@@ -152,13 +168,6 @@ export class SignupSecondStepPageComponent {
         this.router.navigate(['signin']);
       });
     if (this.imageAvatar?.value.filename.length !== 0) {
-      this.personService
-        .addImageAvatar(this._userId, this._formData)
-        .subscribe(() => {});
-    } else {
-      this._formData.append('file', '');
-
-      //загружаем пустую строку в бд в поле с фотографией, если пользователь не стал выбирать фото
       this.personService
         .addImageAvatar(this._userId, this._formData)
         .subscribe(() => {});

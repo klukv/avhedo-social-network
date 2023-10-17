@@ -26,23 +26,55 @@
         />
         <div
           appStopPropagination
-          class="header__responsive-search__popup fixed top-0 right-0 bottom-0 left-0 bg-black/50 z-[1000] flex justify-center backdrop-blur-sm"
+          class="header__responsive-search__view fixed top-0 right-0 bottom-0 left-0 bg-black/50 z-[1000] flex justify-center backdrop-blur-sm"
           *ngIf="this.modalService.isOpenSearch$ | async"
           (click)="this.modalService.closeSearch()"
         >
+          <div
+            class="header__responsive-search__popup max-h-[35px] mt-[90px] flex justify-center items-center"
+          >
+            <button
+              class="header__responsive-search__btn w-[35px] h-full bg-[#00A3FF] rounded-[6px] mr-[10px] flex justify-center items-center"
+              (click)="goToLink('/subscribers/search')"
+              >
+              <svg
+                class="w-[21px] h-[21px]"
+                viewBox="0 0 26 26"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10.875 20.4375C16.1562 20.4375 20.4375 16.1562 20.4375 10.875C20.4375 5.59378 16.1562 1.3125 10.875 1.3125C5.59378 1.3125 1.3125 5.59378 1.3125 10.875C1.3125 16.1562 5.59378 20.4375 10.875 20.4375Z"
+                  stroke="#FFFFFF"
+                  stroke-width="1.28"
+                  stroke-miterlimit="10"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M24.6875 24.6875L17.6389 17.6389"
+                  stroke="#FFFFFF"
+                  stroke-width="1.28"
+                  stroke-miterlimit="10"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <!-- <img src="../../../assets/img/navigation/search.svg" alt="search" /> -->
+            </button>
             <input
               appStopPropagination
               type="text"
-              class="header__responsive-search_input w-[250px] max-h-[35px] rounded-[6px] pl-[25px] pr-[8px] bg-[#FFFFFF] py-[5px] mt-[90px] text-[16px] focus:outline-none placeholder:text-[#7A7A7A]"
+              class="header__responsive-search_input w-[250px] h-full rounded-[6px] pl-[25px] pr-[8px] bg-[#FFFFFF] py-[5px] text-[16px] focus:outline-none placeholder:text-[#7A7A7A]"
               placeholder="Поиск"
               (keyup)="setResponsiveSearchUsername($event)"
             />
+          </div>
         </div>
       </div>
       <div class="header__search relative max-sm:hidden">
         <app-search
           class="header__search-block"
-          (setSearchValue)="getSearchUsername($event)"
           [placeholder]="'Поиск'"
           (click)="isOpenSearchPopup = true"
         ></app-search>
@@ -56,16 +88,14 @@
         >
           <ul
             class="header__search-popup__list"
-            *ngIf="friendsService.listSubsribers.length !== 0; else empty"
+            *ngIf="(friendsService.listAllUsers | filterFriends | async)?.length !== 0; else empty"
           >
             <li
               class="header__search-popup__list-point border-b-[1px] border-solid border-b-[#B6B6B6] p-[8px] hover:bg-[#B6B6B6] duration-[200ms] cursor-pointer"
               *ngFor="
-                let friendInfo of friendsService.listSubsribers
-                  | filterFriends : searchUsername
-                  | slice : 0 : 5
+                let friendInfo of friendsService.listAllUsers | filterFriends | async | slice : 0 : 5
               "
-              (click)="this.friendsService.goToPageFriend(friendInfo.id)"
+              (click)="this.friendsService.goToPageFriend(friendInfo.userInfo.id)"
             >
               <div class="header__search-popup__list-point__info flex">
                 <div
@@ -83,18 +113,18 @@
                 </div>
                 <div class="search__text flex flex-col items-start">
                   <h3 class="search__username text-[18px]">
-                    {{ friendInfo.username }}
+                    {{ friendInfo.userInfo.username }}
                   </h3>
                   <div class="seacrh__age text-[#646464]">
-                    {{ friendInfo.age }} лет
+                    {{ friendInfo.dateOfBirthday }} лет
                   </div>
                 </div>
               </div>
             </li>
           </ul>
           <a
-            routerLink="/subscribers/added"
-            class="search__popup-link text-[16px] text-[#00A3FF] hover:text-[#56C2FF] duration-[200ms] flex items-center justify-center p-[8px]"
+            (click)="goToLink('/subscribers/search')"
+            class="search__popup-link text-[16px] text-[#00A3FF] hover:text-[#56C2FF] duration-[200ms] flex items-center justify-center p-[8px] cursor-pointer"
             >Показать все резальтаты
             <span class="w-[12px] h-[12px] inline-block ml-[4px] pt-[1px]"
               ><svg
