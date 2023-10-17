@@ -42,7 +42,7 @@ export class AppComponent {
   }
 
   private _connectWebsocket() {
-    this.websocketService.connect('http://localhost:8080/ws');
+    this.websocketService.connect('http://80.76.43.34:8080/ws');
   }
 
   hasRoute(route: string) {

@@ -39,7 +39,7 @@ export class ChatPageComponent {
     this.chatService.setLoadedMessages(false);
     this.personInfo = this.storageService.getUser();
 
-    //Устанавливаю переменную в false, то есть показываю, что сооббщения не загружены
+    //Устанавливаю переменную в false, то есть показываю, что сообщения не загружены
 
     this.personService
       .getInfoUser(this._user_id)
