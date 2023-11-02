@@ -13,15 +13,20 @@ import { FriendsService } from 'src/app/services/friends.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FilterFriendsPipe } from 'src/app/pipes/filter-friends.pipe';
-import { By } from '@angular/platform-browser';
+
 
 describe('HeaderComponent', () => {
   let headerCom: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
   let routerSpy: jasmine.SpyObj<Router>;
+  let storageService: StorageService;
 
   beforeEach(() => {
     const routerSpyObj = jasmine.createSpyObj('Router', ['navigate']);
+    const storageServiceMock = jasmine.createSpyObj('StorageService', [
+      'getUser',
+    ]);
+
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, HttpClientTestingModule],
       declarations: [
@@ -29,11 +34,11 @@ describe('HeaderComponent', () => {
         SearchComponent,
         NotificationsComponent,
         NavigationComponent,
-        FilterFriendsPipe
+        FilterFriendsPipe,
       ],
       providers: [
         ModalService,
-        StorageService,
+        { provide: StorageService, useValue: storageServiceMock },
         NotificationService,
         FriendsService,
         HttpClient,
@@ -43,14 +48,32 @@ describe('HeaderComponent', () => {
     fixture = TestBed.createComponent(HeaderComponent);
     headerCom = fixture.componentInstance;
     routerSpy = TestBed.inject(Router) as jasmine.SpyObj<Router>;
+    storageService = TestBed.inject(StorageService);
   });
 
-  it('should create', () => {
+  it('должен создавать компонент', () => {
     expect(headerCom).toBeTruthy();
   });
 
-  xit('should display logo containing text "AVHEDO"', () => {
-    const logoText =fixture.debugElement.query(By.css('.header__logo-image')).nativeElement;
-    expect(logoText.textContent).toBe('AVHEDO');
- });
+  it('должен возвращать информацию о пользователе', () => {
+    const mockUserInfo = {
+      id: 1,
+      username: 'Петя',
+      age: "25",
+      gender: 'man',
+      hobby: 'Программирование',
+      about: 'Люблю сырники',
+      urlImage: '',
+    };
+
+    (<jasmine.Spy<any>>storageService.getUser).and.returnValue(mockUserInfo);
+
+    headerCom.ngOnInit();
+
+    const userInfo = headerCom.getUserInfo();
+    console.log(headerCom.getUserInfo());
+    expect(userInfo).toEqual(mockUserInfo);
+
+    expect(storageService.getUser).toHaveBeenCalled();
+  });
 });

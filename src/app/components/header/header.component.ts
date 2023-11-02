@@ -13,7 +13,7 @@ import { StorageService } from 'src/app/services/storage.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
-  private userInfo: IPersonInfo = this.storageService.getUser();
+  private userInfo: IPersonInfo;
   private _subSearchUsername: Subject<string> = new Subject();
 
   searchUsername = '';
@@ -28,6 +28,8 @@ export class HeaderComponent {
   ) {}
 
   ngOnInit() {
+    this.userInfo = this.storageService.getUser();
+    
     if (this.userInfo.id !== 0 && this.userInfo.id) {
       this.notificationService
         .getAllNotifications(this.userInfo.id)
@@ -40,7 +42,9 @@ export class HeaderComponent {
     //Устанавливаю имя, введенное пользователем, применив debounceTime (чтобы переменная не перезаписывалась после каждой нажатой кнопки)
     this._subSearchUsername
       .pipe(debounceTime(800))
-      .subscribe((searchUsername) => this.friendsService.setSearchUsername(searchUsername));
+      .subscribe((searchUsername) =>
+        this.friendsService.setSearchUsername(searchUsername)
+      );
   }
 
   //Прослушивание события клика для закрытия выпадающего списка
