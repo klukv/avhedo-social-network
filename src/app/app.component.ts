@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { ModalService } from './services/modal.service';
 import { TypeModalWindows } from './utils/const';
 import { ErrorService } from './services/error.service';
-import { IPersonInfo } from './models/personInfo';
-import { StorageService } from './services/storage.service';
 import { PersonPageService } from './services/person-page.service';
 import { WebsocketService } from './services/websocket.service';
 

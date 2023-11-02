@@ -19,21 +19,23 @@ export class SearchComponent {
 
   constructor(
     private storageService: StorageService,
-    public friendService: FriendsService,
+    public friendService: FriendsService
   ) {}
 
   ngOnInit() {
     if (this.userInfo.id && this.userInfo.id !== 0) {
       this.friendService.setLoadedAllUsers(false);
-      this.friendService
-        .getAllUsers(this.userInfo.id)
-        .subscribe(() => {
-          this.friendService.setLoadedAllUsers(true);
-        });
+      this.friendService.getAllUsers(this.userInfo.id).subscribe(() => {
+        this.friendService.setLoadedAllUsers(true);
+      });
     }
 
     //Устанавливаю имя, введенное пользователем, применив debounceTime
-    this._searchUsername.pipe(debounceTime(800)).subscribe(searchValue => this.friendService.setSearchUsername(searchValue));
+    this._searchUsername
+      .pipe(debounceTime(800))
+      .subscribe((searchValue) =>
+        this.friendService.setSearchUsername(searchValue)
+      );
   }
 
   updateSearch(newSearchText: any) {
@@ -41,6 +43,8 @@ export class SearchComponent {
   }
 
   ngOnDestroy() {
-    this.subs.unsubscribe();
+    if (this.subs) {
+      this.subs.unsubscribe();
+    }
   }
 }

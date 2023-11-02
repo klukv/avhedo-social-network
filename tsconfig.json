@@ -20,11 +20,12 @@
     "module": "ES2022",
     "useDefineForClassFields": false,
     "strictPropertyInitialization": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ]
+    "lib": ["ES2022", "dom"]
   },
+  "files": ["polyfills.ts"],
+  "include": [
+    "src/**/*.ts" // указывает путь к вашим TypeScript файлам
+   ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

@@ -1,6 +1,6 @@
-import { Component, HostListener, ViewChild, ElementRef } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject, Subscription, debounceTime, fromEvent } from 'rxjs';
+import { Subject, debounceTime } from 'rxjs';
 import { IPersonInfo } from 'src/app/models/personInfo';
 import { FriendsService } from 'src/app/services/friends.service';
 import { ModalService } from 'src/app/services/modal.service';
