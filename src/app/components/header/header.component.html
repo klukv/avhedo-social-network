@@ -196,7 +196,7 @@
           <div class="menu-button"></div>
         </label>
         <ul class="menu">
-          <li (click)="goPersonPage()">Моя страница</li>
+          <li (click)="this.friendsService.goToPageFriend(getUserInfo().id)">Моя страница</li>
           <li (click)="goToLink('/')">Главная</li>
           <li (click)="goToLink('subscribers/own')">Друзья</li>
           <li (click)="goToLink('messages')">Сообщения</li>

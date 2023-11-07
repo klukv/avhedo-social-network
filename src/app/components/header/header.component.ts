@@ -65,12 +65,6 @@ export class HeaderComponent {
     this.route.navigate([route]);
   }
 
-  goPersonPage() {
-    if (this.userInfo.id !== 0 && this.userInfo.id) {
-      this.friendsService.goToPageFriend(this.userInfo.id);
-    }
-  }
-
   setResponsiveSearchUsername(searchUsername: any) {
     this._subSearchUsername.next(searchUsername.target.value);
   }

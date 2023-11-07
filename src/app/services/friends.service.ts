@@ -145,8 +145,8 @@ export class FriendsService {
   setInfoFriend(infoFriend: IResponseInfoUser) {
     this._friendInfo.next(infoFriend);
   }
-  
-  setAllUsers(listSearchPeople: IResponseAllUsers[]){
+
+  setAllUsers(listSearchPeople: IResponseAllUsers[]) {
     this._allUsers = listSearchPeople;
   }
 
@@ -159,12 +159,14 @@ export class FriendsService {
     this.websocketService.clearMessages();
   }
 
-  goToPageFriend(id: number) {
-    this.router.navigate(['person'], {
-      queryParams: {
-        id: id,
-      },
-    });
+  goToPageFriend(id: number | undefined) {
+    if (id) {
+      this.router.navigate(['person'], {
+        queryParams: {
+          id: id,
+        },
+      });
+    }
   }
 
   isExistSubscribe(id: number, list: IPersonSub[]) {

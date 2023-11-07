@@ -14,7 +14,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FilterFriendsPipe } from 'src/app/pipes/filter-friends.pipe';
 
-
 describe('HeaderComponent', () => {
   let headerCom: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
@@ -59,7 +58,7 @@ describe('HeaderComponent', () => {
     const mockUserInfo = {
       id: 1,
       username: 'Петя',
-      age: "25",
+      age: '25',
       gender: 'man',
       hobby: 'Программирование',
       about: 'Люблю сырники',
@@ -75,5 +74,10 @@ describe('HeaderComponent', () => {
     expect(userInfo).toEqual(mockUserInfo);
 
     expect(storageService.getUser).toHaveBeenCalled();
+  });
+
+  it('должен перенаправлять по указанному адресу', () => {
+    headerCom.goToLink('/person'),
+      expect(routerSpy.navigate).toHaveBeenCalledWith(['/person']);
   });
 });
