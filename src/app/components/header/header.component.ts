@@ -16,6 +16,8 @@ export class HeaderComponent {
   private userInfo: IPersonInfo;
   private _subSearchUsername: Subject<string> = new Subject();
 
+  subSearchUsername$ = this._subSearchUsername.asObservable();
+
   searchUsername = '';
   isOpenSearchPopup: boolean;
 
@@ -59,6 +61,10 @@ export class HeaderComponent {
 
   getUserInfo() {
     return this.userInfo;
+  }
+
+  getSubSearchUsername(){
+    return this._subSearchUsername;
   }
 
   goToLink(route: string) {

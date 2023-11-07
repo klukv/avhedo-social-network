@@ -80,4 +80,12 @@ describe('HeaderComponent', () => {
     headerCom.goToLink('/person'),
       expect(routerSpy.navigate).toHaveBeenCalledWith(['/person']);
   });
+
+  it('должен передавать введенное имя пользователя (searchUsername) в subject', () => {
+    const setValueSubject = spyOn(headerCom.getSubSearchUsername(), 'next');
+    headerCom.setResponsiveSearchUsername('Иван');
+    headerCom.subSearchUsername$.subscribe(resultSearch => expect(resultSearch).toBe('Иван'));
+
+    expect(setValueSubject).toHaveBeenCalledOnceWith('Иван');
+  })
 });
