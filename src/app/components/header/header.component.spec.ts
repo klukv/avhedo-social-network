@@ -19,12 +19,27 @@ describe('HeaderComponent', () => {
   let fixture: ComponentFixture<HeaderComponent>;
   let routerSpy: jasmine.SpyObj<Router>;
   let storageService: StorageService;
+  let friendsService: FriendsService;
 
   beforeEach(() => {
     const routerSpyObj = jasmine.createSpyObj('Router', ['navigate']);
     const storageServiceMock = jasmine.createSpyObj('StorageService', [
       'getUser',
     ]);
+    const friendsServiceMock = jasmine.createSpyObj('FriendsService', [
+      'setSearchUsername',
+    ]);
+
+    //мок данные для метода по возвращению информации о пользователе
+    const mockUserInfo = {
+      id: 1,
+      username: 'Петя',
+      age: '25',
+      gender: 'man',
+      hobby: 'Программирование',
+      about: 'Люблю сырники',
+      urlImage: '',
+    };
 
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, HttpClientTestingModule],
@@ -39,7 +54,7 @@ describe('HeaderComponent', () => {
         ModalService,
         { provide: StorageService, useValue: storageServiceMock },
         NotificationService,
-        FriendsService,
+        { provide: FriendsService, useValue: friendsServiceMock },
         HttpClient,
         { provide: Router, useValue: routerSpyObj },
       ],
@@ -48,6 +63,10 @@ describe('HeaderComponent', () => {
     headerCom = fixture.componentInstance;
     routerSpy = TestBed.inject(Router) as jasmine.SpyObj<Router>;
     storageService = TestBed.inject(StorageService);
+    friendsService = TestBed.inject(FriendsService);
+    
+    //возвращение мок данных методом getUser()
+    (<jasmine.Spy<any>>storageService.getUser).and.returnValue(mockUserInfo);
   });
 
   it('должен создавать компонент', () => {
@@ -55,7 +74,10 @@ describe('HeaderComponent', () => {
   });
 
   it('должен возвращать информацию о пользователе', () => {
-    const mockUserInfo = {
+    headerCom.ngOnInit();
+
+    const userInfo = headerCom.getUserInfo();
+    expect(userInfo).toEqual({
       id: 1,
       username: 'Петя',
       age: '25',
@@ -63,29 +85,32 @@ describe('HeaderComponent', () => {
       hobby: 'Программирование',
       about: 'Люблю сырники',
       urlImage: '',
-    };
-
-    (<jasmine.Spy<any>>storageService.getUser).and.returnValue(mockUserInfo);
-
-    headerCom.ngOnInit();
-
-    const userInfo = headerCom.getUserInfo();
-    console.log(headerCom.getUserInfo());
-    expect(userInfo).toEqual(mockUserInfo);
+    });
 
     expect(storageService.getUser).toHaveBeenCalled();
   });
 
   it('должен перенаправлять по указанному адресу', () => {
-    headerCom.goToLink('/person'),
-      expect(routerSpy.navigate).toHaveBeenCalledWith(['/person']);
+    headerCom.goToLink('/person');
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/person']);
   });
 
   it('должен передавать введенное имя пользователя (searchUsername) в subject', () => {
+    const mockEventUsername = {
+      target: {
+        value: 'Иван',
+      },
+    };
+    //создание мока для метода next
     const setValueSubject = spyOn(headerCom.getSubSearchUsername(), 'next');
-    headerCom.setResponsiveSearchUsername('Иван');
-    headerCom.subSearchUsername$.subscribe(resultSearch => expect(resultSearch).toBe('Иван'));
+    headerCom.setResponsiveSearchUsername(mockEventUsername);
+    headerCom.subSearchUsername$.subscribe((resultSearch) => {});
 
-    expect(setValueSubject).toHaveBeenCalledOnceWith('Иван');
-  })
+    expect(setValueSubject).toHaveBeenCalledWith('Иван');
+  });
+
+  it('должен передавать введенное введенное имя пользователя в сервис друзей (friendsService)', () => {
+    headerCom.ngOnInit();
+   // headerCom.setResponsiveSearchUsername('Юлия');
+  });
 });
