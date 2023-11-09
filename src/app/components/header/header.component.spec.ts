@@ -1,8 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
-import { SearchComponent } from '../search/search.component';
-import { NavigationComponent } from '../navigation/navigation.component';
-import { NotificationsComponent } from '../notifications/notifications.component';
 import { HeaderComponent } from './header.component';
 import { ModalService } from 'src/app/services/modal.service';
 import { HttpClient } from '@angular/common/http';
@@ -12,7 +9,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 import { FriendsService } from 'src/app/services/friends.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { FilterFriendsPipe } from 'src/app/pipes/filter-friends.pipe';
+import { CUSTOM_ELEMENTS_SCHEMA, Pipe, PipeTransform } from '@angular/core';
 
 describe('HeaderComponent', () => {
   let headerCom: HeaderComponent;
@@ -21,35 +18,38 @@ describe('HeaderComponent', () => {
   let storageService: StorageService;
   let friendsService: FriendsService;
 
+  @Pipe({
+    name: 'filterFriends',
+  })
+  class FilterFriendsPipe implements PipeTransform {
+    transform(value: string): string {
+      return value;
+    }
+  }
+
+  const routerSpyObj = jasmine.createSpyObj('Router', ['navigate']);
+  const storageServiceMock = jasmine.createSpyObj('StorageService', [
+    'getUser',
+  ]);
+  const friendsServiceMock = jasmine.createSpyObj('FriendsService', [
+    'setSearchUsername',
+  ]);
+
+  //мок данные для метода по возвращению информации о пользователе
+  const mockUserInfo = {
+    id: 1,
+    username: 'Петя',
+    age: '25',
+    gender: 'man',
+    hobby: 'Программирование',
+    about: 'Люблю сырники',
+    urlImage: '',
+  };
+
   beforeEach(() => {
-    const routerSpyObj = jasmine.createSpyObj('Router', ['navigate']);
-    const storageServiceMock = jasmine.createSpyObj('StorageService', [
-      'getUser',
-    ]);
-    const friendsServiceMock = jasmine.createSpyObj('FriendsService', [
-      'setSearchUsername',
-    ]);
-
-    //мок данные для метода по возвращению информации о пользователе
-    const mockUserInfo = {
-      id: 1,
-      username: 'Петя',
-      age: '25',
-      gender: 'man',
-      hobby: 'Программирование',
-      about: 'Люблю сырники',
-      urlImage: '',
-    };
-
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, HttpClientTestingModule],
-      declarations: [
-        HeaderComponent,
-        SearchComponent,
-        NotificationsComponent,
-        NavigationComponent,
-        FilterFriendsPipe,
-      ],
+      declarations: [HeaderComponent, FilterFriendsPipe],
       providers: [
         ModalService,
         { provide: StorageService, useValue: storageServiceMock },
@@ -58,15 +58,18 @@ describe('HeaderComponent', () => {
         HttpClient,
         { provide: Router, useValue: routerSpyObj },
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     });
     fixture = TestBed.createComponent(HeaderComponent);
     headerCom = fixture.componentInstance;
     routerSpy = TestBed.inject(Router) as jasmine.SpyObj<Router>;
     storageService = TestBed.inject(StorageService);
     friendsService = TestBed.inject(FriendsService);
-    
+
     //возвращение мок данных методом getUser()
     (<jasmine.Spy<any>>storageService.getUser).and.returnValue(mockUserInfo);
+    headerCom.setUserInfo(mockUserInfo);
+    fixture.detectChanges();
   });
 
   it('должен создавать компонент', () => {
@@ -74,8 +77,6 @@ describe('HeaderComponent', () => {
   });
 
   it('должен возвращать информацию о пользователе', () => {
-    headerCom.ngOnInit();
-
     const userInfo = headerCom.getUserInfo();
     expect(userInfo).toEqual({
       id: 1,
@@ -95,22 +96,28 @@ describe('HeaderComponent', () => {
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/person']);
   });
 
-  it('должен передавать введенное имя пользователя (searchUsername) в subject', () => {
+  it('должен передавать введенное имя пользователя (searchUsername) в subject', (done) => {
     const mockEventUsername = {
       target: {
         value: 'Иван',
       },
     };
     //создание мока для метода next
-    const setValueSubject = spyOn(headerCom.getSubSearchUsername(), 'next');
+    headerCom.subSearchUsername$.subscribe((resultSearch) => {
+      expect(resultSearch).toBe('Иван');
+      done();
+    });
     headerCom.setResponsiveSearchUsername(mockEventUsername);
-    headerCom.subSearchUsername$.subscribe((resultSearch) => {});
-
-    expect(setValueSubject).toHaveBeenCalledWith('Иван');
   });
 
-  it('должен передавать введенное введенное имя пользователя в сервис друзей (friendsService)', () => {
-    headerCom.ngOnInit();
-   // headerCom.setResponsiveSearchUsername('Юлия');
-  });
+  it('должен передавать введенное введенное имя пользователя в сервис друзей (friendsService)', fakeAsync(() => {
+    const mockEventUsername = {
+      target: {
+        value: 'Юлия',
+      },
+    };
+    headerCom.setResponsiveSearchUsername(mockEventUsername);
+    tick(800);
+    expect(friendsService.setSearchUsername).toHaveBeenCalledWith('Юлия');
+  }));
 });

@@ -31,7 +31,7 @@ export class HeaderComponent {
 
   ngOnInit() {
     this.userInfo = this.storageService.getUser();
-    
+
     if (this.userInfo.id !== 0 && this.userInfo.id) {
       this.notificationService
         .getAllNotifications(this.userInfo.id)
@@ -63,12 +63,12 @@ export class HeaderComponent {
     return this.userInfo;
   }
 
-  getSubSearchUsername(){
-    return this._subSearchUsername;
-  }
-
   goToLink(route: string) {
     this.route.navigate([route]);
+  }
+
+  setUserInfo(newInfo: IPersonInfo) {
+    this.userInfo = newInfo;
   }
 
   setResponsiveSearchUsername(searchUsername: any) {
