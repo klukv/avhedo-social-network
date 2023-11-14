@@ -39,6 +39,8 @@ export class AppComponent {
     });
   }
 
+  //адрес для локального хоста - http://localhost:8080/ws
+  //адрес для сервера - http://80.76.43.34:8080/ws
   private _connectWebsocket() {
     this.websocketService.connect('http://80.76.43.34:8080/ws');
   }

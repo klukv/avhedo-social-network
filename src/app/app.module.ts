@@ -9,6 +9,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { HttpClientModule } from '@angular/common/http';
 import { ContentLoaderModule } from '@ngneat/content-loader';
+import { ChatModule } from './chat/chat/chat.module';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -19,7 +20,6 @@ import { MyPageComponent } from './components/my-page/my-page.component';
 import { FriendsBlockComponent } from './components/friends-block/friends-block.component';
 import { PostBlockComponent } from './components/post-block/post-block.component';
 import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
-import { ChatPageComponent } from './pages/chat-page/chat-page.component';
 import { CastingPageComponent } from './pages/casting-page/casting-page.component';
 import { FormBlockComponent } from './components/form-block/form-block.component';
 import { LikesBlockComponent } from './components/casting/likes-block/likes-block.component';
@@ -52,6 +52,21 @@ import { SignupSecondStepPageComponent } from './pages/signup-second-step-page/s
 import { NotificationsComponent } from './components/notifications/notifications.component';
 
 @NgModule({
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    TextFieldModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    ContentLoaderModule,
+    ChatModule
+  ],
   declarations: [
     AppComponent,
     NavigationComponent,
@@ -62,7 +77,6 @@ import { NotificationsComponent } from './components/notifications/notifications
     FriendsBlockComponent,
     PostBlockComponent,
     MessagesPageComponent,
-    ChatPageComponent,
     CastingPageComponent,
     FormBlockComponent,
     LikesBlockComponent,
@@ -89,20 +103,6 @@ import { NotificationsComponent } from './components/notifications/notifications
     LoaderHomeComponent,
     SignupSecondStepPageComponent,
     NotificationsComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    TextFieldModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatNativeDateModule,
-    MatDatepickerModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    ContentLoaderModule,
   ],
 
   providers: [FriendsService, PostsService, httpInterceptorProviders],

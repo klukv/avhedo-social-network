@@ -24,7 +24,7 @@
   },
   "files": ["polyfills.ts"],
   "include": [
-    "src/**/*.ts" // указывает путь к вашим TypeScript файлам
+    "src/**/*.ts" // указывает путь к TypeScript файлам
    ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { MessagesPageComponent } from './pages/messages-page/messages-page.component';
-import { ChatPageComponent } from './pages/chat-page/chat-page.component';
 import { CastingPageComponent } from './pages/casting-page/casting-page.component';
 import { ContactsBlockComponent } from './components/casting/contacts-block/contacts-block.component';
 import { LikesBlockComponent } from './components/casting/likes-block/likes-block.component';
@@ -31,6 +30,7 @@ import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { AuthGuard, AuthGuardChild } from './services/guard.service';
 import { FriendsMyFriendsComponent } from './components/friends/friends-my-friends/friends-my-friends.component';
 import { SignupSecondStepPageComponent } from './pages/signup-second-step-page/signup-second-step-page.component';
+import { ChatPageComponent } from './chat/chat/pages/chat-page/chat-page.component';
 
 const castingRoutes: Routes = [
   {

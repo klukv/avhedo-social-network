@@ -40,7 +40,6 @@ export class ChatPageComponent {
     this.personInfo = this.storageService.getUser();
 
     //Устанавливаю переменную в false, то есть показываю, что сообщения не загружены
-
     this.personService
       .getInfoUser(this._user_id)
       .pipe(catchError((error) => this.errorService.handle(error)))
