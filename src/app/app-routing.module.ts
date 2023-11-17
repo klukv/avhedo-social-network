@@ -75,7 +75,12 @@ const routes: Routes = [
     component: MessagesPageComponent,
     canActivate: [AuthGuard],
   },
-  { path: CHAT_PAGE, component: ChatPageComponent, canActivate: [AuthGuard] },
+  {
+    path: CHAT_PAGE,
+    loadChildren: () =>
+      import('./modules/chat/chat.module').then((m) => m.ChatModule),
+    canActivate: [AuthGuard],
+  },
   {
     path: CASTING_PAGE,
     component: CastingPageComponent,
