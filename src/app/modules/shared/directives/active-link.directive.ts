@@ -1,6 +1,6 @@
 import { Directive, HostListener, Input } from '@angular/core';
-import { CastingService } from '../services/casting.service';
-import { FriendsService } from '../services/friends.service';
+import { CastingService } from '../../../services/casting.service';
+import { FriendsService } from '../../../services/friends.service';
 
 @Directive({
   selector: '[appActiveLink]',

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ActiveLinkDirective } from 'src/app/directives/active-link.directive';
+import { ActiveLinkDirective } from 'src/app/modules/shared/directives/active-link.directive';
 import { CastingService } from 'src/app/services/casting.service';
 
 @Component({
