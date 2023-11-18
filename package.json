@@ -21,7 +21,6 @@
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
     "@ngneat/content-loader": "^7.0.0",
-    "install": "^0.13.0",
     "net": "^1.0.2",
     "npm": "^9.8.1",
     "or": "^0.2.0",

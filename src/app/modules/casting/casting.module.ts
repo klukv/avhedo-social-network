@@ -4,6 +4,7 @@ import { CastingPageComponent } from './pages/casting-page/casting-page.componen
 import { LikesBlockComponent } from './components/likes-block/likes-block.component';
 import { ContactsBlockComponent } from './components/contacts-block/contacts-block.component';
 import { SharedModule } from '../shared/shared.module';
+import { FormBlockComponent } from 'src/app/components/form-block/form-block.component';
 
 @NgModule({
   imports: [CommonModule, SharedModule],
@@ -11,12 +12,9 @@ import { SharedModule } from '../shared/shared.module';
     CastingPageComponent,
     LikesBlockComponent,
     ContactsBlockComponent,
+    FormBlockComponent,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  exports: [
-    CastingPageComponent,
-    LikesBlockComponent,
-    ContactsBlockComponent,
-  ],
+  //schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  exports: [CastingPageComponent],
 })
 export class CastingModule {}

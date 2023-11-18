@@ -16,7 +16,6 @@ import { SearchComponent } from './components/search/search.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { MyPageComponent } from './components/my-page/my-page.component';
 import { PostBlockComponent } from './components/post-block/post-block.component';
-import { FormBlockComponent } from './components/form-block/form-block.component';
 import { PersonPageComponent } from './pages/person-page/person-page.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { CreateProductComponent } from './components/create-product/create-product.component';
@@ -64,7 +63,6 @@ import { SharedModule } from './modules/shared/shared.module';
     MainPageComponent,
     MyPageComponent,
     PostBlockComponent,
-    FormBlockComponent,
     PersonPageComponent,
     ModalComponent,
     CreateProductComponent,

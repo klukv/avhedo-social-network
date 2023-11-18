@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { messagesData } from 'src/app/data/messagesData';
-import { IMessage } from 'src/app/models/message';
 import { IPersonInfo } from 'src/app/models/personInfo';
 import { ChatService } from 'src/app/services/chat.service';
 import { StorageService } from 'src/app/services/storage.service';

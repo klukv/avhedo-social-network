@@ -10,15 +10,15 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { HeaderComponent } from './components/header/header.component';
 import { SearchComponent } from './components/search/search.component';
-import { FriendsRoutingComponent } from './components/friends-routing/friends-routing.component';
 import { MyPageComponent } from './components/my-page/my-page.component';
-import { FriendsBlockComponent } from './components/friends-block/friends-block.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { CreateProductComponent } from './components/create-product/create-product.component';
 import { ErrorComponent } from './components/error/error.component';
 import { FilterFriendsPipe } from './pipes/filter-friends.pipe';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { FriendsRoutingComponent } from './modules/friends/components/friends-routing/friends-routing.component';
+import { FriendsBlockComponent } from './modules/friends/components/friends-block/friends-block.component';
 
 describe('AppComponent', () => {
   let app: AppComponent;

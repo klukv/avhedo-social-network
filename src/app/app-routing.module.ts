@@ -30,7 +30,6 @@ import {
   SUBSCRIBERS_PAGE,
   SUBSCRIBERS_SEARCH,
 } from './utils/const';
-import { ChatPageComponent } from './modules/chat/pages/chat-page/chat-page.component';
 
 const castingRoutes: Routes = [
   {
