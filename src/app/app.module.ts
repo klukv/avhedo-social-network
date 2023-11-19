@@ -27,8 +27,6 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { httpInterceptorProviders } from './_helpers/auth.interceptor';
 import { ErrorComponent } from './components/error/error.component';
-import { LodaerSpinV1Component } from './components/loading/lodaer-spin-v1/lodaer-spin-v1.component';
-import { LodaerSpinV2Component } from './components/loading/lodaer-spin-v2/lodaer-spin-v2.component';
 import { LoaderHomeComponent } from './components/loading/loader-home/loader-home.component';
 import { SignupSecondStepPageComponent } from './pages/signup-second-step-page/signup-second-step-page.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
@@ -73,8 +71,6 @@ import { SharedModule } from './modules/shared/shared.module';
     LoginPageComponent,
     SignupPageComponent,
     ErrorComponent,
-    LodaerSpinV1Component,
-    LodaerSpinV2Component,
     LoaderHomeComponent,
     SignupSecondStepPageComponent,
     NotificationsComponent,

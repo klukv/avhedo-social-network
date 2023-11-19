@@ -11,9 +11,14 @@ import { FriendsMyFriendsComponent } from './components/friends-my-friends/frien
 import { FriendsAddComponent } from './components/friends-add/friends-add.component';
 import { FriendsBlockComponent } from './components/friends-block/friends-block.component';
 import { SharedModule } from '../shared/shared.module';
+import { FriendsRoutingModule } from './friends-routing.module';
 
 @NgModule({
-  imports: [CommonModule, ContentLoaderModule, SharedModule],
+  imports: [
+    CommonModule,
+    FriendsRoutingModule,
+    SharedModule,
+  ],
   declarations: [
     FriendsPageComponent,
     FriendsRoutingComponent,
@@ -23,13 +28,9 @@ import { SharedModule } from '../shared/shared.module';
     FriendsBlockComponent,
     FilterFriendsPipe,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
     FriendsPageComponent,
     FriendsRoutingComponent,
-    FriendsSearchComponent,
-    FriendsMyFriendsComponent,
-    FriendsAddComponent,
     FriendsBlockComponent,
     FilterFriendsPipe,
   ],

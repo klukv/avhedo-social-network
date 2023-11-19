@@ -5,16 +5,16 @@ import { LikesBlockComponent } from './components/likes-block/likes-block.compon
 import { ContactsBlockComponent } from './components/contacts-block/contacts-block.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormBlockComponent } from 'src/app/components/form-block/form-block.component';
+import { CastingRoutingModule } from './casting-routing.module';
 
 @NgModule({
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, SharedModule, CastingRoutingModule],
   declarations: [
     CastingPageComponent,
     LikesBlockComponent,
     ContactsBlockComponent,
     FormBlockComponent,
   ],
-  //schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [CastingPageComponent],
 })
 export class CastingModule {}

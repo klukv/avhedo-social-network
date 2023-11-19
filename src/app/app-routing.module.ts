@@ -31,32 +31,6 @@ import {
   SUBSCRIBERS_SEARCH,
 } from './utils/const';
 
-const castingRoutes: Routes = [
-  {
-    path: CASTING_PAGE_CONTACTS,
-    component: ContactsBlockComponent,
-  },
-  {
-    path: CASTING_PAGE_LIKES,
-    component: LikesBlockComponent,
-  },
-];
-
-const friendsRoute = [
-  {
-    path: MY_SUBSCRIBERS,
-    component: FriendsMyFriendsComponent,
-  },
-  {
-    path: SUBSCRIBERS_ADDED,
-    component: FriendsAddComponent,
-  },
-  {
-    path: SUBSCRIBERS_SEARCH,
-    component: FriendsSearchComponent,
-  },
-];
-
 const routes: Routes = [
   { path: REGISTRATION_PAGE, component: SignupPageComponent },
   { path: REGISTRATION_SECOND, component: SignupSecondStepPageComponent },
@@ -64,14 +38,17 @@ const routes: Routes = [
   { path: MAIN_PAGE, component: MainPageComponent, canActivate: [AuthGuard] },
   {
     path: SUBSCRIBERS_PAGE,
-    component: FriendsPageComponent,
-    children: friendsRoute,
+    loadChildren: () =>
+      import('./modules/friends/friends.module').then((m) => m.FriendsModule),
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuardChild],
   },
   {
     path: MESSAGES_PAGE,
-    component: MessagesPageComponent,
+    loadChildren: () =>
+      import('./modules/messages/messages.module').then(
+        (m) => m.MessagesModule
+      ),
     canActivate: [AuthGuard],
   },
   {
@@ -82,8 +59,8 @@ const routes: Routes = [
   },
   {
     path: CASTING_PAGE,
-    component: CastingPageComponent,
-    children: castingRoutes,
+    loadChildren: () =>
+      import('./modules/casting/casting.module').then((m) => m.CastingModule),
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuardChild],
   },
