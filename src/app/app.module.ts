@@ -30,10 +30,6 @@ import { ErrorComponent } from './components/error/error.component';
 import { LoaderHomeComponent } from './components/loading/loader-home/loader-home.component';
 import { SignupSecondStepPageComponent } from './pages/signup-second-step-page/signup-second-step-page.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
-import { FriendsModule } from './modules/friends/friends.module';
-import { MessagesModule } from './modules/messages/messages.module';
-import { CastingModule } from './modules/casting/casting.module';
-import { ChatModule } from './modules/chat/chat.module';
 import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
@@ -47,10 +43,6 @@ import { SharedModule } from './modules/shared/shared.module';
     MatNativeDateModule,
     MatDatepickerModule,
     ContentLoaderModule,
-    ChatModule,
-    FriendsModule,
-    MessagesModule,
-    CastingModule,
     SharedModule
   ],
   declarations: [
