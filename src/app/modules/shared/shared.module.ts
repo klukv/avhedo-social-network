@@ -9,7 +9,7 @@ import { LodaerSpinV2Component } from 'src/app/components/loading/lodaer-spin-v2
 import { LodaerSpinV1Component } from 'src/app/components/loading/lodaer-spin-v1/lodaer-spin-v1.component';
 import { FriendsRoutingComponent } from '../friends/components/friends-routing/friends-routing.component';
 import { FriendsBlockComponent } from '../friends/components/friends-block/friends-block.component';
-import { FilterFriendsPipe } from 'src/app/pipes/filter-friends.pipe';
+import { FilterFriendsPipe } from './pipes/filter-friends.pipe';
 
 @NgModule({
   imports: [

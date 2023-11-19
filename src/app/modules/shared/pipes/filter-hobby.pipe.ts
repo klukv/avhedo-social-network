@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IHobbyInfo } from '../models/personInfo';
+import { IHobbyInfo } from '../../../models/personInfo';
 
 @Pipe({
   name: 'filterHobby'

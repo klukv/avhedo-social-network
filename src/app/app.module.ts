@@ -22,7 +22,7 @@ import { CreateProductComponent } from './components/create-product/create-produ
 import { StopPropaginationDirective } from './directives/stop-propagination.directive';
 import { MultiSelectComponent } from './components/multi-select/multi-select.component';
 import { ClickListenerDirective } from './directives/click-listener.directive';
-import { FilterHobbyPipe } from './pipes/filter-hobby.pipe';
+import { FilterHobbyPipe } from './modules/shared/pipes/filter-hobby.pipe';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 import { httpInterceptorProviders } from './_helpers/auth.interceptor';

@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IResponseAllUsers } from '../models/friends';
-import { FriendsService } from '../services/friends.service';
+import { IResponseAllUsers } from '../../../models/friends';
+import { FriendsService } from '../../../services/friends.service';
 import { Observable, map } from 'rxjs';
 
 @Pipe({
